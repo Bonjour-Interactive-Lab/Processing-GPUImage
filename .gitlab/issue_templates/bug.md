@@ -1,36 +1,31 @@
-<!--- ** For coding questions, please use https://forum.processing.org ** -->
-<!--- ** This form is only for bugs in the software & feature requests ** -->
-
-<!--- ** Also be sure to read the troubleshooting page first: ** -->
-<!--- ** https://github.com/processing/processing/wiki/Troubleshooting ** -->
-
+<!--- ** For features request or usage question use the right template. This form is only for bug reports -->
 <!--- ** Before posting, please search Issues for duplicates  ** --> 
 
 ## Description
-<!--- Use a title that describes what is happening. -->
-<!--- Give a description of the proposed change. -->
+<!--- Use the title to quick describe your bug. Please specify the area of the bug (CORE, Filtering, encoding...) -->
+<!--- Give a description of the bug -->
 
 ## Expected Behavior
-<!--- Bug? Tell us what you were expecting. -->
-<!--- Improvement? Tell us how you’d like it to work. -->
+<!--- What are the expected behaviors on your program. -->
 
 ## Current Behavior
-<!--- Explain the difference from current behavior. -->
+<!--- What are the current behaviors. -->
 
-## Steps to Reproduce
-<!--- Provide an unambiguous set of steps to reproduce. -->
-<!--- Including code will make it more likely to be fixed. -->
+## Steps to Reproduce or code
+<!--- Provide an unambiguous set of steps to reproduce or provide your actual code. -->
 1.
 2.
 3.
 
 ## Your Environment
 <!--- Include details about your environment. -->
-<!--- Thousands of people use Processing every day and may not have --> 
-<!--- this issue, this might give us clues about why you’re seeing it. -->
+<!--- OpenGL might be tricky on various OS and various GPU. -->
+<!--- You can find your GPU information using the SpecsTest from processing available in the Examples/Demo/Tests folder. -->
 * Processing version:
 * Operating System and OS version:
-* Other information:
+* GPU:
+* OpenGL version
+* GLSL version:
 
 ## Possible Causes / Solutions
-<!--- Optionally, ideas on how to implement the change. -->
+<!--- Optionally, ideas on how to solve your problem. -->
