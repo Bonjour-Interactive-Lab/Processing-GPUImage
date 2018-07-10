@@ -1,5 +1,5 @@
 package gpuimage.core;
-import gpuimage.utils.*;
+
 import processing.core.*;
 import processing.opengl.PGraphicsOpenGL;
 
@@ -76,7 +76,7 @@ public class GPUImage implements PConstants{
 	/**
 	 * print the informations of the library
 	 */
-	public void printInfos(){
+	public static void printInfos(){
 		System.out.println(LIBINFO.getLibraryInfos());
 		System.out.println();
 	}
@@ -84,7 +84,7 @@ public class GPUImage implements PConstants{
 	/**
 	 * print the GPU informations
 	 */
-	public void printGLInfos() {
+	public static void printGLInfos() {
 		System.out.println(GPUINFO.getGpuInfos());
 		System.out.println();
 	}

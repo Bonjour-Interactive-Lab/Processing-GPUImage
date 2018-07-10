@@ -19,18 +19,42 @@ public class PingPongBuffer implements PConstants{
 	private PGraphics src;
 	public PGraphics dst;
 
+	/**
+	 * Instantiate a Ping Pong Buffer Object at the size of the PApplet
+	 * @param papplet
+	 */
 	public PingPongBuffer(PApplet papplet) {
 		initBuffers(papplet, papplet.width, papplet.height, P2D);
 	}
 	
+	/**
+	 * Instantiate a Ping Pong Buffer Object with custom size
+	 * @param papplet
+	 * @param width
+	 * @param height
+	 */
 	public PingPongBuffer(PApplet papplet, int width, int height) {
 		initBuffers(papplet, width, height, P2D);
 	}
 	
+	/**
+	 * Instantiate a Ping Pong Buffer Object with custom size and RENDERER (see processing renderer documentation)
+	 * @param papplet
+	 * @param width
+	 * @param height
+	 * @param RENDERER
+	 */
 	public PingPongBuffer(PApplet papplet, int width, int height, String RENDERER) {
 		initBuffers(papplet, width, height, RENDERER);
 	}
-
+	
+	/**
+	 * Init the buffers
+	 * @param papplet
+	 * @param width
+	 * @param height
+	 * @param RENDERER
+	 */
 	private void initBuffers(PApplet papplet, int width, int height, String RENDERER) {
 		this.papplet = papplet;
 		this.dst = papplet.createGraphics(width, height, RENDERER);;
