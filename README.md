@@ -5,7 +5,8 @@ Processing library for high-performance image computing and GPGPU computing (GLS
 
 ## To do
 ### Global
-- [ ] Add try ctach and handle errors
+- [ ] Add try catch and handle errors
+- [ ] Add custom throw error (view adidas source)
 
 ### Core 
 - [x] Library info
