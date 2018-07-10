@@ -18,18 +18,19 @@ public class Filter implements GPUFiltersInterface, PConstants{
 			this.papplet = papplet;
 		}
 		
-		ppb = new PingPongBuffer(this.papplet, width, height);
+		this.ppb = new PingPongBuffer(this.papplet, width, height);
 	}
 	
 	public PGraphics filter(PApplet papplet, PImage src, PShader filtersrc) {
 		//check if papplet exist
-		if(ppb != null && ppb.dst.width == src.width && ppb.dst.height == src.height) {
+		if(this.ppb != null && this.ppb.dst.width == src.width && this.ppb.dst.height == src.height) {
 		}else {
 			//or init
 			this.initPPB(papplet, src.width, src.height);
 		}
 		
-		ppbFilter(papplet, src, filtersrc);
+		this.ppbFilter(papplet, src, filtersrc);
+		
 		//return a clone of the PGraphics
 		try {
 			return (PGraphics) this.ppb.dst.clone();
@@ -40,13 +41,13 @@ public class Filter implements GPUFiltersInterface, PConstants{
 	}
 	
 	private void ppbFilter(PApplet papplet, PImage src, PShader filtersrc) {
-		ppb.dst.beginDraw();
-		ppb.dst.background(0);
-		ppb.dst.shader(filtersrc);
-		ppb.dst.image(src, 0, 0);
-		ppb.dst.endDraw();
+		this.ppb.dst.beginDraw();
+		this.ppb.dst.background(0);
+		this.ppb.dst.shader(filtersrc);
+		this.ppb.dst.image(src, 0, 0);
+		this.ppb.dst.endDraw();
 		
 		//swap buffer for next iteration
-		ppb.swap();
+		this.ppb.swap();
 	}
 }
