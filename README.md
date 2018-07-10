@@ -4,6 +4,9 @@ Processing library for high-performance image computing and GPGPU computing (GLS
 ## Features
 
 ## To do
+### Global
+[] Add try ctach and handle errors
+
 ### Core 
 [x] Library info
 [x] (simple) GPU info

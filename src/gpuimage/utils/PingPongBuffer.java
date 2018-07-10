@@ -6,8 +6,10 @@ import processing.opengl.PGraphicsOpenGL;
  * PingPong buffer is an utils class allowing you to create a ping pong buffer in order to make read-write texture pipeline by creating 2 buffers
  * Each buffer can be swapped so the second is always a previous version of the first one.
  * 
- * The main idea of this class is to keep the paradigm of an offscreen buffer made in processing using PGraphics and bind this buffer to the PinPongBuffer object. 
- * So user does not have to learn an new offscreen drawing implementation with various context and drawing methods.
+ * The main idea of this class is to keep the paradigm of an offscreen buffer made in processing using PGraphics through the PinPongBuffer object. 
+ * So user does not have to learn an new offscreen drawing implementation with various context and drawing methods. Drawing can be handle using
+ * object.dst.beginDraw();
+ * object.dst.endDraw();
  * 
  * @author bonjour
  *
@@ -15,34 +17,24 @@ import processing.opengl.PGraphicsOpenGL;
 public class PingPongBuffer implements PConstants{
 	private PApplet papplet;
 	private PGraphics src;
-	private PGraphics dst;
-	
-	/**
-	 * Create a PingPong buffer and bind the drawing buffer
-	 * @param papplet
-	 * @param dst
-	 */
-	public PingPongBuffer(PApplet papplet, PGraphics dst) {
-		this.bindDestinationBuffer(papplet, dst);
+	public PGraphics dst;
+
+	public PingPongBuffer(PApplet papplet) {
+		initBuffers(papplet, papplet.width, papplet.height, P2D);
 	}
 	
-	/**
-	 * Bind you drawing buffer to the PingPong buffer
-	 * @param dst
-	 */
-	public void bindDestinationBuffer(PGraphics dst) {
-		this.dst = dst;
+	public PingPongBuffer(PApplet papplet, int width, int height) {
+		initBuffers(papplet, width, height, P2D);
 	}
 	
-	/**
-	 * Bind you drawing buffer to the PingPong buffer
-	 * @param papplet
-	 * @param dst
-	 */
-	private void bindDestinationBuffer(PApplet papplet, PGraphics dst) {
+	public PingPongBuffer(PApplet papplet, int width, int height, String RENDERER) {
+		initBuffers(papplet, width, height, RENDERER);
+	}
+
+	private void initBuffers(PApplet papplet, int width, int height, String RENDERER) {
 		this.papplet = papplet;
-		this.dst = dst;
-		this.src = papplet.createGraphics(this.dst.width, this.dst.height, P2D);
+		this.dst = papplet.createGraphics(width, height, RENDERER);;
+		this.src = papplet.createGraphics(this.dst.width, this.dst.height, RENDERER);
 	}
 	
 	/**
@@ -68,7 +60,7 @@ public class PingPongBuffer implements PConstants{
 	 * return the Source Buffer
 	 * @return
 	 */
-	public PGraphics getSourceBuffer() {
+	public PGraphics getSrcBuffer() {
 		return (PGraphics) this.src;
 	}
 	
@@ -76,7 +68,7 @@ public class PingPongBuffer implements PConstants{
 	 * retrun the Destination Buffer
 	 * @return
 	 */
-	public PGraphics getDestinationBuffer() {
+	public PGraphics getDstBuffer() {
 		return  (PGraphics) this.dst;
 	}
 }
