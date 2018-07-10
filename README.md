@@ -21,7 +21,50 @@ So user does not have to learn an new offscreen drawing implementation with vari
 - [ ] independant ping pong buffer (custom JOGL implementation) for Floating Point Texture
 
 ### Filtering
-- [ ] ... (TBD)
+Filter list :
+
+Denoiser/Blur/Filtering
+- [ ] Bilateral
+- [ ] Bicubic
+- [ ] Simple Denoise
+- [ ] Median 3×3 (TBD : iteration avec PingPong Buffer)
+- [ ] Median 5×5 (TBD : iteration avec PingPong Buffer)
+- [ ] Edge detection + Sobel + Canny
+
+Blur
+- [ ] BlurHV
+- [ ] Gaussian
+- [ ] Radial blur
+
+Color :
+- [ ] Brightness
+- [ ] Contrast/Sat/Bright
+- [ ] Desaturate
+- [ ] Level
+- [ ] Gamma
+- [ ] LUT
+- [ ] Photoshop fusion mode (multiply, add...)
+- [ ] High-Passing
+- [ ] Threshold
+
+Effect/VFX :
+- [ ] ChromaWarp
+- [ ] Grain
+- [ ] Dithering (TBD)
+- [ ] Pixelate
+- [ ] ASCII
+- [ ] Bloom
+- [ ] Double exposure
+
+Other : 
+- [ ] Mask
+- [ ] Dilatation (TBD : iteration avec PingPong Buffer)
+- [ ] Erosion (TBD : iteration avec PingPong Buffer)
+- [ ] Optical Flow
+- [ ] FrameDifferencing
+- [ ] Pixel sorting
+- [ ] DoF from Depth (TBD)
+- [ ] Alpha Matte (sprite mode)
 
 ### RGBA packing
 - [ ] ... (TBD)
