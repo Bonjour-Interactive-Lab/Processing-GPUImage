@@ -9,8 +9,8 @@ Processing library for high-performance image computing and GPGPU computing (GLS
 
 ### Core 
 - [x] Library info
-- [x] (simple) GPU info
-- [ ]  (custom) GPU info (memory size...)
+- [x] simple GPU info
+- [ ] custom GPU info (memory size...)
 
 ### Ping Pong Buffer
 [x] Processing ping pong buffer using PGraphics biding
