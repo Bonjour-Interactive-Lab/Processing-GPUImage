@@ -13,7 +13,7 @@ Processing library for high-performance image computing and GPGPU computing (GLS
 - [ ] custom GPU info (memory size...)
 
 ### Ping Pong Buffer
-[x] Processing ping pong buffer using PGraphics biding
+- [x] Processing ping pong buffer using PGraphics biding
 PingPong buffer is an utils class allowing you to create a ping pong buffer in order to make read-write texture pipeline by creating 2 buffers
 Each buffer can be swapped so the second is always a previous version of the first one.
   
