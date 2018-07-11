@@ -35,7 +35,8 @@ The class extends the PGraphicsOpenGL class in order to have the same drawing me
 object.beginDraw();
 object.endDraw();
 ```
-This methods is a test méthods only. We need to make a benchmark in order to define the best solution.
+This methods is a test methods only. We need to make a benchmark in order to define the best solution.
+**NB : Tested on a filter methods inside a forloop, this method is too slow on the arrayCopy() (30 fps at 60 iterations) vs the previous one (60 fps at 60 iterations)**
 
 - [ ] independant ping pong buffer (custom JOGL implementation) for Floating Point Texture
 

@@ -1,4 +1,4 @@
-package gpuimage.test;
+package gpuimage.utils;
 
 import gpuimage.core.GPUFiltersInterface;
 import processing.core.*;
@@ -17,18 +17,22 @@ public class PingPongGraphics extends PGraphicsOpenGL implements PConstants, GPU
 	/*see getEnclosingPApplet() method which return an error
 	public PingPongGraphics(int width, int height) {
 		final PApplet papplet = getEnclosingPApplet();
-		init(papplet, width, height, papplet.dataPath(""));
+		init(papplet, width, height, papplet.dataPath(""), true);
 	}*/
 	
 	public PingPongGraphics(PApplet papplet, int width, int height) {
-		init(papplet, width, height, papplet.dataPath(""));
+		init(papplet, width, height, papplet.dataPath(""), true);
 	}
 	
 	public PingPongGraphics(PApplet papplet, int width, int height, String datapath) {
-		init(papplet, width, height, datapath);
+		init(papplet, width, height, datapath, true);
 	}
 	
-	private void init(PApplet papplet, int width, int height, String datapath) {
+	private PingPongGraphics(PApplet papplet, int width, int height, String datapath, boolean ext) {
+		init(papplet, width, height, datapath, ext);
+	}
+	
+	private void init(PApplet papplet, int width, int height, String datapath, boolean ext) {
 		this.papplet = papplet;
 		//set param & init
 		setParent(this.papplet);
@@ -38,15 +42,12 @@ public class PingPongGraphics extends PGraphicsOpenGL implements PConstants, GPU
 		smooth(8);
 		this.dst = this;
 		this.swapArray = new PingPongGraphics[2];
-		//create the second buffer;
-		//createPingPongGraphics();
-	}
+		
+		if(ext) {
+			//create the second buffer;
+			this.src = new PingPongGraphics(this.papplet, width, height, this.papplet.dataPath(""), false);
+		}
 	
-	public void createPingPongGraphics() {
-		//this.src = (PGraphicsOpenGL) this.papplet.createGraphics(width, height, P2D);
-		this.src = new PingPongGraphics(this.papplet, width, height, this.papplet.dataPath(""));
-		
-		
 		this.swapArray[0] = this.src;
 		this.swapArray[1] = this.dst;
 	}
