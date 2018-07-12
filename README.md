@@ -50,28 +50,26 @@ Filter list :
 
 Denoiser/Blur/Filtering
 - [x] Bilateral
-* * [ ] Debugger le filtre GLSL (Inversion d'UV)
+* * [x] Debugger le filtre GLSL (Inversion d'UV)
 - [ ] Bicubic
 - [x] Simple Denoise
-* * [ ] set custom param binding to shader
-- [x] Median 3×3 (TBD : iteration avec PingPong Buffer) → Quid de setter le sitération côté P5 examples ?
-- [x] Median 5×5 (TBD : iteration avec PingPong Buffer) → Quid de setter le sitération côté P5 examples ?
+* * [x] set custom param binding to shader
+- [x] Median 3×3 (TBD : iteration avec PingPong Buffer)
+- [x] Median 5×5 (TBD : iteration avec PingPong Buffer) 
 - [ ] Edge detection + Sobel + Canny
 
 Blur
 - [x] Gaussian
-* * [ ] set custom param binding to shader
+* * [x] set custom param binding to shader
+- [x] Fast Blur 5x5, 7x7, 9x9, 13x13
 - [ ] Radial blur
 
 Color :
-- [ ] Brightness
-* * [ ] set custom param binding to shader
-- [ ] Contrast/Sat/Bright
+- [x] Contrast/Sat/Bright
 - [ ] Desaturate
 - [x] Level
-* * [ ] set custom param binding to shader
 - [x] Gamma
-* * [ ] set custom param binding to shader
+* * [x] set custom param binding to shader
 - [ ] LUT
 - [ ] Photoshop fusion mode (multiply, add...)
 - [ ] High-Passing
@@ -79,7 +77,8 @@ Color :
 
 Effect/VFX :
 - [x] ChromaWarp
-* * [ ] set custom param binding to shader
+* * [x] set custom param binding to shader
+- [x] Fast ChromaWarp 4, 10, 20
 - [x] Grain
 * * [ ] set custom param binding to shader
 - [ ] Dithering (TBD)
@@ -101,25 +100,25 @@ Other :
 - [ ] Alpha Matte (sprite mode)
 
 Check all shaders
-- [ ] Bilateral
+- [x] Bilateral
 - [ ] Bicubic
-- [ ] Simple Denoise
-- [ ] Median 3×3
-- [ ] Median 5×5
+- [x] Simple Denoise
+- [x] Median 3×3
+- [x] Median 5×5
 - [ ] Edge detection + Sobel + Canny
-- [ ] Gaussian
+- [x] Gaussian
+- [x] Fast Blur 5x5, 7x7, 9x9, 13x13
 - [ ] Radial blur
-- [ ] Brightness
-- [ ] Contrast/Sat/Bright
+- [x] Contrast/Sat/Bright
 - [ ] Desaturate
-- [ ] Level
-- [ ] Gamma
+- [x] Level (add RGB support)
+- [x] Gamma
 - [ ] LUT
 - [ ] Photoshop fusion mode (multiply, add...)
 - [ ] High-Passing
 - [ ] Threshold
-- [ ] ChromaWarp
-- [ ] Grain
+- [x] ChromaWarp 
+- [x] Grain
 - [ ] Dithering (TBD)
 - [ ] Pixelate
 - [ ] ASCII

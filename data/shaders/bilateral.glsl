@@ -1,22 +1,23 @@
-
-// Original shader by mrharicot
-// https://www.shadertoy.com/view/4dfGDH
-// Ported to Processing by Raphaël de Courville <twitter: @sableRaph>
-
-
+#version 150
 #ifdef GL_ES
 precision mediump float;
 precision mediump int;
 #endif
 
-#define SIGMA 2.0
-#define BSIGMA 1.0
-#define MSIZE 5
+// Original shader by mrharicot
+// https://www.shadertoy.com/view/4dfGDH
+// Ported to Processing by Raphaël de Courville <twitter: @sableRaph>
+// Update in order to use vertTexCoord attribute by BonjourLab
+
+#define SIGMA 5.0
+#define BSIGMA 0.1
+#define MSIZE 5 //define the kerner size
 
 uniform sampler2D texture;
 uniform vec2 resolution;
-
 in vec4 vertTexCoord;
+
+out vec4 fragColor;
 
 float normpdf(in float x, in float sigma)
 {
@@ -28,12 +29,11 @@ float normpdf3(in vec3 v, in float sigma)
 	return 0.39894*exp(-0.5*dot(v,v)/(sigma*sigma))/sigma;
 }
 
-
 void main(void)
 {
-	vec2 uv = vertTexCoord.xy;//gl_FragCoord.xy / resolution.xy;
-	uv.y = 1.0 - uv.y;
-	vec3 c = texture2D( texture, vertTexCoord.xy).rgb;
+	vec2 uv = vertTexCoord.xy;
+	vec2 screenuv = vertTexCoord.xy * resolution.xy;
+	vec3 c = texture2D(texture, vertTexCoord.xy).rgb;
 		
 	//declare stuff
 	const int kSize = (MSIZE-1)/2;
@@ -56,8 +56,7 @@ void main(void)
 	{
 		for (int j=-kSize; j <= kSize; ++j)
 		{
-			vec2 iuv = ( gl_FragCoord.xy + vec2(float(i),float(j)) ) / resolution.xy ;
-			iuv.y = 1.0 - iuv.y;
+			vec2 iuv = (screenuv + vec2(float(i),float(j)) ) / resolution.xy ;
 			cc = texture2D(texture, vec2(0.0, 0.0) + iuv).rgb;
 			factor = normpdf3(cc-c, BSIGMA)*bZ*kernel[kSize+j]*kernel[kSize+i];
 			Z += factor;
@@ -66,6 +65,5 @@ void main(void)
 		}
 	}
 	
-	gl_FragColor = vec4(final_colour/Z, 1.0);
-
+	fragColor = vec4(final_colour/Z, 1.0);
 }

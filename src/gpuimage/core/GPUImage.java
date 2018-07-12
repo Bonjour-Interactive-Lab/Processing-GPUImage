@@ -9,7 +9,7 @@ import processing.opengl.PGraphicsOpenGL;
  * @author bonjour
  *
  */
-public class GPUImage implements PConstants{
+public class GPUImage implements GPUFiltersInterface, PConstants{
 	//Static class
 	/**
 	 * Static class feed with the library informations
