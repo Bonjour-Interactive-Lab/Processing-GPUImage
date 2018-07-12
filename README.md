@@ -3,6 +3,11 @@ Processing library for high-performance image computing and GPGPU computing (GLS
 
 ## Features
 
+## Informations
+- The v.0.0.1 the library is build on the top of processing which means we are using processing class such as PGraphics, Pimage, PApplet...
+- The v.0.0.1 is based on the processing PJOGL profile. There is no change in the GL context and it's still build on GL2ES2 (a version between GL2, GL3 and GLES2) [GL2ES2 JOGAMP](https://download.java.net/media/jogl/jogl-2.x-docs/javax/media/opengl/GL2ES2.html)
+- Because the library relies on the PJOGL profile (GL2ES2) all shaders are based on GLSL 1.50 (150) [GLSL versions table](https://www.opengl.org/discussion_boards/showthread.php/199965-picking-a-glsl-version)
+
 ## To do
 ### Global
 - [ ] Add try catch and handle errors
@@ -44,19 +49,66 @@ This methods is a test methods only. We need to make a benchmark in order to def
 Filter list :
 
 Denoiser/Blur/Filtering
-- [ ] Bilateral
+- [x] Bilateral
+* * [ ] Debugger le filtre GLSL (Inversion d'UV)
 - [ ] Bicubic
-- [ ] Simple Denoise
-- [ ] Median 3×3 (TBD : iteration avec PingPong Buffer)
-- [ ] Median 5×5 (TBD : iteration avec PingPong Buffer)
+- [x] Simple Denoise
+* * [ ] set custom param binding to shader
+- [x] Median 3×3 (TBD : iteration avec PingPong Buffer) → Quid de setter le sitération côté P5 examples ?
+- [x] Median 5×5 (TBD : iteration avec PingPong Buffer) → Quid de setter le sitération côté P5 examples ?
 - [ ] Edge detection + Sobel + Canny
 
 Blur
-- [ ] BlurHV
-- [ ] Gaussian
+- [x] Gaussian
+* * [ ] set custom param binding to shader
 - [ ] Radial blur
 
 Color :
+- [ ] Brightness
+* * [ ] set custom param binding to shader
+- [ ] Contrast/Sat/Bright
+- [ ] Desaturate
+- [x] Level
+* * [ ] set custom param binding to shader
+- [x] Gamma
+* * [ ] set custom param binding to shader
+- [ ] LUT
+- [ ] Photoshop fusion mode (multiply, add...)
+- [ ] High-Passing
+- [ ] Threshold
+
+Effect/VFX :
+- [x] ChromaWarp
+* * [ ] set custom param binding to shader
+- [x] Grain
+* * [ ] set custom param binding to shader
+- [ ] Dithering (TBD)
+- [ ] Pixelate
+- [ ] ASCII
+- [ ] Bloom
+- [ ] Double exposure
+
+Other : 
+- [x] Mask
+* * [ ] set custom param binding to shader
+* * [ ] clean shader
+- [ ] Dilatation (TBD : iteration avec PingPong Buffer)
+- [ ] Erosion (TBD : iteration avec PingPong Buffer)
+- [ ] Optical Flow
+- [ ] FrameDifferencing
+- [ ] Pixel sorting
+- [ ] DoF from Depth (TBD)
+- [ ] Alpha Matte (sprite mode)
+
+Check all shaders
+- [ ] Bilateral
+- [ ] Bicubic
+- [ ] Simple Denoise
+- [ ] Median 3×3
+- [ ] Median 5×5
+- [ ] Edge detection + Sobel + Canny
+- [ ] Gaussian
+- [ ] Radial blur
 - [ ] Brightness
 - [ ] Contrast/Sat/Bright
 - [ ] Desaturate
@@ -66,8 +118,6 @@ Color :
 - [ ] Photoshop fusion mode (multiply, add...)
 - [ ] High-Passing
 - [ ] Threshold
-
-Effect/VFX :
 - [ ] ChromaWarp
 - [ ] Grain
 - [ ] Dithering (TBD)
@@ -75,8 +125,6 @@ Effect/VFX :
 - [ ] ASCII
 - [ ] Bloom
 - [ ] Double exposure
-
-Other : 
 - [ ] Mask
 - [ ] Dilatation (TBD : iteration avec PingPong Buffer)
 - [ ] Erosion (TBD : iteration avec PingPong Buffer)
