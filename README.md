@@ -12,6 +12,7 @@ Processing library for high-performance image computing and GPGPU computing (GLS
 ### Global
 - [ ] Add try catch and handle errors
 - [ ] Add custom throw error (view adidas source)
+- [ ] Add avatar @gitlab
 
 ### Core 
 - [x] Library info
