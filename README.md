@@ -49,7 +49,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
 ### Filtering
 Filter list :
 
-Denoiser/Blur/Filtering
+#### Denoiser/Blur/Filtering
 - [x] Bilateral
 * * [x] Debugger le filtre GLSL (Inversion d'UV)
 - [ ] Bicubic
@@ -59,13 +59,13 @@ Denoiser/Blur/Filtering
 - [x] Median 5×5 (TBD : iteration avec PingPong Buffer) 
 - [ ] Edge detection + Sobel + Canny
 
-Blur
+#### Blur
 - [x] Gaussian
 * * [x] set custom param binding to shader
 - [x] Fast Blur 5x5, 7x7, 9x9, 13x13
 - [ ] Radial blur
 
-Color :
+#### Color :
 - [x] Contrast/Sat/Bright
 - [ ] Desaturate
 - [x] Level
@@ -76,7 +76,7 @@ Color :
 - [ ] High-Passing
 - [ ] Threshold
 
-Effect/VFX :
+#### Effect/VFX :
 - [x] ChromaWarp
 * * [x] set custom param binding to shader
 - [x] Fast ChromaWarp 4, 10, 20
@@ -88,7 +88,7 @@ Effect/VFX :
 - [ ] Bloom
 - [ ] Double exposure
 
-Other : 
+#### Other : 
 - [x] Mask
 * * [ ] set custom param binding to shader
 * * [ ] clean shader
@@ -100,7 +100,7 @@ Other :
 - [ ] DoF from Depth (TBD)
 - [ ] Alpha Matte (sprite mode)
 
-Check all shaders
+#### Check all shaders
 - [x] Bilateral
 - [ ] Bicubic
 - [x] Simple Denoise
