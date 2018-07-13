@@ -87,6 +87,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [x] Median 3×3 (TBD : iteration avec PingPong Buffer)
 - [x] Median 5×5 (TBD : iteration avec PingPong Buffer) 
 - [ ] Edge detection + Sobel + Canny
+- [x] High-Passing
 
 ##### Blur
 - [x] Gaussian
@@ -96,13 +97,13 @@ This methods is a test methods only. We need to make a benchmark in order to def
 
 ##### Color :
 - [x] Contrast/Sat/Bright
-- [ ] Desaturate
+- [x] Desaturate
 - [x] Level
 - [x] Gamma
 * * [x] set custom param binding to shader
 - [ ] LUT
-- [ ] High-Passing
-- [ ] Threshold
+- [x] Color Threshold
+- [x] Threshold
 
 ##### Effect/VFX :
 - [x] ChromaWarp + optimized low, medium, high
@@ -158,6 +159,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
 * * [x] set custom param binding to shader
 * * [x] clean shader
 - [ ] Alpha Matte (sprite mode)
+- [ ] Chroma key
 
 #### Procedural extends GPUImageBaseEffects
 
@@ -172,13 +174,13 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [x] Fast Blur 5x5, 7x7, 9x9, 13x13
 - [x] Radial blur
 - [x] Contrast/Sat/Bright
-- [ ] Desaturate
+- [x] Desaturate
 - [x] Level (add RGB support)
 - [x] Gamma
 - [ ] LUT
 - [x] Photoshop fusion mode (multiply, add...)
-- [ ] High-Passing
-- [ ] Threshold
+- [x] High-Passing
+- [x] Threshold
 - [x] ChromaWarp 
 - [x] Grain
 - [ ] Dithering (TBD)
@@ -194,6 +196,8 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [ ] Pixel sorting
 - [ ] DoF from Depth (TBD)
 - [ ] Alpha Matte (sprite mode)
+- [ ] Chroma key
+- [x] Color threshold
 
 ### %"Packing RGBA"
 - [ ] ... (TBD)

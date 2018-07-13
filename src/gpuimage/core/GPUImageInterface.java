@@ -43,6 +43,7 @@ public interface GPUImageInterface{
 	public static final String DENOISE = "denoise";
 	public static final String MEDIAN3X3 = "median3x3";
 	public static final String MEDIAN5X5 = "median5x5";
+	public static final String HIGHPASS = "highpass";
 	public static final String SOBEL = "sobel";
 	
 	public static final String GAUSSIANBLUR = "gaussianblur";
@@ -60,7 +61,7 @@ public interface GPUImageInterface{
 	public static final String LEVEL = "level";
 	public static final String GAMMA = "gamma";
 	public static final String LUT = "lut";
-	public static final String HIGHPASS = "highpass";
+	public static final String COLORTHRESHOLD = "colorthreshold";
 	public static final String THRESHOLD = "threshold";
 	
 	public static final String CHROMAWARP = "chromawarp";

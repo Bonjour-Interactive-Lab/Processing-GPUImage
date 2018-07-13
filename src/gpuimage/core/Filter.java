@@ -64,6 +64,19 @@ public class Filter extends GPUImageBaseEffects{
 		return super.filter(src);
 	}
 	
+	/**
+	 * High pass filter
+	 * @param src source layer
+	 * @param radius sharpening factor between 0 and X (default is 1.0)
+	 * @return
+	 */
+	public PGraphics getHighPassImage(PImage src, float radius) {
+		super.setCurrentSH(HIGHPASS);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		super.currentSH.set("sharpFactor", radius);
+		return super.filter(src);
+	}
+	
 	/* ...............................................
 	 * 
 	 * 
@@ -459,6 +472,46 @@ public class Filter extends GPUImageBaseEffects{
 	public PGraphics getGammaCorrectionImage(PImage src, float gamma) {
 		super.setCurrentSH(GAMMA);
 		super.currentSH.set("gamma", gamma);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Desaturate an image
+	 * @param src source layer
+	 * @param desaturation desaturation ratio between 0 and 100
+	 * @return
+	 */
+	public PGraphics getDesaturateImage(PImage src, float desaturation) {
+		super.setCurrentSH(GPUImageInterface.DESATURATE);
+		super.currentSH.set("desaturation", desaturation/100.0f);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Threshold on each channel RGB
+	 * @param src source layer
+	 * @param levelRed threshold value on the red channel between 0/255
+	 * @param levelGreen threshold value on the blue channel between 0/255
+	 * @param levelBlue threshold value on the green channel between 0/255
+	 * @return
+	 */
+	public PGraphics getColorThresholdImage(PImage src, float levelRed, float levelGreen, float levelBlue) {
+		super.setCurrentSH(COLORTHRESHOLD);
+		super.currentSH.set("levelRed", levelRed/255.0f);
+		super.currentSH.set("levelGreen", levelGreen/255.0f);
+		super.currentSH.set("levelBlue", levelBlue/255.0f);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Threshold image
+	 * @param src source layer
+	 * @param level threshold value between 0/255
+	 * @return
+	 */
+	public PGraphics getThresholdImage(PImage src, float level) {
+		super.setCurrentSH(GPUImageInterface.THRESHOLD);
+		super.currentSH.set("level", level/255.0f);
 		return super.filter(src);
 	}
 	
