@@ -92,7 +92,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [x] Gaussian
 * * [x] set custom param binding to shader
 - [x] Fast Blur 5x5, 7x7, 9x9, 13x13
-- [ ] Radial blur
+- [x] Radial blur + optimized low, medium, high
 
 ##### Color :
 - [x] Contrast/Sat/Bright
@@ -105,11 +105,11 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [ ] Threshold
 
 ##### Effect/VFX :
-- [x] ChromaWarp
+- [x] ChromaWarp + optimized low, medium, high
 * * [x] set custom param binding to shader
 - [x] Fast ChromaWarp 4, 10, 20
 - [x] Grain
-* * [ ] set custom param binding to shader
+* * [x] set custom param binding to shader
 - [ ] Dithering (TBD)
 - [ ] Pixelate
 - [ ] ASCII **Est-ce un filtre ou une composition ?**
@@ -170,7 +170,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [ ] Edge detection + Sobel + Canny
 - [x] Gaussian
 - [x] Fast Blur 5x5, 7x7, 9x9, 13x13
-- [ ] Radial blur
+- [x] Radial blur
 - [x] Contrast/Sat/Bright
 - [ ] Desaturate
 - [x] Level (add RGB support)

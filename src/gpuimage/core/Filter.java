@@ -142,6 +142,94 @@ public class Filter extends GPUImageBaseEffects{
 		super.currentSH.set("blurSize", 1.0f / (float)src.height);
 		return super.filter(tmp);
 	}
+	
+	/**
+	 * Radial blur from the center of the image
+	 * @param src source layer
+	 * @param blurSize size of the blur
+	 * @param QUALITY define the number iteration
+	 * LOW : 4
+	 * MED : 10
+	 * HIGH : 20
+	 * @return
+	 */
+	public PGraphics getOptimizedRadialBlurImage(PImage src, float blurSize, String QUALITY) {
+		return getOptimizedRadialBlurImage(src, (float) src.width / 2.0f, (float) src.height / 2.0f, blurSize, QUALITY);
+	}
+	
+	/**
+	 * Radial blur
+	 * @param src source layer
+	 * @param originX origin x of the blur
+	 * @param originY origin x of the blur
+	 * @param blurSize size of the blur
+	 * @param QUALITY define the number iteration
+	 * LOW : 4
+	 * MED : 10
+	 * HIGH : 20
+	 * @return
+	 */
+	public PGraphics getOptimizedRadialBlurImage(PImage src, float originX, float originY, float blurSize, String QUALITY) {
+		switch(QUALITY) {
+			case LOW : 	return getRadialBlurLowImage(src, originX, originY, blurSize);
+			case MED : 	return getRadialBlurMediumImage(src, originX, originY, blurSize);
+			case HIGH : return getRadialBlurHighImage(src, originX, originY, blurSize);
+			default : 	return getRadialBlurLowImage(src, originX, originY, blurSize);
+		}
+	}
+	
+	private PGraphics getRadialBlurLowImage(PImage src, float originX, float originY, float blurSize) {
+		super.setCurrentSH(RADIALBLURLOW);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		super.currentSH.set("blurOrigin", originX / (float)src.width, originY / (float)src.height);
+		super.currentSH.set("blurSize", blurSize);
+		return super.filter(src);
+	}
+	
+	private PGraphics getRadialBlurMediumImage(PImage src, float originX, float originY, float blurSize) {
+		super.setCurrentSH(RADIALBLURMED);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		super.currentSH.set("blurOrigin", originX / (float)src.width, originY / (float)src.height);
+		super.currentSH.set("blurSize", blurSize);
+		return super.filter(src);
+	}
+	
+	private PGraphics getRadialBlurHighImage(PImage src, float originX, float originY, float blurSize) {
+		super.setCurrentSH(RADIALBLURLHIGH);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		super.currentSH.set("blurOrigin", originX / (float)src.width, originY / (float)src.height);
+		super.currentSH.set("blurSize", blurSize);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Radial blur from the center of the image
+	 * @param src source layer
+	 * @param blurSize size of the blur
+	 * @param step number of iteration
+	 * @return
+	 */
+	public PGraphics getRadialBlurImage(PImage src, float blurSize, int step) {
+		return getRadialBlurImage(src, (float)src.width/2, (float)src.height/2, blurSize, step);
+	}
+	
+	/**
+	 * Radial blur
+	 * @param src source layer
+	 * @param originX origin x of the blur
+	 * @param originY origin x of the blur
+	 * @param blurSize size of the blur
+	 * @param step number of iteration
+	 * @return
+	 */
+	public PGraphics getRadialBlurImage(PImage src, float originX, float originY, float blurSize, int step) {
+		super.setCurrentSH(RADIALBLUR);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		super.currentSH.set("blurOrigin", originX / (float)src.width, originY / (float)src.height);
+		super.currentSH.set("blurSize", blurSize);
+		super.currentSH.set("octave", step);
+		return super.filter(src);
+	}
 
 	/* ...............................................
 	 * 

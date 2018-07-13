@@ -5,7 +5,6 @@ precision mediump int;
 #endif
 
 
-#define offset 43758.5453123
 uniform sampler2D texture;
 uniform vec2 resolution;
 uniform vec2 blurOrigin = vec2(0.5);

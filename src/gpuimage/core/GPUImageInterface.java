@@ -51,6 +51,9 @@ public interface GPUImageInterface{
 	public static final String GAUSSIANBLUR9X9 = "gaussianblur9x9";
 	public static final String GAUSSIANBLUR13X13 = "gaussianblur13x13";
 	public static final String RADIALBLUR = "radialblur";
+	public static final String RADIALBLURLOW = "radialblurlow";
+	public static final String RADIALBLURMED = "radialblurmedium";
+	public static final String RADIALBLURLHIGH = "radialblurhigh";
 	
 	public static final String CONTRASTSATBRIGHT = "constrastsaturationbrightness";
 	public static final String DESATURATE = "desaturate";
