@@ -29,8 +29,8 @@ graph TD;
   GPUImageBaseEffects-->Filter
   GPUImageBaseEffects-->Compositor
   GPUImageBaseEffects-->ProceduralTexture
-  utils-->PingPongBuffer(TBD)
-  utils-->PingPongGraphics(TBD)
+  utils-->PingPongBuffer-TBD
+  utils-->PingPongGraphics-TBD
   utils-->RGBAPacking
 ```
 
