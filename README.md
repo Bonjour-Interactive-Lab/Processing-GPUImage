@@ -1,7 +1,10 @@
 # GPUImage
 Processing library for high-performance image computing and GPGPU computing (GLSL).
 
-**`Windows`**
+| Plateforme : 	|
+| **`Windows`** |
+| **`OSX`** 	|
+| **`Linux`** 	|
 
 ## Features
 
@@ -29,7 +32,6 @@ graph TD;
   utils-->PingPongGraphics;
   utils-->RGBAPacking
 ```
-----
 
 ## To do
 ### Global
