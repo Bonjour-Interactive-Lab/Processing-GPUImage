@@ -1,12 +1,7 @@
 package gpuimage.core;
 
-import java.nio.file.Paths;
-import java.util.HashMap;
-import gpuimage.utils.*;
 import processing.core.*;
 import processing.opengl.*;
-import processing.opengl.PGraphicsOpenGL;
-
 /**
  * Filtering class wich provide various postFX and filtering methods usefull for design, compositing or computervision.
  * Each available shaders are define in the GPUImageInterface.
@@ -22,8 +17,17 @@ public class Filter extends GPUImageBaseEffects{
 	public Filter(PApplet papplet, int width, int height) {
 		super.init(papplet, width, height);
 	}
+	
 
-	// FILTERING ...............................................
+	/* ...............................................
+	 * 
+	 * 
+	 * 					FILTERING 
+	 * 
+	 * 
+	 ...............................................*/
+	
+	
 	/**Bilateral filtering
 	 * @param src source layer
 	 */
@@ -60,7 +64,14 @@ public class Filter extends GPUImageBaseEffects{
 		return super.filter(src);
 	}
 	
-	// BLUR ......................................................
+	/* ...............................................
+	 * 
+	 * 
+	 * 					  BLUR 
+	 * 
+	 * 
+	 ...............................................*/
+	
 	/**
 	 * Optimized gaussian blur (without using any forloop into the shader)
 	 * @param src source layer
@@ -132,7 +143,14 @@ public class Filter extends GPUImageBaseEffects{
 		return super.filter(tmp);
 	}
 
-	// COLOR .....................................................
+	/* ...............................................
+	 * 
+	 * 
+	 * 					COLOR 
+	 * 
+	 * 
+	 ...............................................*/
+	
 	/**Brighntess adjustment
 	 * @param src source layer
 	 * @param brightness is define as percent. A base brighntess is 100, a lowest will be 50 (50%) and highest could be 150 (150%)
@@ -356,7 +374,13 @@ public class Filter extends GPUImageBaseEffects{
 		return super.filter(src);
 	}
 	
-	// POSTFX .....................................................
+	/* ...............................................
+	 * 
+	 * 
+	 * 					POSTFX 
+	 * 
+	 * 
+	 ...............................................*/
 	/**
 	 * RGB Chroma warping. Origin is set as center of the source layer.
 	 * @param src source layer
@@ -484,13 +508,6 @@ public class Filter extends GPUImageBaseEffects{
 		super.setCurrentSH(GRAIN);
 		super.currentSH.set("intensity", intensity);
 		super.currentSH.set("time", time);
-		return super.filter(src);
-	}
-	
-	// OTHER .......................................................
-	public PGraphics getMaskImage(PImage src, PImage mask) {
-		super.setCurrentSH(MASK);
-		super.currentSH.set("mask", mask);
 		return super.filter(src);
 	}
 }

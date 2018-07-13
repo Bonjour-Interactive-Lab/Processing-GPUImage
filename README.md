@@ -124,11 +124,39 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [ ] DoF from Depth (TBD)
 
 #### Compositor extends GPUImageBaseEffects
-- [ ] Photoshop fusion mode (multiply, add...)
+- [x] Photoshop fusion mode (multiply, add...)
+  - [x] add
+  - [x] average
+  - [x] color
+  - [x] colorburn
+  - [x] colordodge
+  - [x] darken
+  - [x] difference
+  - [x] exclusion
+  - [x] glow
+  - [x] hardlight
+  - [x] hardmix
+  - [x] hue
+  - [x] lighten
+  - [x] linearburn
+  - [x] lineardodge
+  - [x] linearlight
+  - [x] luminosity
+  - [x] multiply
+  - [x] negation
+  - [x] overlay
+  - [x] phoenix
+  - [x] pinlight
+  - [x] reflect
+  - [x] saturation
+  - [x] screen
+  - [x] softlight
+  - [x] substract
+  - [x] vividlight
 - [ ] Double exposure
-- [ ] Mask
-* * [ ] set custom param binding to shader
-* * [ ] clean shader
+- [x] Mask
+* * [x] set custom param binding to shader
+* * [x] clean shader
 - [ ] Alpha Matte (sprite mode)
 
 #### Procedural extends GPUImageBaseEffects
@@ -148,7 +176,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [x] Level (add RGB support)
 - [x] Gamma
 - [ ] LUT
-- [ ] Photoshop fusion mode (multiply, add...)
+- [x] Photoshop fusion mode (multiply, add...)
 - [ ] High-Passing
 - [ ] Threshold
 - [x] ChromaWarp 
@@ -158,7 +186,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [ ] ASCII
 - [ ] Bloom
 - [ ] Double exposure
-- [ ] Mask
+- [x] Mask
 - [ ] Dilatation (TBD : iteration avec PingPong Buffer)
 - [ ] Erosion (TBD : iteration avec PingPong Buffer)
 - [ ] Optical Flow

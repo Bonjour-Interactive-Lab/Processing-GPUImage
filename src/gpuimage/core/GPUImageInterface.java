@@ -28,9 +28,14 @@ public interface GPUImageInterface{
 	 */
 	public static final String HIGH2 = "high2";
 	
-	/**
-	 * Available Filters and Effects 
-	 */
+
+	/* ...............................................
+	 * 
+	 * 
+	 * 					FILTERING 
+	 * 
+	 * 
+	 ...............................................*/
 	
 	public static final String UV = "uv";
 	public static final String BILATERAL = "bilateral";
@@ -71,12 +76,46 @@ public interface GPUImageInterface{
 	
 	public static final String OPTICALFLOW = "opticalflow";
 	
-	/**
-	 * Available compositor
-	 */
+
+	/* ...............................................
+	 * 
+	 * 
+	 * 					COMPOSITING 
+	 * 
+	 * 
+	 ...............................................*/
 	
 	public static final String MASK = "mask";
+	public static final String MASK2 = "mask2";
 	public static final String ALPHASPRITE = "alphasprite";
 	public static final String DOUBLEEXPOSURE = "doubleexposure";
 	
+	public static final String ADD = "blendadd";
+	public static final String AVERAGE = "blendaverage";
+	public static final String COLOR = "blendcolor";
+	public static final String COLORBURN = "blendcolorburn";
+	public static final String COLORDODGE = "blendcolordodge";
+	public static final String DARKEN = "blenddarken";
+	public static final String DIFFERENCE = "blenddifference";
+	public static final String EXCLUSION = "blendexclusion";
+	public static final String GLOW = "blendglow";
+	public static final String HARDLIGHT = "blendhardlight";
+	public static final String HARDMIX = "blendhardmix";
+	public static final String HUE = "blendhue";
+	public static final String LIGHTEN = "blendlighten";
+	public static final String LINEARBURN = "blendlinearburn";
+	public static final String LINEARDODGE = "blendlineardodge";
+	public static final String LINEARLIGHT = "blendlinearlight";
+	public static final String LUMINOSITY = "blendluminosity";
+	public static final String MULTIPLY = "blendmultiply";
+	public static final String NEGATION = "blendnegation";
+	public static final String OVERLAY = "blendoverlay";
+	public static final String PHOENIX = "blendphoenix";
+	public static final String PINLIGHT = "blendpinlight";
+	public static final String REFLECT = "blendreflect";
+	public static final String SATURATION = "blendsaturation";
+	public static final String SCREEN = "blendscreen";
+	public static final String SOFTLIGHT = "blendsoftlight";
+	public static final String SUBSTRACT = "blendsubstract";
+	public static final String VIVIDLIGHT = "blendvividlight";
 }
