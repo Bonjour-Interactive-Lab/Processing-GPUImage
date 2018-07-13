@@ -1,6 +1,6 @@
 package gpuimage.utils;
 
-import gpuimage.core.GPUFiltersInterface;
+import gpuimage.core.GPUImageInterface;
 import processing.core.*;
 import processing.opengl.PGraphicsOpenGL;
 /**
@@ -8,7 +8,7 @@ import processing.opengl.PGraphicsOpenGL;
  * @author bonjour
  *
  */
-public class PingPongGraphics extends PGraphicsOpenGL implements PConstants, GPUFiltersInterface{
+public class PingPongGraphics extends PGraphicsOpenGL implements PConstants, GPUImageInterface{
 	public PingPongGraphics src;
 	public PingPongGraphics dst;
 	public PingPongGraphics[] swapArray;

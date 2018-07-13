@@ -1,16 +1,38 @@
 package gpuimage.core;
 
-public interface GPUFiltersInterface{
-	//Level
+/**
+ * Names shared throughout the gpuimage.core
+ * @author bonjour
+ *
+ */
+public interface GPUImageInterface{
+	
+	/**
+	 * Quality setting. By default the quality of filtering is set as LOW.
+	 * For filtering the quality define the used of optmized shader, the higher is the quality the sahding compution is heavy
+	 */
 	public static final String LOW = "low";
+	/**
+	 * Quality setting.
+	 * @see #LOW
+	 */
 	public static final String MED = "medium";
+	/**
+	 * Quality setting.
+	 * @see #LOW
+	 */
 	public static final String HIGH = "high";
+	/**
+	 * Quality setting.
+	 * @see #LOW
+	 */
 	public static final String HIGH2 = "high2";
 	
-	//shader names
-	public static final String UV = "uv";
+	/**
+	 * Available Filters and Effects 
+	 */
 	
-	//Filtering
+	public static final String UV = "uv";
 	public static final String BILATERAL = "bilateral";
 	public static final String BICUBIC = "bicubic";
 	public static final String DENOISE = "denoise";
@@ -41,15 +63,20 @@ public interface GPUFiltersInterface{
 	public static final String PIXELATE = "pixelate";
 	public static final String ASCII = "ascii";
 	public static final String BLOOM = "bloom";
-	public static final String DOUBLEEXPOSURE = "doubleexposure";
 	
-	public static final String MASK = "mask";
 	public static final String DILATE = "dilate";
 	public static final String ERODE = "erode";
 	public static final String PIXELSORTING ="pixelsorting";
 	public static final String DOF = "dof";
-	public static final String ALPHASPRITE = "alphasprite";
 	
 	public static final String OPTICALFLOW = "opticalflow";
+	
+	/**
+	 * Available compositor
+	 */
+	
+	public static final String MASK = "mask";
+	public static final String ALPHASPRITE = "alphasprite";
+	public static final String DOUBLEEXPOSURE = "doubleexposure";
 	
 }
