@@ -18,7 +18,7 @@ Processing library for high-performance image computing and GPGPU computing (GLS
 	- **Compositor** : Composition between two images (mask, blending...)
 	- **ProceduralTexture** : Generation of procedural texture (noise, FBM, voronoi...)
 
-## Pattern design %"Design Pattern"
+## %"Design Pattern"
 ```mermaid
 graph TD;
   gpuimage-->core;
