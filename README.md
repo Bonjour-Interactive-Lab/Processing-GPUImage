@@ -1,11 +1,11 @@
 # GPUImage
 Processing library for high-performance image computing and GPGPU computing (GLSL).
 
-| Plateforme : 	|
-|---------------|
-| **`Windows`** |
-| **`OSX`** 	|
-| **`Linux`** 	|
+| Plateforme : 	| Status:		|
+|---------------|---------------|
+| **`Windows`** | ![status](https://img.shields.io/badge/build-wip-green.svg?longCache=true&style=flat&colorA=grey&colorB=ffd800) |
+| **`OSX`** 	| ![status](https://img.shields.io/badge/build-wip-green.svg?longCache=true&style=flat&colorA=grey&colorB=ffd800) |
+| **`Linux`** 	| ![status](https://img.shields.io/badge/build-wip-green.svg?longCache=true&style=flat&colorA=grey&colorB=ffd800) |
 
 ## Features
 
