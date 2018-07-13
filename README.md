@@ -6,11 +6,11 @@ Processing library for high-performance image computing and GPGPU computing (GLS
 ## Informations and major updates
 - The v.0.0.1 the library is build on the top of processing which means we are using processing class such as PGraphics, Pimage, PApplet...
 - The v.0.0.1 is based on the processing PJOGL profile. There is no change in the GL context and it's still build on GL2ES2 (a version between GL2, GL3 and GLES2) [GL2ES2 JOGAMP](https://download.java.net/media/jogl/jogl-2.x-docs/javax/media/opengl/GL2ES2.html)
-- Because the library relies on the PJOGL profile (GL2ES2) all shaders are based on GLSL 1.50 (150) [GLSL versions table](https://www.opengl.org/discussion_boards/showthread.php/199965-picking-a-glsl-version)
+- **Because the library relies on the PJOGL profile (GL2ES2) all shaders are based on GLSL 1.50 (150) [GLSL versions table](https://www.opengl.org/discussion_boards/showthread.php/199965-picking-a-glsl-version)**
 - The effect effector system is design as a a base component : GPUImageBaseEffects which is extends by 3 differents class : Filter, Compositor and ProceduralTexture. Each of them is based on the ping pong buffer system set in the GPUImageBaseEffects. Each of them can take cares of differents actions :
-- - Filter : All filtering and VFX operations on a single image (chromawarp, blur, sobel...)
-- - Compositor : Composition between two images (mask, blending...)
-- - ProceduralTexture : Generation of procedural texture (noise, FBM, voronoi...)
+	- Filter : All filtering and VFX operations on a single image (chromawarp, blur, sobel...)
+	- Compositor : Composition between two images (mask, blending...)
+	- ProceduralTexture : Generation of procedural texture (noise, FBM, voronoi...)
 
 ## Pattern design
 ```mermaid
@@ -27,6 +27,7 @@ graph TD;
   utils-->PingPongGraphics;
   utils-->RGBAPacking
 ```
+----
 
 ## To do
 ### Global
