@@ -74,9 +74,11 @@ This methods is a test methods only. We need to make a benchmark in order to def
 
 ### %"Filtering/Compositor/Procedural Texture"
 
+#### GPUImageBaseEffects
 
+#### Filter extends GPUImageBaseEffects
 
-#### Denoiser/Blur/Filtering
+##### Denoiser/Blur/Filtering
 - [x] Bilateral
 * * [x] Debugger le filtre GLSL (Inversion d'UV)
 - [ ] Bicubic
@@ -86,24 +88,23 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [x] Median 5×5 (TBD : iteration avec PingPong Buffer) 
 - [ ] Edge detection + Sobel + Canny
 
-#### Blur
+##### Blur
 - [x] Gaussian
 * * [x] set custom param binding to shader
 - [x] Fast Blur 5x5, 7x7, 9x9, 13x13
 - [ ] Radial blur
 
-#### Color :
+##### Color :
 - [x] Contrast/Sat/Bright
 - [ ] Desaturate
 - [x] Level
 - [x] Gamma
 * * [x] set custom param binding to shader
 - [ ] LUT
-- [ ] Photoshop fusion mode (multiply, add...)
 - [ ] High-Passing
 - [ ] Threshold
 
-#### Effect/VFX :
+##### Effect/VFX :
 - [x] ChromaWarp
 * * [x] set custom param binding to shader
 - [x] Fast ChromaWarp 4, 10, 20
@@ -111,21 +112,26 @@ This methods is a test methods only. We need to make a benchmark in order to def
 * * [ ] set custom param binding to shader
 - [ ] Dithering (TBD)
 - [ ] Pixelate
-- [ ] ASCII
+- [ ] ASCII **Est-ce un filtre ou une composition ?**
 - [ ] Bloom
-- [ ] Double exposure
 
-#### Other : 
-- [x] Mask
-* * [ ] set custom param binding to shader
-* * [ ] clean shader
+##### Other : 
 - [ ] Dilatation (TBD : iteration avec PingPong Buffer)
 - [ ] Erosion (TBD : iteration avec PingPong Buffer)
 - [ ] Optical Flow
 - [ ] FrameDifferencing
 - [ ] Pixel sorting
 - [ ] DoF from Depth (TBD)
+
+#### Compositor extends GPUImageBaseEffects
+- [ ] Photoshop fusion mode (multiply, add...)
+- [ ] Double exposure
+- [ ] Mask
+* * [ ] set custom param binding to shader
+* * [ ] clean shader
 - [ ] Alpha Matte (sprite mode)
+
+#### Procedural extends GPUImageBaseEffects
 
 #### Check all shaders
 - [x] Bilateral
