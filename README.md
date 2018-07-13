@@ -3,7 +3,7 @@ Processing library for high-performance image computing and GPGPU computing (GLS
 
 ## Features
 
-## Informations
+## Informations and major updates
 - The v.0.0.1 the library is build on the top of processing which means we are using processing class such as PGraphics, Pimage, PApplet...
 - The v.0.0.1 is based on the processing PJOGL profile. There is no change in the GL context and it's still build on GL2ES2 (a version between GL2, GL3 and GLES2) [GL2ES2 JOGAMP](https://download.java.net/media/jogl/jogl-2.x-docs/javax/media/opengl/GL2ES2.html)
 - Because the library relies on the PJOGL profile (GL2ES2) all shaders are based on GLSL 1.50 (150) [GLSL versions table](https://www.opengl.org/discussion_boards/showthread.php/199965-picking-a-glsl-version)
@@ -11,10 +11,14 @@ Processing library for high-performance image computing and GPGPU computing (GLS
 ## Pattern design
 ```mermaid
 graph TD;
-  A-->B;
-  A-->C;
-  B-->D;
-  C-->D;
+  gpuimage-->core;
+  gpuimage-->utils;
+  core-->GPUInterface
+  core-->GPUImage
+  core-->Filter;
+  core-->Compositor
+  utils-->PingPongBuffer;
+  utils-->PingPongGraphics;
 ```
 
 ## To do
