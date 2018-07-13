@@ -1,6 +1,8 @@
 # GPUImage
 Processing library for high-performance image computing and GPGPU computing (GLSL).
 
+**`Windows`**
+
 ## Features
 
 ## Informations and major updates
@@ -40,7 +42,7 @@ graph TD;
 - [x] simple GPU info
 - [ ] custom GPU info (memory size...)
 
-### Ping Pong Buffer %"PingPong Buffer"
+### %"PingPong Buffer"
 PingPong buffer is an utils class allowing you to create a ping pong buffer in order to make read-write texture pipeline by creating 2 buffers
 
 - [x] Processing ping pong buffer using PGraphics
@@ -67,8 +69,9 @@ This methods is a test methods only. We need to make a benchmark in order to def
 
 - [ ] independant ping pong buffer (custom JOGL implementation) for Floating Point Texture
 
-### Filtering %"Filtering/Compositor/Procedural Texture"
-Filter list :
+### %"Filtering/Compositor/Procedural Texture"
+
+
 
 #### Denoiser/Blur/Filtering
 - [x] Bilateral
@@ -155,9 +158,8 @@ Filter list :
 - [ ] DoF from Depth (TBD)
 - [ ] Alpha Matte (sprite mode)
 
-### RGBA packing %"Packing RGBA"
+### %"Packing RGBA"
 - [ ] ... (TBD)
 
-### VBO (TBD) %"Module Géométrique (VBO)"
-### Procedural Texture (TBD) %"Filtering/Compositor/Procedural Texture"
+### %"Module Géométrique (VBO)"
 ### Wiki (TBD)
