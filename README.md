@@ -7,12 +7,12 @@ Processing library for high-performance image computing and GPGPU computing (GLS
 - The v.0.0.1 the library is build on the top of processing which means we are using processing class such as PGraphics, Pimage, PApplet...
 - The v.0.0.1 is based on the processing PJOGL profile. There is no change in the GL context and it's still build on GL2ES2 (a version between GL2, GL3 and GLES2) [GL2ES2 JOGAMP](https://download.java.net/media/jogl/jogl-2.x-docs/javax/media/opengl/GL2ES2.html)
 - **Because the library relies on the PJOGL profile (GL2ES2) all shaders are based on GLSL 1.50 (150) [GLSL versions table](https://www.opengl.org/discussion_boards/showthread.php/199965-picking-a-glsl-version)**
-- The effect effector system is design as a a base component : **GPUImageBaseEffects** which is extends by 3 differents class : **Filter**, **Compositor** and **ProceduralTexture**. Each of them is based on the ping pong buffer system set in the **GPUImageBaseEffects**. Each of them can take cares of differents actions :
+- #11 The effect effector system is design as a a base component : **GPUImageBaseEffects** which is extends by 3 differents class : **Filter**, **Compositor** and **ProceduralTexture**. Each of them is based on the ping pong buffer system set in the **GPUImageBaseEffects**. Each of them can take cares of differents actions :
 	- **Filter** : All filtering and VFX operations on a single image (chromawarp, blur, sobel...)
 	- **Compositor** : Composition between two images (mask, blending...)
 	- **ProceduralTexture** : Generation of procedural texture (noise, FBM, voronoi...)
 
-## Pattern design
+## Pattern design %"Design Pattern"
 ```mermaid
 graph TD;
   gpuimage-->core;
@@ -40,13 +40,13 @@ graph TD;
 - [x] simple GPU info
 - [ ] custom GPU info (memory size...)
 
-### Ping Pong Buffer
+### Ping Pong Buffer %"PingPong Buffer"
 PingPong buffer is an utils class allowing you to create a ping pong buffer in order to make read-write texture pipeline by creating 2 buffers
 
 - [x] Processing ping pong buffer using PGraphics
 Each buffer can be swapped so the second is always a previous version of the first one. 
 The main idea of this class is to keep the paradigm of an offscreen buffer made in processing using PGraphics through the PinPongBuffer object. User does not have to learn an new offscreen drawing implementation with various context and drawing methods. Drawing can be handle using
-```
+```java
 object.dst.beginDraw();
 object.dst.endDraw();
 ```
@@ -58,7 +58,7 @@ object.dst.endDraw();
 **WIP**
 Processing ping pong buffer extending PGraphicsOpenGLClass
 The class extends the PGraphicsOpenGL class in order to have the same drawing methods. At each swap the main buffer is copied into the prebious buffer using arrayCopy. User can draw into the PingPongGraphics using all the PGraphics methods
-```
+```java
 object.beginDraw();
 object.endDraw();
 ```
@@ -67,7 +67,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
 
 - [ ] independant ping pong buffer (custom JOGL implementation) for Floating Point Texture
 
-### Filtering
+### Filtering %"Filtering/Compositor/Procedural Texture"
 Filter list :
 
 #### Denoiser/Blur/Filtering
@@ -155,9 +155,9 @@ Filter list :
 - [ ] DoF from Depth (TBD)
 - [ ] Alpha Matte (sprite mode)
 
-### RGBA packing
+### RGBA packing %"Packing RGBA"
 - [ ] ... (TBD)
 
-### VBO (TBD)
-### Procedural Texture (TBD)
+### VBO (TBD) %"Module Géométrique (VBO)"
+### Procedural Texture (TBD) %"Filtering/Compositor/Procedural Texture"
 ### Wiki (TBD)
