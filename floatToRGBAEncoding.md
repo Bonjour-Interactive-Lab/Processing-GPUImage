@@ -76,3 +76,5 @@ ARGB value 		:-16744449
 | Aras Pranckevičiu ARGB32 	| **3.1**168557902787515	|
 | Chris Wellons ARGB16 		| **3.1**29224825983652		|
 
+## References :
+https://www.gamedev.net/forums/topic/442138-packing-a-float-into-a-a8r8g8b8-texture-shader/#2936108 
