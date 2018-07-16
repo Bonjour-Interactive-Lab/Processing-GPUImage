@@ -27,7 +27,7 @@ norm retreived 	:0.49999996996118046
 ARGB value 		:-8421505
 ```
 
-### ARGB24 Methods2
+### ARGB24 Method 2
 ```
 entry 			:3.1415927410125732
 retreived 		:3.141592554493359
@@ -36,6 +36,14 @@ norm retreived 	:0.4999999703145459
 ARGB value 		:-8388609
 ```
 
+### ARGB16 Method (custom implementation)
+```
+entry 			:3.1415927410125732
+retreived 		:3.1416414342823544
+norm entry 		:0.5
+norm retreived 	:0.5000077497743654
+ARGB value 		:-8421377
+```
 ## Aras Pranckevičius approach
 [Link](https://aras-p.info/blog/2009/07/30/encoding-floats-to-rgba-the-final/)
 
@@ -73,6 +81,7 @@ ARGB value 		:-16744449
 | Gary Ruddock ARGB32 		| **3.14159274**09952498	|
 | Gary Ruddock ARGB24-1		| **3.141592**5522730985	|
 | Gary Ruddock ARGB24-2 	| **3.141592**554493359		|
+| Gary Ruddock ARGB16	 	| **3.141**6414342823544	|
 | Aras Pranckevičiu ARGB32 	| **3.1**168557902787515	|
 | Chris Wellons ARGB16 		| **3.1**29224825983652		|
 
