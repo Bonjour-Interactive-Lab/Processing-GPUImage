@@ -53,7 +53,7 @@ ARGB value 		:2122219134
 **This approach is useful when you need to encode an 2D x,y position into en RGBA texture where x >> RG et y >> BA**
 [Link](https://nullprogram.com/blog/2014/06/29/)
 
-##ARGB16 (two value encoded int two channels)
+## ARGB16 (two value encoded int two channels)
 ```
 entry 			:3.1415927410125732
 retreived 		:3.129224825983652
