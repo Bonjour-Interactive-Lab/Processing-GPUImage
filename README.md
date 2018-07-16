@@ -18,7 +18,7 @@ Processing library for high-performance image computing and GPGPU computing (GLS
 	- **Compositor** : Composition between two images (mask, blending...)
 	- **ProceduralTexture** : Generation of procedural texture (noise, FBM, voronoi...)
 
-## %"Design Pattern"
+## %"Architecture et Design Pattern"
 ```mermaid
 graph TD;
   gpuimage-->core;
@@ -30,7 +30,6 @@ graph TD;
   GPUImageBaseEffects-->Compositor
   GPUImageBaseEffects-->ProceduralTexture
   utils-->PingPongBuffer-TBD
-  utils-->PingPongGraphics-TBD
   utils-->RGBAPacking
 ```
 
@@ -45,8 +44,8 @@ graph TD;
 - [x] simple GPU info
 - [ ] custom GPU info (memory size...)
 
-### %"PingPong Buffer"
-PingPong buffer is an utils class allowing you to create a ping pong buffer in order to make read-write texture pipeline by creating 2 buffers
+### %"PingPong Buffer" 
+PingPong buffer is an utils class allowing you to create a ping pong buffer in order to make read-write texture pipeline by creating 2 buffers. For more information about the differents implementation test see #5
 
 - [x] Processing ping pong buffer using PGraphics
 Each buffer can be swapped so the second is always a previous version of the first one. 
@@ -123,6 +122,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [ ] FrameDifferencing
 - [ ] Pixel sorting
 - [ ] DoF from Depth (TBD)
+- [ ] Normal Map converter
 
 #### Compositor extends GPUImageBaseEffects
 - [x] Photoshop fusion mode (multiply, add...)
@@ -162,6 +162,17 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [ ] Chroma key
 
 #### Procedural extends GPUImageBaseEffects
+- [ ] Noise & Random
+  - [ ] Noise
+  - [ ] Random
+  - [ ] Simplex
+  - [ ] Gradient
+  - [ ] Cellular
+  - [ ] Fractal
+  - [ ] Cellular
+- [ ] Isosurface
+- [ ] Reaction-Diffusion
+
 
 #### Check all shaders
 - [x] Bilateral
