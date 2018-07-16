@@ -67,12 +67,12 @@ ARGB value 		:-16744449
 2. Aras Pranckevičius' approach seems quite inefficient fo JAVA by losing values at its first digit
 3. Chris Wellons' approach seems also inefficient but quite usefull if we want to store 1 value per 2 channel such as x >> RG and y >> BA
 
-| NAME   					| value 			    |
-|---------------------------|:---------------------:|
-| ENTRY VALUE (double) 		| 3.1415927410125732	|
-| Gary Ruddock ARGB32 		| 3.1415927409952498	|
-| Gary Ruddock ARGB24-1		| 3.1415925522730985	|
-| Gary Ruddock ARGB24-2 	| 3.141592554493359		|
-| Aras Pranckevičiu ARGB32 	| 3.1168557902787515	|
-| Chris Wellons ARGB16 		| 3.129224825983652		|
+| NAME   					| VALUES 			    	|
+|:---						|:---						|
+| ENTRY VALUE (double) 		| **3.1415927410125732**	|
+| Gary Ruddock ARGB32 		| **3.14159274**09952498	|
+| Gary Ruddock ARGB24-1		| **3.141592**5522730985	|
+| Gary Ruddock ARGB24-2 	| **3.141592**554493359		|
+| Aras Pranckevičiu ARGB32 	| **3.1**168557902787515	|
+| Chris Wellons ARGB16 		| **3.1**29224825983652		|
 
