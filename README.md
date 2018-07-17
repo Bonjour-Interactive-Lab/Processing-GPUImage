@@ -30,7 +30,9 @@ graph TD;
   GPUImageBaseEffects-->Compositor
   GPUImageBaseEffects-->ProceduralTexture
   utils-->PingPongBuffer-TBD
-  utils-->FloatPacking
+  utils-->GPUImageBaseFloatPacking
+  utils-->GPUImageMathsPixels
+  GPUImageBaseFloatPacking-->FloatPacking
 ```
 
 ## To do
@@ -239,7 +241,11 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [x] Color threshold
 
 ### %"Packing RGBA"
-- [ ] ... (TBD)
+- [x] Float to RGBA algorithm precision test
+- [x] Abstract class with various encoding/decoding methods (RGBA16, 24, 32) from float and double
+- [x] Main float packing class
+- [ ] RGBA1616 double packing → Allowing two data (1 per 2 channel 1616)
+- [ ] ModIntPacking allowing to pack int value into 8bits + 8bits index
 
 ### %"Module Géométrique (VBO)"
 ### Wiki (TBD)

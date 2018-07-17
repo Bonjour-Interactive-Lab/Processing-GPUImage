@@ -29,7 +29,7 @@ public interface GPUImageInterface{
 	public static final String HIGH2 = "high2";
 	
 
-	/* ...............................................
+	/** ...............................................
 	 * 
 	 * 
 	 * 					FILTERING 
@@ -81,7 +81,7 @@ public interface GPUImageInterface{
 	public static final String OPTICALFLOW = "opticalflow";
 	
 
-	/* ...............................................
+	/** ...............................................
 	 * 
 	 * 
 	 * 					COMPOSITING 
@@ -122,4 +122,17 @@ public interface GPUImageInterface{
 	public static final String SOFTLIGHT = "blendsoftlight";
 	public static final String SUBSTRACT = "blendsubstract";
 	public static final String VIVIDLIGHT = "blendvividlight";
+	
+
+	/** ...............................................
+	 * 
+	 * 
+	 * 			RGBA ENCODING DECODING 
+	 * 
+	 * 
+	 ...............................................*/
+	public static final int ARGB32 = 32;
+	public static final int ARGB24 = 24;
+	public static final int ARGB16 = 16;
+	
 }

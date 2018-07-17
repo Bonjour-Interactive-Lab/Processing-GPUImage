@@ -1,5 +1,6 @@
 package gpuimage.core;
 
+import gpuimage.utils.GPUImageMathsPixels;
 import processing.core.*;
 import processing.opengl.PGraphicsOpenGL;
 
@@ -9,7 +10,7 @@ import processing.opengl.PGraphicsOpenGL;
  * @author bonjour
  *
  */
-public class GPUImage implements GPUImageInterface, PConstants{
+public class GPUImage extends GPUImageMathsPixels implements GPUImageInterface, PConstants{
 	//Static class
 	/**
 	 * Static class feed with the library informations
