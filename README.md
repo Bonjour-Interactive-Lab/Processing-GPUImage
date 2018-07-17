@@ -241,7 +241,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [x] Color threshold
 
 ### %"Packing RGBA"
-- [x] Float to RGBA algorithm precision test
+- [x] Float to RGBA algorithm [precision test](https://gitlab.bonjour-lab.com/alexr4/GPUImage/blob/master/floatToRGBAEncoding.md)
 - [x] Abstract class with various encoding/decoding methods (RGBA16, 24, 32) from float and double
 - [x] Main float packing class
 - [ ] RGBA1616 double packing → Allowing two data (1 per 2 channel 1616)
