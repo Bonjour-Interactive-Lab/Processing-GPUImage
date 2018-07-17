@@ -50,7 +50,7 @@ ARGB value 		:-8421377
 ### ARGB32
 ```
 entry 			:3.1415927410125732
-retreived 		:3.1168557902787515
+retreived 		:3.116855791764753
 norm entry 		:0.5
 norm retreived 	:0.4960629921232488
 ARGB value 		:2122219134
@@ -89,7 +89,7 @@ Retreived = decode * TWO_PI
 | Gary Ruddock ARGB24-1		| **3.141592**5522730985	|
 | Gary Ruddock ARGB24-2 	| **3.141592**554493359		|
 | Gary Ruddock ARGB16	 	| **3.141**6414342823544	|
-| Aras Pranckevičiu ARGB32 	| **3.1**168557902787515	|
+| Aras Pranckevičiu ARGB32 	| **3.1**16855791764753		|
 | Chris Wellons ARGB16 		| **3.1**29224825983652		|
 
 
@@ -107,7 +107,7 @@ Retreived = decode
 | Gary Ruddock ARGB24-1		| **0.4566399**349694513		|
 | Gary Ruddock ARGB24-2 	| **0.4566399**1322699965		|
 | Gary Ruddock ARGB16	 	| **0.4566**551930526745		|
-| Aras Pranckevičiu ARGB32 	| **0.45**270296753771455**		|
+| Aras Pranckevičiu ARGB32 	| **0.45**2702967774219			|
 | Chris Wellons ARGB16 		| **0.45**4894325238035			|
 
 ## References :
