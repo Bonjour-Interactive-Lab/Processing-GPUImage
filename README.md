@@ -30,7 +30,7 @@ graph TD;
   GPUImageBaseEffects-->Compositor
   GPUImageBaseEffects-->ProceduralTexture
   utils-->PingPongBuffer-TBD
-  utils-->RGBAPacking
+  utils-->FloatPacking
 ```
 
 ## To do
