@@ -14,7 +14,7 @@ import processing.core.*;
  * @author bonjour
  */
 
-public class GPUImageBaseFloatPacking implements GPUImageInterface, PConstants{
+abstract class GPUImageBaseFloatPacking implements GPUImageInterface, PConstants{
 	//Double precision
 	private static final double[] DEFACTOR = {1.0, 255.0, 65025.0, 16581375.0};
 	private static final double[] DSCALE = {1.0, 256.0, 65536.0};
