@@ -111,4 +111,5 @@ Retreived = decode
 | Chris Wellons ARGB16 		| **0.45**4894325238035			|
 
 ## References :
-https://www.gamedev.net/forums/topic/442138-packing-a-float-into-a-a8r8g8b8-texture-shader/#2936108 
+https://www.gamedev.net/forums/topic/442138-packing-a-float-into-a-a8r8g8b8-texture-shader/#2936108
+http://diaryofagraphicsprogrammer.blogspot.com/2009/10/bitmasks-packing-data-into-fp-render.html
