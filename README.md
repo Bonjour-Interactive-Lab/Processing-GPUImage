@@ -34,7 +34,7 @@ graph TD;
   utils-->IntPacking
   utils-->GPUImageMathsPixels
   GPUImageBaseFloatPacking-->FloatPacking
-  FloatPacking-->Vac2Packing
+  FloatPacking-->Vec2Packing
 ```
 
 ## To do
