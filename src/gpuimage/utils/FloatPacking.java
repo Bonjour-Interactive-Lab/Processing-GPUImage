@@ -33,7 +33,7 @@ public class FloatPacking extends GPUImageBaseFloatPacking{
 	 * 
 	 * 
 	 ...............................................*/
-	public PImage encodeRGBADouble(double[] data, int ENCODINGTYPE) {
+	public PImage encodeARGBDouble(double[] data, int ENCODINGTYPE) {
 		/**
 		 * Switch case are quite slow. We kept it in order to propose a custom solution but for faster encoding please use direct implementation
 		 */
@@ -49,7 +49,7 @@ public class FloatPacking extends GPUImageBaseFloatPacking{
 		return encodedDataImage;
 	}
 	
-	public PImage encodeRGBA32Double(double[] data) {
+	public PImage encodeARGB32Double(double[] data) {
 		this.paramEncodedDataImage(data.length);
 		this.encodeARGB32(data);
 		encodedDataImage = new PImage(image);
@@ -57,7 +57,7 @@ public class FloatPacking extends GPUImageBaseFloatPacking{
 		return encodedDataImage;
 	}
 	
-	public PImage encodeRGBA24Double(double[] data) {
+	public PImage encodeARGB24Double(double[] data) {
 		this.paramEncodedDataImage(data.length);
 		this.encodeARGB24(data);
 		encodedDataImage = new PImage(image);
@@ -65,7 +65,7 @@ public class FloatPacking extends GPUImageBaseFloatPacking{
 		return encodedDataImage;
 	}
 	
-	public PImage encodeRGBA16Double(double[] data) {
+	public PImage encodeARGB16Double(double[] data) {
 		this.paramEncodedDataImage(data.length);
 		this.encodeARGB16(data);
 		encodedDataImage = new PImage(image);
@@ -73,7 +73,7 @@ public class FloatPacking extends GPUImageBaseFloatPacking{
 		return encodedDataImage;
 	}
 	
-	public PImage encodeRGBAFloat(float[] data, int ENCODINGTYPE) {
+	public PImage encodeARGBFloat(float[] data, int ENCODINGTYPE) {
 		this.paramEncodedDataImage(data.length);
 		switch(ENCODINGTYPE) {
 			case GPUImageInterface.ARGB32 : this.encodeARGB32(data);
@@ -88,7 +88,7 @@ public class FloatPacking extends GPUImageBaseFloatPacking{
 	
 
 	
-	public PImage encodeRGBA32Float(float[] data) {
+	public PImage encodeARGB32Float(float[] data) {
 		this.paramEncodedDataImage(data.length);
 		this.encodeARGB32(data);
 		encodedDataImage = new PImage(image);
@@ -96,7 +96,7 @@ public class FloatPacking extends GPUImageBaseFloatPacking{
 		return encodedDataImage;
 	}
 	
-	public PImage encodeRGBA24Float(float[] data) {
+	public PImage encodeARGB24Float(float[] data) {
 		this.paramEncodedDataImage(data.length);
 		this.encodeARGB24(data);
 		encodedDataImage = new PImage(image);
@@ -104,7 +104,7 @@ public class FloatPacking extends GPUImageBaseFloatPacking{
 		return encodedDataImage;
 	}
 	
-	public PImage encodeRGBA16Float(float[] data) {
+	public PImage encodeARGB16Float(float[] data) {
 		this.paramEncodedDataImage(data.length);
 		this.encodeARGB16(data);
 		encodedDataImage = new PImage(image);

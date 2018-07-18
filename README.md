@@ -246,8 +246,8 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [x] Abstract class with various encoding/decoding methods (RGBA16, 24, 32) from float and double
 - [x] Main float packing class
 - [ ] RGBA1616 double packing → Allowing two data (1 per 2 channel 1616)
-- [ ] ModIntPacking allowing to pack int value into 8bits + 8bits index
-- [ ] Performance
+- [x] ModIntPacking allowing to pack int value into 8bits + 8bits index
+- [ ] Performances
   - [ ] Quid to use generic type in order to simplify class writing ?
   - [ ] Quid to thread encoding operation for performance ? 
   - [x] Quid to bypass the PImage object in order to encode in a spediest way ? 
