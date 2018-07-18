@@ -8,6 +8,28 @@ import gpuimage.core.GPUImageInterface;
  *
  */
 public abstract class GPUImageMathsPixels implements GPUImageInterface{
+	//Image helpers
+	public static int[] getWidthHeightFromArea(int area) {
+		//NB maybe we can throw an exception if area is prime because it will only retur a texture of 1 × area
+		
+		float sqrtArea = (float)Math.sqrt(area);
+		int isqrtArea = (int)Math.ceil(sqrtArea);
+		  
+		int w = 0;
+		int h = 0;
+		for (h=isqrtArea; h>0; h--) {
+			// integer division discarding remainder:
+			w = area/h;
+			if ( w*h == area ) {
+				// closest pair is (w,h)
+				break;
+			}
+		}
+	
+		int[] wh = {w, h};
+		return wh;
+	}
+	
 	//Maths inpired by GLSL method
 	public static double fract(double value) {
 		return value % 1.0;

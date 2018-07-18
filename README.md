@@ -39,6 +39,7 @@ graph TD;
 ### Global
 - [ ] Add try catch and handle errors
 - [ ] Add custom throw error (view adidas source)
+- [ ] Add precise documentation
 - [ ] Add avatar @gitlab
 
 ### Core 
@@ -246,6 +247,13 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [x] Main float packing class
 - [ ] RGBA1616 double packing → Allowing two data (1 per 2 channel 1616)
 - [ ] ModIntPacking allowing to pack int value into 8bits + 8bits index
+- [ ] Performance
+  - [ ] Quid to use generic type in order to simplify class writing ?
+  - [ ] Quid to thread encoding operation for performance ? 
+  - [x] Quid to bypass the PImage object in order to encode in a spediest way ? 
+    - Using BufferedImage seems to speed up the performance [Reference](http://www.java-gaming.org/index.php?topic=23013.0)
+    - Using specific method without switch/case. The test was too low
+  - [x] Find a way to create a rectangle from area only. [See sehrope implementation en stackoverflow](https://stackoverflow.com/questions/16266931/input-an-integer-find-the-two-closest-integers-which-when-multiplied-equal-th)
 
 ### %"Module Géométrique (VBO)"
 ### Wiki (TBD)

@@ -44,18 +44,57 @@ abstract class GPUImageBaseFloatPacking implements GPUImageInterface, PConstants
 	 * 
 	 ...............................................*/
 	
-	
-	public int valueToARGB(double value, int ENCODINGTYPE) {
+	public int doubleToARGB(double value, int ENCODINGTYPE) {
+		/**
+		 * Switch case are quite slow. We kept it in order to propose a custom solution but for faster encoding please use direct implementation
+		 */
 		double[] argb = valueToARGBArray(value, ENCODINGTYPE);
 		return GPUImage.getARGB(argb);
 	}
 	
-	public int valueToARGB(float value, int ENCODINGTYPE) {
+	public int doubleToARGB32(double value) {
+		double[] argb = valueToARGB32(value);
+		return GPUImage.getARGB(argb);
+	}
+	
+	public int doubleToARGB24(double value) {
+		double[] argb = valueToARGB24(value);
+		return GPUImage.getARGB(argb);
+	}
+	
+	public int doubleToARGB16(double value) {
+		double[] argb = valueToARGB16(value);
+		return GPUImage.getARGB(argb);
+	}
+	
+	public int floatToARGB(float value, int ENCODINGTYPE) {
+		/**
+		 * Switch case are quite slow. We kept it in order to propose a custom solution but for faster encoding please use direct implementation
+		 */
 		float[] argb = valueToARGBArray(value, ENCODINGTYPE);
+		return GPUImage.getARGB(argb);
+	}
+
+	
+	public int floatToARGB32(float value) {
+		float[] argb = valueToARGB32(value);
+		return GPUImage.getARGB(argb);
+	}
+	
+	public int floatToARGB24(float value) {
+		float[] argb = valueToARGB24(value);
+		return GPUImage.getARGB(argb);
+	}
+	
+	public int floatToARGB16(float value) {
+		float[] argb = valueToARGB16(value);
 		return GPUImage.getARGB(argb);
 	}
 	
 	public double[] valueToARGBArray(double value, int ENCODINGTYPE) {
+		/**
+		 * Switch case are quite slow. We kept it in order to propose a custom solution but for faster encoding please use direct implementation
+		 */
 		switch(ENCODINGTYPE) {
 			case ARGB32 : return valueToARGB32(value);
 			case ARGB24 : return valueToARGB24(value);
@@ -65,6 +104,9 @@ abstract class GPUImageBaseFloatPacking implements GPUImageInterface, PConstants
 	}
 	
 	public float[] valueToARGBArray(float value, int ENCODINGTYPE) {
+		/**
+		 * Switch case are quite slow. We kept it in order to propose a custom solution but for faster encoding please use direct implementation
+		 */
 		switch(ENCODINGTYPE) {
 			case ARGB32 : return valueToARGB32(value);
 			case ARGB24 : return valueToARGB24(value);
@@ -233,32 +275,32 @@ abstract class GPUImageBaseFloatPacking implements GPUImageInterface, PConstants
 		}
 	}
 	
-	private double ARGB32ToDouble(int argb) {
+	public double ARGB32ToDouble(int argb) {
 		double[] rgbaArray = GPUImage.getRGBADouble(argb);
 		return GPUImage.dot(rgbaArray, DDFACTOR32) / 255.0;
 	}
 	
-	private float ARGB32ToFloat(int argb) {
+	public float ARGB32ToFloat(int argb) {
 		float[] rgbaArray = GPUImage.getRGBAFloat(argb);
 		return GPUImage.dot(rgbaArray, FDFACTOR32) / 255.0f;
 	}
 	
-	private double ARGB24ToDouble(int argb) {
+	public double ARGB24ToDouble(int argb) {
 		double[] rgbaArray = GPUImage.getRGBADouble(argb);
 		return GPUImage.dot(rgbaArray, DDFACTOR24) / 255.0;
 	}
 	
-	private float ARGB24ToFloat(int argb) {
+	public float ARGB24ToFloat(int argb) {
 		float[] rgbaArray = GPUImage.getRGBAFloat(argb);
 		return GPUImage.dot(rgbaArray, FDFACTOR24) / 255.0f;
 	}
 	
-	private double ARGB16ToDouble(int argb) {
+	public double ARGB16ToDouble(int argb) {
 		double[] rgbaArray = GPUImage.getRGBADouble(argb);
 		return GPUImage.dot(rgbaArray, DDFACTOR16) / 255.0;
 	}
 	
-	private float ARGB16ToFloat(int argb) {
+	public float ARGB16ToFloat(int argb) {
 		float[] rgbaArray = GPUImage.getRGBAFloat(argb);
 		return GPUImage.dot(rgbaArray, FDFACTOR16) / 255.0f;
 	}
