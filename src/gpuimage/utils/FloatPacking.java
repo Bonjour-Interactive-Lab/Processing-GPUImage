@@ -11,19 +11,9 @@ import processing.core.*;
  *
  */
 public class FloatPacking extends GPUImageBaseFloatPacking{
-	private PApplet papplet;
-	private PImage encodedDataImage;
-	private BufferedImage image;
-	private int[] imagePixelData;
 	
 	public FloatPacking(PApplet papplet) {
-		this.papplet = papplet;
-	}
-	
-	public void paramEncodedDataImage(int dataLength) {
-		int[] wh = GPUImage.getWidthHeightFromArea(dataLength);	
-		image = new BufferedImage(wh[0], wh[1], BufferedImage.TYPE_INT_ARGB);
-		imagePixelData = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
+		super(papplet);
 	}
 	
 	/** ...............................................
@@ -39,10 +29,13 @@ public class FloatPacking extends GPUImageBaseFloatPacking{
 		 */
 		this.paramEncodedDataImage(data.length);	
 		switch(ENCODINGTYPE) {
+			default :
 			case GPUImageInterface.ARGB32 : this.encodeARGB32(data);
+			break;
 			case GPUImageInterface.ARGB24 : this.encodeARGB24(data);
+			break;
 			case GPUImageInterface.ARGB16 : this.encodeARGB16(data);
-			default : this.encodeARGB32(data);
+			break;
 		}
 		encodedDataImage = new PImage(image);
 		encodedDataImage.parent = this.papplet;
@@ -76,10 +69,13 @@ public class FloatPacking extends GPUImageBaseFloatPacking{
 	public PImage encodeARGBFloat(float[] data, int ENCODINGTYPE) {
 		this.paramEncodedDataImage(data.length);
 		switch(ENCODINGTYPE) {
+			default :
 			case GPUImageInterface.ARGB32 : this.encodeARGB32(data);
+			break;
 			case GPUImageInterface.ARGB24 : this.encodeARGB24(data);
+			break;
 			case GPUImageInterface.ARGB16 : this.encodeARGB16(data);
-			default : this.encodeARGB32(data);
+			break;
 		}
 		encodedDataImage = new PImage(image);
 		encodedDataImage.parent = this.papplet;

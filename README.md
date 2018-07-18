@@ -34,7 +34,7 @@ graph TD;
   utils-->IntPacking
   utils-->GPUImageMathsPixels
   GPUImageBaseFloatPacking-->FloatPacking
-  FloatPacking-->Vec2Packing
+  GPUImageBaseFloatPacking-->Vec2Packing
 ```
 
 ## To do
@@ -247,15 +247,18 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [x] Float to RGBA algorithm [precision test](https://gitlab.bonjour-lab.com/alexr4/GPUImage/blob/master/floatToRGBAEncoding.md)
 - [x] Abstract class with various encoding/decoding methods (RGBA16, 24, 32) from float and double
 - [x] Main float packing class
-- [ ] RGBA1616 double packing → Allowing two data (1 per 2 channel 1616)
+- [x] RGBA1616 double packing → Allowing two data (1 per 2 channel 1616)
 - [x] ModIntPacking allowing to pack int value into 8bits + 8bits index
 - [ ] Performances
-  - [ ] Quid to use generic type in order to simplify class writing ?
+  - [x] Quid to use generic type in order to simplify class writing ? (Not quite efficience for now)
   - [ ] Quid to thread encoding operation for performance ? 
   - [x] Quid to bypass the PImage object in order to encode in a spediest way ? 
     - Using BufferedImage seems to speed up the performance [Reference](http://www.java-gaming.org/index.php?topic=23013.0)
     - Using specific method without switch/case. The test was too low
   - [x] Find a way to create a rectangle from area only. [See sehrope implementation en stackoverflow](https://stackoverflow.com/questions/16266931/input-an-integer-find-the-two-closest-integers-which-when-multiplied-equal-th)
+- [ ] Pack/unpack RGBA (16/24/32) shader model
+- [ ] Pack/unpack RGBA1616 shader model
+- [ ] Pack/unpack RGBAMod shader model
 
 ### %"Module Géométrique (VBO)"
 ### Wiki (TBD)

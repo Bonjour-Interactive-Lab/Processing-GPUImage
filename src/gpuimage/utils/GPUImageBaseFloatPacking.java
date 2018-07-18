@@ -1,5 +1,7 @@
 package gpuimage.utils;
 
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
 import gpuimage.core.GPUImage;
 import gpuimage.core.GPUImageInterface;
 import processing.core.*;
@@ -31,9 +33,20 @@ abstract class GPUImageBaseFloatPacking implements GPUImageInterface, PConstants
 	private static final float[] FDFACTOR16 = {FDFACTOR32[0], FDFACTOR32[1]};
 	private static final float FMASK = 1.0f/256.0f;
 	
+	protected PApplet papplet;
+	protected PImage encodedDataImage;
+	protected BufferedImage image;
+	protected int[] imagePixelData;
 	
-	public GPUImageBaseFloatPacking(){
-		
+	
+	public GPUImageBaseFloatPacking(PApplet papplet){
+		this.papplet = papplet;
+	}
+	
+	protected void paramEncodedDataImage(int dataLength) {
+		int[] wh = GPUImage.getWidthHeightFromArea(dataLength);	
+		image = new BufferedImage(wh[0], wh[1], BufferedImage.TYPE_INT_ARGB);
+		imagePixelData = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
 	}
 	
 	/** ...............................................
@@ -116,7 +129,7 @@ abstract class GPUImageBaseFloatPacking implements GPUImageInterface, PConstants
 	}
 	
 	//RGBA
-	private double[] valueToARGB32(double value) {
+	protected double[] valueToARGB32(double value) {
 		double[] rgba = {
 				DEFACTOR[0] * value,
 				DEFACTOR[1] * value,
@@ -143,7 +156,7 @@ abstract class GPUImageBaseFloatPacking implements GPUImageInterface, PConstants
 		return rgba;
 	}
 	
-	private float[] valueToARGB32(float value) {
+	protected float[] valueToARGB32(float value) {
 		float[] rgba = {
 				FEFACTOR[0] * value,
 				FEFACTOR[1] * value,
@@ -170,7 +183,7 @@ abstract class GPUImageBaseFloatPacking implements GPUImageInterface, PConstants
 	}
 	
 	//RGB
-	private double[] valueToARGB24(double value) {
+	protected double[] valueToARGB24(double value) {
 		double[] rgb = {
 				DEFACTOR[0] * value,
 				DEFACTOR[1] * value,
@@ -192,7 +205,7 @@ abstract class GPUImageBaseFloatPacking implements GPUImageInterface, PConstants
 	}
 	
 
-	private float[] valueToARGB24(float value) {
+	protected float[] valueToARGB24(float value) {
 		float[] rgb = {
 				FEFACTOR[0] * value,
 				FEFACTOR[1] * value,
@@ -214,7 +227,7 @@ abstract class GPUImageBaseFloatPacking implements GPUImageInterface, PConstants
 	}
 	
 	//RG
-	private double[] valueToARGB16(double value) {
+	protected double[] valueToARGB16(double value) {
 		double[] rgb = {
 				DEFACTOR[0] * value,
 				DEFACTOR[1] * value
@@ -231,7 +244,7 @@ abstract class GPUImageBaseFloatPacking implements GPUImageInterface, PConstants
 		return rgb;
 	}
 
-	private float[] valueToARGB16(float value) {
+	protected float[] valueToARGB16(float value) {
 		float[] rgb = {
 				FEFACTOR[0] * value,
 				FEFACTOR[1] * value

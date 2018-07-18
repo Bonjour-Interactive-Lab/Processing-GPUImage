@@ -85,7 +85,7 @@ public class PingPongBuffer implements PConstants{
 	 * @return
 	 */
 	public PGraphics getSrcBuffer() {
-		return (PGraphics) this.src;
+		return this.src;
 	}
 	
 	/***
@@ -93,6 +93,6 @@ public class PingPongBuffer implements PConstants{
 	 * @return
 	 */
 	public PGraphics getDstBuffer() {
-		return  (PGraphics) this.dst;
+		return  this.dst;
 	}
 }

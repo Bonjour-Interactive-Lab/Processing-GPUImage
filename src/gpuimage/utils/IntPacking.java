@@ -22,7 +22,7 @@ public class IntPacking{
 		this.papplet = papplet;
 	}
 	
-	public void paramEncodedDataImage(int dataLength) {
+	private void paramEncodedDataImage(int dataLength) {
 		int[] wh = GPUImage.getWidthHeightFromArea(dataLength);	
 		image = new BufferedImage(wh[0], wh[1], BufferedImage.TYPE_INT_ARGB);
 		imagePixelData = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
@@ -42,7 +42,7 @@ public class IntPacking{
 			int value = datas[i];
 			int modValue = value % 255;
 			int modIndex = value / 255;
-			int modIndexAlpha = (int) Math.round(((float)modIndex / divider) * 255);
+			int modIndexAlpha = Math.round(((float)modIndex / divider) * 255);
 			imagePixelData[i] = (modIndexAlpha << 24) | (modValue << 16) | (modValue << 8) | modValue;
 		}
 	}
@@ -55,7 +55,7 @@ public class IntPacking{
 			int a = img.pixels[i] >> 24 & 0xFF;
 			int r = img.pixels[i] >> 16 & 0xFF;
 			
-			int modIndexRetreived = (int)Math.round((a / 255.0f) * divider);
+			int modIndexRetreived = Math.round((a / 255.0f) * divider);
 			datas[i] = (r + 255 * modIndexRetreived);
 		}
 		
