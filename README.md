@@ -31,8 +31,10 @@ graph TD;
   GPUImageBaseEffects-->ProceduralTexture
   utils-->PingPongBuffer-TBD
   utils-->GPUImageBaseFloatPacking
+  utils-->IntPacking
   utils-->GPUImageMathsPixels
   GPUImageBaseFloatPacking-->FloatPacking
+  FloatPacking-->Vac2Packing
 ```
 
 ## To do
