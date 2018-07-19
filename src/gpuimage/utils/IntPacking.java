@@ -6,9 +6,28 @@ import gpuimage.core.GPUImage;
 import gpuimage.core.GPUImageInterface;
 import processing.core.*;
 
+
 /**
- * Integer to rgba packing using RGB 8bit for value as v%255.0 and 8bits for modulo index as i = (a / 256) * divider where divider is a known value
+ * IntPacking is an utils class allowing to packing integer value into RGBA texture using modulo 255 for grey value and alpha channel for column index per modulo.<br>
+ * This technic is usefull when you need to pass and integer array of values from CPU to GPU for vairous GPGPU computation on shader side — 
+ * such as physics simulation on pixel analysis like optical flow — or if you need to send large amount of data as texture (using spout, syphon or NDI)<br>
+ * This class provide a faster encoding/decoding methods than the FloatPacking by using only modulo and alpha channel.
+ * <b>Howerver this cannot be use for non integer value.</b>
+ * 
+ * <p>
+ * The main idea is to take a integer value from a range of 0 to <b>KNOWN</b> value and split it across a the RGB channel by using a value%255.<br>
+ * The index of the modulo (number of repetition across the range) is store into the alpha channel<br>
+
+ * <p><b>All color are send as int.</b> You can use it with the processing variable color</p>
+ * <p> the value can be retreived on CPU side via the provided methods or en GPU (shader) side via the following methods :
+ * <pre>
+ * {@code
+ * 
+ * 
+ * }
+ * </pre>
  * @author bonjour
+ * @see GPUImageInterface
  *
  */
 public class IntPacking{
@@ -22,12 +41,22 @@ public class IntPacking{
 		this.papplet = papplet;
 	}
 	
+	/**
+	 * Defines the size of the output encoded texture and prepares the PImage
+	 * @param dataLength
+	 */
 	private void paramEncodedDataImage(int dataLength) {
 		int[] wh = GPUImage.getWidthHeightFromArea(dataLength);	
 		image = new BufferedImage(wh[0], wh[1], BufferedImage.TYPE_INT_ARGB);
 		imagePixelData = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
 	}
 	
+	/**
+	 * Encode int array into RGBA texture
+	 * @param datas
+	 * @param maxDataValue Maximum value known into the datas array
+	 * @return
+	 */
 	public PImage encodeARGB(int[] datas, int maxDataValue) {
 		paramEncodedDataImage(datas.length);
 		divider = maxDataValue / 256.0f;
@@ -37,6 +66,7 @@ public class IntPacking{
 		return encodedDataImage;
 	}
 	
+	//encode int to RGBA % 255
 	private void encodeARGBMod(int[] datas) {
 		for(int i=0; i<datas.length; i++){
 			int value = datas[i];
@@ -47,6 +77,12 @@ public class IntPacking{
 		}
 	}
 	
+	/**
+	 * Decode RGBA texture into int array
+	 * @param img
+	 * @param maxDataValue Maximum value known into the datas array
+	 * @return
+	 */
 	public int[] decodeARGB(PImage img, int maxDataValue) {
 		img.loadPixels();
 		float divider = maxDataValue / 256.0f;
@@ -62,7 +98,8 @@ public class IntPacking{
 		return datas;
 	}
 	
-	public float getLastDivider() {
+	
+	private float getLastDivider() {
 		return this.divider;
 	}
 	

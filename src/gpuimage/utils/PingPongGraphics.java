@@ -4,9 +4,35 @@ import gpuimage.core.GPUImageInterface;
 import processing.core.*;
 import processing.opengl.Texture;
 import processing.opengl.PGraphicsOpenGL;
+
 /**
- * Based on GoToLoop PGraphicsJava2D extended class example : https://forum.processing.org/two/discussion/5238/creating-a-layer-class-that-extends-pgraphics
+ * This PingPong buffer is a attempt to create a double buffering texture by extending the PGraphicsOpenGL class<br>
+ * The main goal is to create a simple read-write texture which can be use as a simple PGraphics so user can use it as the usual processing PGraphics : 
+ * <pre>
+ * {@code
+ * buffer.beginDraw();
+ * //...draw anything you like using buffer.function()
+ * buffer.endDraw();
+ * buffer.swap(); // swap the buffers (read-write texture)
+ * }
+ * </pre>
+ * It's based on GoToLoop PGraphicsJava2D extended class example : https://forum.processing.org/two/discussion/5238/creating-a-layer-class-that-extends-pgraphics
+ * For now the differents implementations tested are : <br> 
+ * <ul>
+ * <li>write the main Pgraphics into another (begin/endDraw()) (too slow)</li>
+ * <li>copy pixel from texture to another (too slow)</li>
+ * <li>swapping context using array (not working)</li>
+ * <li>swapping context (not working)</li>
+ * <li>copy texture and write it into Pgraphics (too slow)</li>
+ * <li>copy texture as PImage (too slow)</li>
+ * </ul>
+ * <p>
+ * Next :
+ * <ul>
+ * <li>Using BufferedImage to copy the PPB ?</li>
+ * </ul>
  * @author bonjour
+ * @see GPUImageInterface
  *
  */
 public class PingPongGraphics extends PGraphicsOpenGL implements PConstants, GPUImageInterface{

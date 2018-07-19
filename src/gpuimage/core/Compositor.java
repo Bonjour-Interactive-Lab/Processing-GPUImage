@@ -3,6 +3,15 @@ package gpuimage.core;
 import processing.core.*;
 import processing.opengl.*;
 
+/**
+ * Compositor provide various GPU based blending methods for compositing between two image.<br>
+ * The class is based on the same paradigme as photoshop where we have a src image (top layer) which is blend with a base image (bottom layer)
+ * Each available shaders are define in the GPUImageInterface.
+ * 
+ * @see GPUImageInterface
+ * @author bonjour
+ *
+ */
 public class Compositor extends GPUImageBaseEffects{
 	public Compositor(PApplet papplet) {
 		super.init(papplet);

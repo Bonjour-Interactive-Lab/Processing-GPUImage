@@ -24,6 +24,10 @@ public class GPUImage extends GPUImageMathsPixels implements GPUImageInterface, 
 		//this will be enable after the public release
 		//public static final String GIT         = "##source.repository##";
 		
+		/**
+		 * Return Name, version and authors as String
+		 * @return
+		 */
 		public String getLibraryInfos(){
 			return NAME +" "+ VERSION+" by "+AUTHOR;
 		}
@@ -46,6 +50,10 @@ public class GPUImage extends GPUImageMathsPixels implements GPUImageInterface, 
 			GLSLVERSION        = PGraphicsOpenGL.GLSL_VERSION;
 		}
 		
+		/**
+		 * Return Renderer, vendor, GLVersion, GLSLVersion as String
+		 * @return
+		 */
 		public String getGpuInfos() {
 			return "GPU : "    +RENDERER    +" by "+VENDOR+"\n"+
 					"OpenGL : "+GLVERSION   +"\n"+

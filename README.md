@@ -76,6 +76,13 @@ This methods is a test methods only. We need to make a benchmark in order to def
 
 - [ ] independant ping pong buffer (custom JOGL implementation) for Floating Point Texture
 
+#### Others
+- [x] add filtering linear :
+```java
+  buffer.hint(DISABLE_TEXTURE_MIPMAPS);
+  ((PGraphicsOpenGL)buffer).textureSampling(3);
+```
+
 ### %"Filtering/Compositor/Procedural Texture"
 
 #### GPUImageBaseEffects

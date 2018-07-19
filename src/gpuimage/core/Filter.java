@@ -2,10 +2,12 @@ package gpuimage.core;
 
 import processing.core.*;
 import processing.opengl.*;
+
+
 /**
- * Filtering class wich provide various postFX and filtering methods usefull for design, compositing or computervision.
+ * Filter wich provide various postFX and filtering methods usefull for design or computer vision.
  * Each available shaders are define in the GPUImageInterface.
- * @see #GPUImageInterface
+ * @see GPUImageInterface
  * 
  * @author bonjour
  */
