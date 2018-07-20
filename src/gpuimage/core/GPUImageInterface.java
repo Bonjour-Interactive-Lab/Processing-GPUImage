@@ -60,7 +60,9 @@ public interface GPUImageInterface{
 	public static final String DESATURATE = "desaturate";
 	public static final String LEVEL = "level";
 	public static final String GAMMA = "gamma";
-	public static final String LUT = "lut";
+	public static final String LUT1D = "lut1d";
+	public static final String LUT1DGEN = "lut1dgen";
+	public static final String LUT2DGEN = "lut2dgen";
 	public static final String COLORTHRESHOLD = "colorthreshold";
 	public static final String THRESHOLD = "threshold";
 	

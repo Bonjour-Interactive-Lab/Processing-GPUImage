@@ -517,6 +517,19 @@ public class Filter extends GPUImageBaseEffects{
 		return super.filter(src);
 	}
 	
+	/**
+	 * Color grading using 1D Look Up Table (LUT)
+	 * @see 
+	 * @param src
+	 * @param lut
+	 * @return
+	 */
+	public PGraphics getLut1DImage(PImage src, PImage lut) {
+		super.setCurrentSH(GPUImageInterface.LUT1D);
+		super.currentSH.set("lut", lut);
+		return super.filter(src);
+	}
+	
 	/* ...............................................
 	 * 
 	 * 

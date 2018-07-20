@@ -29,6 +29,7 @@ graph TD;
   GPUImageBaseEffects-->Filter
   GPUImageBaseEffects-->Compositor
   GPUImageBaseEffects-->ProceduralTexture
+  GPUImageBaseEffects-->LUTGenerator
   utils-->PingPongBuffer-TBD
   utils-->GPUImageBaseFloatPacking
   utils-->IntPacking
@@ -112,7 +113,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [x] Level
 - [x] Gamma
 * * [x] set custom param binding to shader
-- [ ] LUT
+- [x] LUT
 - [x] Color Threshold
 - [x] Threshold
 
@@ -200,7 +201,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [x] Desaturate
 - [x] Level (add RGB support)
 - [x] Gamma
-- [ ] LUT
+- [x] LUT
 - [x] Photoshop fusion mode (multiply, add...)
   - [x] add
   - [x] average
