@@ -79,6 +79,28 @@ public class Filter extends GPUImageBaseEffects{
 		return super.filter(src);
 	}
 	
+	/**
+	 * Hue segmentation filter with a hue resolution at 1.0
+	 * @param src source layer
+	 * @return
+	 */
+	public PGraphics getHueSegmentationImage(PImage src) {
+		super.setCurrentSH(HUESEGMENTATION);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Hue segmentation filter
+	 * @param src source layer
+	 * @param huestep resolution per hue (by default the huer resolution is set at 1.0);
+	 * @return
+	 */
+	public PGraphics getHueSegmentationImage(PImage src, float hueresolution) {
+		super.setCurrentSH(HUESEGMENTATION);
+		super.currentSH.set("hueStepper", hueresolution);
+		return super.filter(src);
+	}
+	
 	/* ...............................................
 	 * 
 	 * 
@@ -107,19 +129,44 @@ public class Filter extends GPUImageBaseEffects{
 		}
 	}
 	
-	private PGraphics getGaussianBlur5x5Image(PImage src, float blurSize) {
+	/**
+	 * Optimized low quality gaussian blur
+	 * @param src source layer
+	 * @param blurSize size of the blur
+	 * @return
+	 */
+	public PGraphics getGaussianBlur5x5Image(PImage src, float blurSize) {
 		return getFastGaussianBlur(src, blurSize, GAUSSIANBLUR5X5);
 	}
 	
-	private PGraphics getGaussianBlur9x9Image(PImage src, float blurSize) {
+	/**
+	 * Optimized medium quality gaussian blur
+	 * @param src source layer
+	 * @param blurSize size of the blur
+	 * @return
+	 */
+	public PGraphics getGaussianBlur9x9Image(PImage src, float blurSize) {
 		return getFastGaussianBlur(src, blurSize, GAUSSIANBLUR9X9);
 	}
+
 	
-	private PGraphics getGaussianBlur7x7Image(PImage src, float blurSize) {
+	/**
+	 * Optimized high quality gaussian blur
+	 * @param src source layer
+	 * @param blurSize size of the blur
+	 * @return
+	 */
+	public PGraphics getGaussianBlur7x7Image(PImage src, float blurSize) {
 		return getFastGaussianBlur(src, blurSize, GAUSSIANBLUR7X7);
 	}
-	
-	private PGraphics getGaussianBlur13x13Image(PImage src, float blurSize) {
+
+	/**
+	 * Optimized ultra high quality gaussian blur
+	 * @param src source layer
+	 * @param blurSize size of the blur
+	 * @return
+	 */
+	public PGraphics getGaussianBlur13x13Image(PImage src, float blurSize) {
 		return getFastGaussianBlur(src, blurSize, GAUSSIANBLUR13X13);
 	}
 	
@@ -193,7 +240,15 @@ public class Filter extends GPUImageBaseEffects{
 		}
 	}
 	
-	private PGraphics getRadialBlurLowImage(PImage src, float originX, float originY, float blurSize) {
+	/**
+	 * Optimized low quality radial blur
+	 * @param src source layer
+	 * @param originX origin x of the blur
+	 * @param originY origin y of the blur
+	 * @param blurSize size of the blur
+	 * @return
+	 */
+	public PGraphics getRadialBlurLowImage(PImage src, float originX, float originY, float blurSize) {
 		super.setCurrentSH(RADIALBLURLOW);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
 		super.currentSH.set("blurOrigin", originX / (float)src.width, originY / (float)src.height);
@@ -201,7 +256,29 @@ public class Filter extends GPUImageBaseEffects{
 		return super.filter(src);
 	}
 	
-	private PGraphics getRadialBlurMediumImage(PImage src, float originX, float originY, float blurSize) {
+	/**
+	 * Optimized low quality radial blur from the center of the image
+	 * @param src source layer
+	 * @param blurSize size of the blur
+	 * @return
+	 */
+	public PGraphics getCenteredRadialBlurLowImage(PImage src, float blurSize) {
+		super.setCurrentSH(RADIALBLURLOW);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		super.currentSH.set("blurOrigin",  (float) src.width / 2.0f, (float) src.height / 2.0f);
+		super.currentSH.set("blurSize", blurSize);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Optimized medium quality radial blur
+	 * @param src source layer
+	 * @param originX origin x of the blur
+	 * @param originY origin y of the blur
+	 * @param blurSize size of the blur
+	 * @return
+	 */
+	public PGraphics getRadialBlurMediumImage(PImage src, float originX, float originY, float blurSize) {
 		super.setCurrentSH(RADIALBLURMED);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
 		super.currentSH.set("blurOrigin", originX / (float)src.width, originY / (float)src.height);
@@ -209,10 +286,46 @@ public class Filter extends GPUImageBaseEffects{
 		return super.filter(src);
 	}
 	
-	private PGraphics getRadialBlurHighImage(PImage src, float originX, float originY, float blurSize) {
+	/**
+	 * Optimized medium quality radial blur from the center of the image
+	 * @param src source layer
+	 * @param blurSize size of the blur
+	 * @return
+	 */
+	public PGraphics getCenteredRadialBlurMediumImage(PImage src, float blurSize) {
+		super.setCurrentSH(RADIALBLURMED);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		super.currentSH.set("blurOrigin",  (float) src.width / 2.0f, (float) src.height / 2.0f);
+		super.currentSH.set("blurSize", blurSize);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Optimized high quality radial blur
+	 * @param src source layer
+	 * @param originX origin x of the blur
+	 * @param originY origin y of the blur
+	 * @param blurSize size of the blur
+	 * @return
+	 */
+	public PGraphics getRadialBlurHighImage(PImage src, float originX, float originY, float blurSize) {
 		super.setCurrentSH(RADIALBLURLHIGH);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
 		super.currentSH.set("blurOrigin", originX / (float)src.width, originY / (float)src.height);
+		super.currentSH.set("blurSize", blurSize);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Optimized high quality radial blur from the center of the image
+	 * @param src source layer
+	 * @param blurSize size of the blur
+	 * @return
+	 */
+	public PGraphics getCenteredRadialBlurHighImage(PImage src, float blurSize) {
+		super.setCurrentSH(RADIALBLURLHIGH);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		super.currentSH.set("blurOrigin",  (float) src.width / 2.0f, (float) src.height / 2.0f);
 		super.currentSH.set("blurSize", blurSize);
 		return super.filter(src);
 	}
@@ -574,7 +687,16 @@ public class Filter extends GPUImageBaseEffects{
 		}
 	}
 	
-	private PGraphics getChromaWarpLowImage(PImage src, float originX, float originY, float blurSize, float splitAngle) {
+	/**
+	 * Optimized low quality chroma warpping
+	 * @param src source layer
+	 * @param originX origin x of the chroma warp
+	 * @param originY origin x of the chroma warp
+	 * @param blurSize size of the blur
+	 * @param splitAngle angle offset of each channel
+	 * @return
+	 */
+	public PGraphics getChromaWarpLowImage(PImage src, float originX, float originY, float blurSize, float splitAngle) {
 		super.setCurrentSH(CHROMAWARPLOW);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
 		super.currentSH.set("blurOrigin", originX / (float)src.width, originY / (float)src.height);
@@ -583,7 +705,32 @@ public class Filter extends GPUImageBaseEffects{
 		return super.filter(src);
 	}
 	
-	private PGraphics getChromaWarpMediumImage(PImage src, float originX, float originY, float blurSize, float splitAngle) {
+	/**
+	 * Optimized low quality chroma warpping from center of the image
+	 * @param src source layer
+	 * @param blurSize size of the blur
+	 * @param splitAngle angle offset of each channel
+	 * @return
+	 */
+	public PGraphics getChromaWarpLowImage(PImage src, float blurSize, float splitAngle) {
+		super.setCurrentSH(CHROMAWARPLOW);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		super.currentSH.set("blurOrigin", (float)src.width / 2.0f, (float)src.height / 2.0f);
+		super.currentSH.set("blurSize", blurSize);
+		super.currentSH.set("angle", splitAngle);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Optimized medium quality chroma warpping
+	 * @param src source layer
+	 * @param originX origin x of the chroma warp
+	 * @param originY origin x of the chroma warp
+	 * @param blurSize size of the blur
+	 * @param splitAngle angle offset of each channel
+	 * @return
+	 */
+	public PGraphics getChromaWarpMediumImage(PImage src, float originX, float originY, float blurSize, float splitAngle) {
 		super.setCurrentSH(CHROMAWARPMED);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
 		super.currentSH.set("blurOrigin", originX / (float)src.width, originY / (float)src.height);
@@ -592,10 +739,51 @@ public class Filter extends GPUImageBaseEffects{
 		return super.filter(src);
 	}
 	
-	private PGraphics getChromaWarpHighImage(PImage src, float originX, float originY, float blurSize, float splitAngle) {
+	/**
+	 * Optimized medium quality chroma warpping from center of the image
+	 * @param src source layer
+	 * @param blurSize size of the blur
+	 * @param splitAngle angle offset of each channel
+	 * @return
+	 */
+	public PGraphics getChromaWarpMediumImage(PImage src, float blurSize, float splitAngle) {
+		super.setCurrentSH(CHROMAWARPMED);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		super.currentSH.set("blurOrigin",(float)src.width / 2.0f, (float)src.height / 2.0f);
+		super.currentSH.set("blurSize", blurSize);
+		super.currentSH.set("angle", splitAngle);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Optimized high quality chroma warpping
+	 * @param src source layer
+	 * @param originX origin x of the chroma warp
+	 * @param originY origin x of the chroma warp
+	 * @param blurSize size of the blur
+	 * @param splitAngle angle offset of each channel
+	 * @return
+	 */
+	public PGraphics getChromaWarpHighImage(PImage src, float originX, float originY, float blurSize, float splitAngle) {
 		super.setCurrentSH(CHROMAWARPHIGH);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
 		super.currentSH.set("blurOrigin", originX / (float)src.width, originY / (float)src.height);
+		super.currentSH.set("blurSize", blurSize);
+		super.currentSH.set("angle", splitAngle);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Optimized high quality chroma warpping from center of the image
+	 * @param src source layer
+	 * @param blurSize size of the blur
+	 * @param splitAngle angle offset of each channel
+	 * @return
+	 */
+	public PGraphics getChromaWarpHighImage(PImage src, float blurSize, float splitAngle) {
+		super.setCurrentSH(CHROMAWARPHIGH);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		super.currentSH.set("blurOrigin", (float)src.width / 2.0f, (float)src.height / 2.0f);
 		super.currentSH.set("blurSize", blurSize);
 		super.currentSH.set("angle", splitAngle);
 		return super.filter(src);
