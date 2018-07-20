@@ -189,7 +189,6 @@ This methods is a test methods only. We need to make a benchmark in order to def
 
 #### Check all shaders
 - [x] Bilateral
-- [ ] Bicubic
 - [x] Simple Denoise
 - [x] Median 3×3
 - [x] Median 5×5

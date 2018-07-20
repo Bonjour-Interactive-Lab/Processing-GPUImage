@@ -39,7 +39,6 @@ public interface GPUImageInterface{
 	
 	public static final String UV = "uv";
 	public static final String BILATERAL = "bilateral";
-	public static final String BICUBIC = "bicubic";
 	public static final String DENOISE = "denoise";
 	public static final String MEDIAN3X3 = "median3x3";
 	public static final String MEDIAN5X5 = "median5x5";
