@@ -93,7 +93,6 @@ This methods is a test methods only. We need to make a benchmark in order to def
 ##### Denoiser/Blur/Filtering
 - [x] Bilateral
 * * [x] Debugger le filtre GLSL (Inversion d'UV)
-- [x] Bicubic
 - [x] Simple Denoise
 * * [x] set custom param binding to shader
 - [x] Median 3×3 (TBD : iteration avec PingPong Buffer)
