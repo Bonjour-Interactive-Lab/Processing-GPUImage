@@ -100,7 +100,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [x] Median 5×5 (TBD : iteration avec PingPong Buffer) 
 - [ ] Edge detection + Sobel + Canny
 - [x] High-Passing
-- [ ] Hue segmentation
+- [x] Hue segmentation
 
 ##### Blur
 - [x] Gaussian
