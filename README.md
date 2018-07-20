@@ -98,7 +98,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
 * * [x] set custom param binding to shader
 - [x] Median 3×3 (TBD : iteration avec PingPong Buffer)
 - [x] Median 5×5 (TBD : iteration avec PingPong Buffer) 
-- [ ] Edge detection + Sobel + Canny
+- [x] Edge detection + Sobel + Canny
 - [x] High-Passing
 - [x] Hue segmentation
 
@@ -168,7 +168,6 @@ This methods is a test methods only. We need to make a benchmark in order to def
   - [x] softlight
   - [x] substract
   - [x] vividlight
-- [ ] Double exposure
 - [x] Mask
 * * [x] set custom param binding to shader
 * * [x] clean shader
@@ -194,7 +193,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [x] Simple Denoise
 - [x] Median 3×3
 - [x] Median 5×5
-- [ ] Edge detection + Sobel + Canny
+- [x] Edge detection + Sobel + Canny
 - [x] Gaussian
 - [x] Fast Blur 5x5, 7x7, 9x9, 13x13
 - [x] Radial blur
@@ -240,7 +239,6 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [ ] Pixelate
 - [ ] ASCII
 - [ ] Bloom
-- [ ] Double exposure
 - [x] Mask
 - [ ] Dilatation (TBD : iteration avec PingPong Buffer)
 - [ ] Erosion (TBD : iteration avec PingPong Buffer)

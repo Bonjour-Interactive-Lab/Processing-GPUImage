@@ -45,6 +45,8 @@ public interface GPUImageInterface{
 	public static final String MEDIAN5X5 = "median5x5";
 	public static final String HIGHPASS = "highpass";
 	public static final String SOBEL = "sobel";
+	public static final String SOBELEDGE = "sobeledge";
+	public static final String CANNYEDGE = "cannyedge1";
 	public static final String HUESEGMENTATION = "huesegmentation";
 	
 	public static final String GAUSSIANBLUR = "gaussianblur";

@@ -86,6 +86,7 @@ public class Filter extends GPUImageBaseEffects{
 	 */
 	public PGraphics getHueSegmentationImage(PImage src) {
 		super.setCurrentSH(HUESEGMENTATION);
+		super.currentSH.set("hueStepper", 1.0f);
 		return super.filter(src);
 	}
 	
@@ -99,6 +100,106 @@ public class Filter extends GPUImageBaseEffects{
 		super.setCurrentSH(HUESEGMENTATION);
 		super.currentSH.set("hueStepper", hueresolution);
 		return super.filter(src);
+	}
+	
+	/**
+	 * Sobel filter
+	 * @param src source layer
+	 * @param src
+	 * @return
+	 */
+	public PGraphics getSobelImage(PImage src) {
+		super.setCurrentSH(SOBEL);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		super.currentSH.set("sobelxScale", 1.0f);
+		super.currentSH.set("sobelyScale", 1.0f);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Sobel filter
+	 * @param src source layer
+	 * @param sobelXScale scale of the sobel on X between [0, X] (default is 1.0)
+	 * @param sobelYScale scale of the sobel on Y between [0, X] (default is 1.0)
+	 * @return
+	 */
+	public PGraphics getSobelImage(PImage src, float sobelXScale, float sobelYScale) {
+		super.setCurrentSH(SOBEL);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		super.currentSH.set("sobelxScale", sobelXScale);
+		super.currentSH.set("sobelyScale", sobelYScale);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Sobel edge filter
+	 * @param src source layer
+	 * @param src
+	 * @return
+	 */
+	public PGraphics getSobelEdgeImage(PImage src) {
+		super.setCurrentSH(SOBELEDGE);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		super.currentSH.set("sobelxScale", 1.0f);
+		super.currentSH.set("sobelyScale", 1.0f);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Sobel edge filter
+	 * @param src source layer
+	 * @param sobelXScale scale of the sobel on X between [0, X] (default is 1.0)
+	 * @param sobelYScale scale of the sobel on Y between [0, X] (default is 1.0)
+	 * @return
+	 */
+	public PGraphics getSobelEdgeImage(PImage src, float sobelXScale, float sobelYScale) {
+		super.setCurrentSH(SOBELEDGE);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		super.currentSH.set("sobelxScale", sobelXScale);
+		super.currentSH.set("sobelyScale", sobelYScale);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Canny edge filter using default sobel scale of 1.0 and default threshold of 0.5
+	 * @param src source layer
+	 * @param threshold threshold of the edge between [0, 1.0] where 0 = all detected edge and 1.0 = none
+	 * @return
+	 */
+	public PGraphics getCannyEdgeImage(PImage src) {
+		return getCannyEdgeImage(src, 1.0f, 1.0f, 0.5f);
+	}
+	
+	/**
+	 * Canny edge filter using default sobel scale of 1.0
+	 * @param src source layer
+	 * @param threshold threshold of the edge between [0, 1.0] where 0 = all detected edge and 1.0 = none
+	 * @return
+	 */
+	public PGraphics getCannyEdgeImage(PImage src, float threshold) {
+		return getCannyEdgeImage(src, 1.0f, 1.0f, threshold);
+	}
+	
+	/**
+	 * Canny edge filter
+	 * @param src source layer
+	 * @param sobelXScale scale of the sobel on X between [0, X] (default is 1.0)
+	 * @param sobelYScale scale of the sobel on Y between [0, X] (default is 1.0)
+	 * @param threshold threshold of the edge between [0, 1.0] where 0 = all detected edge and 1.0 = none
+	 * @return
+	 */
+	public PGraphics getCannyEdgeImage(PImage src, float sobelXScale, float sobelYScale, float threshold) {
+		super.setCurrentSH(CANNYEDGE);
+		//first sobel pass
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		super.currentSH.set("sobelxScale", sobelXScale);
+		super.currentSH.set("sobelyScale", sobelYScale);
+		PGraphics tmp = super.filter(src);
+		//Horizontal pass
+		super.setCurrentSH("cannyedge2");
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		super.currentSH.set("lowerThreshold", threshold);
+		return super.filter(tmp);
 	}
 	
 	/* ...............................................
