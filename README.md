@@ -44,6 +44,7 @@ graph TD;
 - [ ] Add custom throw error (view adidas source)
 - [ ] Add precise documentation
 - [ ] Add avatar @gitlab
+- [ ] Find good licenced image for library usage/example
 
 ### Core 
 - [x] Library info
@@ -76,6 +77,8 @@ This methods is a test methods only. We need to make a benchmark in order to def
 **NB : Tested on a filter methods inside a forloop, this method is too slow on the arrayCopy() (30 fps at 60 iterations) vs the previous one (60 fps at 60 iterations)**
 
 - [ ] independant ping pong buffer (custom JOGL implementation) for Floating Point Texture
+
+- [ ] add smooth to PPB
 
 #### Others
 - [x] add filtering linear :
@@ -267,3 +270,39 @@ This methods is a test methods only. We need to make a benchmark in order to def
 
 ### %"Module Géométrique (VBO)"
 ### Wiki (TBD)
+### Exemples
+- [ ] Composition
+  - [x] Blending
+  - [X] Mask
+  - [ ] Alpha sprite
+  - [ ] Chromakey
+- [x] Core
+  - [x] Infos
+- [x] Filters
+  - [x] Sequential filtering
+  - [x] Filtering
+    - [x] Denoise (denoise, bilateral, median3x3, median5x5)
+    - [x] Edge detection + Sobel + Canny
+    - [x] High-Passing
+    - [x] Hue segmentation
+  - [x] Blur
+    - [x] Radial blur
+    - [x] Gaussian blur
+  - [x] Color grading
+    - [x] Threshold (gray + color)
+    - [x] LUT1D
+    - [x] Level
+    - [x] Gamma correction
+    - [x] Desaturation
+    - [x] Contrast Saturation Brightness
+  - [x] Post fx
+    - [x] White grain 
+    - [x] Chroma warping
+- [ ] Other
+  - [ ] Accentuation
+  - [ ] ProcessHueSegmentation
+- [ ] Procedural
+- [ ] RGBA Encoding
+- [ ] Utils
+  - [ ] Generate 1D LUT
+  - [ ] Ping Pong Buffer
