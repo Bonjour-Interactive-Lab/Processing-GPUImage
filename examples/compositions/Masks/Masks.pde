@@ -55,10 +55,19 @@ void draw() {
   mask.fill(255);
   mask.ellipse(nx * imgw, ny * imgh, imgw * 0.5, imgh * 0.5);
   mask.endDraw();
+  
+  //println(comp1.isPImage(mask));
+  
+    PGraphics baseG = createGraphics(base.width, base.height, P2D);
+  baseG.beginDraw();
+  baseG.image(base, 0, 0);
+  baseG.endDraw();
 
+  
   //PGraphics mess up with UV coordinates
-  filteredImg1 = comp1.getMaskImage(src, mask);
+  filteredImg1 = comp1.getMaskImage(src, maskimg);
   filteredImg2 = comp1.getMaskImage(src, base, mask);
+  
 
   image(src, imgw * 0, imgh * 0, imgw, imgh);
   image(mask, imgw * 1, imgh * 0, imgw, imgh);

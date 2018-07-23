@@ -34,6 +34,8 @@ precision mediump int;
 uniform sampler2D texture;
 uniform sampler2D base;
 uniform float opacity;
+uniform int srci = 0;
+uniform int basei = 0;
 
 in vec4 vertTexCoord;
 out vec4 fragColor;
@@ -46,8 +48,10 @@ out vec4 fragColor;
 
 void main(){
 	vec2 uv = vertTexCoord.xy;
-	vec3 based = texture2D(base, uv).rgb;
-	vec3 blend = texture2D(texture, uv).rgb;
+	vec2 iuv = vec2(uv.x, 1.0 - uv.y);
+
+	vec3 based = texture2D(base    , uv * (1 - srci)  + iuv * srci ).rgb;
+	vec3 blend = texture2D(texture , uv * (1 - basei) + iuv * basei).rgb;
 	vec3 blended = BlendVividLight(based, blend);
 
 	fragColor = mix(vec4(based, 1.0), vec4(blended, 1.0), opacity);

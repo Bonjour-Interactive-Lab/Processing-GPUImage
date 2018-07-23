@@ -31,6 +31,17 @@ public class Compositor extends GPUImageBaseEffects{
 		this.ppb.dst.endDraw();
 	}
 	
+	//check if any of the two types are differents (PImage/PGraphics) in order to change the UV
+	private void checkUVSettings(PImage src, PImage base, String uniform) {
+		boolean srcPImage = super.isPImage(src);
+		boolean basePImage = super.isPImage(base);
+		if(srcPImage != basePImage) {
+			//the two buffers have differents type so some uv need to be inverted
+			super.currentSH.set(uniform, 1);
+			//super.currentSH.set(uniform, 0);
+		}
+	}
+	
 	/* ...............................................
 	 * 
 	 * 
@@ -47,6 +58,7 @@ public class Compositor extends GPUImageBaseEffects{
 	 */
 	public PGraphics getMaskImage(PImage src, PImage mask) {
 		super.setCurrentSH(MASK);
+		this.checkUVSettings(src,  mask, "srci");
 		super.currentSH.set("mask", mask);
 		return super.filter(src);
 	}
@@ -60,6 +72,8 @@ public class Compositor extends GPUImageBaseEffects{
 	 */
 	public PGraphics getMaskImage(PImage src, PImage base, PImage mask) {
 		super.setCurrentSH(MASK2);
+		this.checkUVSettings(src,  mask, "srci");
+		this.checkUVSettings(src,  base, "base2i");
 		super.currentSH.set("mask", mask);
 		super.currentSH.set("base", base);
 		return super.filter(src);
@@ -281,6 +295,18 @@ public class Compositor extends GPUImageBaseEffects{
 		return getBlendImage(src, base, opacity, GPUImageInterface.NEGATION);
 	}
 	
+
+	/**
+	 * Overlay blending
+	 * @param src source layer to blend
+	 * @param base base layer
+	 * @param opacity opacity of the src blended layer on the base layer between 0/100
+	 * @return
+	 */
+	public PGraphics getBlendOverlayImage(PImage src, PImage base, float opacity) {
+		return getBlendImage(src, base, opacity, GPUImageInterface.OVERLAY);
+	}
+	
 	/**
 	 * Phoenix blending
 	 * @param src source layer to blend
@@ -379,6 +405,7 @@ public class Compositor extends GPUImageBaseEffects{
 	 */
 	public PGraphics getBlendImage(PImage src, PImage base, float opacity, String NAME) {
 		super.setCurrentSH(NAME);
+		this.checkUVSettings(src,  base, "srci");
 		super.currentSH.set("base", base);
 		super.currentSH.set("opacity", opacity/100.0f);
 		return super.filter(src);

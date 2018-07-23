@@ -93,6 +93,15 @@ abstract class GPUImageBaseEffects implements GPUImageInterface, PConstants{
 		}
 	}
 	
+	//check type
+	protected boolean isPImage(PImage src) {
+		if(src instanceof PGraphics) {
+			return false;
+		}else {
+			return true;
+		}
+	}
+	
 	/**Set current shader*/
 	protected void setCurrentSH(String NAME) {
 		this.checkIfShaderExists(NAME);

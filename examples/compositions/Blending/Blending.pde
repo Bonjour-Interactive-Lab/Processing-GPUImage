@@ -19,8 +19,8 @@ PGraphics filteredImg;
 String[] name = {"src", "base", "blend: add"};
 String[] blending = { "add", "average", "color burn", "color dodge", "color", "darken", "difference", "exclusion", 
   "glow", "hard light", "hard mix", "hue", "lighten", "linear burn", "linear dodge", "linear light", 
-  "luminosity", "multiply", "negation", "pheonix", "pin light", "reflect", "saturation", "screen", 
-  "soft light", "substract", "vivid light"};
+  "luminosity", "multiply", "negation", "overlay", "pheonix", "pin light", "reflect", "saturation", 
+   "screen", "soft light", "substract", "vivid light"};
 
 float scale = 1.0;
 int imgw, imgh;
@@ -105,27 +105,30 @@ void draw() {
     filteredImg = composition.getBlendNegationImage(src, base, value); //negation
     break;
   case 19 : 
-    filteredImg = composition.getBlendPhoenixImage(src, base, value); //pheonix
+    filteredImg = composition.getBlendOverlayImage(src, base, value); //overlay
     break;
   case 20 : 
-    filteredImg = composition.getBlendPinLightImage(src, base, value); //pin light
+    filteredImg = composition.getBlendPhoenixImage(src, base, value); //pheonix
     break;
   case 21 : 
-    filteredImg = composition.getBlendReflectImage(src, base, value); //reflect
+    filteredImg = composition.getBlendPinLightImage(src, base, value); //pin light
     break;
   case 22 : 
-    filteredImg = composition.getBlendSaturationImage(src, base, value); //saturation
+    filteredImg = composition.getBlendReflectImage(src, base, value); //reflect
     break;
   case 23 : 
-    filteredImg = composition.getBlendScreenImage(src, base, value); //screen
+    filteredImg = composition.getBlendSaturationImage(src, base, value); //saturation
     break;
   case 24 : 
-    filteredImg = composition.getBlendSoftLightImage(src, base, value); //soft light
+    filteredImg = composition.getBlendScreenImage(src, base, value); //screen
     break;
   case 25 : 
-    filteredImg = composition.getBlendSubstractImage(src, base, value); //substract
+    filteredImg = composition.getBlendSoftLightImage(src, base, value); //soft light
     break;
   case 26 : 
+    filteredImg = composition.getBlendSubstractImage(src, base, value); //substract
+    break;
+  case 27 : 
     filteredImg = composition.getBlendVividLightImage(src, base, value); //vivid light
     break;
   }
@@ -152,13 +155,13 @@ void draw() {
 void keyPressed() {
   if (key == 'a') {
     count ++;
-    if (count > 26) {
+    if (count > blending.length - 1) {
       count = 0;
     }
   } else if (key == 'z') {
     count --;
     if (count < 0) {
-      count = 26;
+      count = blending.length - 1;
     }
   }
 }

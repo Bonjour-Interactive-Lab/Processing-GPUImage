@@ -222,11 +222,11 @@ public class Filter extends GPUImageBaseEffects{
 	 */
 	public PGraphics getOptimizedGaussianBlurImage(PImage src, float blurSize, String QUALITY) {
 		switch(QUALITY) {
-			case LOW :   return getGaussianBlur5x5Image(src, blurSize);
-			case MED :   return getGaussianBlur9x9Image(src, blurSize);
-			case HIGH :  return getGaussianBlur7x7Image(src, blurSize);
-			case HIGH2 : return getGaussianBlur13x13Image(src, blurSize);
-			default :    return getGaussianBlur5x5Image(src, blurSize);
+			case LOW :   return getGaussianBlurLowImage(src, blurSize);
+			case MED :   return getGaussianBlurMediumImage(src, blurSize);
+			case HIGH :  return getGaussianBlurHighImage(src, blurSize);
+			case HIGH2 : return getGaussianBlurUltraHighImage(src, blurSize);
+			default :    return getGaussianBlurLowImage(src, blurSize);
 		}
 	}
 	
@@ -236,18 +236,18 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param blurSize size of the blur
 	 * @return
 	 */
-	public PGraphics getGaussianBlur5x5Image(PImage src, float blurSize) {
+	public PGraphics getGaussianBlurLowImage(PImage src, float blurSize) {
 		return getFastGaussianBlur(src, blurSize, GAUSSIANBLUR5X5);
 	}
-	
+
 	/**
 	 * Optimized medium quality gaussian blur
 	 * @param src source layer
 	 * @param blurSize size of the blur
 	 * @return
 	 */
-	public PGraphics getGaussianBlur9x9Image(PImage src, float blurSize) {
-		return getFastGaussianBlur(src, blurSize, GAUSSIANBLUR9X9);
+	public PGraphics getGaussianBlurMediumImage(PImage src, float blurSize) {
+		return getFastGaussianBlur(src, blurSize, GAUSSIANBLUR7X7);
 	}
 
 	
@@ -257,17 +257,16 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param blurSize size of the blur
 	 * @return
 	 */
-	public PGraphics getGaussianBlur7x7Image(PImage src, float blurSize) {
-		return getFastGaussianBlur(src, blurSize, GAUSSIANBLUR7X7);
+	public PGraphics getGaussianBlurHighImage(PImage src, float blurSize) {
+		return getFastGaussianBlur(src, blurSize, GAUSSIANBLUR9X9);
 	}
-
 	/**
 	 * Optimized ultra high quality gaussian blur
 	 * @param src source layer
 	 * @param blurSize size of the blur
 	 * @return
 	 */
-	public PGraphics getGaussianBlur13x13Image(PImage src, float blurSize) {
+	public PGraphics getGaussianBlurUltraHighImage(PImage src, float blurSize) {
 		return getFastGaussianBlur(src, blurSize, GAUSSIANBLUR13X13);
 	}
 	
@@ -473,9 +472,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param brightness is define as percent. A base brighntess is 100, a lowest will be 50 (50%) and highest could be 150 (150%)
 	 */
 	public PGraphics getBrightnessImage(PImage src, float brightness) {
-		super.setCurrentSH(CONTRASTSATBRIGHT);
-		super.currentSH.set("brightness", brightness/100.0f);
-		return super.filter(src);
+		return getContrastSaturationBrightnessImage(src, 100.0f, 100.0f, brightness);
 	}
 	
 	/**Contrast adjustment
@@ -483,9 +480,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param contrast is define as percent. A base contrast is 100, a lowest will be 50 (50%) and highest could be 150 (150%)
 	 */
 	public PGraphics getContrastImage(PImage src, float contrast) {
-		super.setCurrentSH(CONTRASTSATBRIGHT);
-		super.currentSH.set("contrast", contrast/100.0f);
-		return super.filter(src);
+		return getContrastSaturationBrightnessImage(src, contrast, 100.0f, 100.0f);
 	}
 
 	/**Satruation adjustment
@@ -493,9 +488,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param saturation is define as percent. A base saturation is 100, a lowest will be 50 (50%) and highest could be 150 (150%)
 	 */
 	public PGraphics getSaturationImage(PImage src, float saturation) {
-		super.setCurrentSH(CONTRASTSATBRIGHT);
-		super.currentSH.set("saturation", saturation/100.0f);
-		return super.filter(src);
+		return getContrastSaturationBrightnessImage(src, 100.0f, saturation, 100.0f);
 	}
 	
 	/**Contrast Saturation Brightness adjustment.

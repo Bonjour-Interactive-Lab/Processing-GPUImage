@@ -44,13 +44,13 @@ void setup() {
 
 void draw() {
   background(20);
-  float value = norm(mouseX, 0, width) * 5.0;
+  float value = 0.01 + norm(mouseX, 0, width) * 5.0;
 
   filteredImg1 = gaussian.getGaussianBlurImage(src, value, value);
-  filteredImg2 = low.getGaussianBlur5x5Image(src, value);
-  filteredImg3 = med.getGaussianBlur7x7Image(src, value);
-  filteredImg4 = high.getGaussianBlur9x9Image(src, value);
-  filteredImg5 = ultrahigh.getGaussianBlur13x13Image(src, value);
+  filteredImg2 = low.getGaussianBlurLowImage(src, value);
+  filteredImg3 = med.getGaussianBlurMediumImage(src, value);
+  filteredImg4 = high.getGaussianBlurHighImage(src, value);
+  filteredImg5 = ultrahigh.getGaussianBlurUltraHighImage(src, value);
 
   image(src         , imgw * 0, imgh * 0, imgw, imgh);
   image(filteredImg1, imgw * 1, imgh * 0, imgw, imgh);
