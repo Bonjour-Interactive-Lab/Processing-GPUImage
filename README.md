@@ -299,10 +299,10 @@ This methods is a test methods only. We need to make a benchmark in order to def
     - [x] White grain 
     - [x] Chroma warping
 - [ ] Other
-  - [ ] Accentuation
-  - [ ] ProcessHueSegmentation
+  - [x] Accentuation
+  - [x] ProcessHueSegmentation
 - [ ] Procedural
 - [ ] RGBA Encoding
-- [ ] Utils
-  - [ ] Generate 1D LUT
-  - [ ] Ping Pong Buffer
+- [x] Utils
+  - [x] Generate 1D LUT
+  - [X] Ping Pong Buffer

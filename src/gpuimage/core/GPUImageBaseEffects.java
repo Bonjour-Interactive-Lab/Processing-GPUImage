@@ -25,7 +25,7 @@ abstract class GPUImageBaseEffects implements GPUImageInterface, PConstants{
 	protected PShader currentSH = new PShader();
 	
 	/**List of all available shaders*/
-	protected HashMap<String, PShader> shaderlist = new HashMap<String, PShader>();
+	protected static HashMap<String, PShader> shaderlist = new HashMap<String, PShader>();
 	
 	//---------------------------------------------------------
 	
