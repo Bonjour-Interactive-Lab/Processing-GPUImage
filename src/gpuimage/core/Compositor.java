@@ -79,6 +79,74 @@ public class Compositor extends GPUImageBaseEffects{
 		return super.filter(src);
 	}
 	
+	/**
+	 * Chroma key on image with a border threshold of 0.5f. Return keyed image on the top of the other
+	 * @param src source layer
+	 * @parma base base layer
+	 * @param red red component of the key color between [0 - 255]
+	 * @param green green component of the key color between [0 - 255]
+	 * @param blue blue component of the key color between [0 - 255]
+	 * @return
+	 */
+	public PGraphics getChromaKeyImage(PImage src, PImage base, float red, float green, float blue) {
+		super.setCurrentSH(CHROMAKEY2);
+		this.checkUVSettings(src, base, "srci");
+		super.currentSH.set("keyColor", red/255.0f, green/255.0f, blue/255.0f);
+		super.currentSH.set("threshold", 0.5f);
+		super.currentSH.set("base", base);
+		return super.filter(src);	
+	}
+	
+	/**
+	 * Chroma key on image. Return keyed image on the top of the other
+	 * @param src source layer
+	 * @parma base base layer
+	 * @param red red component of the key color between [0 - 255]
+	 * @param green green component of the key color between [0 - 255]
+	 * @param blue blue component of the key color between [0 - 255]
+	 * @param threshold border threshold between [0.0, 1.0]
+	 * @return
+	 */
+	public PGraphics getChromaKeyImage(PImage src, PImage base, float red, float green, float blue, float threshold) {
+		super.setCurrentSH(CHROMAKEY2);
+		this.checkUVSettings(src, base, "srci");
+		super.currentSH.set("keyColor", red/255.0f, green/255.0f, blue/255.0f);
+		super.currentSH.set("threshold", threshold);
+		super.currentSH.set("base", base);
+		return super.filter(src);	
+	}
+	
+	/**
+	 * Chroma key on image with a border threshold of 0.5f. Return image with alpha 0.0
+	 * @param src source layer
+	 * @param red red component of the key color between [0 - 255]
+	 * @param green green component of the key color between [0 - 255]
+	 * @param blue blue component of the key color between [0 - 255]
+	 * @return
+	 */
+	public PGraphics getChromaKeyImage(PImage src, float red, float green, float blue) {
+		super.setCurrentSH(CHROMAKEY);
+		super.currentSH.set("keyColor", red/255.0f, green/255.0f, blue/255.0f);
+		super.currentSH.set("threshold", 0.5f);
+		return super.filter(src);	
+	}
+	
+	/**
+	 * Chroma key on image. Return image with alpha 0.0
+	 * @param src source layer
+	 * @param red red component of the key color between [0 - 255]
+	 * @param green green component of the key color between [0 - 255]
+	 * @param blue blue component of the key color between [0 - 255]
+	 * @param threshold border threshold between [0.0, 1.0]
+	 * @return
+	 */
+	public PGraphics getChromaKeyImage(PImage src, float red, float green, float blue, float threshold) {
+		super.setCurrentSH(CHROMAKEY);
+		super.currentSH.set("keyColor", red/255.0f, green/255.0f, blue/255.0f);
+		super.currentSH.set("threshold", threshold);
+		return super.filter(src);	
+	}
+	
 	/* ...............................................
 	 * 
 	 * 

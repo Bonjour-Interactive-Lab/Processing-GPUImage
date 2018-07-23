@@ -67,6 +67,7 @@ public interface GPUImageInterface{
 	public static final String LUT2DGEN = "lut2dgen";
 	public static final String COLORTHRESHOLD = "colorthreshold";
 	public static final String THRESHOLD = "threshold";
+	public static final String INVERT = "invert";
 	
 	public static final String CHROMAWARP = "chromawarp";
 	public static final String CHROMAWARPLOW = "chromawarplow";
@@ -95,8 +96,9 @@ public interface GPUImageInterface{
 	
 	public static final String MASK = "mask";
 	public static final String MASK2 = "mask2";
+	public static final String CHROMAKEY = "chromakey";
+	public static final String CHROMAKEY2 = "chromakey2";
 	public static final String ALPHASPRITE = "alphasprite";
-	public static final String DOUBLEEXPOSURE = "doubleexposure";
 	
 	public static final String ADD = "blendadd";
 	public static final String AVERAGE = "blendaverage";

@@ -737,6 +737,11 @@ public class Filter extends GPUImageBaseEffects{
 		return super.filter(src);
 	}
 	
+	public PGraphics getInvertImage(PImage src) {
+		super.setCurrentSH(GPUImageInterface.INVERT);
+		return super.filter(src);
+	}
+	
 	/* ...............................................
 	 * 
 	 * 

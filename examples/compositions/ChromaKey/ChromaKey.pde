@@ -16,7 +16,7 @@ Compositor comp1, comp2;
 
 //destination buffer
 PGraphics filteredImg1, filteredImg2;
-String[] name = {"src", "base", "Mask on alpha", "Mask on base image"};
+String[] name = {"src", "base", "Chroma key on alpha", "Chroma key on base image"};
 
 float scale = 1.0;
 int imgw, imgh;
@@ -24,7 +24,6 @@ int imgw, imgh;
 void settings() {
   src = loadImage("src.png");
   base = loadImage("base.png");
-  maskimg = loadImage("mask.png");
   imgw = ceil(src.width * scale);
   imgh = ceil(src.height * scale);
   int w = imgw * 2;
@@ -45,25 +44,13 @@ void setup() {
 
 void draw() {
   background(20);
-  float nx = norm(mouseX, 0, width);
-  float ny = norm(mouseY, 0, height);
-
-  mask.beginDraw();
-  mask.background(0);
-  mask.image(maskimg, 0, 0);
-  mask.noStroke();
-  mask.fill(255);
-  mask.ellipse(nx * imgw, ny * imgh, imgw * 0.5, imgh * 0.5);
-  mask.endDraw();
-
   
   //PGraphics mess up with UV coordinates
-  filteredImg1 = comp1.getMaskImage(src, mask);
-  filteredImg2 = comp1.getMaskImage(src, base, mask);
-  
+  filteredImg1 = comp1.getChromaKeyImage(src, 11.0, 165, 70.0);
+  filteredImg2 = comp1.getChromaKeyImage(src, base, 11.0, 165, 70.0);
 
   image(src, imgw * 0, imgh * 0, imgw, imgh);
-  image(mask, imgw * 1, imgh * 0, imgw, imgh);
+  image(base, imgw * 1, imgh * 0, imgw, imgh);
   image(filteredImg1, imgw * 0, imgh * 1, imgw, imgh);
   image(filteredImg2, imgw * 1, imgh * 1, imgw, imgh);
 

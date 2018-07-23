@@ -119,6 +119,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [x] LUT
 - [x] Color Threshold
 - [x] Threshold
+- [x] Invert image
 
 ##### Effect/VFX :
 - [x] ChromaWarp + optimized low, medium, high
@@ -250,6 +251,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [ ] Alpha Matte (sprite mode)
 - [ ] Chroma key
 - [x] Color threshold
+- [x] Invert image
 
 ### %"Packing RGBA"
 - [x] Float to RGBA algorithm [precision test](https://gitlab.bonjour-lab.com/alexr4/GPUImage/blob/master/floatToRGBAEncoding.md)
