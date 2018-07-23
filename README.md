@@ -175,7 +175,8 @@ This methods is a test methods only. We need to make a benchmark in order to def
 * * [x] set custom param binding to shader
 * * [x] clean shader
 - [ ] Alpha Matte (sprite mode)
-- [ ] Chroma key
+- [x] Chroma key
+  - [ ] Quid add chromaRamp forhue segmentation(?)
 
 #### Procedural extends GPUImageBaseEffects
 - [ ] Noise & Random
@@ -249,7 +250,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [ ] Pixel sorting
 - [ ] DoF from Depth (TBD)
 - [ ] Alpha Matte (sprite mode)
-- [ ] Chroma key
+- [x] Chroma key
 - [x] Color threshold
 - [x] Invert image
 
