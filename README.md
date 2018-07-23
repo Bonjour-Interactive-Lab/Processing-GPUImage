@@ -131,6 +131,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [ ] Pixelate
 - [ ] ASCII **Est-ce un filtre ou une composition ?**
 - [ ] Bloom
+- [ ] SlitScan effect
 
 ##### Other : 
 - [ ] Dilatation (TBD : iteration avec PingPong Buffer)
@@ -176,7 +177,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
 * * [x] clean shader
 - [ ] Alpha Matte (sprite mode)
 - [x] Chroma key
-  - [ ] Quid add chromaRamp forhue segmentation(?)
+  - [ ] Quid add chromaRamp for hue segmentation (?)
 
 #### Procedural extends GPUImageBaseEffects
 - [ ] Noise & Random
@@ -189,70 +190,6 @@ This methods is a test methods only. We need to make a benchmark in order to def
   - [ ] Cellular
 - [ ] Isosurface
 - [ ] Reaction-Diffusion
-
-
-#### Check all shaders
-- [x] Bilateral
-- [x] Simple Denoise
-- [x] Median 3×3
-- [x] Median 5×5
-- [x] Edge detection + Sobel + Canny
-- [x] Gaussian
-- [x] Fast Blur 5x5, 7x7, 9x9, 13x13
-- [x] Radial blur
-- [x] Contrast/Sat/Bright
-- [x] Desaturate
-- [x] Level (add RGB support)
-- [x] Gamma
-- [x] LUT
-- [x] Photoshop fusion mode (multiply, add...)
-  - [x] add
-  - [x] average
-  - [x] color
-  - [x] colorburn
-  - [x] colordodge
-  - [x] darken
-  - [x] difference
-  - [x] exclusion
-  - [x] glow
-  - [x] hardlight
-  - [x] hardmix
-  - [x] hue
-  - [x] lighten
-  - [x] linearburn
-  - [x] lineardodge
-  - [x] linearlight
-  - [x] luminosity
-  - [x] multiply
-  - [x] negation
-  - [x] overlay
-  - [x] phoenix
-  - [x] pinlight
-  - [x] reflect
-  - [x] saturation
-  - [x] screen
-  - [x] softlight
-  - [x] substract
-  - [x] vividlight
-- [x] High-Passing
-- [x] Threshold
-- [x] ChromaWarp 
-- [x] Grain
-- [ ] Dithering (TBD)
-- [ ] Pixelate
-- [ ] ASCII
-- [ ] Bloom
-- [x] Mask
-- [ ] Dilatation (TBD : iteration avec PingPong Buffer)
-- [ ] Erosion (TBD : iteration avec PingPong Buffer)
-- [ ] Optical Flow
-- [ ] FrameDifferencing
-- [ ] Pixel sorting
-- [ ] DoF from Depth (TBD)
-- [ ] Alpha Matte (sprite mode)
-- [x] Chroma key
-- [x] Color threshold
-- [x] Invert image
 
 ### %"Packing RGBA"
 - [x] Float to RGBA algorithm [precision test](https://gitlab.bonjour-lab.com/alexr4/GPUImage/blob/master/floatToRGBAEncoding.md)
@@ -301,7 +238,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
   - [x] Post fx
     - [x] White grain 
     - [x] Chroma warping
-- [ ] Other
+- [x] Other
   - [x] Accentuation
   - [x] ProcessHueSegmentation
 - [ ] Procedural
@@ -309,3 +246,5 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [x] Utils
   - [x] Generate 1D LUT
   - [X] Ping Pong Buffer
+- [ ] Codevember
+  - [ ] Add all codevember design (?)
