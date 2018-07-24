@@ -1,3 +1,5 @@
 bin
 tmp
 distribution
+resources/build.properties
+resources/build.xml
