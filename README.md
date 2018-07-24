@@ -93,7 +93,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
 
 #### Filter extends GPUImageBaseEffects
 
-##### Denoiser/Blur/Filtering
+##### Filtering
 - [x] Bilateral
 * * [x] Debugger le filtre GLSL (Inversion d'UV)
 - [x] Simple Denoise
