@@ -125,10 +125,9 @@ This methods is a test methods only. We need to make a benchmark in order to def
 
 ##### Effect/VFX :
 - [x] ChromaWarp + optimized low, medium, high
-* * [x] set custom param binding to shader
 - [x] Fast ChromaWarp 4, 10, 20
 - [x] Grain
-* * [x] set custom param binding to shader
+- [x] Grain RGB
 - [ ] Dithering (TBD)
 - [ ] Pixelate
 - [ ] ASCII **Est-ce un filtre ou une composition ?**
@@ -239,6 +238,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
     - [x] Invert
   - [x] Post fx
     - [x] White grain 
+    - [x] RGB grain 
     - [x] Chroma warping
 - [x] Other
   - [x] Accentuation
