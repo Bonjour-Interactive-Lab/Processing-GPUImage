@@ -29,11 +29,20 @@ public class PingPongBuffer implements PConstants{
 	public PGraphics dst;
 
 	/**
-	 * Instantiate a Ping Pong Buffer Object at the size of the PApplet
+	 * Instantiate a Ping Pong Buffer Object at the size of the PApplet  (RENDERER is P2D)
 	 * @param papplet
 	 */
 	public PingPongBuffer(PApplet papplet) {
 		initBuffers(papplet, papplet.width, papplet.height, P2D);
+	}
+	
+	/**
+	 * Instantiate a Ping Pong Buffer Object at the size of the PApplet and smooth (RENDERER is P2D)
+	 * @param papplet
+	 * @param smooth
+	 */
+	public PingPongBuffer(PApplet papplet, int smooth) {
+		initBuffers(papplet, papplet.width, papplet.height, P2D, smooth);
 	}
 	
 	/**
@@ -44,6 +53,17 @@ public class PingPongBuffer implements PConstants{
 	 */
 	public PingPongBuffer(PApplet papplet, int width, int height) {
 		initBuffers(papplet, width, height, P2D);
+	}
+	
+	/**
+	 * Instantiate a Ping Pong Buffer Object with custom size and smooth (RENDERER is P2D)
+	 * @param papplet
+	 * @param width
+	 * @param height
+	 * @param smooth
+	 */
+	public PingPongBuffer(PApplet papplet, int width, int height, int smooth) {
+		initBuffers(papplet, width, height, P2D, smooth);
 	}
 	
 	/**
@@ -64,6 +84,11 @@ public class PingPongBuffer implements PConstants{
 	 * @param height
 	 * @param RENDERER
 	 */
+	private void initBuffers(PApplet papplet, int width, int height, String RENDERER, int smooth) {
+		this.initBuffers(papplet, width, height, RENDERER);
+		this.smooth(smooth);
+	}
+	
 	private void initBuffers(PApplet papplet, int width, int height, String RENDERER) {
 		this.papplet = papplet;
 		this.dst = papplet.createGraphics(width, height, RENDERER);;
@@ -120,6 +145,24 @@ public class PingPongBuffer implements PConstants{
 			((PGraphicsOpenGL)this.dst).textureSampling(5) ;
 			break;
 		}
+	}
+	
+	/**
+	 * Activate aliasing on the ping-pong buffer.
+	 * See reference on Processing for more informations : https://processing.org/reference/smooth_.html
+	 * @param smooth can be either 2, 3, 4 or 8. Default is 4
+	 */
+	public void smooth(int smooth) {
+		this.dst.smooth(smooth);
+		this.src.smooth(smooth);
+	}
+	
+	/**
+	 * Desactivate aliasing on the buffers
+	 */
+	public void noSmooth() {
+		this.dst.noSmooth();
+		this.src.noSmooth();
 	}
 	
 	/**
