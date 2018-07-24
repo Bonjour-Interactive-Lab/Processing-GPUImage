@@ -215,7 +215,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
   - [x] Blending
   - [X] Mask
   - [ ] Alpha sprite
-  - [ ] Chromakey
+  - [x] Chromakey
 - [x] Core
   - [x] Infos
 - [x] Filters
@@ -248,5 +248,4 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [x] Utils
   - [x] Generate 1D LUT
   - [X] Ping Pong Buffer
-- [ ] Codevember
-  - [ ] Add all codevember design (?)
+- [ ] Codevember (Add all codevember design ?)
