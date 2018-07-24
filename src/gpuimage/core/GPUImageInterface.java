@@ -78,8 +78,10 @@ public interface GPUImageInterface{
 	public static final String ASCII = "ascii";
 	public static final String BLOOM = "bloom";
 	
-	public static final String DILATE = "dilate";
-	public static final String ERODE = "erode";
+	public static final String DILATE = "dilation";
+	public static final String ERODE = "erosion";
+	public static final String DILATERGB = "dilationrgb";
+	public static final String ERODERGB = "erosionrgb";
 	public static final String PIXELSORTING ="pixelsorting";
 	public static final String DOF = "dof";
 	

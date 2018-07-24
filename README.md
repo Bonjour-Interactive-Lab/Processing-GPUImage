@@ -103,6 +103,8 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [x] Edge detection + Sobel + Canny
 - [x] High-Passing
 - [x] Hue segmentation
+- [x] Dilation
+- [x] Erosion
 
 ##### Blur
 - [x] Gaussian
@@ -134,8 +136,6 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [ ] SlitScan effect
 
 ##### Other : 
-- [ ] Dilatation (TBD : iteration avec PingPong Buffer)
-- [ ] Erosion (TBD : iteration avec PingPong Buffer)
 - [ ] Optical Flow
 - [ ] FrameDifferencing
 - [ ] Pixel sorting
@@ -225,6 +225,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
     - [x] Edge detection + Sobel + Canny
     - [x] High-Passing
     - [x] Hue segmentation
+    - [x] Dilation/Erosion
   - [x] Blur
     - [x] Radial blur
     - [x] Gaussian blur
@@ -235,6 +236,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
     - [x] Gamma correction
     - [x] Desaturation
     - [x] Contrast Saturation Brightness
+    - [x] Invert
   - [x] Post fx
     - [x] White grain 
     - [x] Chroma warping

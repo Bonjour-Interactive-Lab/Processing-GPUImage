@@ -202,6 +202,50 @@ public class Filter extends GPUImageBaseEffects{
 		return super.filter(tmp);
 	}
 	
+	/**
+	 * Dilation filter on black/white image
+	 * @param src source layer
+	 * @return
+	 */
+	public PGraphics getDilationImage(PImage src) {
+		super.setCurrentSH(GPUImageInterface.DILATE);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Dilation filter on rgb image
+	 * @param src source layer
+	 * @return
+	 */
+	public PGraphics getDilationRGBImage(PImage src) {
+		super.setCurrentSH(DILATERGB);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Erosion filter on rgb image
+	 * @param src source layer
+	 * @return
+	 */
+	public PGraphics getErosionImage(PImage src) {
+		super.setCurrentSH(GPUImageInterface.ERODE);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Erosion filter on rgb image
+	 * @param src source layer
+	 * @return
+	 */
+	public PGraphics getErosionRGBImage(PImage src) {
+		super.setCurrentSH(ERODERGB);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		return super.filter(src);
+	}
+	
 	/* ...............................................
 	 * 
 	 * 
