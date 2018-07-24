@@ -74,6 +74,7 @@ public interface GPUImageInterface{
 	public static final String CHROMAWARPMED = "chromawarpmedium";
 	public static final String CHROMAWARPHIGH = "chromawarphigh";
 	public static final String GRAIN = "grain";
+	public static final String GRAINRGB = "grainrgb";
 	public static final String PIXELATE = "pixelate";
 	public static final String ASCII = "ascii";
 	public static final String BLOOM = "bloom";

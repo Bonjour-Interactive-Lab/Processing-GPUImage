@@ -997,4 +997,38 @@ public class Filter extends GPUImageBaseEffects{
 		super.currentSH.set("time", time);
 		return super.filter(src);
 	}
+	
+	/**
+	 * Animated rgb grain based on the millis() passed
+	 * @param src source layer
+	 * @param intensity between 0/1
+	 * @return
+	 */
+	public PGraphics getAnimatedGrainRGBImage(PImage src, float intensity) {
+		return getGrainRGBImage(src, intensity, 1.0f + ((float)this.papplet.millis() / 1000.0f));
+	}
+	
+	/**
+	 * RGB Grain
+	 * @param src source layer
+	 * @param intensity between 0/1
+	 * @return
+	 */
+	public PGraphics getGrainRGBImage(PImage src, float intensity) {
+		return getGrainRGBImage(src, intensity, 1.0f);
+	}
+
+	/**
+	 * Animated rgb grain
+	 * @param src source layer
+	 * @param intensity between 0/1
+	 * @param time
+	 * @return
+	 */
+	public PGraphics getGrainRGBImage(PImage src, float intensity, float time) {
+		super.setCurrentSH(GRAINRGB);
+		super.currentSH.set("intensity", intensity);
+		super.currentSH.set("time", time);
+		return super.filter(src);
+	}
 }
