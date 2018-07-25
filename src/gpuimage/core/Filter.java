@@ -1031,4 +1031,205 @@ public class Filter extends GPUImageBaseEffects{
 		super.currentSH.set("time", time);
 		return super.filter(src);
 	}
+	
+	/**
+	 * Pixelate an image at 100 pixel per width
+	 * @param src source layer
+	 * @return
+	 */
+	public PGraphics getPixelateImage(PImage src) {
+		super.setCurrentSH(PIXELATE);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		super.currentSH.set("pixelRes", 100.0f);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Pixelate an image
+	 * @param src source layer
+	 * @param pixelRes number of pixel per width
+	 * @return
+	 */
+	public PGraphics getPixelateImage(PImage src, float pixelRes) {
+		super.setCurrentSH(PIXELATE);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		super.currentSH.set("pixelRes", pixelRes);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Get a greyscale dithering image based on 2x2 Bayer Matrix
+	 * @param src source layer
+	 * @return
+	 */
+	public PGraphics getDitherBayer2x2Image(PImage src) {
+		super.setCurrentSH(DITHERBAYER2X2);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Get a rgb dithering image based on 2x2 Bayer Matrix
+	 * @param src source layer
+	 * @return
+	 */
+	public PGraphics getDitherBayer2x2RGBImage(PImage src) {
+		super.setCurrentSH(DITHERBAYER2X2RGB);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Get a greyscale dithering image based on 3x3 Bayer Matrix
+	 * @param src source layer
+	 * @return
+	 */
+	public PGraphics getDitherBayer3x3Image(PImage src) {
+		super.setCurrentSH(DITHERBAYER3X3);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Get a rgb dithering image based on 3x3 Bayer Matrix
+	 * @param src source layer
+	 * @return
+	 */
+	public PGraphics getDitherBayer3x3RGBImage(PImage src) {
+		super.setCurrentSH(DITHERBAYER3X3RGB);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Get a greyscale dithering image based on 4x4 Bayer Matrix
+	 * @param src source layer
+	 * @return
+	 */
+	public PGraphics getDitherBayer4x4Image(PImage src) {
+		super.setCurrentSH(DITHERBAYER4X4);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Get a rgb dithering image based on 4x4 Bayer Matrix
+	 * @param src source layer
+	 * @return
+	 */
+	public PGraphics getDitherBayer4x4RGBImage(PImage src) {
+		super.setCurrentSH(DITHERBAYER4X4RGB);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Get a greyscale dithering image based on 8x8 Bayer Matrix
+	 * @param src source layer
+	 * @return
+	 */
+	public PGraphics getDitherBayer8x8Image(PImage src) {
+		super.setCurrentSH(DITHERBAYER8X8);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Get a rgb dithering image based on 8x8 Bayer Matrix
+	 * @param src source layer
+	 * @return
+	 */
+	public PGraphics getDitherBayer8x8RGBImage(PImage src) {
+		super.setCurrentSH(DITHERBAYER8X8RGB);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Get a greyscale dithering image based on 4x4 Cluster Dot Matrix
+	 * @param src source layer
+	 * @return
+	 */
+	public PGraphics getDitherClusterDot4x4Image(PImage src) {
+		super.setCurrentSH(DITHERCLUSTERDOT4X4);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Get a rgb dithering image based on 4x4 Cluster Dot Matrix
+	 * @param src source layer
+	 * @return
+	 */
+	public PGraphics getDitherClusterDot4x4RGBImage(PImage src) {
+		super.setCurrentSH(DITHERCLUSTERDOT4X4RGB);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Get a greyscale dithering image based on 8x8 Cluster Dot Matrix
+	 * @param src source layer
+	 * @return
+	 */
+	public PGraphics getDitherClusterDot8x8Image(PImage src) {
+		super.setCurrentSH(DITHERCLUSTERDOT8X8);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Get a rgb dithering image based on 8x8 Cluster Dot Matrix
+	 * @param src source layer
+	 * @return
+	 */
+	public PGraphics getDitherClusterDot8x8RGBImage(PImage src) {
+		super.setCurrentSH(DITHERCLUSTERDOT8X8RGB);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Get a greyscale dithering image based on 5x3 Cluster Dot Matrix
+	 * @param src source layer
+	 * @return
+	 */
+	public PGraphics getDitherClusterDot5x3Image(PImage src) {
+		super.setCurrentSH(DITHERCLUSTERDOT5X3);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Get a rgb dithering image based on 5x3 Cluster Dot Matrix
+	 * @param src source layer
+	 * @return
+	 */
+	public PGraphics getDitherClusterDot5x3RGBImage(PImage src) {
+		super.setCurrentSH(DITHERCLUSTERDOT5X3RGB);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Get a greyscale dithering image based on 3x3 Random Matrix
+	 * @param src source layer
+	 * @return
+	 */
+	public PGraphics getDitherRandom3x3Image(PImage src) {
+		super.setCurrentSH(DITHERRANDOM3X3);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Get a rgb dithering image based on 3x3 Random Matrix
+	 * @param src source layer
+	 * @return
+	 */
+	public PGraphics getDitherRandom3x3RGBImage(PImage src) {
+		super.setCurrentSH(DITHERRANDOM3X3RGB);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		return super.filter(src);
+	}
 }

@@ -7,7 +7,6 @@
  * http://www.bonjour-lab.com
  */
 import gpuimage.core.*;
-import java.awt.*;
 
 PImage src;
 Filter levelRGB, levelGrey, gammaRGB, gammaGrey, inputRGB, inputGrey, outputRGB, outputGrey;

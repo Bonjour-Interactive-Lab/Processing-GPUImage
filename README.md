@@ -128,8 +128,8 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [x] Fast ChromaWarp 4, 10, 20
 - [x] Grain
 - [x] Grain RGB
-- [ ] Dithering (TBD)
-- [ ] Pixelate
+- [ ] Dithering
+- [x] Pixelate
 - [ ] ASCII **Est-ce un filtre ou une composition ?**
 - [ ] Bloom
 - [ ] SlitScan effect
@@ -240,6 +240,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
     - [x] White grain 
     - [x] RGB grain 
     - [x] Chroma warping
+    - [x] Pixelate
 - [x] Other
   - [x] Accentuation
   - [x] ProcessHueSegmentation

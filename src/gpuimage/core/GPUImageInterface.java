@@ -76,17 +76,29 @@ public interface GPUImageInterface{
 	public static final String GRAIN = "grain";
 	public static final String GRAINRGB = "grainrgb";
 	public static final String PIXELATE = "pixelate";
-	public static final String ASCII = "ascii";
-	public static final String BLOOM = "bloom";
+
+	public static final String DITHERBAYER2X2 = "ditheringbayer2x2";
+	public static final String DITHERBAYER2X2RGB = "ditheringbayer2x2rgb";
+	public static final String DITHERBAYER3X3 = "ditheringbayer3x3";
+	public static final String DITHERBAYER3X3RGB = "ditheringbayer3x3rgb";
+	public static final String DITHERBAYER4X4 = "ditheringbayer4x4";
+	public static final String DITHERBAYER4X4RGB = "ditheringbayer4x4rgb";
+	public static final String DITHERBAYER8X8 = "ditheringbayer8x8";
+	public static final String DITHERBAYER8X8RGB = "ditheringbayer8x8rgb";
+	public static final String DITHERCLUSTERDOT4X4 = "ditheringclusterdot4x4";
+	public static final String DITHERCLUSTERDOT4X4RGB = "ditheringclusterdot4x4rgb";
+	public static final String DITHERCLUSTERDOT8X8 = "ditheringclusterdot8x8";
+	public static final String DITHERCLUSTERDOT8X8RGB = "ditheringclusterdot8x8rgb";
+	public static final String DITHERCLUSTERDOT5X3 = "ditheringclusterdot5x3";
+	public static final String DITHERCLUSTERDOT5X3RGB = "ditheringclusterdot5x3rgb";
+	public static final String DITHERRANDOM3X3 = "ditheringrandom3x3";
+	public static final String DITHERRANDOM3X3RGB = "ditheringrandom3x3rgb";
 	
 	public static final String DILATE = "dilation";
 	public static final String ERODE = "erosion";
 	public static final String DILATERGB = "dilationrgb";
 	public static final String ERODERGB = "erosionrgb";
-	public static final String PIXELSORTING ="pixelsorting";
-	public static final String DOF = "dof";
 	
-	public static final String OPTICALFLOW = "opticalflow";
 	
 
 	/* ...............................................
