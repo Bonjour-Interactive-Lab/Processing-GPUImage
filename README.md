@@ -130,7 +130,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [x] Grain RGB
 - [x] Dithering : Bayer (2x2, 3x3, 4x4, 8x8), Cluster Dot (4x4, 8x8, 5x3), Random (3x3)
 - [x] Pixelate
-- [ ] ASCII **Est-ce un filtre ou une composition ?**
+- [ ] ASCII **Est-ce un filtre ou une composition ?** → http://paulbourke.net/dataformats/asciiart/ (class dédiée)
 - [ ] Bloom
 - [ ] SlitScan effect
 
