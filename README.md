@@ -128,7 +128,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [x] Fast ChromaWarp 4, 10, 20
 - [x] Grain
 - [x] Grain RGB
-- [ ] Dithering
+- [x] Dithering : Bayer (2x2, 3x3, 4x4, 8x8), Cluster Dot (4x4, 8x8, 5x3), Random (3x3)
 - [x] Pixelate
 - [ ] ASCII **Est-ce un filtre ou une composition ?**
 - [ ] Bloom
@@ -241,6 +241,8 @@ This methods is a test methods only. We need to make a benchmark in order to def
     - [x] RGB grain 
     - [x] Chroma warping
     - [x] Pixelate
+    - [x] Ditherings
+    - [x] Ditherings RGB
 - [x] Other
   - [x] Accentuation
   - [x] ProcessHueSegmentation
