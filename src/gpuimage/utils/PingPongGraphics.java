@@ -1,3 +1,4 @@
+
 package gpuimage.utils;
 
 import gpuimage.core.GPUImageInterface;
@@ -35,6 +36,7 @@ import processing.opengl.PGraphicsOpenGL;
  * @see GPUImageInterface
  *
  */
+
 public class PingPongGraphics extends PGraphicsOpenGL implements PConstants, GPUImageInterface{
 	/*public PingPongGraphics src;
 	public PingPongGraphics dst;

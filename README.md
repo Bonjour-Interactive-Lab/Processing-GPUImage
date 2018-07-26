@@ -118,7 +118,8 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [x] Level
 - [x] Gamma
 * * [x] set custom param binding to shader
-- [x] LUT
+- [x] LUT (1D)
+- [x] Ramp (1D)
 - [x] Color Threshold
 - [x] Threshold
 - [x] Invert image
@@ -231,6 +232,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
   - [x] Color grading
     - [x] Threshold (gray + color)
     - [x] LUT1D
+    - [x] Ramp 1D
     - [x] Level
     - [x] Gamma correction
     - [x] Desaturation

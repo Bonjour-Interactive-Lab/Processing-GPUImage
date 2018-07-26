@@ -65,6 +65,7 @@ public interface GPUImageInterface{
 	public static final String LUT1D = "lut1d";
 	public static final String LUT1DGEN = "lut1dgen";
 	public static final String LUT2DGEN = "lut2dgen";
+	public static final String RAMP1D = "ramp1d";
 	public static final String COLORTHRESHOLD = "colorthreshold";
 	public static final String THRESHOLD = "threshold";
 	public static final String INVERT = "invert";

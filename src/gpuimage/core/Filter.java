@@ -771,8 +771,8 @@ public class Filter extends GPUImageBaseEffects{
 	/**
 	 * Color grading using 1D Look Up Table (LUT)
 	 * @see 
-	 * @param src
-	 * @param lut
+	 * @param src source layer
+	 * @param lut look up table
 	 * @return
 	 */
 	public PGraphics getLut1DImage(PImage src, PImage lut) {
@@ -781,6 +781,23 @@ public class Filter extends GPUImageBaseEffects{
 		return super.filter(src);
 	}
 	
+	/**
+	 * Ramp the luma value of the image from a look up texture (ramp)
+	 * @param src source layer
+	 * @param ramp ramp texture
+	 * @return
+	 */
+	public PGraphics getRamp1DImage(PImage src, PImage ramp) {
+		super.setCurrentSH(RAMP1D);
+		super.currentSH.set("ramp", ramp);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Get the inverted color image
+	 * @param src source layer
+	 * @return
+	 */
 	public PGraphics getInvertImage(PImage src) {
 		super.setCurrentSH(GPUImageInterface.INVERT);
 		return super.filter(src);
