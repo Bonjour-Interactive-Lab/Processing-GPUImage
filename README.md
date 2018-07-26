@@ -204,9 +204,9 @@ This methods is a test methods only. We need to make a benchmark in order to def
     - Using BufferedImage seems to speed up the performance [Reference](http://www.java-gaming.org/index.php?topic=23013.0)
     - Using specific method without switch/case. The test was too low
   - [x] Find a way to create a rectangle from area only. [See sehrope implementation en stackoverflow](https://stackoverflow.com/questions/16266931/input-an-integer-find-the-two-closest-integers-which-when-multiplied-equal-th)
-- [ ] Pack/unpack RGBA (16/24/32) shader model
-- [ ] Pack/unpack RGBA1616 shader model
-- [ ] Pack/unpack RGBAMod shader model
+- [x] Pack/unpack RGBA (16/24/32) shader model
+- [x] Pack/unpack RGBA1616 shader model
+- [x] Pack/unpack RGBAMod shader model
 
 ### %"Module Géométrique (VBO)"
 ### Wiki (TBD)
