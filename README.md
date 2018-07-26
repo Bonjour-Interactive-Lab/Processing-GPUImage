@@ -248,8 +248,11 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [x] Other
   - [x] Accentuation
   - [x] ProcessHueSegmentation
+  - [ ] Kinect Depth IntToRGBA
+  - [ ] 2D GPU physics engine
+  - [ ] 3D GPU physics engine
 - [ ] Procedural
-- [ ] RGBA Encoding
+- [x] RGBA Encoding
 - [x] Utils
   - [x] Generate 1D LUT
   - [X] Ping Pong Buffer
