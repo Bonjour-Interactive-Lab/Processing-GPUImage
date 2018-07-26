@@ -248,7 +248,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [x] Other
   - [x] Accentuation
   - [x] ProcessHueSegmentation
-  - [ ] Kinect Depth IntToRGBA
+  - [x] Kinect Depth IntToRGBA
   - [ ] 2D GPU physics engine
   - [ ] 3D GPU physics engine
 - [ ] Procedural
