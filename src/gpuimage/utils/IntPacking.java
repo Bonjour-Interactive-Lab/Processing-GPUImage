@@ -15,7 +15,7 @@ import processing.core.*;
  * <b>Howerver this cannot be use for non integer value.</b>
  * 
  * <p>
- * The main idea is to take a integer value from a range of 0 to <b>KNOWN</b> value and split it across a the RGB channel by using a value%255.<br>
+ * The main idea is to take a integer value from a range of 0 to <b>KNOWN</b> value and split it across a the RG channel by using a value%255.<br>
  * The index of the modulo (number of repetition across the range) is store into the blue channel<br>
 
  * <p><b>All color are send as int.</b> You can use it with the processing variable color</p>

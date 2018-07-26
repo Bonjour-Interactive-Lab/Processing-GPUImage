@@ -249,7 +249,7 @@ abstract class GPUImageBaseFloatPacking implements GPUImageInterface, PConstants
 		rgba[0] -= rgba[1] * FMASK;
 		rgba[1] -= rgba[2] * FMASK;
 		rgba[2] -= rgba[3] * FMASK;
-		//rgba[3] = 1.0; //avoid 0 as alpha
+		//rgba[3] = 1.0f; //avoid 0 as alpha
 			  
 		//remap between 0 and 255
 		rgba[0] *= 255.0;
