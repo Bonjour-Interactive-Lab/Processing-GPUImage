@@ -70,6 +70,7 @@ void draw() {
   frag.set("dataTexture", rgbaMod);
   frag.set("dataMax", dataMax);
   frag.set("time", (float)millis() * 0.0001);
+  
   buffer.beginDraw();
   buffer.shader(frag);
   buffer.rect(0, 0, buffer.width, buffer.height);
@@ -77,7 +78,7 @@ void draw() {
 
   image(kinect.getDepth256Image(), imgw * 0, 0);
   image(rgbaMod, imgw * 1, 0);
-  image(buffer, imgw * 2, 0);
+  image(buffer, imgw * 2, 0, buffer.width, buffer.height);
 
   noStroke();
   fill(20);
