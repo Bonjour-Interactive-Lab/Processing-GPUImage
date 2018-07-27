@@ -3,8 +3,9 @@
  * 
  * This technic is usefull when you need to pass and integer array of values from CPU to GPU for vairous GPGPU computation on shader side — such as physics simulation on pixel analysis like optical flow — or if you need to send large amount of data as texture (using spout, syphon or NDI)
  * This class provide a faster encoding/decoding methods than the FloatPacking by using only modulo and alpha channel. Howerver this cannot be use for non integer value.
- * The main idea is to take a integer value from a range of 0 to KNOWN value and split it across a the RG channel by using a value%255.
- * The index of the modulo (number of repetition across the range) is store into the blue channel
+ * The main idea is to take each component of the vector on a range 0-1 and split/encode it into 16 bits as color where :
+ * vector.x : the value is encoded into Red and Green (8 bits per channel). 255 * 255
+ * vector.y : the value is encoded into Blue and Alpha (8 bits per channel). 255 * 255
  *
  * You can also retreive values on GPU side (into shader). Please see the class documentation for glsl code or examples of GLSL simulation on the "other" folder
  * --
