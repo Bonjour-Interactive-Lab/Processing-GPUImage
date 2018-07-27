@@ -54,7 +54,7 @@ import processing.core.*;
 *	float divider = float(edge) / 256.0;
 *	float index = round(rgba.b * divider);
 *
-*	return rgba.r + 255 * index;
+*	return rgba.r * 255.0 + 255.0 * index;
 *}
 *
 *void main(){
