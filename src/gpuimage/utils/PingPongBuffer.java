@@ -29,52 +29,82 @@ public class PingPongBuffer implements PConstants{
 	public PGraphics dst;
 
 	/**
-	 * Instantiate a Ping Pong Buffer Object at the size of the PApplet  (RENDERER is P2D)
+	 * Instantiate a Ping Pong Buffer Object at the size of the PApplet  (RENDERER is java2d)
 	 * @param papplet
 	 */
 	public PingPongBuffer(PApplet papplet) {
-		initBuffers(papplet, papplet.width, papplet.height, P2D);
+		initBuffers(papplet, papplet.width, papplet.height, null);
 	}
 	
 	/**
-	 * Instantiate a Ping Pong Buffer Object at the size of the PApplet and smooth (RENDERER is P2D)
+	 * Instantiate a Ping Pong Buffer Object at the size of the PApplet 
+	 * @param papplet
+	 * @param RENDERER
+	 */
+	public PingPongBuffer(PApplet papplet, String RENDERER) {
+		initBuffers(papplet, papplet.width, papplet.height, RENDERER);
+	}
+	
+	/**
+	 * Instantiate a Ping Pong Buffer Object at the size of the PApplet and smooth (RENDERER is java2d)
 	 * @param papplet
 	 * @param smooth
 	 */
 	public PingPongBuffer(PApplet papplet, int smooth) {
-		initBuffers(papplet, papplet.width, papplet.height, P2D, smooth);
+		initBuffers(papplet, papplet.width, papplet.height, null, smooth);
 	}
 	
 	/**
-	 * Instantiate a Ping Pong Buffer Object with custom size
+	 * Instantiate a Ping Pong Buffer Object at the size of the PApplet and smooth
+	 * @param papplet
+	 * @param smooth
+	 * @param RENDERER
+	 */
+	public PingPongBuffer(PApplet papplet, int smooth, String RENDERER) {
+		initBuffers(papplet, papplet.width, papplet.height, RENDERER, smooth);
+	}
+	
+	/**
+	 * Instantiate a Ping Pong Buffer Object with custom size (renderer is java2d)
 	 * @param papplet
 	 * @param width
 	 * @param height
 	 */
 	public PingPongBuffer(PApplet papplet, int width, int height) {
-		initBuffers(papplet, width, height, P2D);
+		initBuffers(papplet, width, height, null);
 	}
 	
 	/**
-	 * Instantiate a Ping Pong Buffer Object with custom size and smooth (RENDERER is P2D)
+	 * Instantiate a Ping Pong Buffer Object with custom size 
+	 * @param papplet
+	 * @param width
+	 * @param height
+	 */
+	public PingPongBuffer(PApplet papplet, int width, int height, String RENDERER) {
+		initBuffers(papplet, width, height, RENDERER);
+	}
+	
+	/**
+	 * Instantiate a Ping Pong Buffer Object with custom size and smooth (RENDERER is java2d)
 	 * @param papplet
 	 * @param width
 	 * @param height
 	 * @param smooth
 	 */
 	public PingPongBuffer(PApplet papplet, int width, int height, int smooth) {
-		initBuffers(papplet, width, height, P2D, smooth);
+		initBuffers(papplet, width, height, null, smooth);
 	}
 	
 	/**
-	 * Instantiate a Ping Pong Buffer Object with custom size and RENDERER (see processing renderer documentation)
+	 * Instantiate a Ping Pong Buffer Object with custom size and smooth (RENDERER is java2d)
 	 * @param papplet
 	 * @param width
 	 * @param height
+	 * @param smooth
 	 * @param RENDERER
 	 */
-	public PingPongBuffer(PApplet papplet, int width, int height, String RENDERER) {
-		initBuffers(papplet, width, height, RENDERER);
+	public PingPongBuffer(PApplet papplet, int width, int height, int smooth, String RENDERER) {
+		initBuffers(papplet, width, height, RENDERER, smooth);
 	}
 	
 	/**
@@ -91,8 +121,13 @@ public class PingPongBuffer implements PConstants{
 	
 	private void initBuffers(PApplet papplet, int width, int height, String RENDERER) {
 		this.papplet = papplet;
-		this.dst = papplet.createGraphics(width, height, RENDERER);;
-		this.src = papplet.createGraphics(this.dst.width, this.dst.height, RENDERER);
+		if(RENDERER != null) {
+			this.dst = papplet.createGraphics(width, height, RENDERER);
+			this.src = papplet.createGraphics(this.dst.width, this.dst.height, RENDERER);
+		}else {
+			this.dst = papplet.createGraphics(width, height);
+			this.src = papplet.createGraphics(this.dst.width, this.dst.height);
+		}
 	}
 	
 	/**

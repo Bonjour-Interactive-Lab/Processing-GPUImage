@@ -14,5 +14,5 @@ out vec4 fragColor;
 
 
 void main() {
-  fragColor =texture2D(texture, vertTexCoord.xy);
+  fragColor = texture2D(texture, vertTexCoord.xy);
 }

@@ -33,7 +33,7 @@ void settings() {
 
 
 void setup() {
-  ((PGraphicsOpenGL)g).textureSampling(2);
+  ((PGraphicsOpenGL)g).textureSampling(3);
 
   posFrag = loadShader("posFrag.glsl");
 
@@ -47,42 +47,42 @@ void setup() {
   encodedVelBuffer = vp.encodeARGB(firstVelData);
 
   //add the texture to the PinPongBuffer
-  posBuffer = new PingPongBuffer(this, encodedPosBuffer.width, encodedPosBuffer.height);
-  velBuffer = new PingPongBuffer(this, encodedVelBuffer.width, encodedVelBuffer.height);
-  posBuffer.setFiltering(2);
-  posBuffer.enableTextureMipmaps(false);
+  posBuffer = new PingPongBuffer(this, encodedPosBuffer.width, encodedPosBuffer.height, P2D);
+  velBuffer = new PingPongBuffer(this, encodedVelBuffer.width, encodedVelBuffer.height, P2D);
+  //posBuffer.setFiltering(2);
+  //posBuffer.enableTextureMipmaps(false);
 
   drawTextureIntoPingPongBuffer(posBuffer, encodedPosBuffer);
   drawTextureIntoPingPongBuffer(velBuffer, encodedVelBuffer);
 
   posBuffer.dst.save("posBuffer.png");
   encodedPosBuffer.save("encodedPosBuffer.png");
-/*
+  /*
   ArrayList<Float> attribList = new ArrayList<Float>();
-  for (int i=0; i<firstPosData.length; i++) {
-    float x = i % encodedPosBuffer.width;
-    float y = (i - x) / encodedPosBuffer.width;
-    float u = x / (float) encodedPosBuffer.width;
-    float v = y / (float) encodedPosBuffer.height;
-
-    attribList.add(x);
-    attribList.add(y);
-    attribList.add(0.0);
-    attribList.add(1.0);
-
-    attribList.add(1.0);
-    attribList.add(1.0);
-    attribList.add(1.0);
-    attribList.add(1.0);
-
-    attribList.add(u);
-    attribList.add(v);
-    attribList.add(0.0);
-    attribList.add(0.0);
-  }
-
-  vbo = new VBOInterleaved(g, attribList);
-*/
+   for (int i=0; i<firstPosData.length; i++) {
+   float x = i % encodedPosBuffer.width;
+   float y = (i - x) / encodedPosBuffer.width;
+   float u = x / (float) encodedPosBuffer.width;
+   float v = y / (float) encodedPosBuffer.height;
+   
+   attribList.add(x);
+   attribList.add(y);
+   attribList.add(0.0);
+   attribList.add(1.0);
+   
+   attribList.add(1.0);
+   attribList.add(1.0);
+   attribList.add(1.0);
+   attribList.add(1.0);
+   
+   attribList.add(u);
+   attribList.add(v);
+   attribList.add(0.0);
+   attribList.add(0.0);
+   }
+   
+   vbo = new VBOInterleaved(g, attribList);
+   */
   particles = createShape();
 
   particles.beginShape(POINTS);
@@ -114,7 +114,7 @@ void draw() {
   drawTextureIntoPingPongBuffer(posBuffer, encodedPosBuffer);
 
   //vbo.display(encodedPosBuffer);
-  
+
   psh.set("dataTexture", encodedPosBuffer);
   shader(psh);
   shape(particles);
@@ -146,9 +146,37 @@ void draw() {
 }
 
 void drawTextureIntoPingPongBuffer(PingPongBuffer ppb, PImage tex) { 
+  // tex.loadPixels();
   ppb.dst.beginDraw(); 
   ppb.dst.clear();
-  ppb.dst.background(204, 1);
+  ppb.dst.background(0, 0);
+  //ppb.dst.background(tex);
+  //ppb.dst.shader(posFrag);
+  /*
+  ppb.dst.beginShape();
+   ppb.dst.fill(255);
+   ppb.dst.noStroke();
+   //ppb.dst.textureMode(NORMAL);
+   //ppb.dst.texture(tex);
+   ppb.dst.vertex(0, 0, 0, 0, 0);
+   ppb.dst.vertex(0, ppb.dst.width, 0, 1, 0);
+   ppb.dst.vertex(ppb.dst.width, ppb.dst.height, 0, 1, 1);
+   ppb.dst.vertex(0, ppb.dst.height, 0, 0, 1);
+   ppb.dst.endShape(CLOSE);
+   */
+   /*
+  ppb.dst.shader(posFrag);
+  ppb.dst.textureMode(NORMAL);
+  ppb.dst.beginShape();
+  ppb.dst.noStroke();
+  ppb.dst.noFill();
+  ppb.dst.texture(tex);
+  ppb.dst.vertex(0, 0, 0, 0, 0);
+  ppb.dst.vertex(ppb.dst.width, 0, 0, 1, 0);
+  ppb.dst.vertex(ppb.dst.width, ppb.dst.height, 0, 1, 1);
+  ppb.dst.vertex(0, ppb.dst.height, 0, 0, 1);
+  ppb.dst.endShape(CLOSE);
+*/
   ppb.dst.shader(posFrag);
   ppb.dst.image(tex, 0, 0, ppb.dst.width, ppb.dst.height);
   ppb.dst.endDraw();
