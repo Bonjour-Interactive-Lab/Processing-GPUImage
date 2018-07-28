@@ -47,7 +47,7 @@ void setup() {
   println("Scene has: "+int(width/res * height/res)+" particles");
   println("Buffer res: "+encodedPosBuffer.width+"×"+encodedPosBuffer.height);
   
-  noCursor();
+  //noCursor();
 }
 
 void draw() { 
@@ -87,6 +87,8 @@ void draw() {
   noStroke();
   fill(50);
   ellipse(mx, my, mouseSize, mouseSize);
+  stroke(255, 255, 0);
+  line(width/2.0, height/2, width/2 + windx * 150, height/2);
   
   //update the vel and pos buffers
   posBuffer.swap(); //we swap buffer first in order to get the value;
