@@ -41,9 +41,7 @@ void setup() {
   vp = new Vec2Packing(this);
   fp = new FloatPacking(this);
 
-
   init(int(width/res), int(height/res));
-
 
   frameRate(300);
   println("Scene has: "+int(width/res * height/res)+" particles");

@@ -56,11 +56,11 @@ void main() {
 	vec4 massRGBA = texture2D(massBuffer, vertTexCoord.xy);
 
 	vec2 acc = vec2(0.0);
-	//we remap vel from  [0, 1] to [-1, 1] in order to have -1.0 * velocity
-	vec2 vel = (decodeRGBA16(velRGBA) * 2.0 - 1.0) * maxVel;
-	vec2 loc = decodeRGBA16(posRGBA) * worldResolution;
-	float mass = minMass + decodeRGBA32(massRGBA) * (maxMass - minMass);
+	vec2 vel = (decodeRGBA16(velRGBA) * 2.0 - 1.0) * maxVel; //we remap vel from  [0, 1] to [-1, 1] in order to have velocity in both side -x/+x -y/+y
+	vec2 loc = decodeRGBA16(posRGBA) * worldResolution; //we remap the position from [0, 1] to [0, worldspace]
+	float mass = minMass + decodeRGBA32(massRGBA) * (maxMass - minMass); //we remap the mass from [0, 1] to [minMass, maxMass]
 
+	//define friction
 	float coeff = 0.35;
 	vec2 friction = normalize(vel * -1.0) * coeff;
 
@@ -69,11 +69,12 @@ void main() {
 	acc += (friction / mass);
 	acc += gravity;
 
+	//add acc to velocity
 	vel += acc;
-	vel = clamp(vel, -maxVel, maxVel);
+	vel = clamp(vel, -maxVel, maxVel); //clamp velocity to max force
 
+	//add vel to location
 	loc += vel;
-
 
 	//we compute the distance between the mouse and the particle in order to define if it bounce on it
 	vec2 LtoM = mouse - loc;
@@ -90,7 +91,6 @@ void main() {
 	//we define the bounce condition
 	vel =  R * (1.0 - edgeObstacle) + vel * (edgeObstacle);
 
-
 	//edge condition
 	float edgeXL = 1.0 - step(0.0, loc.x);// if x < 0 : 1.0 else 0.0
 	float edgeXR = step(worldResolution.x, loc.x);// if x > 1.0 : 1.0 else 0.0;
@@ -101,11 +101,11 @@ void main() {
 	vel.x *= edgeX;
 	vel.y *= edgeY;
 
+	vel /= maxVel; //we normalize velocity
+	vel = (vel * 0.5) + 0.5; //reset it from[-1, 1] to [0.0, 1.0]
+	vel = clamp(vel, 0, 1.0); //we clamp the velocity between [0, 1] (this is a security)
 
-	vel /= maxVel;
-	vel = (vel * 0.5) + 0.5;
-	vel = clamp(vel, 0, 1.0);
-
+	//we encode the new velocuty as RGBA1616
 	vec4 newPosEncoded = vec4(encodeRGBA16(vel.x), encodeRGBA16(vel.y));
 
   	fragColor = newPosEncoded;
