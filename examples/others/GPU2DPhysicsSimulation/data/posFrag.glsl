@@ -57,7 +57,8 @@ void main() {
 	loc = edgePos * edgeObstacle + loc * (1.0 - edgeObstacle);
 
 	//edge
-	loc /= worldResolution;
+	//loc = mod(loc, worldResolution);
+	loc /= worldResolution - vec2(0.0, 0.1); //we reduce the world position of 0.1 in order to avoid infinite bounce on the ground
 	loc = clamp(loc, 0.0, 1.0);
 
 	vec4 newPosEncoded = vec4(encodeRGBA16(loc.x), encodeRGBA16(loc.y));

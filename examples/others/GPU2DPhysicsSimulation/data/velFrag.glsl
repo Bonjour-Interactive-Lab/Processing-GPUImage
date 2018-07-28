@@ -14,7 +14,9 @@ const float mask = 1.0/256.0;
 uniform sampler2D texture;
 uniform sampler2D posBuffer;
 uniform sampler2D massBuffer;
+uniform sampler2D maxVelBuffer;
 uniform vec2 worldResolution;
+uniform float minVel;
 uniform float maxVel;
 uniform float maxMass;
 uniform float minMass;
@@ -54,11 +56,13 @@ void main() {
 	vec4 velRGBA = texture2D(texture, vertTexCoord.xy);
 	vec4 posRGBA = texture2D(posBuffer, vertTexCoord.xy);
 	vec4 massRGBA = texture2D(massBuffer, vertTexCoord.xy);
+	vec4 maxVelRGBA = texture2D(maxVelBuffer, vertTexCoord.xy);
 
 	vec2 acc = vec2(0.0);
-	vec2 vel = (decodeRGBA16(velRGBA) * 2.0 - 1.0) * maxVel; //we remap vel from  [0, 1] to [-1, 1] in order to have velocity in both side -x/+x -y/+y
-	vec2 loc = decodeRGBA16(posRGBA) * worldResolution; //we remap the position from [0, 1] to [0, worldspace]
-	float mass = minMass + decodeRGBA32(massRGBA) * (maxMass - minMass); //we remap the mass from [0, 1] to [minMass, maxMass]
+	float edgeVel = mix(minVel, maxVel, decodeRGBA32(maxVelRGBA));
+	vec2 vel = (decodeRGBA16(velRGBA) * 2.0 - 1.0) * edgeVel; //we remap vel from  [0, 1] to [-1, 1] in order to have velocity in both side -x/+x -y/+y
+	vec2 loc = decodeRGBA16(posRGBA) * worldResolution; //we remap the position from [0, 1] to [0, worldspace]	
+	float mass = mix(minMass, maxMass, decodeRGBA32(massRGBA)); //we remap the mass from [0, 1] to [minMass, maxMass]
 
 	//define friction
 	float coeff = 0.35;
@@ -71,7 +75,7 @@ void main() {
 
 	//add acc to velocity
 	vel += acc;
-	vel = clamp(vel, -maxVel, maxVel); //clamp velocity to max force
+	vel = clamp(vel, -edgeVel, edgeVel); //clamp velocity to max force
 
 	//add vel to location
 	loc += vel;
@@ -101,7 +105,7 @@ void main() {
 	vel.x *= edgeX;
 	vel.y *= edgeY;
 
-	vel /= maxVel; //we normalize velocity
+	vel /= edgeVel; //we normalize velocity
 	vel = (vel * 0.5) + 0.5; //reset it from[-1, 1] to [0.0, 1.0]
 	vel = clamp(vel, 0, 1.0); //we clamp the velocity between [0, 1] (this is a security)
 
