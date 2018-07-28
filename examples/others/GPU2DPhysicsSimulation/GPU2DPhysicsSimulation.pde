@@ -1,7 +1,7 @@
 /**
  * This example shows how to us Vec2Packing in order to create a full GPU particle physics
  * Based on Chris Wellons article : https://nullprogram.com/blog/2014/06/29/
- 
+ *
  * --
  * Bonjour Lab.
  * http://www.bonjour-lab.com
@@ -9,121 +9,102 @@
 import gpuimage.core.*;
 import gpuimage.utils.*;
 
-
+float res = 2.0;
 Vec2Packing vp;
-PImage encodedPosBuffer, encodedVelBuffer;
+FloatPacking fp;
+PImage encodedPosBuffer, encodedVelBuffer, encodedMassBuffer;
 PingPongBuffer posBuffer, velBuffer, massBuffer;
-PShader posFrag;
-VBOInterleaved vbo;
+PShader posFrag, velFrag;
 
 PShape particles;
 PShader psh;
 
-String[] name = {"Raw data", "Decoded data"};
-
-float scale = 1.0;
-int imgw, imgh;
+String[] name = {"Pos Buffer", "Vel Buffer", "Mass buffer"};
 
 void settings() {
-  imgw = 1280;
-  imgh = 720;
-  size(imgw, imgh, P3D);
-  PJOGL.profile = 4;
+  size(1280, 720, P3D);
 }
 
 
 void setup() {
-  ((PGraphicsOpenGL)g).textureSampling(3);
+  smooth(8);
+  //((PGraphicsOpenGL)g).textureSampling(3);
 
+  //load shaders for GPGPU simulation
   posFrag = loadShader("posFrag.glsl");
+  velFrag = loadShader("velFrag.glsl");
+  psh = loadShader("pfrag.glsl", "pvert.glsl");
 
-  //create a array of random value between 0 and 1
-  PVector[] firstPosData = getRandomData(width/2, height/2);
-  PVector[] firstVelData = getRandomData(width/2, height/2);
-
-  //encode the data into texture
+  //create Vec2packing and FloatPacking object 
   vp = new Vec2Packing(this);
-  encodedPosBuffer = vp.encodeARGB(firstPosData);
-  encodedVelBuffer = vp.encodeARGB(firstVelData);
+  fp = new FloatPacking(this);
 
-  //add the texture to the PinPongBuffer
-  posBuffer = new PingPongBuffer(this, encodedPosBuffer.width, encodedPosBuffer.height, P2D);
-  velBuffer = new PingPongBuffer(this, encodedVelBuffer.width, encodedVelBuffer.height, P2D);
-  //posBuffer.setFiltering(2);
-  //posBuffer.enableTextureMipmaps(false);
 
-  drawTextureIntoPingPongBuffer(posBuffer, encodedPosBuffer);
-  drawTextureIntoPingPongBuffer(velBuffer, encodedVelBuffer);
+  init(int(width/res), int(height/res));
 
-  posBuffer.dst.save("posBuffer.png");
-  encodedPosBuffer.save("encodedPosBuffer.png");
-  /*
-  ArrayList<Float> attribList = new ArrayList<Float>();
-   for (int i=0; i<firstPosData.length; i++) {
-   float x = i % encodedPosBuffer.width;
-   float y = (i - x) / encodedPosBuffer.width;
-   float u = x / (float) encodedPosBuffer.width;
-   float v = y / (float) encodedPosBuffer.height;
-   
-   attribList.add(x);
-   attribList.add(y);
-   attribList.add(0.0);
-   attribList.add(1.0);
-   
-   attribList.add(1.0);
-   attribList.add(1.0);
-   attribList.add(1.0);
-   attribList.add(1.0);
-   
-   attribList.add(u);
-   attribList.add(v);
-   attribList.add(0.0);
-   attribList.add(0.0);
-   }
-   
-   vbo = new VBOInterleaved(g, attribList);
-   */
-  particles = createShape();
-
-  particles.beginShape(POINTS);
-  particles.textureMode(NORMAL);
-  for (int i=0; i<firstPosData.length; i++) {
-    float x = i % encodedPosBuffer.width;
-    float y = (i - x) / encodedPosBuffer.width;
-    float u = x / (float) encodedPosBuffer.width;
-    float v = y / (float) encodedPosBuffer.height;
-    particles.stroke(u * 255, v * 255, 0.0);
-    particles.vertex(x, y, u, v);
-  }
-  particles.endShape();
-
-  psh = loadShader("pfrag.glsl", "pvert_2.glsl");
-  psh.set("dataTexResolution", float(encodedPosBuffer.width), float(encodedPosBuffer.height));
-
-  //compare the retieved data with the original data in order them and find the Root Mean Squared Error (RMSE)
-  //float RMSE = (float) getRMSE(firstPosData, firstVelData);
-  //println("RMSE encoding: "+RMSE);
 
   frameRate(300);
+  println("Scene has: "+int(width/res * height/res)+" particles");
+  println("Buffer res: "+encodedPosBuffer.width+"×"+encodedPosBuffer.height);
 }
 
-void draw() {
-  background(20);
+void draw() { 
+  background(20, 1);
+  //fill(20, 100);
+  //noStroke();
+  //rect(0, 0, width, height);
 
+  float maxVel = 25.0;
+  float maxMass = 10.0;
+  float minMass = 4.0;
+  float wind = noise(millis() * 0.0001, frameCount * 0.001) * 2.0 - 1.0;
 
-  drawTextureIntoPingPongBuffer(posBuffer, encodedPosBuffer);
+  //update velBuffer
+  posBuffer.swap(); //we swap buffer first in order to get the value;
+  velBuffer.swap(); //we swap buffer first in order to get the value;
 
-  //vbo.display(encodedPosBuffer);
+  velFrag.set("posBuffer", posBuffer.getSrcBuffer());
+  velFrag.set("worldResolution", (float) width, (float) height);
+  velFrag.set("massBuffer", encodedMassBuffer);
+  velFrag.set("maxMass", maxMass);
+  velFrag.set("minMass", minMass);
+  velFrag.set("maxVel", maxVel);
+  velFrag.set("wind", wind * 0.5, 0.0);
 
-  psh.set("dataTexture", encodedPosBuffer);
+  velBuffer.dst.beginDraw(); 
+  velBuffer.dst.clear();
+  velBuffer.dst.blendMode(REPLACE);
+  velBuffer.dst.shader(velFrag);
+  velBuffer.dst.image(velBuffer.getSrcBuffer(), 0, 0);
+  velBuffer.dst.endDraw();
+
+  //update posBuffer
+  posFrag.set("velBuffer", velBuffer.getSrcBuffer());
+  posFrag.set("worldResolution", (float) width, (float) height);
+  posFrag.set("maxVel", maxVel);
+
+  posBuffer.dst.beginDraw(); 
+  posBuffer.dst.clear();
+  posBuffer.dst.blendMode(REPLACE);
+  posBuffer.dst.shader(posFrag);
+  posBuffer.dst.image(posBuffer.getSrcBuffer(), 0, 0);
+  posBuffer.dst.endDraw();
+
+  psh.set("posBuffer", posBuffer.dst);
+  psh.set("massBuffer", encodedMassBuffer);
+  psh.set("maxMass", maxMass * 0.5);
+  psh.set("minMass", minMass * 0.5);
+
   shader(psh);
   shape(particles);
+  resetShader();
 
-  float s = 0.5;
-  float h = 60;
+
+  float s = 0.25;
+  float h = 40;
   image(posBuffer.getDstBuffer(), 0, h, posBuffer.dst.width * s, posBuffer.dst.height * s);
-  image(encodedPosBuffer, posBuffer.dst.width * s, h, velBuffer.dst.width * s, velBuffer.dst.height * s);
-  //image(velBuffer.getDstBuffer(), posBuffer.dst.width * s, h, velBuffer.dst.width * s, velBuffer.dst.height * s);
+  image(velBuffer.getDstBuffer(), posBuffer.dst.width * s, h, velBuffer.dst.width * s, velBuffer.dst.height * s);
+  image(encodedMassBuffer, posBuffer.dst.width * s * 2, h, velBuffer.dst.width * s, velBuffer.dst.height * s);
 
   noStroke();
   fill(20);
@@ -134,59 +115,84 @@ void draw() {
   for (int i=0; i<name.length; i++) {
     int x = i % 3;
     int y = (i-x) / 3;
-    text(name[i], x * imgh + 20, y * imgh + 20);
+    text(name[i], x * posBuffer.dst.width *s + 10, y * height + 20);
   }
-  //compare the retieved data with the original data in order them and find the Root Mean Squared Error (RMSE)
-  //float RMSE = (float)getRMSE(data, rdata);
-  //text("RMSE : "+RMSE, imgh + 20, 40);
 
   showFPS();
-
-  //posBuffer.swap();
+  //noLoop();
 }
 
-void drawTextureIntoPingPongBuffer(PingPongBuffer ppb, PImage tex) { 
-  // tex.loadPixels();
+void keyPressed() {
+  init(int(width/res), int(height/res));
+}
+
+void drawTextureIntoPingPongBuffer(PingPongBuffer ppb, PImage tex, PShader sh) { 
+  /**
+   * IMPORTANT : pre-multiply alpha is not supported on processing 3.X (based on 3.4)
+   * Here we use a trick in order to render our image properly into our pingpong buffer
+   * find out more here : https://github.com/processing/processing/issues/3391
+   */
   ppb.dst.beginDraw(); 
   ppb.dst.clear();
-  ppb.dst.background(0, 0);
-  //ppb.dst.background(tex);
-  //ppb.dst.shader(posFrag);
-  /*
-  ppb.dst.beginShape();
-   ppb.dst.fill(255);
-   ppb.dst.noStroke();
-   //ppb.dst.textureMode(NORMAL);
-   //ppb.dst.texture(tex);
-   ppb.dst.vertex(0, 0, 0, 0, 0);
-   ppb.dst.vertex(0, ppb.dst.width, 0, 1, 0);
-   ppb.dst.vertex(ppb.dst.width, ppb.dst.height, 0, 1, 1);
-   ppb.dst.vertex(0, ppb.dst.height, 0, 0, 1);
-   ppb.dst.endShape(CLOSE);
-   */
-   /*
-  ppb.dst.shader(posFrag);
-  ppb.dst.textureMode(NORMAL);
-  ppb.dst.beginShape();
-  ppb.dst.noStroke();
-  ppb.dst.noFill();
-  ppb.dst.texture(tex);
-  ppb.dst.vertex(0, 0, 0, 0, 0);
-  ppb.dst.vertex(ppb.dst.width, 0, 0, 1, 0);
-  ppb.dst.vertex(ppb.dst.width, ppb.dst.height, 0, 1, 1);
-  ppb.dst.vertex(0, ppb.dst.height, 0, 0, 1);
-  ppb.dst.endShape(CLOSE);
-*/
-  ppb.dst.shader(posFrag);
+  ppb.dst.blendMode(REPLACE);
   ppb.dst.image(tex, 0, 0, ppb.dst.width, ppb.dst.height);
   ppb.dst.endDraw();
 }
 
-PVector[] getRandomData(int w, int h) {
+void init(int w, int h) {
+  //create a array of random value between 0 and 1
+  PVector[] firstPosData = getRandomData(w, h, (int)random(4, 12));
+  PVector[] firstVelData = getVelData(w, h);
+  float[] massData = getMassData(w, h);
+  encodedPosBuffer = vp.encodeARGB(firstPosData);
+  encodedVelBuffer = vp.encodeARGB(firstVelData);
+  encodedMassBuffer = fp.encodeARGB32Float(massData);
+
+  //Create two ping pong buffer (one for each pos and vel buffer)
+  posBuffer = new PingPongBuffer(this, encodedPosBuffer.width, encodedPosBuffer.height, P2D);
+  velBuffer = new PingPongBuffer(this, encodedVelBuffer.width, encodedVelBuffer.height, P2D);
+  //set the filtering
+  posBuffer.setFiltering(3);
+  posBuffer.enableTextureMipmaps(false);
+  velBuffer.setFiltering(3);
+  velBuffer.enableTextureMipmaps(false);
+
+  drawTextureIntoPingPongBuffer(velBuffer, encodedVelBuffer, velFrag);
+  drawTextureIntoPingPongBuffer(posBuffer, encodedPosBuffer, posFrag);
+
+  //create grid of particles
+  particles = createShape();
+  particles.beginShape(POINTS);
+  particles.strokeWeight(1);
+  for (int i=0; i<firstPosData.length; i++) {
+    float x = i % encodedPosBuffer.width;
+    float y = (i - x) / encodedPosBuffer.width;
+    //decomment this lines if you want to see the color of each particle as its index
+    double normi =(double)i / (double)firstPosData.length;
+    int indexColor = vp.doubleToARGB32(normi);
+    particles.stroke(indexColor);
+    //particles.stroke(0.0, random(255), random(255));
+    particles.vertex(x, y);
+  }
+  particles.endShape();
+
+  //set the variable to the particles shader
+  psh.set("worldResolution", (float)width, (float)height);
+  psh.set("bufferResolution", (float)encodedPosBuffer.width, (float)encodedPosBuffer.height);
+}
+
+PVector[] getRandomData(int w, int h, int loopPI) {
   PVector[] data = new PVector[w*h];
+  float midRadius = height * 0.25;
+  float minRadius = height * 0.05;
   for (int i=0; i<data.length; i++) {
+    float x = i % w;
+    float y = (i - x) / (float)h;
+
     float t = norm(i, 0, data.length) * TWO_PI;
-    float r = (height * 0.25);
+    float noised = noise(x * 0.001, y * 0.001, i*0.001);
+    float noiseSwitch = noised * 2.0 - 1.0;
+    float r = midRadius + noised * minRadius + sin(t * loopPI) * (midRadius * noised) + random(-1, 1) * minRadius;
     float nx = width/2 + cos(t) * r;
     float ny = height/2 + sin(t) * r;
     data[i] = new PVector(nx / (float)width, ny/(float)height);
@@ -195,19 +201,23 @@ PVector[] getRandomData(int w, int h) {
   return data;
 }
 
-double getRMSE(PVector[] data1, PVector[] data2) {
-  //https://medium.com/human-in-a-machine-world/mae-and-rmse-which-metric-is-better-e60ac3bde13d
-  double sum = 0.0;
-  double n = 0.0;
-  for (int i=0; i<data1.length && i<data2.length; i++) {
-
-    double deviation = PVector.dist(data1[i], data2[i]);
-    sum += (deviation * deviation);
-    n ++;
+PVector[] getVelData(int w, int h) {
+  PVector[] data = new PVector[w*h];
+  for (int i=0; i<data.length; i++) {
+    data[i] = new PVector(0.5, 0.5);
   }
-  double divider = 1.0 / n;
-  double RMSE = Math.sqrt(sum * divider);
-  return RMSE;
+
+  return data;
+}
+
+float[] getMassData(int w, int h) {
+  float[] data = new float[w*h];
+  for (int i=0; i<data.length; i++) {
+    float nm = random(1.0);
+    data[i] = nm;
+  }
+
+  return data;
 }
 
 void showFPS() {
