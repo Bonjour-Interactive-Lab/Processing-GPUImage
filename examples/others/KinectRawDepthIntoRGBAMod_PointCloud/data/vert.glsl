@@ -34,14 +34,14 @@ vec3 computeWorldCoord(vec2 pixel, float depth){
 
 void main(){
 	//Define vertTexCoord
-	vertTexCoord.xy = (position.xy / resolution.xy) * 2.0;
+	vertTexCoord.xy = (position.xy / resolution.xy);
 
   	//get the data into texture
   	vec4 tex = texture2D(dataTexture, vertTexCoord.xy);
   	//decode the data 
   	float depth = decodeRGBAMod(tex, dataMax) / 8000.0;
   	//get the world position by a back-projecting the pixel value into the real world
-  	vec3 wordlPos = computeWorldCoord(vertTexCoord.xy * resolution.xy * 0.5, depth * 500.0);
+  	vec3 wordlPos = computeWorldCoord(vertTexCoord.xy * resolution.xy, depth * 500.0);
 
 	vec4 clip = projection * modelview * vec4(wordlPos, 1.0);
 	gl_Position = clip + projection * vec4(offset.xy * depth, 0, 0);

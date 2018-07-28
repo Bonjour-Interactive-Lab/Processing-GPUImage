@@ -49,6 +49,11 @@ void setup() {
 }
 
 void draw() { 
+  if (frameCount % (300 * 4) == 0) {
+    init(int(width/res), int(height/res));
+  }
+
+
   background(20, 1);
   //fill(20, 100);
   //noStroke();
@@ -120,7 +125,7 @@ void draw() {
   }
 
   showFPS();
-  //noLoop();
+  noLoop();
 }
 
 void keyPressed() {
