@@ -1,7 +1,7 @@
 /**
  * This example shows how to us Vec2Packing in order to create a full GPU particle physics
  * Based on Chris Wellons article : https://nullprogram.com/blog/2014/06/29/
- *
+ * See shaders code for more detail on GPU side
  * --
  * Bonjour Lab.
  * http://www.bonjour-lab.com
@@ -90,6 +90,7 @@ void draw() {
   posBuffer.dst.image(posBuffer.getSrcBuffer(), 0, 0);
   posBuffer.dst.endDraw();
 
+  //display particles
   psh.set("posBuffer", posBuffer.dst);
   psh.set("massBuffer", encodedMassBuffer);
   psh.set("maxMass", maxMass * 0.5);
@@ -99,7 +100,7 @@ void draw() {
   shape(particles);
   resetShader();
 
-
+  //debug display
   float s = 0.25;
   float h = 40;
   image(posBuffer.getDstBuffer(), 0, h, posBuffer.dst.width * s, posBuffer.dst.height * s);
