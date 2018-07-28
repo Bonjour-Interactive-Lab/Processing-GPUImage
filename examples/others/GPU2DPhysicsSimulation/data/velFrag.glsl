@@ -20,6 +20,8 @@ uniform float maxMass;
 uniform float minMass;
 uniform vec2 gravity = vec2(0.0, 0.1);
 uniform vec2 wind = vec2(0.0, 0.0);
+uniform vec2 mouse;
+uniform float mouseSize;
 
 in vec4 vertColor;
 in vec4 vertTexCoord;
@@ -72,16 +74,33 @@ void main() {
 
 	loc += vel;
 
-	//edge
+
+	//we compute the distance between the mouse and the particle in order to define if it bounce on it
+	vec2 LtoM = mouse - loc;
+	float d = length(LtoM);
+	float edgeObstacle = step(mouseSize * 0.5, d) * 2.0 - 1.0;
+	//We compute the reflect vector. By these we do not have a  straight line bounce
+	// R = 2 * N * (N . L) -L
+	vec2 N = normalize(LtoM * -1.0);
+	vec2 L = normalize(vel * -1.0);
+	vec2 R = 2.0 * N * dot(N, L) - L;
+	//we reduce the bounce factor
+	R *= 0.1;
+
+	//we define the bounce condition
+	vel =  R * (1.0 - edgeObstacle) + vel * (edgeObstacle);
+
+
+	//edge condition
 	float edgeXL = 1.0 - step(0.0, loc.x);// if x < 0 : 1.0 else 0.0
 	float edgeXR = step(worldResolution.x, loc.x);// if x > 1.0 : 1.0 else 0.0;
 	float edgeX = (1.0 - (edgeXL + edgeXR)) * 2.0 - 1.0; // 0<x<1 : 0.0 else -1.0<1.0;
 	float edgeYT = 1.0 - step(0.0, loc.y);// if x < 0 : 1.0 else 0.0
 	float edgeYB = step(worldResolution.y, loc.y);// if x > 1.0 : 1.0 else 0.0;
 	float edgeY = (1.0 - (edgeYT + edgeYB)) * 2.0 - 1.0; // 0<x<1 : 0.0 else -1.0<1.0;
-	
 	vel.x *= edgeX;
 	vel.y *= edgeY;
+
 
 	vel /= maxVel;
 	vel = (vel * 0.5) + 0.5;

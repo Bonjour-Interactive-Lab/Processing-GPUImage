@@ -15,6 +15,8 @@ uniform sampler2D texture;
 uniform sampler2D velBuffer;
 uniform vec2 worldResolution;
 uniform float maxVel;
+uniform vec2 mouse;
+uniform float mouseSize;
 
 in vec4 vertColor;
 in vec4 vertTexCoord;
@@ -47,6 +49,12 @@ void main() {
 	vec2 vel = (decodeRGBA16(velRGBA) * 2.0 - 1.0) * maxVel;
 
 	loc += vel;
+
+	vec2 LtoM = loc - mouse;
+	float d = length(LtoM);
+	float edgeObstacle = 1.0 - step(mouseSize * 0.5, d);
+	vec2 edgePos = mouse + normalize(LtoM) * (mouseSize * 0.5);
+	loc = edgePos * edgeObstacle + loc * (1.0 - edgeObstacle);
 
 	//edge
 	loc /= worldResolution;

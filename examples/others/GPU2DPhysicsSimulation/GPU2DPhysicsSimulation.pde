@@ -9,13 +9,15 @@
 import gpuimage.core.*;
 import gpuimage.utils.*;
 
-float res = 2.0;
+float res = 1.5;
 Vec2Packing vp;
 FloatPacking fp;
 PImage encodedPosBuffer, encodedVelBuffer, encodedMassBuffer;
 PingPongBuffer posBuffer, velBuffer, massBuffer;
 PShader posFrag, velFrag;
 
+float windx;
+float xoff, yoff, zoff;
 PShape particles;
 PShader psh;
 
@@ -46,6 +48,8 @@ void setup() {
   frameRate(300);
   println("Scene has: "+int(width/res * height/res)+" particles");
   println("Buffer res: "+encodedPosBuffer.width+"×"+encodedPosBuffer.height);
+  
+  noCursor();
 }
 
 void draw() { 
@@ -55,15 +59,34 @@ void draw() {
 
 
   background(20, 1);
-  //fill(20, 100);
-  //noStroke();
-  //rect(0, 0, width, height);
-
+  /*fill(20, 100);
+  noStroke();
+  rect(0, 0, width, height);*/
+  
+  float maxtime = 2000;
+  float gamma = (millis() % maxtime) / maxtime;
+  float mouseSize = 75.0;
+  float radius = height/2 * 0.75;
+  float mx = width/2 + cos(gamma * TWO_PI) * radius;
+  float my = height/2 + sin(gamma * TWO_PI) * radius;
+  
   float maxVel = 25.0;
   float maxMass = 10.0;
   float minMass = 4.0;
-  float wind = noise(millis() * 0.0001, frameCount * 0.001) * 2.0 - 1.0;
-
+  float len = 0.25;
+  windx = noise(xoff, yoff, zoff) * 2.0 -1.0;
+  windx *= len;
+  xoff += 0.001;
+  yoff += 0.0025;
+  zoff += 0.0035;
+  
+  
+  stroke(50);
+  line(width/2, height/2, mx, my);
+  noStroke();
+  fill(50);
+  ellipse(mx, my, mouseSize, mouseSize);
+  
   //update velBuffer
   posBuffer.swap(); //we swap buffer first in order to get the value;
   velBuffer.swap(); //we swap buffer first in order to get the value;
@@ -74,7 +97,9 @@ void draw() {
   velFrag.set("maxMass", maxMass);
   velFrag.set("minMass", minMass);
   velFrag.set("maxVel", maxVel);
-  velFrag.set("wind", wind * 0.5, 0.0);
+  velFrag.set("wind", windx, 0.0);
+  velFrag.set("mouse", mx, my);
+  velFrag.set("mouseSize", mouseSize);
 
   velBuffer.dst.beginDraw(); 
   velBuffer.dst.clear();
@@ -87,6 +112,8 @@ void draw() {
   posFrag.set("velBuffer", velBuffer.getSrcBuffer());
   posFrag.set("worldResolution", (float) width, (float) height);
   posFrag.set("maxVel", maxVel);
+  posFrag.set("mouse", mx, my);
+  posFrag.set("mouseSize", mouseSize);
 
   posBuffer.dst.beginDraw(); 
   posBuffer.dst.clear();
@@ -103,8 +130,9 @@ void draw() {
 
   shader(psh);
   shape(particles);
-  resetShader();
 
+  
+  resetShader();
   //debug display
   float s = 0.25;
   float h = 40;
@@ -123,9 +151,10 @@ void draw() {
     int y = (i-x) / 3;
     text(name[i], x * posBuffer.dst.width *s + 10, y * height + 20);
   }
-
+  textAlign(RIGHT, CENTER);
+  text("Number of particles: "+ posBuffer.dst.width * posBuffer.dst.height, width - 140, 20);
   showFPS();
-  noLoop();
+  //noLoop();
 }
 
 void keyPressed() {
@@ -201,6 +230,8 @@ PVector[] getRandomData(int w, int h, int loopPI) {
     float r = midRadius + noised * minRadius + sin(t * loopPI) * (midRadius * noised) + random(-1, 1) * minRadius;
     float nx = width/2 + cos(t) * r;
     float ny = height/2 + sin(t) * r;
+    //nx = random(width);
+    //ny = random(height);
     data[i] = new PVector(nx / (float)width, ny/(float)height);
   }
 

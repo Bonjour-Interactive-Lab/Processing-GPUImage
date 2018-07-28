@@ -250,7 +250,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
   - [x] Accentuation
   - [x] ProcessHueSegmentation
   - [x] Kinect Depth IntToRGBA
-  - [ ] 2D GPU physics engine
+  - [x] 2D GPU physics engine
   - [ ] 3D GPU physics engine
 - [ ] Procedural
 - [x] RGBA Encoding
