@@ -52,16 +52,18 @@ void setup() {
   println("Scene has: "+(encodedPosBuffer.width * encodedPosBuffer.height)/ VERT_CMP_COUNT+" particles");
   println("Scene has: "+(encodedPosBuffer.width/ VERT_CMP_COUNT * encodedPosBuffer.height)+" particles");
   println("Buffer res: "+encodedPosBuffer.width+"×"+encodedPosBuffer.height);
+  println("Buffer res: "+posBuffer.dst.width+"×"+posBuffer.dst.height);
 
   encodedPosBuffer.save("test.png");
 }
 
 void draw() {
   background(20);
-
+  float mx = norm(mouseX, 0, width);
+  res = mx * (encodedPosBuffer.width * encodedPosBuffer.height);
   //Bind varibales & buffers to the particles system shader
   psh.set("posBuffer", encodedPosBuffer);
-
+  psh.set("res", res);
   shader(psh);
   shape(particles);
   resetShader();
@@ -81,6 +83,8 @@ void draw() {
   noStroke();
   fill(20);
   rect(0, 0, width, h);
+  fill(0.25 * 255, 0.5 * 255, 0.75 * 255);
+  rect(0, 0, h, h);
   fill(240);
   textAlign(LEFT, CENTER);
   textSize(14);
@@ -126,9 +130,12 @@ void init(int w, int h) {
   particles.stroke(255);
   for (int i=0; i<nbParticles; i++) {
     float pindex = i * VERT_CMP_COUNT;
-   // println(i, pindex);
+    // println(i, pindex);
+    //float x = i % w;//encodedPosBuffer.width;
+    //float y = (i - x) / w;//encodedPosBuffer.width;
     float x = pindex % encodedPosBuffer.width;
     float y = (pindex - x) / encodedPosBuffer.width;
+
     //decomment this lines if you want to see the color of each particle as its index
     double normi =(double)i / (double)nbParticles;
     int indexColor = fp.doubleToARGB32(normi);
@@ -147,9 +154,12 @@ void init(int w, int h) {
   particles.endShape();
   psh.set("worldResolution", 1000.0, 1000.0, 1000.0);
   psh.set("bufferResolution", (float)encodedPosBuffer.width, (float)encodedPosBuffer.height);
+
+  println(0.25 * 255, 0.5 * 255, 0.75 * 255);
 }
 
 float[] getPosData(int w, int h) {
+  println(w, h);
   /**
    * define layout for interleaved VBO
    * xyzwrgbaxyzwrgbaxyzwrgba...
@@ -195,10 +205,15 @@ float[] getPosData(int w, int h) {
     float ex = x * 0.5 + 0.5;
     float ey = y * 0.5 + 0.5;
     float ez = z * 0.5 + 0.5;
-
+    /*
     posInterleavedPosData[i * VERT_CMP_COUNT + 0] = ex;
-    posInterleavedPosData[i * VERT_CMP_COUNT + 1] = ey;
-    posInterleavedPosData[i * VERT_CMP_COUNT + 2] = ez;
+     posInterleavedPosData[i * VERT_CMP_COUNT + 1] = ey;
+     posInterleavedPosData[i * VERT_CMP_COUNT + 2] = ez;
+     */
+    // test step 2 : encode color
+    posInterleavedPosData[i * VERT_CMP_COUNT + 0] = 0.25;
+    posInterleavedPosData[i * VERT_CMP_COUNT + 1] = 0.5;
+    posInterleavedPosData[i * VERT_CMP_COUNT + 2] = 0.75;
   }
 
   return posInterleavedPosData;
