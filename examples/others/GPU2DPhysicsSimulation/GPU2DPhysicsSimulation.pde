@@ -1,5 +1,5 @@
 /**
- * This example shows how to us Vec2Packing in order to create a full GPU particle physics
+ * This example shows how to use Vec2Packing in order to create a full GPU 2D particles physics system
  * Based on Chris Wellons article : https://nullprogram.com/blog/2014/06/29/
  * See shaders code for more detail on GPU side
  * --
@@ -13,7 +13,7 @@ float res = 1.5;
 Vec2Packing vp;
 FloatPacking fp;
 PImage encodedPosBuffer, encodedVelBuffer, encodedMassBuffer, encodedMaxVelBuffer;
-PingPongBuffer posBuffer, velBuffer, massBuffer;
+PingPongBuffer posBuffer, velBuffer;
 PShader posFrag, velFrag;
 
 float windx;
@@ -24,6 +24,7 @@ PShader psh;
 String[] name = {"Position Buffer", "Velocity Buffer", "Mass buffer", "Max Velocity buffer"};
 
 void settings() {
+  //we use the P3D capabilities even if th particle system is 2D based
   size(1280, 720, P3D);
 }
 
@@ -56,7 +57,7 @@ void draw() {
     init(int(width/res), int(height/res));
   }
 
-  background(20, 1);
+  background(20);
   /*fill(20, 10);
   noStroke();
   rect(0, 0, width, height);*/
@@ -122,7 +123,9 @@ void draw() {
 
   //bind variables & buffers to the position buffer
   posFrag.set("velBuffer", velBuffer.getSrcBuffer());
+  posFrag.set("maxVelBuffer", encodedMaxVelBuffer);
   posFrag.set("worldResolution", (float) width, (float) height);
+  posFrag.set("minVel", minVel);
   posFrag.set("maxVel", maxVel);
   posFrag.set("mouse", mx, my);
   posFrag.set("mouseSize", mouseSize);
@@ -178,7 +181,7 @@ void keyPressed() {
   init(int(width/res), int(height/res));
 }
 
-void drawTextureIntoPingPongBuffer(PingPongBuffer ppb, PImage tex, PShader sh) { 
+void drawTextureIntoPingPongBuffer(PingPongBuffer ppb, PImage tex) { 
   /**
    * IMPORTANT : pre-multiply alpha is not supported on processing 3.X (based on 3.4)
    * Here we use a trick in order to render our image properly into our pingpong buffer
@@ -211,8 +214,8 @@ void init(int w, int h) {
   velBuffer.setFiltering(3);
   velBuffer.enableTextureMipmaps(false);
 
-  drawTextureIntoPingPongBuffer(velBuffer, encodedVelBuffer, velFrag);
-  drawTextureIntoPingPongBuffer(posBuffer, encodedPosBuffer, posFrag);
+  drawTextureIntoPingPongBuffer(velBuffer, encodedVelBuffer);
+  drawTextureIntoPingPongBuffer(posBuffer, encodedPosBuffer);
 
   //create grid of particles
   particles = createShape();
@@ -245,7 +248,7 @@ PVector[] getRandomData(int w, int h, int loopPI) {
 
     float t = norm(i, 0, data.length) * TWO_PI;
     float noised = noise(x * 0.001, y * 0.001, i*0.001);
-    float noiseSwitch = noised * 2.0 - 1.0;
+    //float noiseSwitch = noised * 2.0 - 1.0;
     float r = midRadius + noised * minRadius + sin(t * loopPI) * (midRadius * noised) + random(-1, 1) * minRadius;
     float nx = width/2 + cos(t) * r;
     float ny = height/2 + sin(t) * r;
@@ -278,7 +281,7 @@ float[] getMassData(int w, int h) {
 
 void showFPS() {
   int rfps = round(frameRate);
-  float hueFPS = map(rfps, 0, 60, 0, 120);
+  float hueFPS = map(rfps, 0, 300, 0, 120);
   pushStyle();
   colorMode(HSB, 360, 1.0, 1.0);
   fill(hueFPS, 1.0, 1.0);

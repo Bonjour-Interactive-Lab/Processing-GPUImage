@@ -48,7 +48,6 @@ import processing.core.*;
 *	vec4 rgba = v * efactor.rgba;
 *	rgba.gba = fract(rgba.gba);
 *	rgba.rgb -= rgba.gba * mask;
-*	rgba.a = 1.0;
 *	return rgba;
 *}
 *

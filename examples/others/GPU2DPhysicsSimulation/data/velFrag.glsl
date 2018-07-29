@@ -87,10 +87,11 @@ void main() {
 	//We compute the reflect vector. By these we do not have a  straight line bounce
 	// R = 2 * N * (N . L) -L
 	vec2 N = normalize(LtoM * -1.0);
-	vec2 L = normalize(vel * -1.0);
-	vec2 R = 2.0 * N * dot(N, L) - L;
+	vec2 I = vel; //incidence vector
+	vec2 R = reflect(vel, N); //reflection algorithm
+	//vec2 R = I - 2.0 * dot(N, I) * N; //reflection algorithm
 	//we reduce the bounce factor
-	R *= 0.1;
+	R *= 0.15;
 
 	//we define the bounce condition
 	vel =  R * (1.0 - edgeObstacle) + vel * (edgeObstacle);
