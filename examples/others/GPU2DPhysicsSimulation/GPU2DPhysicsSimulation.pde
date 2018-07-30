@@ -49,6 +49,7 @@ void setup() {
   println("Buffer res: "+encodedPosBuffer.width+"×"+encodedPosBuffer.height);
   
   //noCursor();
+  
 }
 
 void draw() { 
