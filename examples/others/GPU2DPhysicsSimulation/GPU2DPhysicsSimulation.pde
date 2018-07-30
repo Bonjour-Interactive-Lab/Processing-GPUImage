@@ -63,16 +63,16 @@ void draw() {
   rect(0, 0, width, height);*/
   
   //set the obstacle position (mx, my)
-  float maxtime = 200;
+  float maxtime = 300 * 1.5;
   float gamma = (frameCount % maxtime) / maxtime;
   float mouseSize = 75.0;
-  float radius = height/2 * 0.75;
+  float radius = height/2 * 0.95;
   float mx = width/2 + cos(-HALF_PI + gamma * TWO_PI) * radius;
   float my = height/2 + sin(-HALF_PI + gamma * TWO_PI) * radius;
   
   //set the particles system variable (speed, force...)
-  float minVel = 4.0;
-  float maxVel = 8.0;
+  float minVel = 3.0;
+  float maxVel = 6.0;
   float minMass = 4.0;
   float maxMass = 10.0;
   float len = 0.25;
@@ -152,7 +152,7 @@ void draw() {
   //debug display
   float s = 0.15;
   float h = 40;
-  fill(0);
+  fill(204);
   noStroke();
   rect(0, h,  posBuffer.dst.width * s * 4,  posBuffer.dst.height * s);
   image(posBuffer.getDstBuffer(), 0, h, posBuffer.dst.width * s, posBuffer.dst.height * s);
@@ -173,6 +173,8 @@ void draw() {
   }
   textAlign(RIGHT, CENTER);
   text("Number of particles: "+ posBuffer.dst.width * posBuffer.dst.height, width - 140, 20);
+  textAlign(RIGHT, TOP);
+  text(GPUImage.GPUINFO.getGpuInfos(),  width - 140, 40);
   showFPS();
   //noLoop();
 }
