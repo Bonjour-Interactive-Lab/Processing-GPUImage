@@ -1,3 +1,4 @@
+
 #version 150
 #ifdef GL_ES
 precision highp float;
@@ -15,12 +16,12 @@ uniform mat4 projection;
 uniform mat4 modelview;
 
 uniform sampler2D posBuffer;
-uniform vec3 worldResolution;
 uniform vec2 bufferResolution;
-uniform float  res;
+uniform vec2 gridResolution;
 
 
 in vec4 position;
+in vec3 normal;
 in vec4 color;
 in vec2 offset;
 
@@ -32,44 +33,10 @@ float decodeRGBA32(vec4 rgba){
 	return dot(rgba, dfactor.rgba);
 }
 
-vec3 getData(vec2 position, vec2 resolution, sampler2D dataTex){
-	int i = int(ceil(position.x + position.y * resolution.x));
-	int ix = i + 0;
-	int iy = i + 1;
-	int iz = i + 2;
-
-	//transform index of XYZ component to uv coordinate
-	int ux = int(floor(mod(ix, resolution.x)));
-	int vx = int(floor((ix - ux) / resolution.x));
-
-	int uy = int(floor(mod(iy, resolution.x)));
-	int vy = int(floor((iy - uy) / resolution.x));
-
-	int uz = int(floor(mod(iz, resolution.x)));
-	int vz = int(floor((iz - uz) / resolution.x));
-
-	vec2 uvx = vec2(ux, vx) / resolution;
-	vec2 uvy = vec2(uy, vy) / resolution;
-	vec2 uvz = vec2(uz, vz) / resolution;
-
-	//get RGBA encoded data
-	vec4 xRGBA = texture2D(dataTex, uvx);
-	vec4 yRGBA = texture2D(dataTex, uvy);
-	vec4 zRGBA = texture2D(dataTex, uvz);
-
-	//decode data and remap them from [0, 1] to [-1, 1]
-	float x = (decodeRGBA32(xRGBA) * 2.0 - 1.0);
-	float y = (decodeRGBA32(yRGBA) * 2.0 - 1.0);
-	float z = (decodeRGBA32(zRGBA) * 2.0 - 1.0); 
-
-	//return position into world space
-	return vec3(x, y, z) * worldResolution;
-}
-
 void main(){
 	//debug color
-	int pindex = int(floor(position.x + position.y * bufferResolution.x));
-	int index = pindex / 3;
+	//int pindex = int(floor(position.x + position.y * bufferResolution.x));
+	//int index = pindex / 3;
 /*
 	int modulo = int(mod(index, 3));
 	float stepX = 1.0 - step(1.0, float(modulo));//if mod == 0.0 : 1.0 : 0.0
@@ -108,45 +75,49 @@ void main(){
     float z = cos(phi) * R;
 
     vec4 tpos = vec4(x, y, z, 1.0);
-*/
-    /**
-    * Step 2 : encode simple value as color (1.0, 1.0, 1.0)
-    */
-
-	float stepper = step(res, float(pindex)) * 0.5 + 0.5;
-
-	float ppindex = (position.x + position.y * bufferResolution.x); //32.0 has been set as constant from P5 (w,h of partciles system)
-    float ix = ppindex;
-	float iy = ppindex + 1;
-	float iz = ppindex + 2;
+*/	
+	
+	//this uv is useful when we have the same amount of particles than buffer size
+	vec2 semiTexel = (vec2(1.0) / bufferResolution) * vec2(0.5, 0.5);
+	vec2 ouv = position.xy / (bufferResolution.xy - vec2(1.0)); //we had a semi pixel in order to get rid a the interpolation at edges
+	vec4 rgba = texture2D(posBuffer, ouv);
 
 
-    float ux = mod(ix, bufferResolution.x);
-	float vx = (ix - ux) / bufferResolution.x;
+	vec2 uv0 = position.xy/gridResolution;
+	
+	float i0 = ceil((position.x + position.y * gridResolution.x)) * 3.0 + 0.0;
+	float i1 = i0 + 1;
+	float i2 = i0 + 2;
 
-	float uy = mod(iy, bufferResolution.x);
-	float vy = (iy - uy) / bufferResolution.x;
+	float ur = ceil(mod(i0, bufferResolution.x));
+	float vr = ceil((i0 - ur) / bufferResolution.x);
 
-	float uz = mod(iz, bufferResolution.x);
-	float vz = (iz - uz) / bufferResolution.x;
+	float ug = ceil(mod(i1, bufferResolution.x));
+	float vg = ceil((i1 - ug) / bufferResolution.x);
 
-	vec2 uvx = vec2(ux, vx) / bufferResolution;
-	vec2 uvy = vec2(uy, vy) / bufferResolution;
-	vec2 uvz = vec2(uz, vz) / bufferResolution;
+	float ub = ceil(mod(i2, bufferResolution.x));
+	float vb = ceil((i2 - ub) / bufferResolution.x);
 
-	//get RGBA encoded data
-	vec4 xRGBA = texture2D(posBuffer, uvx);
-	vec4 yRGBA = texture2D(posBuffer, uvy);
-	vec4 zRGBA = texture2D(posBuffer, uvz);
-
-	//decode data and remap them from [0, 1] to [-1, 1]
-	float r = decodeRGBA32(xRGBA); //seems to be 0.25 and need to be 0.25
-	float g = 0.5;//decodeRGBA32(yRGBA); //seems to be 0.25 and need to be 0.5
-	float b = 0.75;//decodeRGBA32(zRGBA); //seems to be 0.5 and need to be 0.75
+	//we need to offset the buffer res by -1 in order to get the first pixel 0
+	vec2 uvr = vec2(ur, vr) / (bufferResolution - vec2(1.0));
+	vec2 uvg = vec2(ug, vg) / (bufferResolution - vec2(1.0));
+	vec2 uvb = vec2(ub, vb) / (bufferResolution - vec2(1.0));
 
 
-	vec4 clip = projection * modelview * position;
+	vec4 ered = texture2D(posBuffer, uvr, 0.0);
+	vec4 egreen = texture2D(posBuffer, uvg, 0.0);
+	vec4 eblue = texture2D(posBuffer, uvb, 0.0);
+
+	float red = decodeRGBA32(ered);
+	float green = decodeRGBA32(egreen);
+	float blue = decodeRGBA32(eblue);
+
+	vec3 index = vec3(i0 / (gridResolution.x * gridResolution.y));
+
+
+	vec4 clip = projection * modelview * vec4(ur, vr, 0.0, 1.0);//vec4(uvr, 0.0, 1.0);//position;
 	gl_Position = clip + projection * vec4(offset.xy, 0, 0);
 
-	vertColor =	vec4(r, g, b, 1.0) * stepper;
+	vertColor = vec4(red, green, blue, 1.0);// + vec4(position.xy / bufferResolution.xy, 0.0, 1.0);//vec4(uvr / bufferResolution, 0.0, 1.0);//vec4(uv0, 0.0, 1.0);
+
 }
