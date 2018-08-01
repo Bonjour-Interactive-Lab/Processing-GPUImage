@@ -49,7 +49,7 @@ void main(){
 	vec2 uv = vec2(x, y) / bufferResolution;
 	vertTexCoord = vec4(uv, 0.0, 1.0);
 	*/
-	vertTexCoord.xy = (position.xy / (bufferResolution.xy - vec2(1.0)));
+	vertTexCoord.xy = (position.xy / bufferResolution.xy);
 	vertTexCoord.zw = vec2(0.0, 1.0);
 
    	//get the data into texture
