@@ -3,9 +3,9 @@ Processing library for high-performance image computing and GPGPU computing (GLS
 
 | Plateforme : 	| Status:		|
 |---------------|---------------|
-| **`Windows`** | ![status](https://img.shields.io/badge/build-prerelease-green.svg?longCache=true&style=flat&colorA=grey&colorB=ffd800) |
-| **`OSX`** 	| ![status](https://img.shields.io/badge/build-prerelease-green.svg?longCache=true&style=flat&colorA=grey&colorB=ffd800) |
-| **`Linux`** 	| ![status](https://img.shields.io/badge/build-prerelease-green.svg?longCache=true&style=flat&colorA=grey&colorB=ffd800) |
+| **`Windows`** | ![status](https://img.shields.io/badge/build-prerelease-green.svg?longCache=true&style=flat&colorA=grey&colorB=f48c42) |
+| **`OSX`** 	| ![status](https://img.shields.io/badge/build-prerelease-green.svg?longCache=true&style=flat&colorA=grey&colorB=f48c42) |
+| **`Linux`** 	| ![status](https://img.shields.io/badge/build-prerelease-green.svg?longCache=true&style=flat&colorA=grey&colorB=f48c42) |
 
 ## Features
 
