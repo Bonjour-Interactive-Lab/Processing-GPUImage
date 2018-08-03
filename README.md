@@ -3,9 +3,9 @@ Processing library for high-performance image computing and GPGPU computing (GLS
 
 | Plateforme : 	| Status:		|
 |---------------|---------------|
-| **`Windows`** | ![status](https://img.shields.io/badge/build-wip-green.svg?longCache=true&style=flat&colorA=grey&colorB=ffd800) |
-| **`OSX`** 	| ![status](https://img.shields.io/badge/build-wip-green.svg?longCache=true&style=flat&colorA=grey&colorB=ffd800) |
-| **`Linux`** 	| ![status](https://img.shields.io/badge/build-wip-green.svg?longCache=true&style=flat&colorA=grey&colorB=ffd800) |
+| **`Windows`** | ![status](https://img.shields.io/badge/build-prerelease-green.svg?longCache=true&style=flat&colorA=grey&colorB=ffd800) |
+| **`OSX`** 	| ![status](https://img.shields.io/badge/build-prerelease-green.svg?longCache=true&style=flat&colorA=grey&colorB=ffd800) |
+| **`Linux`** 	| ![status](https://img.shields.io/badge/build-prerelease-green.svg?longCache=true&style=flat&colorA=grey&colorB=ffd800) |
 
 ## Features
 
@@ -79,7 +79,8 @@ This methods is a test methods only. We need to make a benchmark in order to def
 
 - [ ] independant ping pong buffer (custom JOGL implementation) for Floating Point Texture
 
-- [ ] add smooth to PPB
+- [x] add smooth to PPB
+- [ ] Add a custom PGraphicsOGL implementation using nearest filtering, warping... see #28 and #26
 
 #### Others
 - [x] add filtering linear :
@@ -178,7 +179,6 @@ This methods is a test methods only. We need to make a benchmark in order to def
 * * [x] clean shader
 - [ ] Alpha Matte (sprite mode)
 - [x] Chroma key
-  - [ ] Quid add chromaRamp for hue segmentation (?)
 
 #### Procedural extends GPUImageBaseEffects
 - [ ] Noise & Random
@@ -251,7 +251,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
   - [x] ProcessHueSegmentation
   - [x] Kinect Depth IntToRGBA
   - [x] 2D GPU physics engine
-  - [ ] 3D GPU physics engine
+  - [ ] 3D GPU physics engine (broken)
 - [ ] Procedural
 - [x] RGBA Encoding
 - [x] Utils
