@@ -44,7 +44,6 @@ void draw() {
   background(20);
   float value = norm(mouseX, 0, width) * 100;
   name[2] = "filter: "+blending[count];
-  println(blending.length);
   
   switch(count) {
   case 0 : 
