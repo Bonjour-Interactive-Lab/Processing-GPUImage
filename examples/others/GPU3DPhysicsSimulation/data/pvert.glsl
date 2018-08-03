@@ -20,6 +20,8 @@ uniform vec2 bufferResolution;
 uniform vec2 gridResolution;
 uniform vec3 worldResolution;
 
+uniform float debug;
+
 
 in vec4 position;
 in vec3 normal;
@@ -53,18 +55,18 @@ float decodeRGBA24(vec3 rgb){
 
 vec3 getData(vec2 screenPosition, vec2 gridResolution, vec2 samplerResolution, sampler2D dataSampler){
 	//vec2 uv0 = position.xy/gridResolution;	
-	float i0 = ceil((screenPosition.x + screenPosition.y * gridResolution.x)) * 3.0 + 0.0;
-	float i1 = i0 + 1;
-	float i2 = i0 + 2;
+	float i0 = ((screenPosition.x + screenPosition.y * gridResolution.x) * 3.0 + 0.0);
+	float i1 = (i0 + 1.0);
+	float i2 = (i0 + 2);
 
-	float ux = floor(mod(i0, samplerResolution.x));
-	float vx = floor((i0 - ux) / samplerResolution.x);
+	float ux = (mod(i0, samplerResolution.x));
+	float vx = ((i0 - ux) / samplerResolution.x);
 
-	float uy = floor(mod(i1, samplerResolution.x));
-	float vy = floor((i1 - uy) / samplerResolution.x);
+	float uy = (mod(i1, samplerResolution.x));
+	float vy = ((i1 - uy) / samplerResolution.x);
 
-	float uz = floor(mod(i2, samplerResolution.x));
-	float vz = floor((i2 - uz) / samplerResolution.x);
+	float uz = (mod(i2, samplerResolution.x));
+	float vz = ((i2 - uz) / samplerResolution.x);
 
 	//we need to offset the buffer res by -1 in order to get the first pixel 0
 	vec2 uvx = vec2(ux, vx) / (samplerResolution - vec2(1.0));
@@ -85,12 +87,11 @@ void shufflePos(inout vec3 pos){
 void main(){
 
 	vec3 posData = getData(position.xy, gridResolution, bufferResolution, posBuffer) * 2.0 - 1.0;
-	//posData *= worldResolution;
+	posData *= worldResolution;
 	shufflePos(posData);
 
-	vec4 clip = projection * modelview * vec4(posData * worldResolution.x, 1.0);
+	vec4 clip = projection * modelview * vec4(posData, 1.0);
 	gl_Position = clip + projection * vec4(offset.xy, 0, 0);
 
 	vertColor = color;
-
 }

@@ -13,9 +13,14 @@ const float mask = 1.0/256.0;
 
 uniform sampler2D texture;
 uniform sampler2D velBuffer;
+uniform sampler2D maxVelBuffer;
+uniform vec2 singleBufferResolution;
 uniform vec2 bufferResolution;
 uniform vec3 worldResolution = vec3(1.0);
 uniform float maxVel;
+uniform float minVel;
+uniform vec3 obstacle;
+uniform float obstacleSize;
 
 in vec4 vertColor;
 in vec4 vertTexCoord;
@@ -113,14 +118,30 @@ vec3 getData(vec2 uvs[6], sampler2D samplerData, vec4 fragmentData, vec3 is){
 	return vec3(x, y, z);
 }
 
-void main() {
+vec2 getSingleDataUV(float index, vec2 samplerResolution){
+	float pindex = floor(index / 3.0);
 
-	vec4 prevPosRGBA = texture2D(texture, vertTexCoord.xy);
-	vec4 velRGBA = texture2D(velBuffer, vertTexCoord.xy);
+	float u = round(mod(pindex, samplerResolution.x));
+	float v = round((pindex - u) / samplerResolution.x);
+
+	return vec2(u, v)/samplerResolution;
+}
+
+
+void main() {
+	/**
+	 * The XYZ seems shuffled into ZXY. its messed up
+	 */
 
 	//compute the index of the fragment on the buffer
 	vec2 screenCoord = vertTexCoord.xy * bufferResolution;
 	float i0 = (screenCoord.x + screenCoord.y * bufferResolution.x);
+	vec2 singleDataUV = getSingleDataUV(i0, singleBufferResolution);
+
+	vec4 prevPosRGBA = texture2D(texture, vertTexCoord.xy);
+	vec4 velRGBA = texture2D(velBuffer, vertTexCoord.xy);
+	vec4 maxVelRGBA = texture2D(maxVelBuffer, singleDataUV);
+
 /*
 	//check the type of the fragment using %3 where 0 = x, 1 = y and z = 2
 	float modi = floor(mod(i0, 3.0));
@@ -186,15 +207,11 @@ void main() {
 	getInterleavedXYZUV(uvs, i0, bufferResolution);
 
 	//get all the samplers per fragment
+	float edgeVel = mix(minVel, maxVel,decodeRGBA24(maxVelRGBA.rgb));
 	vec3 loc = (getData(uvs, texture, prevPosRGBA, is) * 2.0 - 1.0) * worldResolution;
-	vec3 vel = (getData(uvs, velBuffer, velRGBA, is) * 2.0 - 1.0) * maxVel;
+	vec3 vel = (getData(uvs, velBuffer, velRGBA, is) * 2.0 - 1.0) * edgeVel;
 	
 	loc += vel;
-	//vec2 LtoM = loc - mouse;
-	//float d = length(LtoM);
-	//float edgeObstacle = 1.0 - step(mouseSize * 0.5, d);
-	//vec2 edgePos = mouse + normalize(LtoM) * (mouseSize * 0.5);
-	//loc = edgePos * edgeObstacle + loc * (1.0 - edgeObstacle);
 
 	//edge
 	loc /= worldResolution - vec3(0.0, 0.0, 0.0); //we reduce the world position of 0.1 in order to avoid infinite bounce on the ground

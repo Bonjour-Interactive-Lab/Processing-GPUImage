@@ -13,12 +13,19 @@ const float mask = 1.0/256.0;
 
 uniform sampler2D texture;
 uniform sampler2D posBuffer;
+uniform sampler2D maxVelBuffer;
+uniform sampler2D massBuffer;
+uniform vec2 singleBufferResolution;
 uniform vec2 bufferResolution;
 uniform vec3 worldResolution = vec3(1.0);
 uniform vec3 gravity = vec3(0.0, 0.1, 0.0);
 uniform vec3 wind = vec3(0.0);
 uniform float maxVel;
+uniform float minVel;
 uniform float maxMass;
+uniform float minMass;
+uniform vec3 obstacle;
+uniform float obstacleSize;
 
 in vec4 vertColor;
 in vec4 vertTexCoord;
@@ -117,13 +124,33 @@ vec3 getData(vec2 uvs[6], sampler2D samplerData, vec4 fragmentData, vec3 is){
 	return vec3(x, y, z);
 }
 
+vec2 getSingleDataUV(float index, vec2 samplerResolution){
+	float pindex = floor(index / 3.0);
+
+	float u = round(mod(pindex, samplerResolution.x));
+	float v = round((pindex - u) / samplerResolution.x);
+
+	return vec2(u, v)/samplerResolution;
+}
+
 void main() {
-	vec4 prevVelRGBA = texture2D(texture, vertTexCoord.xy);
-	vec4 posRGBA = texture2D(posBuffer, vertTexCoord.xy);
+	/**
+	 * The XYZ seems shuffled into ZXY. its messed up
+	 */
 
 	//compute the index of the fragment on the buffer
 	vec2 screenCoord = vertTexCoord.xy * bufferResolution;
 	float i0 = ceil(screenCoord.x + screenCoord.y * bufferResolution.x);
+	vec2 singleDataUV = getSingleDataUV(i0, singleBufferResolution);
+
+	vec4 prevVelRGBA = texture2D(texture, vertTexCoord.xy);
+	vec4 posRGBA = texture2D(posBuffer, vertTexCoord.xy);
+	vec4 maxVelRGBA = texture2D(maxVelBuffer, singleDataUV);
+	vec4 massRGBA = texture2D(massBuffer, singleDataUV);
+
+	float mass = mix(minMass, maxMass, decodeRGBA24(massRGBA.rgb));
+	float edgeVel = mix(minVel, maxVel,decodeRGBA24(maxVelRGBA.rgb));
+
 
 	//check the type of the fragment using %3 where 0 = x, 1 = y and z = 2
 	vec3 is = getInterleavedXYZ(i0);
@@ -133,9 +160,8 @@ void main() {
 
 	//get all the samplers per fragment
 	vec3 acc = vec3(0.0);
-	vec3 vel = (getData(uvs, texture, prevVelRGBA, is) * 2.0 - 1.0) * maxVel;
+	vec3 vel = (getData(uvs, texture, prevVelRGBA, is) * 2.0 - 1.0) * edgeVel;
 	vec3 loc = (getData(uvs, posBuffer, posRGBA, is) * 2.0 - 1.0) * worldResolution;
-	float mass = maxMass;
 
 	//define friction
 	float coeff = 0.35;
@@ -146,11 +172,34 @@ void main() {
 	acc += friction / mass;
 	acc += gravity;
 
+
 	//add acc to vel
 	vel += acc;
-	vel = clamp(vel, -vec3(maxVel), vec3(maxVel)); //clamp velocity to max force
+	//shuffle force because it's messed up
+	//vel += acc.yzx;//vec3(0.0, 0.0, 1.0); // x = z; y = x; z = y
+	vel = clamp(vel, -vec3(edgeVel), vec3(edgeVel)); //clamp velocity to max force
+	
 
+	
 	loc += vel;
+
+/*** BUG!!!!!!
+	//we compute the distance between the mouse and the particle in order to define if it bounce on it
+	vec3 LtoM = vec3(0.0) - loc;
+	float d = length(LtoM);
+	float edgeObstacle = step(50.0 * 0.5, d) * 2.0 - 1.0;
+	//We compute the reflect vector. By these we do not have a  straight line bounce
+	// R = 2 * N * (N . L) -L
+	vec3 N = normalize(LtoM * -1.0);
+	vec3 I = vel; //incidence vector
+	vec3 R = reflect(vel, N); //reflection algorithm
+	//vec2 R = I - 2.0 * dot(N, I) * N; //reflection algorithm
+	//we reduce the bounce factor
+	R *= 0.15;
+
+	//we define the bounce condition
+	vel =  R * (1.0 - edgeObstacle) + vel * (edgeObstacle);
+*/
 
 	//edge condition
 	float edgeXL = 1.0 - step(-worldResolution.x, loc.x);// if x < 0 : 1.0 else 0.0
@@ -166,7 +215,7 @@ void main() {
 	vel.y *= edgeY;
 	vel.z *= edgeZ;
 
-	vel /= maxVel; //we normalize velocity
+	vel /= edgeVel; //we normalize velocity
 	vel = (vel * 0.5) + 0.5; //reset it from[-1, 1] to [0.0, 1.0]
 	vel = clamp(vel, 0, 1.0); //we clamp the velocity between [0, 1] (this is a security)
 
