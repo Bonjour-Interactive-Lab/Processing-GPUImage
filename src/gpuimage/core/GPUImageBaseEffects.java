@@ -42,7 +42,7 @@ abstract class GPUImageBaseEffects implements GPUImageInterface, PConstants{
 		if(this.papplet == null) {
 			this.papplet = papplet;
 		}
-		this.ppb = new PingPongBuffer(this.papplet, width, height);
+		this.ppb = new PingPongBuffer(this.papplet, width, height, PConstants.P2D);
 	}
 	
 	/**Load shader and add it to the hashmap*/
