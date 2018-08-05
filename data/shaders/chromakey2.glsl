@@ -1,4 +1,3 @@
-#version 150
 #ifdef GL_ES
 precision mediump float;
 precision mediump int;
@@ -61,8 +60,8 @@ void main(){
 	vec2 uv = vertTexCoord.xy; 
 	vec2 iuv = vec2(uv.x, 1.0 - uv.y);
 
-	vec3 tex = texture2D(texture, uv * (1 - basei) + iuv * basei).rgb;
-	vec3 texBase = texture2D(base, uv * (1 - srci) + iuv * srci).rgb;
+	vec3 tex = texture(texture, uv * (1 - basei) + iuv * basei).rgb;
+	vec3 texBase = texture(base, uv * (1 - srci) + iuv * srci).rgb;
 	float ckey = smoothstep(0.0, 1.0, chromaKey(tex, keyColor));
 	float inc = smoothstep(threshold, 1.0, ckey);
 	/*

@@ -1,4 +1,3 @@
-#version 150
 #ifdef GL_ES
 precision mediump float;
 precision mediump int;
@@ -21,7 +20,7 @@ void main(){
 	float v = floor(vertTexCoord.y / dy) * dy;
 
 	vec2 uv = vec2(u, v);
-	vec4 tex = texture2D(texture, uv);
+	vec4 tex = texture(texture, uv);
 
 	fragColor = tex;
 }

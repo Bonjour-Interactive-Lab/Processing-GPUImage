@@ -1,4 +1,3 @@
-#version 150
 #ifdef GL_ES
 precision mediump float;
 precision mediump int;
@@ -24,14 +23,14 @@ in vec4 vertTexCoord;
 out vec4 fragColor;
 
 vec4 textureLuma(sampler2D tex, vec2 uv, float sobelScale){
-	vec3 rgb = texture2D(tex, uv).rgb;
+	vec3 rgb = texture(tex, uv).rgb;
 	float lumadef = dot(rgb, luma * sobelScale);
 	return vec4(vec3(lumadef), 1.0);
 }
 
 void main(){
 	vec2 uv = vertTexCoord.xy;
-	vec4 tex = texture2D(texture, uv);
+	vec4 tex = texture(texture, uv);
 	vec2 uvinc = vec2(1.0) / resolution.xy;
 
 	vec4 sobelh = textureLuma(texture, uv + vec2(-1.0,  1.0) * uvinc, sobelxScale) * SOBELX[0] +

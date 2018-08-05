@@ -1,4 +1,3 @@
-#version 150
 #ifdef GL_ES
 precision mediump float;
 precision mediump int;
@@ -14,11 +13,11 @@ in vec4 vertTexCoord;
 out vec4 fragColor;
 
 #define scale(i)		scale = 1.0 - (blurSize * distToCenter) * (float(i) / float(octave - 1))
-#define blur(i)			scale(i); blur += vec4(texture2D(texture, uv * scale + blurOrigin).rgb, 1.0)
+#define blur(i)			scale(i); blur += vec4(texture(texture, uv * scale + blurOrigin).rgb, 1.0)
 
 vec4 radialBlur(vec2 uv, vec2 texelSize, float blurSize, vec2 blurOrigin)
 {
-	vec4 focus = texture2D(texture, blurOrigin);
+	vec4 focus = texture(texture, blurOrigin);
 	vec4 blur = vec4(0.0, 0.0, 0.0, 0.0);
 	float scale;
 	int octave = 20;

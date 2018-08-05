@@ -1,4 +1,3 @@
-#version 150
 #ifdef GL_ES
 precision mediump float;
 precision mediump int;
@@ -57,7 +56,7 @@ vec3 changeSaturation(vec3 color, float saturation)
 void main(){
 	vec2 uv = vertTexCoord.xy; 
 
-	vec3 tex = texture2D(texture, uv).rgb;
+	vec3 tex = texture(texture, uv).rgb;
 	float ckey = smoothstep(0.0, 1.0, chromaKey(tex, keyColor));
 	float inc = smoothstep(threshold, 1.0, ckey);
 	/*

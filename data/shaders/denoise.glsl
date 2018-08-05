@@ -1,4 +1,3 @@
-#version 150
 #ifdef GL_ES
 precision mediump float;
 precision mediump int;
@@ -18,7 +17,7 @@ in vec4 vertTexCoord;
 out vec4 fragColor;
 
 vec4 addAverageNeighbors(sampler2D texture, vec2 uv, vec2 ij, vec2 resolution, vec4 center){
-	vec4 samplePix = texture2D(texture, uv + ij / resolution);
+	vec4 samplePix = texture(texture, uv + ij / resolution);
 	//float weight = abs(1.0 - (ij.x + ij.y) * 0.25);
 	float weight = 1.0 - abs(dot(samplePix.rgb - center.rgb, vec3(0.25)));
 	weight = pow(weight, EXP);
@@ -27,7 +26,7 @@ vec4 addAverageNeighbors(sampler2D texture, vec2 uv, vec2 ij, vec2 resolution, v
 
 void main() {
 	vec2 uv = vertTexCoord.xy;
-	vec4 center = texture2D(texture, uv);
+	vec4 center = texture(texture, uv);
 	vec4 color = vec4(0.0);
 
 	color += addAverageNeighbors(texture, uv, vec2(-1, -1), resolution, center);

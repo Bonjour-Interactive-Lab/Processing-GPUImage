@@ -1,4 +1,3 @@
-#version 150
 #ifdef GL_ES
 precision mediump float;
 precision mediump int;
@@ -24,22 +23,22 @@ out vec4 fragColor;
 
 void main(){
 	vec2 uv = vertTexCoord.xy;
-	vec4 tex = texture2D(texture, uv);
+	vec4 tex = texture(texture, uv);
 	vec2 uvinc = vec2(1.0) / resolution.xy;
 
-	vec4 sobelh = texture2D(texture, uv + vec2(-1.0,  1.0) * uvinc) * sobelxScale * SOBELX[0] +
-				  texture2D(texture, uv + vec2(-1.0,  0.0) * uvinc) * sobelxScale * SOBELX[3] +
-				  texture2D(texture, uv + vec2(-1.0,  1.0) * uvinc) * sobelxScale * SOBELX[6] +
-				  texture2D(texture, uv + vec2( 1.0, -1.0) * uvinc) * sobelxScale * SOBELX[2] +
-				  texture2D(texture, uv + vec2( 1.0,  0.0) * uvinc) * sobelxScale * SOBELX[5] +
-				  texture2D(texture, uv + vec2( 1.0,  1.0) * uvinc) * sobelxScale * SOBELX[8];
+	vec4 sobelh = texture(texture, uv + vec2(-1.0,  1.0) * uvinc) * sobelxScale * SOBELX[0] +
+				  texture(texture, uv + vec2(-1.0,  0.0) * uvinc) * sobelxScale * SOBELX[3] +
+				  texture(texture, uv + vec2(-1.0,  1.0) * uvinc) * sobelxScale * SOBELX[6] +
+				  texture(texture, uv + vec2( 1.0, -1.0) * uvinc) * sobelxScale * SOBELX[2] +
+				  texture(texture, uv + vec2( 1.0,  0.0) * uvinc) * sobelxScale * SOBELX[5] +
+				  texture(texture, uv + vec2( 1.0,  1.0) * uvinc) * sobelxScale * SOBELX[8];
 
-	vec4 sobelv = texture2D(texture, uv + vec2(-1.0,  1.0) * uvinc) * sobelyScale * SOBELY[0] +
-				  texture2D(texture, uv + vec2(-1.0,  0.0) * uvinc) * sobelyScale * SOBELY[1] +
-				  texture2D(texture, uv + vec2(-1.0,  1.0) * uvinc) * sobelyScale * SOBELY[2] +
-				  texture2D(texture, uv + vec2( 1.0, -1.0) * uvinc) * sobelyScale * SOBELY[6] +
-				  texture2D(texture, uv + vec2( 1.0,  0.0) * uvinc) * sobelyScale * SOBELY[7] +
-				  texture2D(texture, uv + vec2( 1.0,  1.0) * uvinc) * sobelyScale * SOBELY[8];
+	vec4 sobelv = texture(texture, uv + vec2(-1.0,  1.0) * uvinc) * sobelyScale * SOBELY[0] +
+				  texture(texture, uv + vec2(-1.0,  0.0) * uvinc) * sobelyScale * SOBELY[1] +
+				  texture(texture, uv + vec2(-1.0,  1.0) * uvinc) * sobelyScale * SOBELY[2] +
+				  texture(texture, uv + vec2( 1.0, -1.0) * uvinc) * sobelyScale * SOBELY[6] +
+				  texture(texture, uv + vec2( 1.0,  0.0) * uvinc) * sobelyScale * SOBELY[7] +
+				  texture(texture, uv + vec2( 1.0,  1.0) * uvinc) * sobelyScale * SOBELY[8];
 
 	vec4 sobelEdge = sqrt(sobelh * sobelh + sobelv * sobelv);
 

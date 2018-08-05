@@ -22,7 +22,7 @@ void setup() {
   size(1200, 400, P2D);
   smooth();
   
-  ppb = new PingPongBuffer(this, width/2, height, 8); //define the width and height of the PPB
+  ppb = new PingPongBuffer(this, width/2, height, 8, P2D); //define the width and height of the PPB
 
   
   frameRate(1);

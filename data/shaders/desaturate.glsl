@@ -1,5 +1,3 @@
-
-#version 150
 #ifdef GL_ES
 precision mediump float;
 precision mediump int;
@@ -20,7 +18,7 @@ vec4 Desaturate(vec3 color, float value)
 
 void main(){
 	vec2 uv = vertTexCoord.xy;
-	vec3 tex = texture2D(texture, uv).rgb;
+	vec3 tex = texture(texture, uv).rgb;
 
 	fragColor = Desaturate(tex, desaturation);
 }

@@ -1,4 +1,3 @@
-#version 150
 uniform mat4 transform;
 uniform mat4 texMatrix;
 in vec4 vertex;

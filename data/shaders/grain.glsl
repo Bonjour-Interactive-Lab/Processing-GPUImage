@@ -1,4 +1,3 @@
-#version 150
 #ifdef GL_ES
 precision mediump float;
 precision mediump int;
@@ -31,7 +30,7 @@ vec4 addGrain(vec2 uv, float time, float grainIntensity){
 
 void main(){
 	vec2 uv = vertTexCoord.xy;
-	vec4 rgbaTex = texture2D(texture, vertTexCoord.xy);
+	vec4 rgbaTex = texture(texture, vertTexCoord.xy);
 	vec4 grain = addGrain(uv, time, intensity);
 
 	fragColor = rgbaTex + grain;

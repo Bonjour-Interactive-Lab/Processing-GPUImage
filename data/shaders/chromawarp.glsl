@@ -1,4 +1,4 @@
-#version 150
+
 #ifdef GL_ES
 precision mediump float;
 precision mediump int;
@@ -35,9 +35,9 @@ vec4 radialBlur(int octave, vec2 uv, vec2 texelSize, float blurSize, vec2 blurOr
 	  vec2 uvRed   = rotate2d( angle * distToCenter) * uv;
 	  vec2 uvGreen = uv;
 	  vec2 uvRBlue = rotate2d(-angle * distToCenter) * uv;
-	  blur += vec4( texture2D(texture, uvRed   * scale + blurOrigin).r,
-	  				texture2D(texture, uvGreen * scale + blurOrigin).g,
-	  				texture2D(texture, uvRBlue * scale + blurOrigin).b,
+	  blur += vec4( texture(texture, uvRed   * scale + blurOrigin).r,
+	  				texture(texture, uvGreen * scale + blurOrigin).g,
+	  				texture(texture, uvRBlue * scale + blurOrigin).b,
 	  				1.0);
 	}
 

@@ -1,4 +1,3 @@
-#version 150
 #ifdef GL_ES
 precision mediump float;
 precision mediump int;
@@ -34,15 +33,15 @@ void main(){
 	vec3 pix[9];
 	vec3 temp;
 
-	pix[0] = texture2D(texture, uv + vec2(-1.0, -1.0) * uvinc).rgb;
-	pix[1] = texture2D(texture, uv + vec2(0.0, -1.0)  * uvinc).rgb;
-	pix[2] = texture2D(texture, uv + vec2(1.0, -1.0)  * uvinc).rgb;
-	pix[3] = texture2D(texture, uv + vec2(-1.0, 0.0)  * uvinc).rgb;
-	pix[4] = texture2D(texture, uv + vec2(.0, .0)     * uvinc).rgb;
-	pix[5] = texture2D(texture, uv + vec2(1.0, .0)    * uvinc).rgb;
-	pix[6] = texture2D(texture, uv + vec2(-1.0, 1.0)  * uvinc).rgb;
-	pix[7] = texture2D(texture, uv + vec2(.0, 1.0)    * uvinc).rgb;
-	pix[8] = texture2D(texture, uv + vec2(1.0, 1.0)   * uvinc).rgb;
+	pix[0] = texture(texture, uv + vec2(-1.0, -1.0) * uvinc).rgb;
+	pix[1] = texture(texture, uv + vec2(0.0, -1.0)  * uvinc).rgb;
+	pix[2] = texture(texture, uv + vec2(1.0, -1.0)  * uvinc).rgb;
+	pix[3] = texture(texture, uv + vec2(-1.0, 0.0)  * uvinc).rgb;
+	pix[4] = texture(texture, uv + vec2(.0, .0)     * uvinc).rgb;
+	pix[5] = texture(texture, uv + vec2(1.0, .0)    * uvinc).rgb;
+	pix[6] = texture(texture, uv + vec2(-1.0, 1.0)  * uvinc).rgb;
+	pix[7] = texture(texture, uv + vec2(.0, 1.0)    * uvinc).rgb;
+	pix[8] = texture(texture, uv + vec2(1.0, 1.0)   * uvinc).rgb;
 
 	order6(0, 1, 2, 3, 4, 5);
 	order5(1, 2, 3, 4, 6);

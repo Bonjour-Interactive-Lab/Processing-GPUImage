@@ -1,4 +1,3 @@
-#version 150
 #ifdef GL_ES
 precision mediump float;
 precision mediump int;
@@ -19,8 +18,8 @@ uniform float sigma = 4.0; //The sigma value for the gaussian function: higher v
 in vec4 vertTexCoord;
 out vec4 fragColor;
 
-#define avgPos(i) 	avgValue += texture2D(texture, uv - i * blurSize * dir) * incrementalGaussian.x;
-#define avgNeg(i) 	avgValue += texture2D(texture, uv + i * blurSize * dir) * incrementalGaussian.x; 
+#define avgPos(i) 	avgValue += texture(texture, uv - i * blurSize * dir) * incrementalGaussian.x;
+#define avgNeg(i) 	avgValue += texture(texture, uv + i * blurSize * dir) * incrementalGaussian.x; 
 #define coeff()	  	coefficientSum += 2.0 * incrementalGaussian.x;
 #define incGauss()	incrementalGaussian.xy *= incrementalGaussian.yz;
 #define blur(i)		avgPos(i); avgNeg(i); coeff(); incGauss();
@@ -43,7 +42,7 @@ void main(){
  	float coefficientSum = 0.0;
 
   	// Take the central sample first...
-  	avgValue += texture2D(texture, uv) * incrementalGaussian.x;
+  	avgValue += texture(texture, uv) * incrementalGaussian.x;
   	coefficientSum += incrementalGaussian.x;
   	incrementalGaussian.xy *= incrementalGaussian.yz;
 

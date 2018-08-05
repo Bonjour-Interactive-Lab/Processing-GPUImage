@@ -24,8 +24,6 @@
 ** Update : Bonjour Lab
 */
 
-
-#version 150
 #ifdef GL_ES
 precision mediump float;
 precision mediump int;
@@ -45,8 +43,8 @@ out vec4 fragColor;
 void main(){
 	vec2 uv = vertTexCoord.xy;
 	vec2 iuv = vec2(uv.x, 1.0 - uv.y);
-	vec3 based = texture2D(base    , uv * (1 - srci)  + iuv * srci ).rgb;
-	vec3 blend = texture2D(texture , uv * (1 - basei) + iuv * basei).rgb;
+	vec3 based = texture(base    , uv * (1 - srci)  + iuv * srci ).rgb;
+	vec3 blend = texture(texture , uv * (1 - basei) + iuv * basei).rgb;
 	vec3 blended = BlendAverage(based, blend);
 
 	fragColor = mix(vec4(based, 1.0), vec4(blended, 1.0), opacity);

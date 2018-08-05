@@ -1,5 +1,3 @@
-
-#version 150
 #ifdef GL_ES
 precision mediump float;
 precision mediump int;
@@ -12,7 +10,7 @@ uniform float sharpFactor = 1.0;
 in vec4 vertTexCoord;
 out vec4 fragColor;
 
-#define highpass(i) 	tmp = texture2D(texture, uv + offsetTable[i]); sum += tmp * kernel[i]; sum.a = 1.0;
+#define highpass(i) 	tmp = texture(texture, uv + offsetTable[i]); sum += tmp * kernel[i]; sum.a = 1.0;
 
 vec4 highPass(sampler2D texture, vec2 uv, float stepInc){
 	//highPass

@@ -7,7 +7,6 @@
  * Update by Bonjour Lab
  */
 
-#version 150
 #ifdef GL_ES
 precision mediump float;
 precision mediump int;
@@ -45,7 +44,7 @@ float dither(vec2 screenpos, float lum){
 
 void main(){
 	vec2 uv = vertTexCoord.xy;
-	vec4 tex = texture2D(texture, uv);
+	vec4 tex = texture(texture, uv);
 	float r = dither(uv * resolution, tex.r);
 	float g = dither(uv * resolution, tex.g);
 	float b = dither(uv * resolution, tex.b);

@@ -1,4 +1,3 @@
-#version 150
 #ifdef GL_ES
 precision mediump float;
 precision mediump int;
@@ -15,14 +14,14 @@ out vec4 fragColor;
 
 void main(){
 	vec2 uv = vertTexCoord.xy;
-	vec4 tex = texture2D(texture, uv);
+	vec4 tex = texture(texture, uv);
 	vec2 uvinc = vec2(1.0) / resolution.xy;
 
-	vec3 curGradientDir = texture2D(texture, uv).rgb;
+	vec3 curGradientDir = texture(texture, uv).rgb;
 	vec2 gradientDirection = ((curGradientDir.gb * 2.0) - 1.0) * uvinc;
 
-    float firstSampledGradientMagnitude = texture2D(texture, uv + gradientDirection).r;
-    float secondSampledGradientMagnitude = texture2D(texture, uv - gradientDirection).r;
+    float firstSampledGradientMagnitude = texture(texture, uv + gradientDirection).r;
+    float secondSampledGradientMagnitude = texture(texture, uv - gradientDirection).r;
 
     float multiplier = step(firstSampledGradientMagnitude, curGradientDir.r);
     multiplier = multiplier * step(secondSampledGradientMagnitude, curGradientDir.r);

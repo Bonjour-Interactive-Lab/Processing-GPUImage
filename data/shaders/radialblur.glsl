@@ -1,4 +1,3 @@
-#version 150
 #ifdef GL_ES
 precision mediump float;
 precision mediump int;
@@ -16,7 +15,7 @@ out vec4 fragColor;
 
 vec4 radialBlur(int octave, vec2 uv, vec2 texelSize, float blurSize, vec2 blurOrigin)
 {
-	vec4 focus = texture2D(texture, blurOrigin);
+	vec4 focus = texture(texture, blurOrigin);
 	vec4 blur = vec4(0.0, 0.0, 0.0, 0.0);
 
 	float distToCenter = length(uv - blurOrigin);
@@ -26,7 +25,7 @@ vec4 radialBlur(int octave, vec2 uv, vec2 texelSize, float blurSize, vec2 blurOr
 	for (int i = 0; i < octave; i++) 
 	{
 	  float scale = 1.0 - (blurSize * distToCenter) * (float(i) / float(octave - 1));
-	  blur += vec4( texture2D(texture, uv   * scale + blurOrigin).rgb, 1.0);
+	  blur += vec4( texture(texture, uv   * scale + blurOrigin).rgb, 1.0);
 	}
 
 	return blur / float(octave);

@@ -1,4 +1,3 @@
-#version 150
 #ifdef GL_ES
 precision mediump float;
 precision mediump int;
@@ -33,7 +32,7 @@ void main(void)
 {
 	vec2 uv = vertTexCoord.xy;
 	vec2 screenuv = vertTexCoord.xy * resolution.xy;
-	vec3 c = texture2D(texture, vertTexCoord.xy).rgb;
+	vec3 c = texture(texture, vertTexCoord.xy).rgb;
 		
 	//declare stuff
 	const int kSize = (MSIZE-1)/2;
@@ -57,7 +56,7 @@ void main(void)
 		for (int j=-kSize; j <= kSize; ++j)
 		{
 			vec2 iuv = (screenuv + vec2(float(i),float(j)) ) / resolution.xy ;
-			cc = texture2D(texture, vec2(0.0, 0.0) + iuv).rgb;
+			cc = texture(texture, vec2(0.0, 0.0) + iuv).rgb;
 			factor = normpdf3(cc-c, BSIGMA)*bZ*kernel[kSize+j]*kernel[kSize+i];
 			Z += factor;
 			final_colour += factor*cc;

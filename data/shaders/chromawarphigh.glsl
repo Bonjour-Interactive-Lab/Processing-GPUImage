@@ -1,4 +1,3 @@
-#version 150
 #ifdef GL_ES
 precision mediump float;
 precision mediump int;
@@ -18,7 +17,7 @@ out vec4 fragColor;
 #define uvr()			uvred = rotate2d( angle * distToCenter) * uv
 #define uvg()			uvgreen = uv
 #define uvb()			uvblue = rotate2d(-angle * distToCenter) * uv
-#define blur(i)			scale(i); uvr(); uvg(); uvb(); blur += vec4(texture2D(texture, uvred * scale + blurOrigin).r, texture2D(texture, uvgreen * scale + blurOrigin).g, texture2D(texture, uvblue * scale + blurOrigin).b, 1.0)
+#define blur(i)			scale(i); uvr(); uvg(); uvb(); blur += vec4(texture(texture, uvred * scale + blurOrigin).r, texture(texture, uvgreen * scale + blurOrigin).g, texture(texture, uvblue * scale + blurOrigin).b, 1.0)
 
 mat2 rotate2d(float _angle){
     return mat2(cos(_angle),-sin(_angle),
@@ -27,7 +26,7 @@ mat2 rotate2d(float _angle){
 
 vec4 radialBlur(vec2 uv, vec2 texelSize, float blurSize, vec2 blurOrigin, float angle)
 {
-	vec4 focus = texture2D(texture, blurOrigin);
+	vec4 focus = texture(texture, blurOrigin);
 	vec4 blur = vec4(0.0, 0.0, 0.0, 0.0);
 	float scale;
 	vec2 uvred;

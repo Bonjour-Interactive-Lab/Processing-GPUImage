@@ -1,4 +1,3 @@
-#version 150
 #ifdef GL_ES
 precision highp float;
 precision highp vec4;
@@ -39,7 +38,7 @@ vec2 decodeRGBA16(vec4 rgba){
 
 void main(){
 	vec2 uv = vertTexCoord.xy;
-	vec4 tex = texture2D(texture, uv);
+	vec4 tex = texture(texture, uv);
 
 	vec2 data = decodeRGBA16(tex);
 	vec4 encodedData = encodeRGBA1616(data);

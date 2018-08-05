@@ -1,4 +1,3 @@
-#version 150
 #ifdef GL_ES
 precision mediump float;
 precision mediump int;
@@ -12,6 +11,6 @@ out vec4 fragColor;
 
 void main(){
 	//vec2 uv = gl_FragCoord.xy / resolution.xy;
-	vec4 rgba = texture2D(texture, vertTexCoord.xy) * vec4(vertTexCoord.xy, 0.0, 1.0);
+	vec4 rgba = texture(texture, vertTexCoord.xy) * vec4(vertTexCoord.xy, 0.0, 1.0);
 	fragColor = rgba;
 }

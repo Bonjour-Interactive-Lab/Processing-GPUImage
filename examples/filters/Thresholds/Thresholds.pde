@@ -6,7 +6,6 @@
  * http://www.bonjour-lab.com
  */
 import gpuimage.core.*;
-import java.awt.*;
 
 PImage src;
 Filter threshold, cThreshold;

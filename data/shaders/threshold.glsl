@@ -1,5 +1,3 @@
-
-#version 150
 #ifdef GL_ES
 precision mediump float;
 precision mediump int;
@@ -20,7 +18,7 @@ vec4 getBright(vec3 color_, float threshold_){
 
 void main(){
 	vec2 uv = vertTexCoord.xy;
-	vec4 tex = texture2D(texture, uv);
+	vec4 tex = texture(texture, uv);
 	vec4 threshold = getBright(tex.rgb, level);
 	threshold.rgb = 1.0 - step(threshold.rgb, vec3(0.0));
 
