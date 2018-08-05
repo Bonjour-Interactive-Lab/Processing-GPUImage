@@ -11,9 +11,9 @@ Processing library for high-performance image computing and GPGPU computing (GLS
 
 ## Informations and major updates
 - The v.0.0.1 the library is build on the top of processing which means we are using processing class such as PGraphics, Pimage, PApplet...
-- The v.0.0.1 is based on the processing PJOGL profile. There is no change in the GL context and it's still build on GL2ES2 (a version between GL2, GL3 and GLES2) [GL2ES2 JOGAMP](https://download.java.net/media/jogl/jogl-2.x-docs/javax/media/opengl/GL2ES2.html)
-- **Because the library relies on the PJOGL profile (GL2ES2) all shaders are based on GLSL 1.50 (150) [GLSL versions table](https://www.opengl.org/discussion_boards/showthread.php/199965-picking-a-glsl-version)**
-- #11 The effect effector system is design as a a base component : **GPUImageBaseEffects** which is extends by 3 differents class : **Filter**, **Compositor** and **ProceduralTexture**. Each of them is based on the ping pong buffer system set in the **GPUImageBaseEffects**. Each of them can take cares of differents actions :
+- The v.1.0 is based on the processing PJOGL profile. There is no change in the GL context and it's still build on GL2ES2 (a version between GL2, GL3 and GLES2) [GL2ES2 JOGAMP](https://download.java.net/media/jogl/jogl-2.x-docs/javax/media/opengl/GL2ES2.html)
+- **Because the library relies on the PJOGL profile (GL2ES2) all shaders are based on GLSL 1.50 (150) [GLSL versions table](https://www.opengl.org/discussion_boards/showthread.php/199965-picking-a-glsl-version)**. We don't set the version directive on the shader on order to keep compability with OSX plateform. See issue #29 for more informations
+- #11 The effector system is design as a base component : **GPUImageBaseEffects** which is extends by 3 differents class : **Filter**, **Compositor** and **ProceduralTexture**. Each of them is based on the ping pong buffer system set in the **GPUImageBaseEffects**. Each of them can take cares of differents actions :
 	- **Filter** : All filtering and VFX operations on a single image (chromawarp, blur, sobel...)
 	- **Compositor** : Composition between two images (mask, blending...)
 	- **ProceduralTexture** : Generation of procedural texture (noise, FBM, voronoi...)
@@ -39,10 +39,10 @@ graph TD;
 ```
 
 ## To do
-### Global
+### Global/Recette
 - [ ] Add try catch and handle errors
 - [ ] Add custom throw error (view adidas source)
-- [ ] Add precise documentation
+- [x] Add precise documentation
 - [ ] Add avatar @gitlab
 - [ ] Find good licenced image for library usage/example
 - [ ] Codevember example (Add all codevember design ?)
@@ -53,7 +53,7 @@ graph TD;
 - [ ] custom GPU info (memory size...)
 
 ### %"PingPong Buffer" 
-PingPong buffer is an utils class allowing you to create a ping pong buffer in order to make read-write texture pipeline by creating 2 buffers. For more information about the differents implementation test see #5
+PingPong buffer is an utils class allowing you to create a ping pong buffer in order to make read-write texture pipeline by creating 2 buffers. For more information about the differents implementation test see issue #5
 
 - [x] Processing ping pong buffer using PGraphics
 Each buffer can be swapped so the second is always a previous version of the first one. 
@@ -80,10 +80,10 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [ ] independant ping pong buffer (custom JOGL implementation) for Floating Point Texture
 
 - [x] add smooth to PPB
-- [ ] Add a custom PGraphicsOGL implementation using nearest filtering, warping... see #28 and #26
+- [ ] Add a custom PGraphicsOGL implementation using nearest filtering, warping... see issues #28 and #26
 
 #### Others
-- [x] add filtering linear :
+- [x] add filtering capabilities :
 ```java
   buffer.hint(DISABLE_TEXTURE_MIPMAPS);
   ((PGraphicsOpenGL)buffer).textureSampling(3);
