@@ -1,4 +1,3 @@
-#version 150
 #ifdef GL_ES
 precision highp float;
 precision highp vec4;
@@ -107,9 +106,9 @@ void getInterleavedXYZUV(inout vec2 array[6], float index, vec2 samplerResolutio
 
 vec3 getData(vec2 uvs[6], sampler2D samplerData, vec4 fragmentData, vec3 is){
 	//get all the samplers per fragment
-	vec4 RGBAX = 			   fragmentData * is.x + texture2D(texture, uvs[2]) * is.y + texture2D(texture, uvs[4]) * is.z;
-	vec4 RGBAY = texture2D(texture, uvs[0]) * is.x + 			   fragmentData * is.y + texture2D(texture, uvs[5]) * is.z;
-	vec4 RGBAZ = texture2D(texture, uvs[1]) * is.x + texture2D(texture, uvs[3]) * is.y + 			   fragmentData * is.z;
+	vec4 RGBAX = 			 fragmentData * is.x + texture(texture, uvs[2]) * is.y + texture(texture, uvs[4]) * is.z;
+	vec4 RGBAY = texture(texture, uvs[0]) * is.x + 			   fragmentData * is.y + texture(texture, uvs[5]) * is.z;
+	vec4 RGBAZ = texture(texture, uvs[1]) * is.x + texture(texture, uvs[3]) * is.y + 			 fragmentData * is.z;
 
 	float x = decodeRGBA24(RGBAX.rgb);
 	float y = decodeRGBA24(RGBAY.rgb);
@@ -138,9 +137,9 @@ void main() {
 	float i0 = (screenCoord.x + screenCoord.y * bufferResolution.x);
 	vec2 singleDataUV = getSingleDataUV(i0, singleBufferResolution);
 
-	vec4 prevPosRGBA = texture2D(texture, vertTexCoord.xy);
-	vec4 velRGBA = texture2D(velBuffer, vertTexCoord.xy);
-	vec4 maxVelRGBA = texture2D(maxVelBuffer, singleDataUV);
+	vec4 prevPosRGBA = texture(texture, vertTexCoord.xy);
+	vec4 velRGBA = texture(velBuffer, vertTexCoord.xy);
+	vec4 maxVelRGBA = texture(maxVelBuffer, singleDataUV);
 
 /*
 	//check the type of the fragment using %3 where 0 = x, 1 = y and z = 2
@@ -186,12 +185,12 @@ void main() {
 
 
 	//get all the samplers per fragment
-	//vec4 RGBAX = prevPosRGBA * isX + texture2D(texture, vec2(uyx, vyx)/bufferResolution) * isY + texture2D(texture, vec2(uzx, vzx)/bufferResolution) * isZ;
-	//vec4 RGBAY = prevPosRGBA * isY + texture2D(texture, vec2(uxy, vxy)/bufferResolution) * isX + texture2D(texture, vec2(uzy, vzy)/bufferResolution) * isZ;
-	//vec4 RGBAZ = prevPosRGBA * isZ + texture2D(texture, vec2(uxz, vxz)/bufferResolution) * isX + texture2D(texture, vec2(uyz, vyz)/bufferResolution) * isY;
-	vec4 RGBAX = 										 prevPosRGBA * isX + texture2D(texture, vec2(uyx, vyx)/bufferResolution) * isY + texture2D(texture, vec2(uzx, vzx)/bufferResolution) * isZ;
-	vec4 RGBAY = texture2D(texture, vec2(uxy, vxy)/bufferResolution) * isX + 										 prevPosRGBA * isY + texture2D(texture, vec2(uzy, vzy)/bufferResolution) * isZ;
-	vec4 RGBAZ = texture2D(texture, vec2(uxz, vxz)/bufferResolution) * isX + texture2D(texture, vec2(uyz, vyz)/bufferResolution) * isY + 										 prevPosRGBA * isZ;
+	//vec4 RGBAX = prevPosRGBA * isX + texture(texture, vec2(uyx, vyx)/bufferResolution) * isY + texture(texture, vec2(uzx, vzx)/bufferResolution) * isZ;
+	//vec4 RGBAY = prevPosRGBA * isY + texture(texture, vec2(uxy, vxy)/bufferResolution) * isX + texture(texture, vec2(uzy, vzy)/bufferResolution) * isZ;
+	//vec4 RGBAZ = prevPosRGBA * isZ + texture(texture, vec2(uxz, vxz)/bufferResolution) * isX + texture(texture, vec2(uyz, vyz)/bufferResolution) * isY;
+	vec4 RGBAX = 										 prevPosRGBA * isX + texture(texture, vec2(uyx, vyx)/bufferResolution) * isY + texture(texture, vec2(uzx, vzx)/bufferResolution) * isZ;
+	vec4 RGBAY = texture(texture, vec2(uxy, vxy)/bufferResolution) * isX + 										 prevPosRGBA * isY + texture(texture, vec2(uzy, vzy)/bufferResolution) * isZ;
+	vec4 RGBAZ = texture(texture, vec2(uxz, vxz)/bufferResolution) * isX + texture(texture, vec2(uyz, vyz)/bufferResolution) * isY + 										 prevPosRGBA * isZ;
 
 	float x = decodeRGBA24(RGBAX.rgb);
 	float y = decodeRGBA24(RGBAY.rgb);

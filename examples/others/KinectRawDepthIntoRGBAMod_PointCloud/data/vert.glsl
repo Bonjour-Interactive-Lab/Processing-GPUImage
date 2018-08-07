@@ -37,7 +37,7 @@ void main(){
 	vertTexCoord.xy = (position.xy / resolution.xy * 2.0);
 
   	//get the data into texture
-  	vec4 tex = texture2D(dataTexture, vertTexCoord.xy);
+  	vec4 tex = texture(dataTexture, vertTexCoord.xy);
   	//decode the data 
   	float depth = decodeRGBAMod(tex, dataMax) / 8000.0;
   	//get the world position by a back-projecting the pixel value into the real world

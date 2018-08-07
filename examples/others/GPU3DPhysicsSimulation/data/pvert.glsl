@@ -1,5 +1,3 @@
-
-#version 150
 #ifdef GL_ES
 precision highp float;
 precision highp vec2;
@@ -73,9 +71,9 @@ vec3 getData(vec2 screenPosition, vec2 gridResolution, vec2 samplerResolution, s
 	vec2 uvy = vec2(uy, vy) / (samplerResolution - vec2(1.0));
 	vec2 uvz = vec2(uz, vz) / (samplerResolution - vec2(1.0));
 
-	float x = decodeRGBA24(texture2D(dataSampler, uvx).rgb);
-	float y = decodeRGBA24(texture2D(dataSampler, uvy).rgb);
-	float z = decodeRGBA24(texture2D(dataSampler, uvz).rgb);
+	float x = decodeRGBA24(texture(dataSampler, uvx).rgb);
+	float y = decodeRGBA24(texture(dataSampler, uvy).rgb);
+	float z = decodeRGBA24(texture(dataSampler, uvz).rgb);
 
 	return vec3(x, y, z);
 }

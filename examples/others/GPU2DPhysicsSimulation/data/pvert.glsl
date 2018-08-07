@@ -1,4 +1,3 @@
-#version 150
 #ifdef GL_ES
 precision highp float;
 precision highp vec2;
@@ -55,8 +54,8 @@ void main(){
 	vertTexCoord.zw = vec2(0.0, 1.0);
 
    	//get the data into texture
-   	vec4 posRGBA = texture2D(posBuffer, vertTexCoord.xy);
-   	vec4 massRGBA = texture2D(massBuffer, vertTexCoord.xy);
+   	vec4 posRGBA = texture(posBuffer, vertTexCoord.xy);
+   	vec4 massRGBA = texture(massBuffer, vertTexCoord.xy);
   	//decode the data 
   	vec2 pos = decodeRGBA16(posRGBA) * worldResolution;
   	float mass = minMass + decodeRGBA32(massRGBA) * (maxMass - minMass);

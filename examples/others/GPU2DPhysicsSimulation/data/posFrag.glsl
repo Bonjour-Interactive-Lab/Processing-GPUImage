@@ -1,4 +1,3 @@
-#version 150
 #ifdef GL_ES
 precision highp float;
 precision highp vec4;
@@ -47,9 +46,9 @@ float decodeRGBA32(vec4 rgba){
 }
 
 void main() {
-	vec4 prevPosRGBA = texture2D(texture, vertTexCoord.xy);
-	vec4 velRGBA = texture2D(velBuffer, vertTexCoord.xy);
-	vec4 maxVelRGBA = texture2D(maxVelBuffer, vertTexCoord.xy);
+	vec4 prevPosRGBA = texture(texture, vertTexCoord.xy);
+	vec4 velRGBA = texture(velBuffer, vertTexCoord.xy);
+	vec4 maxVelRGBA = texture(maxVelBuffer, vertTexCoord.xy);
 
 	vec2 loc = decodeRGBA16(prevPosRGBA) * worldResolution;
 	float edgeVel = mix(minVel, maxVel, decodeRGBA32(maxVelRGBA));

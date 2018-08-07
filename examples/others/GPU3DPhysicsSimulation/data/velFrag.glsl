@@ -1,4 +1,3 @@
-#version 150
 #ifdef GL_ES
 precision highp float;
 precision highp vec4;
@@ -113,9 +112,9 @@ void getInterleavedXYZUV(inout vec2 array[6], float index, vec2 samplerResolutio
 
 vec3 getData(vec2 uvs[6], sampler2D samplerData, vec4 fragmentData, vec3 is){
 	//get all the samplers per fragment
-	vec4 RGBAX = 			   fragmentData * is.x + texture2D(texture, uvs[2]) * is.y + texture2D(texture, uvs[4]) * is.z;
-	vec4 RGBAY = texture2D(texture, uvs[0]) * is.x + 			   fragmentData * is.y + texture2D(texture, uvs[5]) * is.z;
-	vec4 RGBAZ = texture2D(texture, uvs[1]) * is.x + texture2D(texture, uvs[3]) * is.y + 			   fragmentData * is.z;
+	vec4 RGBAX = 			 fragmentData * is.x + texture(texture, uvs[2]) * is.y + texture(texture, uvs[4]) * is.z;
+	vec4 RGBAY = texture(texture, uvs[0]) * is.x + 			   fragmentData * is.y + texture(texture, uvs[5]) * is.z;
+	vec4 RGBAZ = texture(texture, uvs[1]) * is.x + texture(texture, uvs[3]) * is.y + 			 fragmentData * is.z;
 
 	float x = decodeRGBA24(RGBAX.rgb);
 	float y = decodeRGBA24(RGBAY.rgb);
@@ -143,10 +142,10 @@ void main() {
 	float i0 = ceil(screenCoord.x + screenCoord.y * bufferResolution.x);
 	vec2 singleDataUV = getSingleDataUV(i0, singleBufferResolution);
 
-	vec4 prevVelRGBA = texture2D(texture, vertTexCoord.xy);
-	vec4 posRGBA = texture2D(posBuffer, vertTexCoord.xy);
-	vec4 maxVelRGBA = texture2D(maxVelBuffer, singleDataUV);
-	vec4 massRGBA = texture2D(massBuffer, singleDataUV);
+	vec4 prevVelRGBA = texture(texture, vertTexCoord.xy);
+	vec4 posRGBA = texture(posBuffer, vertTexCoord.xy);
+	vec4 maxVelRGBA = texture(maxVelBuffer, singleDataUV);
+	vec4 massRGBA = texture(massBuffer, singleDataUV);
 
 	float mass = mix(minMass, maxMass, decodeRGBA24(massRGBA.rgb));
 	float edgeVel = mix(minVel, maxVel,decodeRGBA24(maxVelRGBA.rgb));
@@ -217,7 +216,7 @@ void main() {
 
 	vel /= edgeVel; //we normalize velocity
 	vel = (vel * 0.5) + 0.5; //reset it from[-1, 1] to [0.0, 1.0]
-	vel = clamp(vel, 0, 1.0); //we clamp the velocity between [0, 1] (this is a security)
+	vel = clamp(vel, vec3(0), vec3(1.0)); //we clamp the velocity between [0, 1] (this is a security)
 
 	vec4 newVelEncoded = encodeRGBA24(vel.x) * is.x + 
 						 encodeRGBA24(vel.y) * is.y + 

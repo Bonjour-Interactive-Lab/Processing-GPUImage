@@ -1,4 +1,3 @@
-#version 150
 #ifdef GL_ES
 precision highp float;
 precision highp vec4;
@@ -53,10 +52,10 @@ float decodeRGBA32(vec4 rgba){
 
 
 void main() {
-	vec4 velRGBA = texture2D(texture, vertTexCoord.xy);
-	vec4 posRGBA = texture2D(posBuffer, vertTexCoord.xy);
-	vec4 massRGBA = texture2D(massBuffer, vertTexCoord.xy);
-	vec4 maxVelRGBA = texture2D(maxVelBuffer, vertTexCoord.xy);
+	vec4 velRGBA = texture(texture, vertTexCoord.xy);
+	vec4 posRGBA = texture(posBuffer, vertTexCoord.xy);
+	vec4 massRGBA = texture(massBuffer, vertTexCoord.xy);
+	vec4 maxVelRGBA = texture(maxVelBuffer, vertTexCoord.xy);
 
 	vec2 acc = vec2(0.0);
 	float edgeVel = mix(minVel, maxVel, decodeRGBA32(maxVelRGBA));
@@ -75,7 +74,7 @@ void main() {
 
 	//add acc to velocity
 	vel += acc;
-	vel = clamp(vel, -edgeVel, edgeVel); //clamp velocity to max force
+	vel = clamp(vel, -vec2(edgeVel), vec2(edgeVel)); //clamp velocity to max force
 
 	//add vel to location
 	loc += vel;
@@ -108,7 +107,7 @@ void main() {
 
 	vel /= edgeVel; //we normalize velocity
 	vel = (vel * 0.5) + 0.5; //reset it from[-1, 1] to [0.0, 1.0]
-	vel = clamp(vel, 0, 1.0); //we clamp the velocity between [0, 1] (this is a security)
+	vel = clamp(vel, vec2(0), vec2(1.0)); //we clamp the velocity between [0, 1] (this is a security)
 
 	//we encode the new velocuty as RGBA1616
 	vec4 newPosEncoded = vec4(encodeRGBA16(vel.x), encodeRGBA16(vel.y));
