@@ -9,6 +9,19 @@ Processing library for high-performance image computing and GPGPU computing (GLS
 
 ## Features
 
+* Image filtering (color, blur, effects, filtering...)
+* Image compositing (fusion mode, mask, chroma key...)
+* Ping Pong buffering
+* Data packing into RGBA texture
+
+## Tested platforms :
+
+* Windows :
+  * Windows 10 x64, 16GO, intel i7 3.6Ghz, GPU NVidia GTX 970
+  * Windows 10 x64, 16GO, intel i5 3.4Ghz, GPU NVidia GTX 660 #31
+* Linux 16.04, 16GO, intel i7 3.60Ghz, GPU NVidia GTX 1080 #32
+* OSX 10.13.5, 16GO, intel i7 2.5Ghz, GPU AMD Radeon R9 M370X #33   
+
 ## Informations and major updates
 - The v.0.0.1 the library is build on the top of processing which means we are using processing class such as PGraphics, Pimage, PApplet...
 - The v.1.0 is based on the processing PJOGL profile. There is no change in the GL context and it's still build on GL2ES2 (a version between GL2, GL3 and GLES2) [GL2ES2 JOGAMP](https://download.java.net/media/jogl/jogl-2.x-docs/javax/media/opengl/GL2ES2.html)
