@@ -18,8 +18,6 @@ uniform vec2 bufferResolution;
 uniform vec2 gridResolution;
 uniform vec3 worldResolution;
 
-uniform float debug;
-
 
 in vec4 position;
 in vec3 normal;

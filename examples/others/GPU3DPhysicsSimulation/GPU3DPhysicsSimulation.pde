@@ -146,7 +146,6 @@ void draw() {
 
   //bind varibals to vertex shader
   psh.set("posBuffer", posBuffer.dst);
-  psh.set("debug", norm(mouseX, 0.0, width) * 250.0);
   //psh.set("posBuffer", encodedPosBuffer);
 
   //obstacle (not working for now)
