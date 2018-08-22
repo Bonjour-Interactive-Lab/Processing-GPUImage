@@ -14,7 +14,7 @@ Processing library for high-performance image computing and GPGPU computing (GLS
 * Ping Pong buffering
 * Data packing into RGBA texture
 
-## Tested platforms :
+## Tested platforms
 
 * Windows :
   * Windows 10 x64, 16GO, intel i7 3.6Ghz, GPU NVidia GTX 970
