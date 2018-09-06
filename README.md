@@ -32,24 +32,7 @@ Processing library for high-performance image computing and GPGPU computing (GLS
 	- **ProceduralTexture** : Generation of procedural texture (noise, FBM, voronoi...)
 
 ## %"Architecture et Design Pattern"
-```mermaid
-graph TD;
-  gpuimage-->core;
-  gpuimage-->utils;
-  core-->GPUInterface
-  core-->GPUImage
-  core-->GPUImageBaseEffects;
-  GPUImageBaseEffects-->Filter
-  GPUImageBaseEffects-->Compositor
-  GPUImageBaseEffects-->ProceduralTexture
-  GPUImageBaseEffects-->LUTGenerator
-  utils-->PingPongBuffer-TBD
-  utils-->GPUImageBaseFloatPacking
-  utils-->IntPacking
-  utils-->GPUImageMathsPixels
-  GPUImageBaseFloatPacking-->FloatPacking
-  GPUImageBaseFloatPacking-->Vec2Packing
-```
+![Design Pattern]()
 
 ## To do
 ### Global/Recette
