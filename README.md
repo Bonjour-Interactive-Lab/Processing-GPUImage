@@ -32,7 +32,7 @@ Processing library for high-performance image computing and GPGPU computing (GLS
 	- **ProceduralTexture** : Generation of procedural texture (noise, FBM, voronoi...)
 
 ## %"Architecture et Design Pattern"
-![Design Pattern]()
+![Design Pattern](https://gitlab.bonjour-lab.com/alexr4/GPUImage/raw/master/DesignPattern.png)
 
 ## To do
 ### Global/Recette
