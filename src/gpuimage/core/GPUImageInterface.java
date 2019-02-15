@@ -47,6 +47,7 @@ public interface GPUImageInterface{
 	public static final String SOBELEDGE = "sobeledge";
 	public static final String CANNYEDGE = "cannyedge1";
 	public static final String HUESEGMENTATION = "huesegmentation";
+	public static final String SIGNEDDISTANCEFIELD = "signeddistancefield";
 	
 	public static final String GAUSSIANBLUR = "gaussianblur";
 	public static final String GAUSSIANBLUR5X5 = "gaussianblur5x5";

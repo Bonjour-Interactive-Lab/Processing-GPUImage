@@ -1,3 +1,5 @@
+//blend sources : http://wiki.polycount.com/wiki/Blending_functions
+
 #ifdef GL_ES
 precision mediump float;
 precision mediump int;

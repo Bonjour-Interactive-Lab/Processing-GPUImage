@@ -1249,4 +1249,26 @@ public class Filter extends GPUImageBaseEffects{
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
 		return super.filter(src);
 	}
+	
+	/**
+	 * Get a signed distance filmed from a 1 channel image (black and white)
+	 * @param src source layer
+	 * @return
+	 */
+	public PGraphics getSignedDistanceFieldImage(PImage src) {
+		return getSignedDistanceFieldImage(src, 5);
+	}
+	
+	/**
+	 * Get a signed distance filmed from a 1 channel image (black and white)
+	 * @param src source layer
+	 * @param searchDistance search distance in pixel
+	 * @return
+	 */
+	public PGraphics getSignedDistanceFieldImage(PImage src, int searchDistance) {
+		super.setCurrentSH(SIGNEDDISTANCEFIELD);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		super.currentSH.set("searchDistance", searchDistance);
+		return super.filter(src);
+	}
 }
