@@ -120,4 +120,12 @@ abstract class GPUImageBaseEffects implements GPUImageInterface, PConstants{
 		currentSH.set("resolution", (float)src.width, (float)src.height);
 		return filter(src);
 	}
+	
+	/**
+	 * Get the buffer
+	 * @return PGraphics buffer
+	 */
+	public PGraphics getBuffer() {
+		return ppb.getSrcBuffer();
+	}
 }

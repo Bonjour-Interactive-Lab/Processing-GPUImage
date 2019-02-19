@@ -103,6 +103,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [x] Hue segmentation
 - [x] Dilation
 - [x] Erosion
+- [x] Signed Distance Field
 
 ##### Blur
 - [x] Gaussian
