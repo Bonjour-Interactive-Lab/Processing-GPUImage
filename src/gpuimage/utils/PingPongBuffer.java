@@ -148,8 +148,13 @@ public class PingPongBuffer implements PConstants{
 	 * Clear the buffer
 	 */
 	public void clear() {
+		this.src.beginDraw();
 		this.src.clear();
+		this.src.endDraw();
+		
+		this.dst.beginDraw();
 		this.dst.clear();
+		this.dst.endDraw();
 	}
 	
 	/**
