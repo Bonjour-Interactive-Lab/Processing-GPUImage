@@ -133,6 +133,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [ ] ASCII **Est-ce un filtre ou une composition ?** → http://paulbourke.net/dataformats/asciiart/ (class dédiée)
 - [ ] Bloom
 - [ ] SlitScan effect
+- [x] Glitches
 
 ##### Other : 
 - [ ] Optical Flow
@@ -243,6 +244,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
     - [x] Pixelate
     - [x] Ditherings
     - [x] Ditherings RGB
+    - [x] Glitches
 - [x] Other
   - [x] Accentuation
   - [x] ProcessHueSegmentation

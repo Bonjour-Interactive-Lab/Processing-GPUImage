@@ -101,7 +101,12 @@ public interface GPUImageInterface{
 	public static final String DILATERGB = "dilationrgb";
 	public static final String ERODERGB = "erosionrgb";
 	
-	
+	public static final String GLITCHDISPLACELUMA = "glitchdisplaceluma";
+	public static final String GLITCHDISPLACERGB = "glitchdisplacergb";
+	public static final String GLITCHINVERT = "glitchinvert";
+	public static final String GLITCHPIXELATE = "glitchpixelate";
+	public static final String GLITCHSHIFTRGB = "glitchshiftrgb";
+	public static final String GLITCHSHUFFLERGB = "glitchshufflergb";
 
 	/* ...............................................
 	 * 

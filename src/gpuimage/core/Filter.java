@@ -246,6 +246,28 @@ public class Filter extends GPUImageBaseEffects{
 		return super.filter(src);
 	}
 	
+	/**
+	 * Get a signed distance filmed from a 1 channel image (black and white)
+	 * @param src source layer
+	 * @return
+	 */
+	public PGraphics getSignedDistanceFieldImage(PImage src) {
+		return getSignedDistanceFieldImage(src, 5);
+	}
+	
+	/**
+	 * Get a signed distance filmed from a 1 channel image (black and white)
+	 * @param src source layer
+	 * @param searchDistance search distance in pixel
+	 * @return
+	 */
+	public PGraphics getSignedDistanceFieldImage(PImage src, int searchDistance) {
+		super.setCurrentSH(SIGNEDDISTANCEFIELD);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		super.currentSH.set("searchDistance", searchDistance);
+		return super.filter(src);
+	}
+	
 	/* ...............................................
 	 * 
 	 * 
@@ -1250,25 +1272,235 @@ public class Filter extends GPUImageBaseEffects{
 		return super.filter(src);
 	}
 	
-	/**
-	 * Get a signed distance filmed from a 1 channel image (black and white)
-	 * @param src source layer
-	 * @return
+	/*
+	 * This methods binds the global glitch variables to the glitch shaders
 	 */
-	public PGraphics getSignedDistanceFieldImage(PImage src) {
-		return getSignedDistanceFieldImage(src, 5);
+	private void setGlitchParam( float intensity, float time, float columns, float rows, float subdivision, float breaktime, float speedtime, float frequency, float amplitude) {
+		super.currentSH.set("intensity", (float)intensity);
+		super.currentSH.set("time", (float)time);
+		super.currentSH.set("colsrows", (float)columns, (float)rows);
+		super.currentSH.set("subdivision", (float)subdivision);
+		super.currentSH.set("breakTime", (float)breaktime);
+		super.currentSH.set("speedTime", (float)speedtime);
+		super.currentSH.set("frequency", (float)frequency);
+		super.currentSH.set("amplitude", (float)amplitude);
 	}
 	
 	/**
-	 * Get a signed distance filmed from a 1 channel image (black and white)
+	 * Get a displace luma glitch
 	 * @param src source layer
-	 * @param searchDistance search distance in pixel
+	 * @param intensity intensity of the glitch (0.0 = no glicth, 1, full glitch)
+	 * @param time animation time
+	 * @param deviationX deviation on X between 0.0 and 1.0
+	 * @param deviationY deviation on Y between 0.0 and 1.0
 	 * @return
 	 */
-	public PGraphics getSignedDistanceFieldImage(PImage src, int searchDistance) {
-		super.setCurrentSH(SIGNEDDISTANCEFIELD);
+	public PGraphics getGlitchDisplaceLuma(PImage src, float intensity, float time, float deviationX, float deviationY) {
+		return this.getGlitchDisplaceLuma(src, intensity, time, 2.0f, 8.0f, 0.5f, 1.0f, 0.25f, 0.037f, 0.01f, deviationX, deviationY);
+	}
+	
+	/**
+	 * Get a displace luma glitch
+	 * @param src source layer
+	 * @param intensity intensity of the glitch (0.0 = no glicth, 1, full glitch)
+	 * @param time animation time
+	 * @param columns number of columns for grid division
+	 * @param rows number of rows for grid division
+	 * @param subdivision ratio of subdivision per cells
+	 * @param breaktime break point time for animation (between 0.0 and 1.0) 
+	 * @param speedtime speed time scale
+	 * @param frequency frequency of sin wave displacement on x
+	 * @param amplitude amplitude of sin wave displacement on y
+	 * @param deviationX deviation on X between 0.0 and 1.0
+	 * @param deviationY deviation on Y between 0.0 and 1.0
+	 * @return
+	 */
+	public PGraphics getGlitchDisplaceLuma(PImage src, float intensity, float time, float columns, float rows, float subdivision, float breaktime,  float speedtime, float frequency, float amplitude, float deviationX, float deviationY) {
+		super.setCurrentSH(GLITCHDISPLACELUMA);
+		this.setGlitchParam(intensity, time, columns, rows, subdivision, breaktime, speedtime, frequency, amplitude);
+		super.currentSH.set("deviation", (float)deviationX, (float)deviationY);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Get a displace rgb glitch
+	 * @param src source layer
+	 * @param intensity intensity of the glitch (0.0 = no glicth, 1, full glitch)
+	 * @param time animation time
+	 * @param deviationX deviation on X between 0.0 and 1.0
+	 * @param deviationY deviation on Y between 0.0 and 1.0
+	 * @return
+	 */
+	public PGraphics getGlitchDisplaceRGB(PImage src, float intensity, float time, float deviationX, float deviationY) {
+		return this.getGlitchDisplaceRGB(src, intensity, time, 2.0f, 8.0f, 0.5f, 1.0f, 0.25f, 0.037f, 0.01f, deviationX, deviationY);
+	}
+	
+	/**
+	 * Get a displace rgb glitch
+	 * @param src source layer
+	 * @param intensity intensity of the glitch (0.0 = no glicth, 1, full glitch)
+	 * @param time animation time
+	 * @param columns number of columns for grid division
+	 * @param rows number of rows for grid division
+	 * @param subdivision ratio of subdivision per cells
+	 * @param breaktime break point time for animation (between 0.0 and 1.0) 
+	 * @param speedtime speed time scale
+	 * @param frequency frequency of sin wave displacement on x
+	 * @param amplitude amplitude of sin wave displacement on y
+	 * @param deviationX deviation on X between 0.0 and 1.0
+	 * @param deviationY deviation on Y between 0.0 and 1.0
+	 * @return
+	 */
+	public PGraphics getGlitchDisplaceRGB(PImage src, float intensity, float time, float columns, float rows, float subdivision, float breaktime,  float speedtime, float frequency, float amplitude, float deviationX, float deviationY) {
+		super.setCurrentSH(GLITCHDISPLACERGB);
+		this.setGlitchParam(intensity, time, columns, rows, subdivision, breaktime, speedtime, frequency, amplitude);
+		super.currentSH.set("deviation", (float)deviationX, (float)deviationY);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Get a invert glitch
+	 * @param src source layer
+	 * @param intensity intensity of the glitch (0.0 = no glicth, 1, full glitch)
+	 * @param time animation time
+	 * @return
+	 */
+	public PGraphics getGlitchInvert(PImage src, float intensity, float time) {
+		return this.getGlitchInvert(src, intensity, time, 2.0f, 8.0f, 0.5f, 1.0f, 0.25f, 0.037f, 0.01f);
+	}
+	
+	/**
+	 * Get a invert glitch
+	 * @param src source layer
+	 * @param intensity intensity of the glitch (0.0 = no glicth, 1, full glitch)
+	 * @param time animation time
+	 * @param columns number of columns for grid division
+	 * @param rows number of rows for grid division
+	 * @param subdivision ratio of subdivision per cells
+	 * @param breaktime break point time for animation (between 0.0 and 1.0) 
+	 * @param speedtime speed time scale
+	 * @param frequency frequency of sin wave displacement on x
+	 * @param amplitude amplitude of sin wave displacement on y
+	 * @return
+	 */
+	public PGraphics getGlitchInvert(PImage src, float intensity, float time, float columns, float rows, float subdivision, float breaktime,  float speedtime, float frequency, float amplitude) {
+		super.setCurrentSH(GLITCHINVERT);
+		this.setGlitchParam(intensity, time, columns, rows, subdivision, breaktime, speedtime, frequency, amplitude);
+		return super.filter(src);
+	}
+	
+	/**
+	 * * Get a pixelated glitch
+	 * @param src source layer
+	 * @param intensity intensity of the glitch (0.0 = no glicth, 1, full glitch)
+	 * @param time animation time
+	 * @param pixelres resolution of the pixels
+	 * @return
+	 */
+	public PGraphics getGlitchPixelated(PImage src, float intensity, float time, float pixelres) {
+		return this.getGlitchPixelated(src, intensity, time, 2.0f, 8.0f, 0.5f, 1.0f, 0.25f, 0.037f, 0.01f, pixelres);
+	}
+	
+	/**
+     * Get a pixelated glitch
+	 * @param src source layer
+	 * @param intensity intensity of the glitch (0.0 = no glicth, 1, full glitch)
+	 * @param time animation time
+	 * @param columns number of columns for grid division
+	 * @param rows number of rows for grid division
+	 * @param subdivision ratio of subdivision per cells
+	 * @param breaktime break point time for animation (between 0.0 and 1.0) 
+	 * @param speedtime speed time scale
+	 * @param frequency frequency of sin wave displacement on x
+	 * @param amplitude amplitude of sin wave displacement on y
+	 * @param pixelres resolution of the pixels
+	 * @return
+	 */
+	public PGraphics getGlitchPixelated(PImage src, float intensity, float time, float columns, float rows, float subdivision, float breaktime,  float speedtime, float frequency, float amplitude, float pixelres) {
+		super.setCurrentSH(GLITCHPIXELATE);
+		this.setGlitchParam(intensity, time, columns, rows, subdivision, breaktime, speedtime, frequency, amplitude);
+		super.currentSH.set("pixelres", (float)pixelres);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
-		super.currentSH.set("searchDistance", searchDistance);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Get a shift RGB glitch
+	 * @param src source layer
+	 * @param intensity intensity of the glitch (0.0 = no glicth, 1, full glitch)
+	 * @param time animation time
+	 * @param deviationredX red deviation on x between 0.0 and 1.0
+	 * @param deviationredY red deviation on y between 0.0 and 1.0
+	 * @param deviationgreenX green deviation on x between 0.0 and 1.0
+	 * @param deviationgreenY green deviation on y between 0.0 and 1.0
+	 * @param deviationblueX blue deviation on x between 0.0 and 1.0
+	 * @param deviationblueY blue deviation on y between 0.0 and 1.0
+	 * @return
+	 */
+	public PGraphics getGlitchShiftRGB(PImage src, float intensity, float time, float deviationredX, float deviationredY, float deviationgreenX, float deviationgreenY, float deviationblueX, float deviationblueY) {
+		return this.getGlitchShiftRGB(src, intensity, time, 2.0f, 8.0f, 0.5f, 1.0f, 0.25f, 0.037f, 0.01f, deviationredX, deviationredY, deviationgreenX, deviationgreenY, deviationblueX, deviationblueY);
+	}
+	
+	/**
+	 * Get a shift RGB glitch
+	 * @param src source layer
+	 * @param intensity intensity of the glitch (0.0 = no glicth, 1, full glitch)
+	 * @param time animation time
+	 * @param columns number of columns for grid division
+	 * @param rows number of rows for grid division
+	 * @param subdivision ratio of subdivision per cells
+	 * @param breaktime break point time for animation (between 0.0 and 1.0) 
+	 * @param speedtime speed time scale
+	 * @param frequency frequency of sin wave displacement on x
+	 * @param amplitude amplitude of sin wave displacement on y
+	 * @param deviationredX red deviation on x between 0.0 and 1.0
+	 * @param deviationredY red deviation on y between 0.0 and 1.0
+	 * @param deviationgreenX green deviation on x between 0.0 and 1.0
+	 * @param deviationgreenY green deviation on y between 0.0 and 1.0
+	 * @param deviationblueX blue deviation on x between 0.0 and 1.0
+	 * @param deviationblueY blue deviation on y between 0.0 and 1.0
+	 * @return
+	 */
+	public PGraphics getGlitchShiftRGB(PImage src, float intensity, float time, float columns, float rows, float subdivision, float breaktime,  float speedtime, float frequency, float amplitude, float deviationredX, float deviationredY, float deviationgreenX, float deviationgreenY, float deviationblueX, float deviationblueY) {
+		super.setCurrentSH(GLITCHSHIFTRGB);
+		this.setGlitchParam(intensity, time, columns, rows, subdivision, breaktime, speedtime, frequency, amplitude);
+		super.currentSH.set("deviationred", (float)deviationredX, (float)deviationredY);
+		super.currentSH.set("deviationgreen", (float)deviationgreenX, (float)deviationgreenY);
+		super.currentSH.set("deviationblue", (float)deviationblueX, (float)deviationblueY);
+		return super.filter(src);
+	}
+	
+	/**
+	  * Get shuffle RGB glitch
+	 * @param src source layer
+	 * @param intensity intensity of the glitch (0.0 = no glicth, 1, full glitch)
+	 * @param time animation time
+	 * @param contrast contrast of the shuffle
+	 * @return
+	 */
+	public PGraphics getGlitchShuffleRGB(PImage src, float intensity, float time, float contrast) {
+		return this.getGlitchShuffleRGB(src, intensity, time, 2.0f, 8.0f, 0.5f, 1.0f, 0.25f, 0.037f, 0.01f, contrast);
+	}
+	
+	/**
+	 * Get shuffle RGB glitch
+	 * @param src source layer
+	 * @param intensity intensity of the glitch (0.0 = no glicth, 1, full glitch)
+	 * @param time animation time
+	 * @param columns number of columns for grid division
+	 * @param rows number of rows for grid division
+	 * @param subdivision ratio of subdivision per cells
+	 * @param breaktime break point time for animation (between 0.0 and 1.0) 
+	 * @param speedtime speed time scale
+	 * @param frequency frequency of sin wave displacement on x
+	 * @param amplitude amplitude of sin wave displacement on y
+	 * @param contrast contrast of the shuffle
+	 * @return
+	 */
+	public PGraphics getGlitchShuffleRGB(PImage src, float intensity, float time, float columns, float rows, float subdivision, float breaktime,  float speedtime, float frequency, float amplitude, float contrast) {
+		super.setCurrentSH(GLITCHSHUFFLERGB);
+		this.setGlitchParam(intensity, time, columns, rows, subdivision, breaktime, speedtime, frequency, amplitude);
+		super.currentSH.set("contrast", (float)contrast);
 		return super.filter(src);
 	}
 }
