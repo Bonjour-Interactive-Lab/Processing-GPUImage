@@ -107,6 +107,7 @@ public interface GPUImageInterface{
 	public static final String GLITCHPIXELATE = "glitchpixelate";
 	public static final String GLITCHSHIFTRGB = "glitchshiftrgb";
 	public static final String GLITCHSHUFFLERGB = "glitchshufflergb";
+	public static final String GLITCHSTITCH = "glitchstitch";
 
 	/* ...............................................
 	 * 

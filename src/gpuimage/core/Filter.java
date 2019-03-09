@@ -1503,4 +1503,35 @@ public class Filter extends GPUImageBaseEffects{
 		super.currentSH.set("contrast", (float)contrast);
 		return super.filter(src);
 	}
+	
+	/**
+	 * Get Stitch pixel glitch
+	 * @param src source layer
+	 * @param intensity intensity of the glitch (0.0 = no glicth, 1, full glitch)
+	 * @param time animation time
+	 * @return
+	 */
+	public PGraphics getGlitchStitch(PImage src, float intensity, float time) {
+		return this.getGlitchStitch(src, intensity, time, 2.0f, 8.0f, 0.5f, 1.0f, 0.25f, 0.037f, 0.01f);
+	}
+	
+	/**
+	 * Get Stitch pixel glitch
+	 * @param src source layer
+	 * @param intensity intensity of the glitch (0.0 = no glicth, 1, full glitch)
+	 * @param time animation time
+	 * @param columns number of columns for grid division
+	 * @param rows number of rows for grid division
+	 * @param subdivision ratio of subdivision per cells
+	 * @param breaktime break point time for animation (between 0.0 and 1.0) 
+	 * @param speedtime speed time scale
+	 * @param frequency frequency of sin wave displacement on x
+	 * @param amplitude amplitude of sin wave displacement on y
+	 * @return
+	 */
+	public PGraphics getGlitchStitch(PImage src, float intensity, float time, float columns, float rows, float subdivision, float breaktime,  float speedtime, float frequency, float amplitude) {
+		super.setCurrentSH(GLITCHSTITCH);
+		this.setGlitchParam(intensity, time, columns, rows, subdivision, breaktime, speedtime, frequency, amplitude);
+		return super.filter(src);
+	}
 }

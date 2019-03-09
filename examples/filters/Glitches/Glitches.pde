@@ -12,14 +12,15 @@ Filter filter1,
   filter3, 
   filter4, 
   filter5, 
+  filter6, 
   filter7, 
-  filter6; 
+  filter8; 
 
 
-String[] name = {"src", "filter: Invert RGB", "filter: Displace RGB", "filter: Shift RGB", "filter: Displace Luma", "filter: Shuffle RGB", "filter: Pixelate", "filter: All together"};
+String[] name = {"src", "filter: Invert RGB", "filter: Displace RGB", "filter: Shift RGB", "filter: Displace Luma", "filter: Shuffle RGB", "filter: Pixelate", "filter: StitchRGB", "filter: All together"};
 
-int nbFilter = 7;
-float scale = 0.85;
+int nbFilter = 8;
+float scale = 0.65;
 int imgw, imgh;
 
 void settings() {
@@ -27,7 +28,7 @@ void settings() {
   imgw = ceil(src.width * scale);
   imgh = ceil(src.height * scale);
   int w = imgw * 4;
-  int h = imgh * 2;
+  int h = imgh * 3;
   size(w, h, P2D);
 }
 
@@ -44,6 +45,7 @@ void setup() {
   filter5 = new Filter(this, src.width, src.height);
   filter6 = new Filter(this, src.width, src.height);
   filter7 = new Filter(this, src.width, src.height);
+  filter8 = new Filter(this, src.width, src.height);
 }
 
 void draw() {
@@ -58,14 +60,16 @@ void draw() {
   filter4.getGlitchDisplaceLuma(src, intensity, time, 0.025, 0.005);
   filter5.getGlitchShuffleRGB(src, intensity, time, 1.5);
   filter6.getGlitchPixelated(src, intensity, time, 50);
+  filter7.getGlitchStitch(src, intensity, time);
   
   //Full params + sequential glitch
-  filter7.getGlitchInvert(src, intensity * 0.05, time, 2.0, 8.0, 0.15, 1.0, 0.25, 0.9, 0.75);
-  filter7.getGlitchDisplaceRGB(filter7.getBuffer(), intensity * 0.25, time, 4.0, 15.0, 0.45, 0.75, 0.35, 0.154, 0.025, 0.005, 0.0);
-  filter7.getGlitchShiftRGB(filter7.getBuffer(), intensity * 0.75, time, 1.0, 3.0, 0.65, 1.0, 0.35, 0.0, 0.005, 0.01, 0.0, 0.0, 0.015, 0.015, 0.0);
-  filter7.getGlitchDisplaceLuma(filter7.getBuffer(), intensity, time, 2.0, 8.0, 0.5, 1.0, 0.25, 0.037, 0.01, 0.025, 0.005);
-  filter7.getGlitchShuffleRGB(filter7.getBuffer(), intensity * 0.015, time, 2.0, 6.0, 0.4, 1.0, 0.25, 0.204, 0.06, 1.5);
-  filter7.getGlitchPixelated(filter7.getBuffer(), intensity, time, 2.0, 8.0, 0.85, 1.0, 0.25, 0.0, 0.0, 100.0);
+  filter8.getGlitchInvert(src, intensity * 0.05, time, 2.0, 8.0, 0.15, 1.0, 0.25, 0.9, 0.75);
+  filter8.getGlitchDisplaceRGB(filter8.getBuffer(), intensity * 0.25, time, 4.0, 15.0, 0.45, 0.75, 0.35, 0.154, 0.025, 0.005, 0.0);
+  filter8.getGlitchShiftRGB(filter8.getBuffer(), intensity * 0.75, time, 1.0, 3.0, 0.65, 1.0, 0.35, 0.0, 0.005, 0.01, 0.0, 0.0, 0.015, 0.015, 0.0);
+  filter8.getGlitchDisplaceLuma(filter8.getBuffer(), intensity, time, 2.0, 8.0, 0.5, 1.0, 0.25, 0.037, 0.01, 0.025, 0.005);
+  filter8.getGlitchShuffleRGB(filter8.getBuffer(), intensity * 0.015, time, 2.0, 6.0, 0.4, 1.0, 0.25, 0.204, 0.06, 1.5);
+  filter8.getGlitchPixelated(filter8.getBuffer(), intensity, time, 2.0, 8.0, 0.85, 1.0, 0.25, 0.0, 0.0, 100.0);
+  filter8.getGlitchStitch(filter8.getBuffer(), intensity, time, 4.0, 8.0, 0.25, 1.0, 0.25, 2.35, 0.75);
 
   //use filter.getBuffer() to deirectly get the buffer used for the filter
   image(src, imgw * 0, imgh * 0, imgw, imgh);
@@ -76,6 +80,7 @@ void draw() {
   image(filter5.getBuffer(), imgw * 1, imgh * 1, imgw, imgh);
   image(filter6.getBuffer(), imgw * 2, imgh * 1, imgw, imgh);
   image(filter7.getBuffer(), imgw * 3, imgh * 1, imgw, imgh);
+  image(filter8.getBuffer(), imgw * 0, imgh * 2, imgw, imgh);
 
   noStroke();
   textAlign(LEFT, CENTER);
