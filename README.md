@@ -134,6 +134,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [ ] Bloom
 - [ ] SlitScan effect
 - [x] Glitches
+- [x] Datamoshing
 
 ##### Other : 
 - [ ] Optical Flow

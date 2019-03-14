@@ -1534,4 +1534,142 @@ public class Filter extends GPUImageBaseEffects{
 		this.setGlitchParam(intensity, time, columns, rows, subdivision, breaktime, speedtime, frequency, amplitude);
 		return super.filter(src);
 	}
+	
+	/**
+	 * Bind the params of the optical flow to the datamoshing shader
+	 * @param minVel
+	 * @param maxVel
+	 * @param offsetInc
+	 * @param lambda
+	 */
+	private void setDatamoshingFlowParam(float minVel, float maxVel, float offsetInc, float lambda) {
+		this.currentSH.set("minVel", minVel);
+		this.currentSH.set("maxVel", maxVel);
+		this.currentSH.set("offsetInc", offsetInc);
+		this.currentSH.set("lambda", lambda);
+	}
+	
+	/**
+	 * Bind the params of the datamoshing shader
+	 * @param threshold
+	 * @param intensity
+	 * @param offsetRGB
+	 */
+	private void setDatamoshingParam(float threshold, float intensity, float offsetRGB) {
+		this.currentSH.set("threshold", threshold);
+		this.currentSH.set("intensity", intensity);
+		this.currentSH.set("offsetRGB", offsetRGB);
+	}
+	
+	/**
+	 * Get a datamoshing shader
+	 * @param src source layer
+	 * @param threshold minimum velocity to glitch
+	 * @param intensity size of the glitch
+	 * @param offsetRGB RGB offset
+	 * @return
+	 */
+	public PGraphics getDatamoshing(PImage src, float threshold, float intensity, float offsetRGB) {
+		super.setCurrentSH(DATAMOSHING);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		this.currentSH.set("previous", this.ppb.getSrcBuffer());
+		this.setDatamoshingParam(threshold, intensity, offsetRGB);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Get a datamoshing shader
+	 * @param src source layer
+	 * @param minVel minimum velocity for optical flow (default is 0.01)
+	 * @param maxVel maximum velocity for optical flow (default is 0.5)
+	 * @param offsetInc offset increment for the sobel operator
+	 * @param lambda lambda value of the gradient for optical flow
+	 * @param threshold minimum velocity to glitch
+	 * @param intensity size of the glitch
+	 * @param offsetRGB RGB offset
+	 * @return
+	 */
+	public PGraphics getDatamoshing(PImage src, float minVel, float maxVel, float offsetInc, float lambda, float threshold, float intensity, float offsetRGB) {
+		super.setCurrentSH(DATAMOSHING);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		this.currentSH.set("previous", this.ppb.getSrcBuffer());
+		this.setDatamoshingFlowParam(minVel, maxVel, offsetInc, lambda);
+		this.setDatamoshingParam(threshold, intensity, offsetRGB);
+		return super.filter(src);
+	}
+
+	/**
+	 * Get a datamoshing shader
+	 * @param src source layer
+	 * @param threshold minimum velocity to glitch
+	 * @param intensity size of the glitch
+	 * @param offsetRGB RGB offset
+	 * @return
+	 */
+	public PGraphics getDatamoshing3x3(PImage src, float threshold, float intensity, float offsetRGB) {
+		super.setCurrentSH(DATAMOSHING3X3);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		this.currentSH.set("previous", this.ppb.getSrcBuffer());
+		this.setDatamoshingParam(threshold, intensity, offsetRGB);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Get a datamoshing shader
+	 * @param src source layer
+	 * @param minVel minimum velocity for optical flow (default is 0.01)
+	 * @param maxVel maximum velocity for optical flow (default is 0.5)
+	 * @param offsetInc offset increment for the sobel operator
+	 * @param lambda lambda value of the gradient for optical flow
+	 * @param threshold minimum velocity to glitch
+	 * @param intensity size of the glitch
+	 * @param offsetRGB RGB offset
+	 * @return
+	 */
+	public PGraphics getDatamoshing3x3(PImage src, float minVel, float maxVel, float offsetInc, float lambda, float threshold, float intensity, float offsetRGB) {
+		super.setCurrentSH(DATAMOSHING3X3);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		this.currentSH.set("previous", this.ppb.getSrcBuffer());
+		this.setDatamoshingFlowParam(minVel, maxVel, offsetInc, lambda);
+		this.setDatamoshingParam(threshold, intensity, offsetRGB);
+		return super.filter(src);
+	}
+
+
+	/**
+	 * Get a datamoshing shader
+	 * @param src source layer
+	 * @param threshold minimum velocity to glitch
+	 * @param intensity size of the glitch
+	 * @param offsetRGB RGB offset
+	 * @return
+	 */
+	public PGraphics getDatamoshing5x5(PImage src, float threshold, float intensity, float offsetRGB) {
+		super.setCurrentSH(DATAMOSHING5X5);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		this.currentSH.set("previous", this.ppb.getSrcBuffer());
+		this.setDatamoshingParam(threshold, intensity, offsetRGB);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Get a datamoshing shader
+	 * @param src source layer
+	 * @param minVel minimum velocity for optical flow (default is 0.01)
+	 * @param maxVel maximum velocity for optical flow (default is 0.5)
+	 * @param offsetInc offset increment for the sobel operator
+	 * @param lambda lambda value of the gradient for optical flow
+	 * @param threshold minimum velocity to glitch
+	 * @param intensity size of the glitch
+	 * @param offsetRGB RGB offset
+	 * @return
+	 */
+	public PGraphics getDatamoshing5x5(PImage src, float minVel, float maxVel, float offsetInc, float lambda, float threshold, float intensity, float offsetRGB) {
+		super.setCurrentSH(DATAMOSHING5X5);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		this.currentSH.set("previous", this.ppb.getSrcBuffer());
+		this.setDatamoshingFlowParam(minVel, maxVel, offsetInc, lambda);
+		this.setDatamoshingParam(threshold, intensity, offsetRGB);
+		return super.filter(src);
+	}
 }

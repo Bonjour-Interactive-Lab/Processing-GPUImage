@@ -108,6 +108,9 @@ public interface GPUImageInterface{
 	public static final String GLITCHSHIFTRGB = "glitchshiftrgb";
 	public static final String GLITCHSHUFFLERGB = "glitchshufflergb";
 	public static final String GLITCHSTITCH = "glitchstitch";
+	public static final String DATAMOSHING = "datamoshing";
+	public static final String DATAMOSHING3X3 = "datamoshing3x3";
+	public static final String DATAMOSHING5X5 = "datamoshing5x5";	
 
 	/* ...............................................
 	 * 
