@@ -11,7 +11,6 @@ PImage src;
 Filter csb, contrast, saturation, brightness;
 
 //destination buffer
-PGraphics filteredImg1, filteredImg2, filteredImg3, filteredImg4, filteredImg5;
 String[] name = {"src", "filter: Contrast Saturation brightness", "filter: Contrast", "filter: Saturation", "filter: Brightness"};
 
 int nbFilter = 4;
@@ -39,16 +38,16 @@ void draw() {
   background(20);
   float value = norm(mouseX, 0, width) * 200;
 
-  filteredImg1 = csb.getContrastSaturationBrightnessImage(src, 150.0, 25, 100.0);
-  filteredImg2 = contrast.getContrastImage(src, value);
-  filteredImg3 = saturation.getSaturationImage(src, value);
-  filteredImg4 = brightness.getBrightnessImage(src, value);
+  csb.getContrastSaturationBrightness(src, 150.0, 25, 100.0);
+  contrast.getContrast(src, value);
+  saturation.getSaturation(src, value);
+  brightness.getBrightness(src, value);
 
   image(src, imgw * 0, imgh * 0, imgw, imgh);
-  image(filteredImg1, imgw * 1, imgh * 0, imgw, imgh);
-  image(filteredImg2, imgw * 2, imgh * 0, imgw, imgh);
-  image(filteredImg3, imgw * 0, imgh * 1, imgw, imgh);
-  image(filteredImg4, imgw * 1, imgh * 1, imgw, imgh);
+  image(csb.getBuffer(), imgw * 1, imgh * 0, imgw, imgh);
+  image(contrast.getBuffer(), imgw * 2, imgh * 0, imgw, imgh);
+  image(saturation.getBuffer(), imgw * 0, imgh * 1, imgw, imgh);
+  image(brightness.getBuffer(), imgw * 1, imgh * 1, imgw, imgh);
 
   noStroke();
   fill(20);

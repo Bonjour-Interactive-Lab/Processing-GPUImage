@@ -11,8 +11,6 @@ import gpuimage.core.*;
 PImage src;
 Filter levelRGB, levelGrey, gammaRGB, gammaGrey, inputRGB, inputGrey, outputRGB, outputGrey;
 
-//destination buffer
-PGraphics filteredImg1, filteredImg2, filteredImg3, filteredImg4, filteredImg5, filteredImg6, filteredImg7, filteredImg8;
 String[] name = {"src", "filter: level RGB", "filter: level Grey", "filter: Gamma RGB (red)", "filter: Gamma grey", "filter: Input RGB", "filter: Input grey", "filter: Output RGB", "filter: Output grey"};
 
 int nbFilter = 8;
@@ -48,24 +46,24 @@ void draw() {
   background(20);
   //float value = norm(mouseX, 0, width) * 2.0;
 
-  filteredImg1 = levelRGB.getLevelImage(src, 80.0, 22.0, 41.0, 243.0, 255.0, 203.0, 0.63, 1.44, 1.66, 0.0, 5.0, 41.0, 238.0, 231.0, 175.0);
-  filteredImg2 = levelGrey.getLevelImage(src, 80.0, 225, 1.03, 60.0, 255.0);
-  filteredImg3 = gammaRGB.getLevelGammaImage(src, 0.25, 1.0, 1.0);
-  filteredImg4 = gammaGrey.getLevelGammaImage(src, 0.25);
-  filteredImg5 = inputRGB.getLevelInputImage(src, 80.0, 22.0, 41.0, 243.0, 255.0, 203.0);
-  filteredImg6 = inputGrey.getLevelInputImage(src, 80.0, 240.0);
-  filteredImg7 = outputRGB.getLevelOutputImage(src, 100.0, 22.0, 41.0, 243.0, 255.0, 203.0);
-  filteredImg8 = outputGrey.getLevelOutputImage(src, 80.0, 230.0);
+  levelRGB.getLevel(src, 80.0, 22.0, 41.0, 243.0, 255.0, 203.0, 0.63, 1.44, 1.66, 0.0, 5.0, 41.0, 238.0, 231.0, 175.0);
+  levelGrey.getLevel(src, 80.0, 225, 1.03, 60.0, 255.0);
+  gammaRGB.getLevelGamma(src, 0.25, 1.0, 1.0);
+  gammaGrey.getLevelGamma(src, 0.25);
+  inputRGB.getLevelInput(src, 80.0, 22.0, 41.0, 243.0, 255.0, 203.0);
+  inputGrey.getLevelInput(src, 80.0, 240.0);
+  outputRGB.getLevelOutput(src, 100.0, 22.0, 41.0, 243.0, 255.0, 203.0);
+  outputGrey.getLevelOutput(src, 80.0, 230.0);
 
   image(src, imgw * 0, imgh * 0, imgw, imgh);
-  image(filteredImg1, imgw * 1, imgh * 0, imgw, imgh);
-  image(filteredImg2, imgw * 2, imgh * 0, imgw, imgh);
-  image(filteredImg3, imgw * 3, imgh * 0, imgw, imgh);
-  image(filteredImg4, imgw * 0, imgh * 1, imgw, imgh);
-  image(filteredImg5, imgw * 1, imgh * 1, imgw, imgh);
-  image(filteredImg6, imgw * 2, imgh * 1, imgw, imgh);
-  image(filteredImg7, imgw * 3, imgh * 1, imgw, imgh);
-  image(filteredImg8, imgw * 0, imgh * 2, imgw, imgh);
+  image(levelRGB.getBuffer(), imgw * 1, imgh * 0, imgw, imgh);
+  image(levelGrey.getBuffer(), imgw * 2, imgh * 0, imgw, imgh);
+  image(gammaRGB.getBuffer(), imgw * 3, imgh * 0, imgw, imgh);
+  image(gammaGrey.getBuffer(), imgw * 0, imgh * 1, imgw, imgh);
+  image(inputRGB.getBuffer(), imgw * 1, imgh * 1, imgw, imgh);
+  image(inputGrey.getBuffer(), imgw * 2, imgh * 1, imgw, imgh);
+  image(outputRGB.getBuffer(), imgw * 3, imgh * 1, imgw, imgh);
+  image(outputGrey.getBuffer(), imgw * 0, imgh * 2, imgw, imgh);
 
   noStroke();
   textAlign(LEFT, CENTER);

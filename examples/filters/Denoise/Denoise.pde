@@ -10,7 +10,6 @@ PImage src;
 Filter bilateral, denoise, median3x3, median5x5;
 
 //destination buffer
-PGraphics filteredImg1, filteredImg2, filteredImg3, filteredImg4;
 String[] name = {"src", "filter: bilateral", "filter: denoise", "filter: median3x3", "filter: median5x5"};
 
 int nbFilter = 4;
@@ -37,16 +36,16 @@ void setup() {
 void draw() {
   background(20);
   
-  filteredImg1 = bilateral.getBilateralImage(src);
-  filteredImg2 = denoise.getDenoiseImage(src);
-  filteredImg3 = median3x3.getMedian3x3Image(src);
-  filteredImg4 = median5x5.getMedian5x5Image(src);
+  bilateral.getBilateral(src);
+  denoise.getDenoise(src);
+  median3x3.getMedian3x3(src);
+  median5x5.getMedian5x5(src);
   
   image(src          , imgw * 0, imgh * 0, imgw, imgh);
-  image(filteredImg1 , imgw * 1, imgh * 0, imgw, imgh);
-  image(filteredImg2 , imgw * 2, imgh * 0, imgw, imgh);
-  image(filteredImg3 , imgw * 0, imgh * 1, imgw, imgh);
-  image(filteredImg4 , imgw * 1, imgh * 1, imgw, imgh);
+  image(bilateral.getBuffer() , imgw * 1, imgh * 0, imgw, imgh);
+  image(denoise.getBuffer() , imgw * 2, imgh * 0, imgw, imgh);
+  image(median3x3.getBuffer() , imgw * 0, imgh * 1, imgw, imgh);
+  image(median5x5.getBuffer() , imgw * 1, imgh * 1, imgw, imgh);
   
   noStroke();
   fill(20);

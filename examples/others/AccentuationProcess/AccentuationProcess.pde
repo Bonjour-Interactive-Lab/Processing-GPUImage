@@ -15,8 +15,6 @@ Filter filter;
 Compositor comp;
 
 //destination buffer
-PGraphics filteredImg;
-PGraphics compoImg;
 String[] name = {"src", "HighPass + Desaturation", "Overlay blending"};
 
 float scale = 1.0;
@@ -47,16 +45,16 @@ void draw() {
   t.endDraw();
 
   //1- High pass the source image
-  filteredImg = filter.getHighPassImage(src, value);
+  filter.getHighPass(src, value);
   //2- Desaturate the result image
-  filteredImg = filter.getDesaturateImage(filteredImg, 100.0);
+  filter.getDesaturate(filter.getBuffer(), 100.0);
   //3- Compose it with the source image as overlay
-  compoImg = comp.getBlendOverlayImage(filteredImg, src, 100.0);
+  comp.getBlendOverlayImage(filter.getBuffer(), src, 100.0);
 
 
   image(src, imgw * 0, imgh * 0, imgw, imgh);
-  image(filteredImg, imgw * 1, imgh * 0, imgw, imgh);
-  image(compoImg, imgw * 2, imgh * 0, imgw, imgh);
+  image(filter.getBuffer(), imgw * 1, imgh * 0, imgw, imgh);
+  image(comp.getBuffer(), imgw * 2, imgh * 0, imgw, imgh);
 
   noStroke();
   fill(20);

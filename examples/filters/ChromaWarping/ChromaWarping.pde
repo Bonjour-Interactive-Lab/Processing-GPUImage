@@ -13,7 +13,6 @@ PImage src;
 Filter radial, low, med, high;
 
 //destination buffer
-PGraphics filteredImg1, filteredImg2, filteredImg3, filteredImg4, filteredImg5;
 String[] name = {"src", "filter: chroma warping", "filter: chroma warping low quality", "filter: chroma warping medium quality", "filter: chroma warping high quality"};
 
 int nbFilter = 5;
@@ -48,17 +47,18 @@ void draw() {
   float cx = src.width/2;
   float cy = src.height/2;
   float size = nx;
+  float angleDivider = 5.0 + ny * 45.0;
 
-  filteredImg1 = radial.getChromaWarpImage(src, cx, cy, size * 0.1, 25, (HALF_PI / 50.0) * size);
-  filteredImg2 = low.getChromaWarpLowImage(src, cx, cy, size * 0.1, (HALF_PI / 50.0) * size);
-  filteredImg3 = med.getChromaWarpMediumImage(src, cx, cy, size * 0.1, (HALF_PI / 50.0) * size);
-  filteredImg4 = high.getChromaWarpHighImage(src, cx, cy, size * 0.1, (HALF_PI / 50.0) * size);
+  radial.getChromaWarp(src, cx, cy, size * 0.1, 25, (HALF_PI / angleDivider) * size);
+  low.getChromaWarpLow(src, cx, cy, size * 0.1, (HALF_PI / angleDivider) * size);
+  med.getChromaWarpMedium(src, cx, cy, size * 0.1, (HALF_PI / angleDivider) * size);
+  high.getChromaWarpHigh(src, cx, cy, size * 0.1, (HALF_PI / angleDivider) * size);
 
   image(src, imgw * 0, imgh * 0, imgw, imgh);
-  image(filteredImg1, imgw * 1, imgh * 0, imgw, imgh);
-  image(filteredImg2, imgw * 2, imgh * 0, imgw, imgh);
-  image(filteredImg3, imgw * 0, imgh * 1, imgw, imgh);
-  image(filteredImg4, imgw * 1, imgh * 1, imgw, imgh);
+  image(radial.getBuffer(), imgw * 1, imgh * 0, imgw, imgh);
+  image(low.getBuffer(), imgw * 2, imgh * 0, imgw, imgh);
+  image(med.getBuffer(), imgw * 0, imgh * 1, imgw, imgh);
+  image(high.getBuffer(), imgw * 1, imgh * 1, imgw, imgh);
 
   noStroke();
   fill(20);

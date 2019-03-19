@@ -12,10 +12,8 @@
 import gpuimage.core.*;
 
 PImage src;
-Filter filter;
+Filter filter1, filter2;
 
-//destination buffer
-PGraphics filteredImg1, filteredImg2;
 String[] name = {"src", "filter: Hue Segmentation", "filter: Hue Segmentation"};
 
 int nbFilter = 2;
@@ -33,19 +31,20 @@ void settings() {
 
 
 void setup() {
-  filter = new Filter(this, src.width, src.height);
+  filter1 = new Filter(this, src.width, src.height);
+  filter2 = new Filter(this, src.width, src.height);
 }
 
 void draw() {
   background(20);
   float value = norm(mouseX, 0, width) * 360;
-  
-  filteredImg1 = filter.getHueSegmentationImage(src);
-  filteredImg2 = filter.getHueSegmentationImage(src, value);
 
-  image(src          , imgw * 0, imgh * 0, imgw, imgh);
-  image(filteredImg1 , imgw * 1, imgh * 0, imgw, imgh);
-  image(filteredImg2 , imgw * 2, imgh * 0, imgw, imgh);
+  filter1.getHueSegmentation(src);
+  filter2.getHueSegmentation(src, value);
+
+  image(src, imgw * 0, imgh * 0, imgw, imgh);
+  image(filter1.getBuffer(), imgw * 1, imgh * 0, imgw, imgh);
+  image(filter2.getBuffer(), imgw * 2, imgh * 0, imgw, imgh);
 
   noStroke();
   fill(20);

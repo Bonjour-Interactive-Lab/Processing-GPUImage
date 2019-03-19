@@ -1,5 +1,6 @@
 /**
  * This example shows how to use datamoshing shader
+ * Video : montage of various free sources from coverr.com
  * --
  * Bonjour Lab.
  * http://www.bonjour-lab.com

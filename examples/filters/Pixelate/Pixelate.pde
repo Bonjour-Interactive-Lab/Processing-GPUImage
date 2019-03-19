@@ -11,8 +11,6 @@ import gpuimage.core.*;
 PImage src;
 Filter filter;
 
-//destination buffer
-PGraphics filteredImg;
 String[] name = {"src", "filter: pixelate"};
 
 int nbFilter = 2;
@@ -37,10 +35,10 @@ void draw() {
   background(20);
   float value = map(mouseX, 0, width, 10, src.width * 0.25);
   
-  filteredImg = filter.getPixelateImage(src, value);
+  filter.getPixelate(src, value);
 
   image(src, imgw * 0, imgh * 0, imgw, imgh);
-  image(filteredImg, imgw * 1, imgh * 0, imgw, imgh);
+  image(filter.getBuffer(), imgw * 1, imgh * 0, imgw, imgh);
 
   noStroke();
   fill(20);

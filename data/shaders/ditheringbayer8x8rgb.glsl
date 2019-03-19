@@ -24,10 +24,15 @@ const int bayer8x8[64] = int[](0,  32, 8,  40, 2,  34, 10, 42,
 
 uniform sampler2D texture;
 uniform vec2 resolution;
+uniform float theta;
 
 in vec4 vertTexCoord;
 out vec4 fragColor;
 
+mat2 rotate2D(float angle){
+	return mat2( cos(angle), -sin(angle),
+				 sin(angle),  cos(angle));
+}
 
 float index(vec2 screenpos){
 	int x  = int(mod(screenpos.x, 8));
@@ -44,6 +49,12 @@ float dither(vec2 screenpos, float lum){
 void main(){
 	vec2 uv = vertTexCoord.xy;
 	vec4 tex = texture(texture, uv);
+
+	//rotate uv
+	uv -= vec2(0.5, 0.5);
+    uv = rotate2D(theta) * uv;
+    uv += vec2(0.5, 0.5);
+
 	float r = dither(uv * resolution, tex.r);
 	float g = dither(uv * resolution, tex.g);
 	float b = dither(uv * resolution, tex.b);

@@ -12,8 +12,6 @@ import gpuimage.core.*;
 PImage src;
 Filter gaussian, low, med, high, ultrahigh;
 
-//destination buffer
-PGraphics filteredImg1, filteredImg2, filteredImg3, filteredImg4, filteredImg5;
 String[] name = {"src", "filter: gaussian blur", "filter: gaussian blur low quality", "filter: gaussian blur medium quality", "filter: gaussian blur high quality", "filter: gaussian blur ultra high quality"};
 
 int nbFilter = 5;
@@ -46,18 +44,18 @@ void draw() {
   background(20);
   float value = 0.01 + norm(mouseX, 0, width) * 5.0;
 
-  filteredImg1 = gaussian.getGaussianBlurImage(src, value, value);
-  filteredImg2 = low.getGaussianBlurLowImage(src, value);
-  filteredImg3 = med.getGaussianBlurMediumImage(src, value);
-  filteredImg4 = high.getGaussianBlurHighImage(src, value);
-  filteredImg5 = ultrahigh.getGaussianBlurUltraHighImage(src, value);
+  gaussian.getGaussianBlur(src, value, value);
+  low.getGaussianBlurLow(src, value);
+  med.getGaussianBlurMedium(src, value);
+  high.getGaussianBlurHigh(src, value);
+  ultrahigh.getGaussianBlurUltraHigh(src, value);
 
   image(src         , imgw * 0, imgh * 0, imgw, imgh);
-  image(filteredImg1, imgw * 1, imgh * 0, imgw, imgh);
-  image(filteredImg2, imgw * 2, imgh * 0, imgw, imgh);
-  image(filteredImg3, imgw * 0, imgh * 1, imgw, imgh);
-  image(filteredImg4, imgw * 1, imgh * 1, imgw, imgh);
-  image(filteredImg5, imgw * 2, imgh * 1, imgw, imgh);
+  image(gaussian.getBuffer(), imgw * 1, imgh * 0, imgw, imgh);
+  image(low.getBuffer(), imgw * 2, imgh * 0, imgw, imgh);
+  image(med.getBuffer(), imgw * 0, imgh * 1, imgw, imgh);
+  image(high.getBuffer(), imgw * 1, imgh * 1, imgw, imgh);
+  image(ultrahigh.getBuffer(), imgw * 2, imgh * 1, imgw, imgh);
 
   noStroke();
   fill(20);

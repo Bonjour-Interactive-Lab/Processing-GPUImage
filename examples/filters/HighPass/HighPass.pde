@@ -13,8 +13,6 @@ import gpuimage.core.*;
 PImage src;
 Filter filter;
 
-//destination buffer
-PGraphics filteredImg;
 String[] name = {"src", "filter: High-Pass"};
 
 int nbFilter = 2;
@@ -39,10 +37,10 @@ void draw() {
   background(20);
   float value = norm(mouseX, 0, width) * 2.0;
   
-  filteredImg = filter.getHighPassImage(src, value);
+  filter.getHighPass(src, value);
 
   image(src, imgw * 0, imgh * 0, imgw, imgh);
-  image(filteredImg, imgw * 1, imgh * 0, imgw, imgh);
+  image(filter.getBuffer(), imgw * 1, imgh * 0, imgw, imgh);
 
   noStroke();
   fill(20);

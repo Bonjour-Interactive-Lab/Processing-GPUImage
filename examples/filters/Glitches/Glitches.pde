@@ -116,4 +116,6 @@ void keyPressed() {
   filter4.getBuffer().save("filteredImg4.png");
   filter5.getBuffer().save("filteredImg5.png");
   filter6.getBuffer().save("filteredImg6.png");
+  filter7.getBuffer().save("filteredImg7.png");
+  filter8.getBuffer().save("filteredImg8.png");
 }

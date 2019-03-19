@@ -14,8 +14,6 @@ PGraphics mask;
 PImage src, base, maskimg;
 Compositor comp1, comp2;
 
-//destination buffer
-PGraphics filteredImg1, filteredImg2;
 String[] name = {"src", "base", "Chroma key on alpha", "Chroma key on base image"};
 
 float scale = 1.0;
@@ -46,13 +44,13 @@ void draw() {
   background(20);
   
   //PGraphics mess up with UV coordinates
-  filteredImg1 = comp1.getChromaKeyImage(src, 11.0, 165, 70.0);
-  filteredImg2 = comp1.getChromaKeyImage(src, base, 11.0, 165, 70.0);
+  comp1.getChromaKey(src, 11.0, 165, 70.0);
+  comp2.getChromaKey(src, base, 11.0, 165, 70.0);
 
   image(src, imgw * 0, imgh * 0, imgw, imgh);
   image(base, imgw * 1, imgh * 0, imgw, imgh);
-  image(filteredImg1, imgw * 0, imgh * 1, imgw, imgh);
-  image(filteredImg2, imgw * 1, imgh * 1, imgw, imgh);
+  image(comp1.getBuffer(), imgw * 0, imgh * 1, imgw, imgh);
+  image(comp2.getBuffer(), imgw * 1, imgh * 1, imgw, imgh);
 
   noStroke();
   textAlign(LEFT, CENTER);

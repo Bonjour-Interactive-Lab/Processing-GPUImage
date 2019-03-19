@@ -15,8 +15,6 @@ PImage lut;
 PImage[] lutsrc;
 Filter filter;
 
-//destination buffer
-PGraphics filteredImg1;
 String[] name = {"src", "filter: 1D Look Up Table"};
 
 int nbFilter = 1;
@@ -49,10 +47,10 @@ void setup() {
 void draw() {
   background(20);
 
-  filteredImg1 = filter.getLut1DImage(src, lut);
+  filter.getLut1D(src, lut);
 
   image(src, imgw * 0, imgh * 0, imgw, imgh);
-  image(filteredImg1, imgw * 1, imgh * 0, imgw, imgh);
+  image(filter.getBuffer(), imgw * 1, imgh * 0, imgw, imgh);
   image(lut, imgw * 1, imgh * 0 + 40, imgw * 0.1, imgh * 0.1);
 
   noStroke();

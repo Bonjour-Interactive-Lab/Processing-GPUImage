@@ -15,17 +15,7 @@ Filter filter1,
        filter6, 
        filter7, 
        filter8; 
-
-//destination buffer
-PGraphics filteredImg1, 
-          filteredImg2, 
-          filteredImg3, 
-          filteredImg4, 
-          filteredImg5, 
-          filteredImg6, 
-          filteredImg7, 
-          filteredImg8;
-          
+         
 String[] name = {"src", "filter: Bayer2x2", "filter: Bayer3x3", "filter: Bayer4x4", "filter: Bayer8x8", "filter: ClusterDot4x4", "filter: ClusterDot8x8", "filter: ClusterDot5x3", "filter: Random3x3"};
 
 int nbFilter = 8;
@@ -59,26 +49,27 @@ void setup() {
 
 void draw() {
   background(20);
-  //float value = norm(mouseX, 0, width) * 2.0;
+  float value = norm(mouseX, 0, width) * TWO_PI;
+  float angle = value;//frameCount * 0.001;
 
-  filteredImg1 = filter1.getDitherBayer2x2RGBImage(src);
-  filteredImg2 = filter2.getDitherBayer3x3RGBImage(src);
-  filteredImg3 = filter3.getDitherBayer4x4RGBImage(src);
-  filteredImg4 = filter4.getDitherBayer8x8RGBImage(src);
-  filteredImg5 = filter5.getDitherClusterDot4x4RGBImage(src);
-  filteredImg6 = filter6.getDitherClusterDot8x8RGBImage(src);
-  filteredImg7 = filter7.getDitherClusterDot5x3RGBImage(src);
-  filteredImg8 = filter8.getDitherRandom3x3RGBImage(src);
+  filter1.getDitherBayer2x2RGB(src, angle);
+  filter2.getDitherBayer3x3RGB(src, angle);
+  filter3.getDitherBayer4x4RGB(src, angle);
+  filter4.getDitherBayer8x8RGB(src, angle);
+  filter5.getDitherClusterDot4x4RGB(src, angle);
+  filter6.getDitherClusterDot8x8RGB(src, angle);
+  filter7.getDitherClusterDot5x3RGB(src, angle);
+  filter8.getDitherRandom3x3RGB(src, angle);
 
   image(src, imgw * 0, imgh * 0, imgw, imgh);
-  image(filteredImg1, imgw * 1, imgh * 0, imgw, imgh);
-  image(filteredImg2, imgw * 2, imgh * 0, imgw, imgh);
-  image(filteredImg3, imgw * 3, imgh * 0, imgw, imgh);
-  image(filteredImg4, imgw * 0, imgh * 1, imgw, imgh);
-  image(filteredImg5, imgw * 1, imgh * 1, imgw, imgh);
-  image(filteredImg6, imgw * 2, imgh * 1, imgw, imgh);
-  image(filteredImg7, imgw * 3, imgh * 1, imgw, imgh);
-  image(filteredImg8, imgw * 0, imgh * 2, imgw, imgh);
+  image(filter1.getBuffer(), imgw * 1, imgh * 0, imgw, imgh);
+  image(filter2.getBuffer(), imgw * 2, imgh * 0, imgw, imgh);
+  image(filter3.getBuffer(), imgw * 3, imgh * 0, imgw, imgh);
+  image(filter4.getBuffer(), imgw * 0, imgh * 1, imgw, imgh);
+  image(filter5.getBuffer(), imgw * 1, imgh * 1, imgw, imgh);
+  image(filter6.getBuffer(), imgw * 2, imgh * 1, imgw, imgh);
+  image(filter7.getBuffer(), imgw * 3, imgh * 1, imgw, imgh);
+  image(filter8.getBuffer(), imgw * 0, imgh * 2, imgw, imgh);
 
   noStroke();
   textAlign(LEFT, CENTER);
@@ -108,12 +99,12 @@ void showFPS() {
 }
 
 void keyPressed(){
-  filteredImg1.save("filteredImg1.png");
-  filteredImg2.save("filteredImg2.png");
-  filteredImg3.save("filteredImg3.png");
-  filteredImg4.save("filteredImg4.png");
-  filteredImg5.save("filteredImg5.png");
-  filteredImg6.save("filteredImg6.png");
-  filteredImg7.save("filteredImg7.png");
-  filteredImg8.save("filteredImg8.png");
+  filter1.getBuffer().save("filteredImg1.png");
+  filter2.getBuffer().save("filteredImg2.png");
+  filter3.getBuffer().save("filteredImg3.png");
+  filter4.getBuffer().save("filteredImg4.png");
+  filter5.getBuffer().save("filteredImg5.png");
+  filter6.getBuffer().save("filteredImg6.png");
+  filter7.getBuffer().save("filteredImg7.png");
+  filter8.getBuffer().save("filteredImg8.png");
 }

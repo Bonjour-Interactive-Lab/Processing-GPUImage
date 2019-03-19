@@ -11,8 +11,6 @@ import gpuimage.core.*;
 PImage src;
 Filter filter;
 
-//destination buffer
-PGraphics filteredImg;
 String[] name = {"src", "filter: Invert"};
 
 int nbFilter = 2;
@@ -36,10 +34,10 @@ void setup() {
 void draw() {
   background(20);
   
-  filteredImg = filter.getInvertImage(src);
+  filter.getInvert(src);
 
   image(src, imgw * 0, imgh * 0, imgw, imgh);
-  image(filteredImg, imgw * 1, imgh * 0, imgw, imgh);
+  image(filter.getBuffer(), imgw * 1, imgh * 0, imgw, imgh);
 
   noStroke();
   fill(20);

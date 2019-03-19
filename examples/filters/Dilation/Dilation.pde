@@ -11,7 +11,6 @@ PImage src2;
 Filter filter1, filter2;
 
 //destination buffer
-PGraphics filteredImg1, filteredImg2;
 String[] name = {"src RGB", "filter: dilation RGB", "src BW", "filter: dilation BW"};
 
 int nbFilter = 2;
@@ -37,19 +36,19 @@ void setup() {
 void draw() {
   background(20);
 
-  filteredImg1 = filter1.getDilationRGBImage(src);
-  filteredImg2 = filter1.getDilationImage(src2);
+  filter1.getDilationRGB(src);
+  filter2.getDilation(src2);
 
   int loop = 5;
   for (int i=0; i<loop; i++) {
-    filteredImg1 = filter1.getDilationRGBImage(filteredImg1);
-    filteredImg2 = filter1.getDilationImage(filteredImg2);
+    filter1.getDilationRGB(filter1.getBuffer());
+    filter2.getDilation(filter2.getBuffer());
   }
 
   image(src, imgw * 0, imgh * 0, imgw, imgh);
-  image(filteredImg1, imgw * 1, imgh * 0, imgw, imgh);
+  image(filter1.getBuffer(), imgw * 1, imgh * 0, imgw, imgh);
   image(src2, imgw * 0, imgh * 1, imgw, imgh);
-  image(filteredImg2, imgw * 1, imgh * 1, imgw, imgh);
+  image(filter2.getBuffer(), imgw * 1, imgh * 1, imgw, imgh);
 
   noStroke();
   fill(20);

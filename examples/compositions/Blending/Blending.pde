@@ -14,8 +14,6 @@ PImage src, base;
 Compositor composition;
 int count = 0;
 
-//destination buffer
-PGraphics filteredImg;
 String[] name = {"src", "base", "blend: add"};
 String[] blending = { "add", "average", "color burn", "color dodge", "color", "darken", "difference", "exclusion", 
   "glow", "hard light", "hard mix", "hue", "lighten", "linear burn", "linear dodge", "linear light", 
@@ -47,94 +45,94 @@ void draw() {
   
   switch(count) {
   case 0 : 
-    filteredImg = composition.getBlendAddImage(src, base, value); //add
+    composition.getBlendAdd(src, base, value); //add
     break;
   case 1 : 
-    filteredImg = composition.getBlendAverageImage(src, base, value); //average
+    composition.getBlendAverage(src, base, value); //average
     break;
   case 2 : 
-    filteredImg = composition.getBlendColorBurnImage(src, base, value); //color burn
+    composition.getBlendColorBurn(src, base, value); //color burn
     break;
   case 3 : 
-    filteredImg = composition.getBlendColorDodgeImage(src, base, value); //color dodge
+    composition.getBlendColorDodge(src, base, value); //color dodge
     break;
   case 4 : 
-    filteredImg = composition.getBlendColorImage(src, base, value); //color
+    composition.getBlendColor(src, base, value); //color
     break;
   case 5 : 
-    filteredImg = composition.getBlendDarkenImage(src, base, value); //darken
+    composition.getBlendDarken(src, base, value); //darken
     break;
   case 6 : 
-    filteredImg = composition.getBlendDifferenceImage(src, base, value); //difference
+    composition.getBlendDifference(src, base, value); //difference
     break;
   case 7 : 
-    filteredImg = composition.getBlendExclusionImage(src, base, value); //exclusion
+    composition.getBlendExclusion(src, base, value); //exclusion
     break;
   case 8 : 
-    filteredImg = composition.getBlendGlowImage(src, base, value); //glow
+    composition.getBlendGlow(src, base, value); //glow
     break;
   case 9 : 
-    filteredImg = composition.getBlendHardLightImage(src, base, value); //hard light
+    composition.getBlendHardLight(src, base, value); //hard light
     break;
   case 10 : 
-    filteredImg = composition.getBlendHardMixImage(src, base, value); //hard mix
+    composition.getBlendHardMix(src, base, value); //hard mix
     break;
   case 11 : 
-    filteredImg = composition.getBlendHueImage(src, base, value); //hue
+    composition.getBlendHue(src, base, value); //hue
     break;
   case 12 : 
-    filteredImg = composition.getBlendLightenImage(src, base, value); //lighten
+    composition.getBlendLighten(src, base, value); //lighten
     break;
   case 13 : 
-    filteredImg = composition.getBlendLinearBurnImage(src, base, value); //linear burn
+    composition.getBlendLinearBurn(src, base, value); //linear burn
     break;
   case 14 : 
-    filteredImg = composition.getBlendLinearDodgeImage(src, base, value); //linear dodge
+    composition.getBlendLinearDodge(src, base, value); //linear dodge
     break;
   case 15 : 
-    filteredImg = composition.getBlendLinearLightImage(src, base, value); //linear light
+    composition.getBlendLinearLight(src, base, value); //linear light
     break;
   case 16 : 
-    filteredImg = composition.getBlendLuminosityImage(src, base, value); //luminosity
+    composition.getBlendLuminosity(src, base, value); //luminosity
     break;
   case 17 : 
-    filteredImg = composition.getBlendMultiplyImage(src, base, value); //multiply
+    composition.getBlendMultiply(src, base, value); //multiply
     break;
   case 18 : 
-    filteredImg = composition.getBlendNegationImage(src, base, value); //negation
+    composition.getBlendNegation(src, base, value); //negation
     break;
   case 19 : 
-    filteredImg = composition.getBlendOverlayImage(src, base, value); //overlay
+    composition.getBlendOverlay(src, base, value); //overlay
     break;
   case 20 : 
-    filteredImg = composition.getBlendPhoenixImage(src, base, value); //pheonix
+    composition.getBlendPhoenix(src, base, value); //pheonix
     break;
   case 21 : 
-    filteredImg = composition.getBlendPinLightImage(src, base, value); //pin light
+    composition.getBlendPinLight(src, base, value); //pin light
     break;
   case 22 : 
-    filteredImg = composition.getBlendReflectImage(src, base, value); //reflect
+    composition.getBlendReflect(src, base, value); //reflect
     break;
   case 23 : 
-    filteredImg = composition.getBlendSaturationImage(src, base, value); //saturation
+    composition.getBlendSaturation(src, base, value); //saturation
     break;
   case 24 : 
-    filteredImg = composition.getBlendScreenImage(src, base, value); //screen
+    composition.getBlendScreen(src, base, value); //screen
     break;
   case 25 : 
-    filteredImg = composition.getBlendSoftLightImage(src, base, value); //soft light
+    composition.getBlendSoftLight(src, base, value); //soft light
     break;
   case 26 : 
-    filteredImg = composition.getBlendSubstractImage(src, base, value); //substract
+    composition.getBlendSubstract(src, base, value); //substract
     break;
   case 27 : 
-    filteredImg = composition.getBlendVividLightImage(src, base, value); //vivid light
+    composition.getBlendVividLight(src, base, value); //vivid light
     break;
   }
 
   image(src, imgw * 0, imgh * 0, imgw, imgh);
   image(base, imgw * 1, imgh * 0, imgw, imgh);
-  image(filteredImg, imgw * 2, imgh * 0, imgw, imgh);
+  image(composition.getBuffer(), imgw * 2, imgh * 0, imgw, imgh);
 
   noStroke();
   fill(20);

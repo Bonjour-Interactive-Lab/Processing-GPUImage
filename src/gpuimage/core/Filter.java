@@ -1,5 +1,4 @@
 package gpuimage.core;
-
 import processing.core.*;
 import processing.opengl.*;
 
@@ -33,7 +32,7 @@ public class Filter extends GPUImageBaseEffects{
 	/**Bilateral filtering
 	 * @param src source layer
 	 */
-	public PGraphics getBilateralImage(PImage src) {
+	public PGraphics getBilateral(PImage src) {
 		super.setCurrentSH(BILATERAL);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
 		return super.filter(src);
@@ -42,7 +41,7 @@ public class Filter extends GPUImageBaseEffects{
 	/**Simple denoiser based on average neighbors pixels
 	 * @param src source layer
 	 */
-	public PGraphics getDenoiseImage(PImage src) {
+	public PGraphics getDenoise(PImage src) {
 		super.setCurrentSH(DENOISE);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
 		return super.filter(src);
@@ -51,7 +50,7 @@ public class Filter extends GPUImageBaseEffects{
 	/**Median filter based on the 3×3 neighbors
 	 * @param src source layer
 	 */
-	public PGraphics getMedian3x3Image(PImage src) {
+	public PGraphics getMedian3x3(PImage src) {
 		super.setCurrentSH(MEDIAN3X3);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
 		return super.filter(src);
@@ -60,7 +59,7 @@ public class Filter extends GPUImageBaseEffects{
 	/**Median filter based on the 5×5 neighbors
 	 * @param src source layer
 	 */
-	public PGraphics getMedian5x5Image(PImage src) {
+	public PGraphics getMedian5x5(PImage src) {
 		super.setCurrentSH(MEDIAN5X5);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
 		return super.filter(src);
@@ -72,7 +71,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param radius sharpening factor between 0 and X (default is 1.0)
 	 * @return
 	 */
-	public PGraphics getHighPassImage(PImage src, float radius) {
+	public PGraphics getHighPass(PImage src, float radius) {
 		super.setCurrentSH(HIGHPASS);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
 		super.currentSH.set("sharpFactor", radius);
@@ -84,7 +83,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param src source layer
 	 * @return
 	 */
-	public PGraphics getHueSegmentationImage(PImage src) {
+	public PGraphics getHueSegmentation(PImage src) {
 		super.setCurrentSH(HUESEGMENTATION);
 		super.currentSH.set("hueStepper", 1.0f);
 		return super.filter(src);
@@ -96,7 +95,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param huestep resolution per hue (by default the huer resolution is set at 1.0);
 	 * @return
 	 */
-	public PGraphics getHueSegmentationImage(PImage src, float hueresolution) {
+	public PGraphics getHueSegmentation(PImage src, float hueresolution) {
 		super.setCurrentSH(HUESEGMENTATION);
 		super.currentSH.set("hueStepper", hueresolution);
 		return super.filter(src);
@@ -108,7 +107,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param src
 	 * @return
 	 */
-	public PGraphics getSobelImage(PImage src) {
+	public PGraphics getSobel(PImage src) {
 		super.setCurrentSH(SOBEL);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
 		super.currentSH.set("sobelxScale", 1.0f);
@@ -123,7 +122,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param sobelYScale scale of the sobel on Y between [0, X] (default is 1.0)
 	 * @return
 	 */
-	public PGraphics getSobelImage(PImage src, float sobelXScale, float sobelYScale) {
+	public PGraphics getSobel(PImage src, float sobelXScale, float sobelYScale) {
 		super.setCurrentSH(SOBEL);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
 		super.currentSH.set("sobelxScale", sobelXScale);
@@ -137,7 +136,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param src
 	 * @return
 	 */
-	public PGraphics getSobelEdgeImage(PImage src) {
+	public PGraphics getSobelEdge(PImage src) {
 		super.setCurrentSH(SOBELEDGE);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
 		super.currentSH.set("sobelxScale", 1.0f);
@@ -152,7 +151,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param sobelYScale scale of the sobel on Y between [0, X] (default is 1.0)
 	 * @return
 	 */
-	public PGraphics getSobelEdgeImage(PImage src, float sobelXScale, float sobelYScale) {
+	public PGraphics getSobelEdge(PImage src, float sobelXScale, float sobelYScale) {
 		super.setCurrentSH(SOBELEDGE);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
 		super.currentSH.set("sobelxScale", sobelXScale);
@@ -166,8 +165,8 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param threshold threshold of the edge between [0, 1.0] where 0 = all detected edge and 1.0 = none
 	 * @return
 	 */
-	public PGraphics getCannyEdgeImage(PImage src) {
-		return getCannyEdgeImage(src, 1.0f, 1.0f, 0.5f);
+	public PGraphics getCannyEdge(PImage src) {
+		return getCannyEdge(src, 1.0f, 1.0f, 0.5f);
 	}
 	
 	/**
@@ -176,8 +175,8 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param threshold threshold of the edge between [0, 1.0] where 0 = all detected edge and 1.0 = none
 	 * @return
 	 */
-	public PGraphics getCannyEdgeImage(PImage src, float threshold) {
-		return getCannyEdgeImage(src, 1.0f, 1.0f, threshold);
+	public PGraphics getCannyEdge(PImage src, float threshold) {
+		return getCannyEdge(src, 1.0f, 1.0f, threshold);
 	}
 	
 	/**
@@ -188,7 +187,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param threshold threshold of the edge between [0, 1.0] where 0 = all detected edge and 1.0 = none
 	 * @return
 	 */
-	public PGraphics getCannyEdgeImage(PImage src, float sobelXScale, float sobelYScale, float threshold) {
+	public PGraphics getCannyEdge(PImage src, float sobelXScale, float sobelYScale, float threshold) {
 		super.setCurrentSH(CANNYEDGE);
 		//first sobel pass
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
@@ -207,7 +206,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param src source layer
 	 * @return
 	 */
-	public PGraphics getDilationImage(PImage src) {
+	public PGraphics getDilation(PImage src) {
 		super.setCurrentSH(GPUImageInterface.DILATE);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
 		return super.filter(src);
@@ -218,7 +217,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param src source layer
 	 * @return
 	 */
-	public PGraphics getDilationRGBImage(PImage src) {
+	public PGraphics getDilationRGB(PImage src) {
 		super.setCurrentSH(DILATERGB);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
 		return super.filter(src);
@@ -229,7 +228,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param src source layer
 	 * @return
 	 */
-	public PGraphics getErosionImage(PImage src) {
+	public PGraphics getErosion(PImage src) {
 		super.setCurrentSH(GPUImageInterface.ERODE);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
 		return super.filter(src);
@@ -240,7 +239,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param src source layer
 	 * @return
 	 */
-	public PGraphics getErosionRGBImage(PImage src) {
+	public PGraphics getErosionRGB(PImage src) {
 		super.setCurrentSH(ERODERGB);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
 		return super.filter(src);
@@ -251,8 +250,8 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param src source layer
 	 * @return
 	 */
-	public PGraphics getSignedDistanceFieldImage(PImage src) {
-		return getSignedDistanceFieldImage(src, 5);
+	public PGraphics getSignedDistanceField(PImage src) {
+		return getSignedDistanceField(src, 5);
 	}
 	
 	/**
@@ -261,7 +260,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param searchDistance search distance in pixel
 	 * @return
 	 */
-	public PGraphics getSignedDistanceFieldImage(PImage src, int searchDistance) {
+	public PGraphics getSignedDistanceField(PImage src, int searchDistance) {
 		super.setCurrentSH(SIGNEDDISTANCEFIELD);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
 		super.currentSH.set("searchDistance", searchDistance);
@@ -286,13 +285,13 @@ public class Filter extends GPUImageBaseEffects{
 	 * HIGH : 7×7
 	 * HIGH2 : 13×13
 	 */
-	public PGraphics getOptimizedGaussianBlurImage(PImage src, float blurSize, String QUALITY) {
+	public PGraphics getOptimizedGaussianBlur(PImage src, float blurSize, String QUALITY) {
 		switch(QUALITY) {
-			case LOW :   return getGaussianBlurLowImage(src, blurSize);
-			case MED :   return getGaussianBlurMediumImage(src, blurSize);
-			case HIGH :  return getGaussianBlurHighImage(src, blurSize);
-			case HIGH2 : return getGaussianBlurUltraHighImage(src, blurSize);
-			default :    return getGaussianBlurLowImage(src, blurSize);
+			case LOW :   return getGaussianBlurLow(src, blurSize);
+			case MED :   return getGaussianBlurMedium(src, blurSize);
+			case HIGH :  return getGaussianBlurHigh(src, blurSize);
+			case HIGH2 : return getGaussianBlurUltraHigh(src, blurSize);
+			default :    return getGaussianBlurLow(src, blurSize);
 		}
 	}
 	
@@ -302,7 +301,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param blurSize size of the blur
 	 * @return
 	 */
-	public PGraphics getGaussianBlurLowImage(PImage src, float blurSize) {
+	public PGraphics getGaussianBlurLow(PImage src, float blurSize) {
 		return getFastGaussianBlur(src, blurSize, GAUSSIANBLUR5X5);
 	}
 
@@ -312,7 +311,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param blurSize size of the blur
 	 * @return
 	 */
-	public PGraphics getGaussianBlurMediumImage(PImage src, float blurSize) {
+	public PGraphics getGaussianBlurMedium(PImage src, float blurSize) {
 		return getFastGaussianBlur(src, blurSize, GAUSSIANBLUR7X7);
 	}
 
@@ -323,7 +322,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param blurSize size of the blur
 	 * @return
 	 */
-	public PGraphics getGaussianBlurHighImage(PImage src, float blurSize) {
+	public PGraphics getGaussianBlurHigh(PImage src, float blurSize) {
 		return getFastGaussianBlur(src, blurSize, GAUSSIANBLUR9X9);
 	}
 	/**
@@ -332,7 +331,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param blurSize size of the blur
 	 * @return
 	 */
-	public PGraphics getGaussianBlurUltraHighImage(PImage src, float blurSize) {
+	public PGraphics getGaussianBlurUltraHigh(PImage src, float blurSize) {
 		return getFastGaussianBlur(src, blurSize, GAUSSIANBLUR13X13);
 	}
 	
@@ -342,7 +341,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param blurSize size of the blur
 	 * @param radius define the number of for loopiteration (neighbors pixels used) 
 	 */
-	public PGraphics getGaussianBlurImage(PImage src, float blurSize, float radius) {
+	public PGraphics getGaussianBlur(PImage src, float blurSize, float radius) {
 		super.setCurrentSH(GAUSSIANBLUR);
 		//currentSH.set("resolution", (float)src.width, (float)src.height);
 		super.currentSH.set("radius", radius);
@@ -381,8 +380,8 @@ public class Filter extends GPUImageBaseEffects{
 	 * HIGH : 20
 	 * @return
 	 */
-	public PGraphics getOptimizedRadialBlurImage(PImage src, float blurSize, String QUALITY) {
-		return getOptimizedRadialBlurImage(src, (float) src.width / 2.0f, (float) src.height / 2.0f, blurSize, QUALITY);
+	public PGraphics getOptimizedRadialBlur(PImage src, float blurSize, String QUALITY) {
+		return getOptimizedRadialBlur(src, (float) src.width / 2.0f, (float) src.height / 2.0f, blurSize, QUALITY);
 	}
 	
 	/**
@@ -397,12 +396,12 @@ public class Filter extends GPUImageBaseEffects{
 	 * HIGH : 20
 	 * @return
 	 */
-	public PGraphics getOptimizedRadialBlurImage(PImage src, float originX, float originY, float blurSize, String QUALITY) {
+	public PGraphics getOptimizedRadialBlur(PImage src, float originX, float originY, float blurSize, String QUALITY) {
 		switch(QUALITY) {
-			case LOW : 	return getRadialBlurLowImage(src, originX, originY, blurSize);
-			case MED : 	return getRadialBlurMediumImage(src, originX, originY, blurSize);
-			case HIGH : return getRadialBlurHighImage(src, originX, originY, blurSize);
-			default : 	return getRadialBlurLowImage(src, originX, originY, blurSize);
+			case LOW : 	return getRadialBlurLow(src, originX, originY, blurSize);
+			case MED : 	return getRadialBlurMedium(src, originX, originY, blurSize);
+			case HIGH : return getRadialBlurHigh(src, originX, originY, blurSize);
+			default : 	return getRadialBlurLow(src, originX, originY, blurSize);
 		}
 	}
 	
@@ -414,7 +413,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param blurSize size of the blur
 	 * @return
 	 */
-	public PGraphics getRadialBlurLowImage(PImage src, float originX, float originY, float blurSize) {
+	public PGraphics getRadialBlurLow(PImage src, float originX, float originY, float blurSize) {
 		super.setCurrentSH(RADIALBLURLOW);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
 		super.currentSH.set("blurOrigin", originX / (float)src.width, originY / (float)src.height);
@@ -428,7 +427,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param blurSize size of the blur
 	 * @return
 	 */
-	public PGraphics getCenteredRadialBlurLowImage(PImage src, float blurSize) {
+	public PGraphics getCenteredRadialBlurLow(PImage src, float blurSize) {
 		super.setCurrentSH(RADIALBLURLOW);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
 		super.currentSH.set("blurOrigin",  (float) src.width / 2.0f, (float) src.height / 2.0f);
@@ -444,7 +443,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param blurSize size of the blur
 	 * @return
 	 */
-	public PGraphics getRadialBlurMediumImage(PImage src, float originX, float originY, float blurSize) {
+	public PGraphics getRadialBlurMedium(PImage src, float originX, float originY, float blurSize) {
 		super.setCurrentSH(RADIALBLURMED);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
 		super.currentSH.set("blurOrigin", originX / (float)src.width, originY / (float)src.height);
@@ -458,7 +457,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param blurSize size of the blur
 	 * @return
 	 */
-	public PGraphics getCenteredRadialBlurMediumImage(PImage src, float blurSize) {
+	public PGraphics getCenteredRadialBlurMedium(PImage src, float blurSize) {
 		super.setCurrentSH(RADIALBLURMED);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
 		super.currentSH.set("blurOrigin",  (float) src.width / 2.0f, (float) src.height / 2.0f);
@@ -474,7 +473,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param blurSize size of the blur
 	 * @return
 	 */
-	public PGraphics getRadialBlurHighImage(PImage src, float originX, float originY, float blurSize) {
+	public PGraphics getRadialBlurHigh(PImage src, float originX, float originY, float blurSize) {
 		super.setCurrentSH(RADIALBLURLHIGH);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
 		super.currentSH.set("blurOrigin", originX / (float)src.width, originY / (float)src.height);
@@ -488,7 +487,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param blurSize size of the blur
 	 * @return
 	 */
-	public PGraphics getCenteredRadialBlurHighImage(PImage src, float blurSize) {
+	public PGraphics getCenteredRadialBlurHigh(PImage src, float blurSize) {
 		super.setCurrentSH(RADIALBLURLHIGH);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
 		super.currentSH.set("blurOrigin",  (float) src.width / 2.0f, (float) src.height / 2.0f);
@@ -503,8 +502,8 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param step number of iteration
 	 * @return
 	 */
-	public PGraphics getRadialBlurImage(PImage src, float blurSize, int step) {
-		return getRadialBlurImage(src, (float)src.width/2, (float)src.height/2, blurSize, step);
+	public PGraphics getRadialBlur(PImage src, float blurSize, int step) {
+		return getRadialBlur(src, (float)src.width/2, (float)src.height/2, blurSize, step);
 	}
 	
 	/**
@@ -516,7 +515,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param step number of iteration
 	 * @return
 	 */
-	public PGraphics getRadialBlurImage(PImage src, float originX, float originY, float blurSize, int step) {
+	public PGraphics getRadialBlur(PImage src, float originX, float originY, float blurSize, int step) {
 		super.setCurrentSH(RADIALBLUR);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
 		super.currentSH.set("blurOrigin", originX / (float)src.width, originY / (float)src.height);
@@ -537,34 +536,34 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param src source layer
 	 * @param brightness is define as percent. A base brighntess is 100, a lowest will be 50 (50%) and highest could be 150 (150%)
 	 */
-	public PGraphics getBrightnessImage(PImage src, float brightness) {
-		return getContrastSaturationBrightnessImage(src, 100.0f, 100.0f, brightness);
+	public PGraphics getBrightness(PImage src, float brightness) {
+		return getContrastSaturationBrightness(src, 100.0f, 100.0f, brightness);
 	}
 	
 	/**Contrast adjustment
 	 * @param src source layer
 	 * @param contrast is define as percent. A base contrast is 100, a lowest will be 50 (50%) and highest could be 150 (150%)
 	 */
-	public PGraphics getContrastImage(PImage src, float contrast) {
-		return getContrastSaturationBrightnessImage(src, contrast, 100.0f, 100.0f);
+	public PGraphics getContrast(PImage src, float contrast) {
+		return getContrastSaturationBrightness(src, contrast, 100.0f, 100.0f);
 	}
 
 	/**Satruation adjustment
 	 * @param src source layer
 	 * @param saturation is define as percent. A base saturation is 100, a lowest will be 50 (50%) and highest could be 150 (150%)
 	 */
-	public PGraphics getSaturationImage(PImage src, float saturation) {
-		return getContrastSaturationBrightnessImage(src, 100.0f, saturation, 100.0f);
+	public PGraphics getSaturation(PImage src, float saturation) {
+		return getContrastSaturationBrightness(src, 100.0f, saturation, 100.0f);
 	}
 	
 	/**Contrast Saturation Brightness adjustment.
 	 * @param src source layer
 	 * For others params see the related methods :
-	 * @see #getContrastImage(PImage src, float contrast)
-	 * @see #getSaturationImage(PImage src, float saturation)
-	 * @see #getBrightnessImage(PImage src, float brightness)
+	 * @see #getContrast(PImage src, float contrast)
+	 * @see #getSaturation(PImage src, float saturation)
+	 * @see #getBrightness(PImage src, float brightness)
 	 */
-	public PGraphics getContrastSaturationBrightnessImage(PImage src, float contrast, float saturation, float brightness) {
+	public PGraphics getContrastSaturationBrightness(PImage src, float contrast, float saturation, float brightness) {
 		super.setCurrentSH(CONTRASTSATBRIGHT);
 		super.currentSH.set("brightness", brightness/100.0f);
 		super.currentSH.set("contrast", contrast/100.0f);
@@ -575,45 +574,45 @@ public class Filter extends GPUImageBaseEffects{
 	/**
 	 * RGB Level adjustement on output only. See level filter on Photoshop or After Effect for more informations.
 	 * For params see related methods
-	 * @see #getLevelImage(PImage src, float minInputRGB, float maxInputRGB, float gammaRGB, float minOutputRGB, float maxOutputRGB)
-	 * @see #getLevelImage(PImage src, float minInputRed, float minInputGreen, float minInputBlue, float maxInputRed, float maxInputGreen, float maxInputBlue, float gammaRed, float gammaGreen, float gammaBlue, float minOutputRed, float minOutputGreen, float minOutputBlue, float maxOutputRed, float maxOutputGreen, float maxOutputBlue)
+	 * @see #getLevel(PImage src, float minInputRGB, float maxInputRGB, float gammaRGB, float minOutputRGB, float maxOutputRGB)
+	 * @see #getLevel(PImage src, float minInputRed, float minInputGreen, float minInputBlue, float maxInputRed, float maxInputGreen, float maxInputBlue, float gammaRed, float gammaGreen, float gammaBlue, float minOutputRed, float minOutputGreen, float minOutputBlue, float maxOutputRed, float maxOutputGreen, float maxOutputBlue)
 	 * @param src source layer
 	 * @param gammaRed
 	 * @param gammaGreen
 	 * @param gammaBlue
 	 * @return
 	 */
-	public PGraphics getLevelGammaImage(PImage src, float gammaRed, float gammaGreen, float gammaBlue) {
+	public PGraphics getLevelGamma(PImage src, float gammaRed, float gammaGreen, float gammaBlue) {
 		float minOutputRGB = 0.0f;
 		float maxOutputRGB = 255.0f;
 		float minInputRGB = 0.0f;
 		float maxInputRGB = 255.0f;
-		return getLevelImage(src, minInputRGB, minInputRGB, minInputRGB, maxInputRGB, maxInputRGB, maxInputRGB, gammaRed, gammaGreen, gammaBlue, minOutputRGB, minOutputRGB, minOutputRGB, maxOutputRGB, maxOutputRGB, maxOutputRGB);
+		return getLevel(src, minInputRGB, minInputRGB, minInputRGB, maxInputRGB, maxInputRGB, maxInputRGB, gammaRed, gammaGreen, gammaBlue, minOutputRGB, minOutputRGB, minOutputRGB, maxOutputRGB, maxOutputRGB, maxOutputRGB);
 
 	}
 	
 	/**
 	 * RGB Level adjustement on output only. See level filter on Photoshop or After Effect for more informations.
 	 * For params see related methods
-	 * @see #getLevelImage(PImage src, float minInputRGB, float maxInputRGB, float gammaRGB, float minOutputRGB, float maxOutputRGB)
-	 * @see #getLevelImage(PImage src, float minInputRed, float minInputGreen, float minInputBlue, float maxInputRed, float maxInputGreen, float maxInputBlue, float gammaRed, float gammaGreen, float gammaBlue, float minOutputRed, float minOutputGreen, float minOutputBlue, float maxOutputRed, float maxOutputGreen, float maxOutputBlue)
+	 * @see #getLevel(PImage src, float minInputRGB, float maxInputRGB, float gammaRGB, float minOutputRGB, float maxOutputRGB)
+	 * @see #getLevel(PImage src, float minInputRed, float minInputGreen, float minInputBlue, float maxInputRed, float maxInputGreen, float maxInputBlue, float gammaRed, float gammaGreen, float gammaBlue, float minOutputRed, float minOutputGreen, float minOutputBlue, float maxOutputRed, float maxOutputGreen, float maxOutputBlue)
 	 * @param src source layer
 	 * @param gammaRGB
 	 * @return
 	 */
-	public PGraphics getLevelGammaImage(PImage src, float gammaRGB) {
+	public PGraphics getLevelGamma(PImage src, float gammaRGB) {
 		float minOutputRGB = 0.0f;
 		float maxOutputRGB = 255.0f;
 		float minInputRGB = 0.0f;
 		float maxInputRGB = 255.0f;
-		return getLevelImage(src, minInputRGB, minInputRGB, minInputRGB, maxInputRGB, maxInputRGB, maxInputRGB, gammaRGB, gammaRGB, gammaRGB, minOutputRGB, minOutputRGB, minOutputRGB, maxOutputRGB, maxOutputRGB, maxOutputRGB);
+		return getLevel(src, minInputRGB, minInputRGB, minInputRGB, maxInputRGB, maxInputRGB, maxInputRGB, gammaRGB, gammaRGB, gammaRGB, minOutputRGB, minOutputRGB, minOutputRGB, maxOutputRGB, maxOutputRGB, maxOutputRGB);
 	}
 	
 	/**
 	 * RGB Level adjustement on output only. See level filter on Photoshop or After Effect for more informations.
 	 * For params see related methods
-	 * @see #getLevelImage(PImage src, float minInputRGB, float maxInputRGB, float gammaRGB, float minOutputRGB, float maxOutputRGB)
-	 * @see #getLevelImage(PImage src, float minInputRed, float minInputGreen, float minInputBlue, float maxInputRed, float maxInputGreen, float maxInputBlue, float gammaRed, float gammaGreen, float gammaBlue, float minOutputRed, float minOutputGreen, float minOutputBlue, float maxOutputRed, float maxOutputGreen, float maxOutputBlue)
+	 * @see #getLevel(PImage src, float minInputRGB, float maxInputRGB, float gammaRGB, float minOutputRGB, float maxOutputRGB)
+	 * @see #getLevel(PImage src, float minInputRed, float minInputGreen, float minInputBlue, float maxInputRed, float maxInputGreen, float maxInputBlue, float gammaRed, float gammaGreen, float gammaBlue, float minOutputRed, float minOutputGreen, float minOutputBlue, float maxOutputRed, float maxOutputGreen, float maxOutputBlue)
 	 * @param src source layer
 	 * @param minInputRed
 	 * @param minInputGreen
@@ -623,35 +622,35 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param maxInputBlue
 	 * @return
 	 */
-	public PGraphics getLevelInputImage(PImage src, float minInputRed, float minInputGreen, float minInputBlue, float maxInputRed, float maxInputGreen, float maxInputBlue) {
+	public PGraphics getLevelInput(PImage src, float minInputRed, float minInputGreen, float minInputBlue, float maxInputRed, float maxInputGreen, float maxInputBlue) {
 		float minOutputRGB = 0.0f;
 		float maxOutputRGB = 255.0f;
 		float gammaRGB = 1.0f;
-		return getLevelImage(src, minInputRed, minInputGreen, minInputBlue, maxInputRed, maxInputGreen, maxInputBlue, gammaRGB, gammaRGB, gammaRGB, minOutputRGB, minOutputRGB, minOutputRGB, maxOutputRGB, maxOutputRGB, maxOutputRGB);
+		return getLevel(src, minInputRed, minInputGreen, minInputBlue, maxInputRed, maxInputGreen, maxInputBlue, gammaRGB, gammaRGB, gammaRGB, minOutputRGB, minOutputRGB, minOutputRGB, maxOutputRGB, maxOutputRGB, maxOutputRGB);
 	}
 	
 	/**
 	 * RGB Level adjustement on output only. See level filter on Photoshop or After Effect for more informations.
 	 * For params see related methods
-	 * @see #getLevelImage(PImage src, float minInputRGB, float maxInputRGB, float gammaRGB, float minOutputRGB, float maxOutputRGB)
-	 * @see #getLevelImage(PImage src, float minInputRed, float minInputGreen, float minInputBlue, float maxInputRed, float maxInputGreen, float maxInputBlue, float gammaRed, float gammaGreen, float gammaBlue, float minOutputRed, float minOutputGreen, float minOutputBlue, float maxOutputRed, float maxOutputGreen, float maxOutputBlue)
+	 * @see #getLevel(PImage src, float minInputRGB, float maxInputRGB, float gammaRGB, float minOutputRGB, float maxOutputRGB)
+	 * @see #getLevel(PImage src, float minInputRed, float minInputGreen, float minInputBlue, float maxInputRed, float maxInputGreen, float maxInputBlue, float gammaRed, float gammaGreen, float gammaBlue, float minOutputRed, float minOutputGreen, float minOutputBlue, float maxOutputRed, float maxOutputGreen, float maxOutputBlue)
 	 * @param src source layer
 	 * @param minInputRGB
 	 * @param maxInputRGB
 	 * @return
 	 */
-	public PGraphics getLevelInputImage(PImage src, float minInputRGB, float maxInputRGB) {
+	public PGraphics getLevelInput(PImage src, float minInputRGB, float maxInputRGB) {
 		float minOutputRGB = 0.0f;
 		float maxOutputRGB = 255.0f;
 		float gammaRGB = 1.0f;
-		return getLevelImage(src, minInputRGB, minInputRGB, minInputRGB, maxInputRGB, maxInputRGB, maxInputRGB, gammaRGB, gammaRGB, gammaRGB, minOutputRGB, minOutputRGB, minOutputRGB, maxOutputRGB, maxOutputRGB, maxOutputRGB);
+		return getLevel(src, minInputRGB, minInputRGB, minInputRGB, maxInputRGB, maxInputRGB, maxInputRGB, gammaRGB, gammaRGB, gammaRGB, minOutputRGB, minOutputRGB, minOutputRGB, maxOutputRGB, maxOutputRGB, maxOutputRGB);
 	}
 	
 	/**
 	 * RGB Level adjustement on output only. See level filter on Photoshop or After Effect for more informations.
 	 * For params see related methods
-	 * @see #getLevelImage(PImage src, float minInputRGB, float maxInputRGB, float gammaRGB, float minOutputRGB, float maxOutputRGB)
-	 * @see #getLevelImage(PImage src, float minInputRed, float minInputGreen, float minInputBlue, float maxInputRed, float maxInputGreen, float maxInputBlue, float gammaRed, float gammaGreen, float gammaBlue, float minOutputRed, float minOutputGreen, float minOutputBlue, float maxOutputRed, float maxOutputGreen, float maxOutputBlue)
+	 * @see #getLevel(PImage src, float minInputRGB, float maxInputRGB, float gammaRGB, float minOutputRGB, float maxOutputRGB)
+	 * @see #getLevel(PImage src, float minInputRed, float minInputGreen, float minInputBlue, float maxInputRed, float maxInputGreen, float maxInputBlue, float gammaRed, float gammaGreen, float gammaBlue, float minOutputRed, float minOutputGreen, float minOutputBlue, float maxOutputRed, float maxOutputGreen, float maxOutputBlue)
 	 * @param src source layer
 	 * @param minOutputRed
 	 * @param minOutputGreen
@@ -661,28 +660,28 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param maxOutputBlue
 	 * @return
 	 */
-	public PGraphics getLevelOutputImage(PImage src, float minOutputRed, float minOutputGreen, float minOutputBlue, float maxOutputRed, float maxOutputGreen, float maxOutputBlue) {
+	public PGraphics getLevelOutput(PImage src, float minOutputRed, float minOutputGreen, float minOutputBlue, float maxOutputRed, float maxOutputGreen, float maxOutputBlue) {
 		float minInputRGB = 0.0f;
 		float maxInputRGB = 255.0f;
 		float gammaRGB = 1.0f;
-		return getLevelImage(src, minInputRGB, minInputRGB, minInputRGB, maxInputRGB, maxInputRGB, maxInputRGB, gammaRGB, gammaRGB, gammaRGB, minOutputRed, minOutputGreen, minOutputBlue, maxOutputRed, maxOutputGreen, maxOutputBlue);
+		return getLevel(src, minInputRGB, minInputRGB, minInputRGB, maxInputRGB, maxInputRGB, maxInputRGB, gammaRGB, gammaRGB, gammaRGB, minOutputRed, minOutputGreen, minOutputBlue, maxOutputRed, maxOutputGreen, maxOutputBlue);
 	}
 	
 	/**
 	 * RGB Level adjustement on output only. See level filter on Photoshop or After Effect for more informations.
 	 * For params see related methods
-	 * @see #getLevelImage(PImage src, float minInputRGB, float maxInputRGB, float gammaRGB, float minOutputRGB, float maxOutputRGB)
-	 * @see #getLevelImage(PImage src, float minInputRed, float minInputGreen, float minInputBlue, float maxInputRed, float maxInputGreen, float maxInputBlue, float gammaRed, float gammaGreen, float gammaBlue, float minOutputRed, float minOutputGreen, float minOutputBlue, float maxOutputRed, float maxOutputGreen, float maxOutputBlue)
+	 * @see #getLevel(PImage src, float minInputRGB, float maxInputRGB, float gammaRGB, float minOutputRGB, float maxOutputRGB)
+	 * @see #getLevel(PImage src, float minInputRed, float minInputGreen, float minInputBlue, float maxInputRed, float maxInputGreen, float maxInputBlue, float gammaRed, float gammaGreen, float gammaBlue, float minOutputRed, float minOutputGreen, float minOutputBlue, float maxOutputRed, float maxOutputGreen, float maxOutputBlue)
 	 * @param src source layer
 	 * @param minOutputRGB
 	 * @param maxOutputRGB
 	 * @return
 	 */
-	public PGraphics getLevelOutputImage(PImage src, float minOutputRGB, float maxOutputRGB) {
+	public PGraphics getLevelOutput(PImage src, float minOutputRGB, float maxOutputRGB) {
 		float minInputRGB = 0.0f;
 		float maxInputRGB = 255.0f;
 		float gammaRGB = 1.0f;
-		return getLevelImage(src, minInputRGB, minInputRGB, minInputRGB, maxInputRGB, maxInputRGB, maxInputRGB, gammaRGB, gammaRGB, gammaRGB, minOutputRGB, minOutputRGB, minOutputRGB, maxOutputRGB, maxOutputRGB, maxOutputRGB);
+		return getLevel(src, minInputRGB, minInputRGB, minInputRGB, maxInputRGB, maxInputRGB, maxInputRGB, gammaRGB, gammaRGB, gammaRGB, minOutputRGB, minOutputRGB, minOutputRGB, maxOutputRGB, maxOutputRGB, maxOutputRGB);
 	}
 	
 	/**
@@ -695,8 +694,8 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param maxOutputRGB maximum value of the RGB (gray) output between 0/255
 	 * @return
 	 */
-	public PGraphics getLevelImage(PImage src, float minInputRGB, float maxInputRGB, float gammaRGB, float minOutputRGB, float maxOutputRGB) {
-		return getLevelImage(src, minInputRGB, minInputRGB, minInputRGB, maxInputRGB, maxInputRGB, maxInputRGB, gammaRGB, gammaRGB, gammaRGB, minOutputRGB, minOutputRGB, minOutputRGB, maxOutputRGB, maxOutputRGB, maxOutputRGB);
+	public PGraphics getLevel(PImage src, float minInputRGB, float maxInputRGB, float gammaRGB, float minOutputRGB, float maxOutputRGB) {
+		return getLevel(src, minInputRGB, minInputRGB, minInputRGB, maxInputRGB, maxInputRGB, maxInputRGB, gammaRGB, gammaRGB, gammaRGB, minOutputRGB, minOutputRGB, minOutputRGB, maxOutputRGB, maxOutputRGB, maxOutputRGB);
 	}
 	
 	/**
@@ -719,7 +718,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param maxOutputBlue maximum value of the blue output between 0/255
 	 * @return
 	 */
-	public PGraphics getLevelImage(PImage src, float minInputRed, float minInputGreen, float minInputBlue, float maxInputRed, float maxInputGreen, float maxInputBlue, float gammaRed, float gammaGreen, float gammaBlue, float minOutputRed, float minOutputGreen, float minOutputBlue, float maxOutputRed, float maxOutputGreen, float maxOutputBlue) {
+	public PGraphics getLevel(PImage src, float minInputRed, float minInputGreen, float minInputBlue, float maxInputRed, float maxInputGreen, float maxInputBlue, float gammaRed, float gammaGreen, float gammaBlue, float minOutputRed, float minOutputGreen, float minOutputBlue, float maxOutputRed, float maxOutputGreen, float maxOutputBlue) {
 		super.setCurrentSH(LEVEL);
 		super.currentSH.set("minInput", minInputRed/255.0f, minInputGreen/255.0f, minInputBlue/255.0f);
 		super.currentSH.set("maxInput", maxInputRed/255.0f, maxInputGreen/255.0f, maxInputBlue/255.0f);
@@ -734,8 +733,8 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param src source layer
 	 * @return
 	 */
-	public PGraphics getGammaCorrectionImage(PImage src) {
-		return getGammaCorrectionImage(src, 2.2f);
+	public PGraphics getGammaCorrection(PImage src) {
+		return getGammaCorrection(src, 2.2f);
 	}
 	
 	/**
@@ -744,7 +743,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param gamma value
 	 * @return
 	 */
-	public PGraphics getGammaCorrectionImage(PImage src, float gamma) {
+	public PGraphics getGammaCorrection(PImage src, float gamma) {
 		super.setCurrentSH(GAMMA);
 		super.currentSH.set("gamma", gamma);
 		return super.filter(src);
@@ -756,7 +755,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param desaturation desaturation ratio between 0 and 100
 	 * @return
 	 */
-	public PGraphics getDesaturateImage(PImage src, float desaturation) {
+	public PGraphics getDesaturate(PImage src, float desaturation) {
 		super.setCurrentSH(GPUImageInterface.DESATURATE);
 		super.currentSH.set("desaturation", desaturation/100.0f);
 		return super.filter(src);
@@ -770,7 +769,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param levelBlue threshold value on the green channel between 0/255
 	 * @return
 	 */
-	public PGraphics getColorThresholdImage(PImage src, float levelRed, float levelGreen, float levelBlue) {
+	public PGraphics getColorThreshold(PImage src, float levelRed, float levelGreen, float levelBlue) {
 		super.setCurrentSH(COLORTHRESHOLD);
 		super.currentSH.set("levelRed", levelRed/255.0f);
 		super.currentSH.set("levelGreen", levelGreen/255.0f);
@@ -784,7 +783,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param level threshold value between 0/255
 	 * @return
 	 */
-	public PGraphics getThresholdImage(PImage src, float level) {
+	public PGraphics getThreshold(PImage src, float level) {
 		super.setCurrentSH(GPUImageInterface.THRESHOLD);
 		super.currentSH.set("level", level/255.0f);
 		return super.filter(src);
@@ -797,7 +796,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param lut look up table
 	 * @return
 	 */
-	public PGraphics getLut1DImage(PImage src, PImage lut) {
+	public PGraphics getLut1D(PImage src, PImage lut) {
 		super.setCurrentSH(GPUImageInterface.LUT1D);
 		super.currentSH.set("lut", lut);
 		return super.filter(src);
@@ -809,7 +808,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param ramp ramp texture
 	 * @return
 	 */
-	public PGraphics getRamp1DImage(PImage src, PImage ramp) {
+	public PGraphics getRamp1D(PImage src, PImage ramp) {
 		super.setCurrentSH(RAMP1D);
 		super.currentSH.set("ramp", ramp);
 		return super.filter(src);
@@ -820,7 +819,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param src source layer
 	 * @return
 	 */
-	public PGraphics getInvertImage(PImage src) {
+	public PGraphics getInvert(PImage src) {
 		super.setCurrentSH(GPUImageInterface.INVERT);
 		return super.filter(src);
 	}
@@ -843,8 +842,8 @@ public class Filter extends GPUImageBaseEffects{
 	 * HIGH : 20
 	 * @return
 	 */
-	public PGraphics getOptimizedChromaWarpImage(PImage src, float blurSize, float splitAngle, String QUALITY) {
-		return getOptimizedChromaWarpImage(src, (float) src.width / 2.0f, (float) src.height / 2.0f, blurSize, splitAngle, QUALITY);
+	public PGraphics getOptimizedChromaWarp(PImage src, float blurSize, float splitAngle, String QUALITY) {
+		return getOptimizedChromaWarp(src, (float) src.width / 2.0f, (float) src.height / 2.0f, blurSize, splitAngle, QUALITY);
 	}
 	
 	/**
@@ -860,12 +859,12 @@ public class Filter extends GPUImageBaseEffects{
 	 * HIGH : 20
 	 * @return
 	 */
-	public PGraphics getOptimizedChromaWarpImage(PImage src, float originX, float originY, float blurSize, float splitAngle, String QUALITY) {
+	public PGraphics getOptimizedChromaWarp(PImage src, float originX, float originY, float blurSize, float splitAngle, String QUALITY) {
 		switch(QUALITY) {
-			case LOW : 	return getChromaWarpLowImage(src, originX, originY, blurSize, splitAngle);
-			case MED : 	return getChromaWarpMediumImage(src, originX, originY, blurSize, splitAngle);
-			case HIGH : return getChromaWarpHighImage(src, originX, originY, blurSize, splitAngle);
-			default : 	return getChromaWarpLowImage(src, originX, originY, blurSize, splitAngle);
+			case LOW : 	return getChromaWarpLow(src, originX, originY, blurSize, splitAngle);
+			case MED : 	return getChromaWarpMedium(src, originX, originY, blurSize, splitAngle);
+			case HIGH : return getChromaWarpHigh(src, originX, originY, blurSize, splitAngle);
+			default : 	return getChromaWarpLow(src, originX, originY, blurSize, splitAngle);
 		}
 	}
 	
@@ -878,7 +877,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param splitAngle angle offset of each channel
 	 * @return
 	 */
-	public PGraphics getChromaWarpLowImage(PImage src, float originX, float originY, float blurSize, float splitAngle) {
+	public PGraphics getChromaWarpLow(PImage src, float originX, float originY, float blurSize, float splitAngle) {
 		super.setCurrentSH(CHROMAWARPLOW);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
 		super.currentSH.set("blurOrigin", originX / (float)src.width, originY / (float)src.height);
@@ -894,7 +893,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param splitAngle angle offset of each channel
 	 * @return
 	 */
-	public PGraphics getChromaWarpLowImage(PImage src, float blurSize, float splitAngle) {
+	public PGraphics getChromaWarpLow(PImage src, float blurSize, float splitAngle) {
 		super.setCurrentSH(CHROMAWARPLOW);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
 		super.currentSH.set("blurOrigin", (float)src.width / 2.0f, (float)src.height / 2.0f);
@@ -912,7 +911,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param splitAngle angle offset of each channel
 	 * @return
 	 */
-	public PGraphics getChromaWarpMediumImage(PImage src, float originX, float originY, float blurSize, float splitAngle) {
+	public PGraphics getChromaWarpMedium(PImage src, float originX, float originY, float blurSize, float splitAngle) {
 		super.setCurrentSH(CHROMAWARPMED);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
 		super.currentSH.set("blurOrigin", originX / (float)src.width, originY / (float)src.height);
@@ -928,7 +927,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param splitAngle angle offset of each channel
 	 * @return
 	 */
-	public PGraphics getChromaWarpMediumImage(PImage src, float blurSize, float splitAngle) {
+	public PGraphics getChromaWarpMedium(PImage src, float blurSize, float splitAngle) {
 		super.setCurrentSH(CHROMAWARPMED);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
 		super.currentSH.set("blurOrigin",(float)src.width / 2.0f, (float)src.height / 2.0f);
@@ -946,7 +945,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param splitAngle angle offset of each channel
 	 * @return
 	 */
-	public PGraphics getChromaWarpHighImage(PImage src, float originX, float originY, float blurSize, float splitAngle) {
+	public PGraphics getChromaWarpHigh(PImage src, float originX, float originY, float blurSize, float splitAngle) {
 		super.setCurrentSH(CHROMAWARPHIGH);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
 		super.currentSH.set("blurOrigin", originX / (float)src.width, originY / (float)src.height);
@@ -962,7 +961,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param splitAngle angle offset of each channel
 	 * @return
 	 */
-	public PGraphics getChromaWarpHighImage(PImage src, float blurSize, float splitAngle) {
+	public PGraphics getChromaWarpHigh(PImage src, float blurSize, float splitAngle) {
 		super.setCurrentSH(CHROMAWARPHIGH);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
 		super.currentSH.set("blurOrigin", (float)src.width / 2.0f, (float)src.height / 2.0f);
@@ -979,8 +978,8 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param splitAngle angle offset of each channel
 	 * @return
 	 */
-	public PGraphics getChromaWarpImage(PImage src, float blurSize, int step, float splitAngle) {
-		return getChromaWarpImage(src, (float)src.width/2, (float)src.height/2, blurSize, step, splitAngle);
+	public PGraphics getChromaWarp(PImage src, float blurSize, int step, float splitAngle) {
+		return getChromaWarp(src, (float)src.width/2, (float)src.height/2, blurSize, step, splitAngle);
 	}
 	
 	/**
@@ -993,7 +992,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param splitAngle angle offset of each channel
 	 * @return
 	 */
-	public PGraphics getChromaWarpImage(PImage src, float originX, float originY, float blurSize, int step, float splitAngle) {
+	public PGraphics getChromaWarp(PImage src, float originX, float originY, float blurSize, int step, float splitAngle) {
 		super.setCurrentSH(CHROMAWARP);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
 		super.currentSH.set("blurOrigin", originX / (float)src.width, originY / (float)src.height);
@@ -1009,8 +1008,8 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param intensity between 0/1
 	 * @return
 	 */
-	public PGraphics getAnimatedGrainImage(PImage src, float intensity) {
-		return getGrainImage(src, intensity, 1.0f + ((float)this.papplet.millis() / 1000.0f));
+	public PGraphics getAnimatedGrain(PImage src, float intensity) {
+		return getGrain(src, intensity, 1.0f + ((float)this.papplet.millis() / 1000.0f));
 	}
 	
 	/**
@@ -1019,8 +1018,8 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param intensity between 0/1
 	 * @return
 	 */
-	public PGraphics getGrainImage(PImage src, float intensity) {
-		return getGrainImage(src, intensity, 1.0f);
+	public PGraphics getGrain(PImage src, float intensity) {
+		return getGrain(src, intensity, 1.0f);
 	}
 
 	/**
@@ -1030,7 +1029,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param time
 	 * @return
 	 */
-	public PGraphics getGrainImage(PImage src, float intensity, float time) {
+	public PGraphics getGrain(PImage src, float intensity, float time) {
 		super.setCurrentSH(GRAIN);
 		super.currentSH.set("intensity", intensity);
 		super.currentSH.set("time", time);
@@ -1043,8 +1042,8 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param intensity between 0/1
 	 * @return
 	 */
-	public PGraphics getAnimatedGrainRGBImage(PImage src, float intensity) {
-		return getGrainRGBImage(src, intensity, 1.0f + ((float)this.papplet.millis() / 1000.0f));
+	public PGraphics getAnimatedGrainRGB(PImage src, float intensity) {
+		return getGrainRGB(src, intensity, 1.0f + ((float)this.papplet.millis() / 1000.0f));
 	}
 	
 	/**
@@ -1053,8 +1052,8 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param intensity between 0/1
 	 * @return
 	 */
-	public PGraphics getGrainRGBImage(PImage src, float intensity) {
-		return getGrainRGBImage(src, intensity, 1.0f);
+	public PGraphics getGrainRGB(PImage src, float intensity) {
+		return getGrainRGB(src, intensity, 1.0f);
 	}
 
 	/**
@@ -1064,7 +1063,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param time
 	 * @return
 	 */
-	public PGraphics getGrainRGBImage(PImage src, float intensity, float time) {
+	public PGraphics getGrainRGB(PImage src, float intensity, float time) {
 		super.setCurrentSH(GRAINRGB);
 		super.currentSH.set("intensity", intensity);
 		super.currentSH.set("time", time);
@@ -1076,7 +1075,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param src source layer
 	 * @return
 	 */
-	public PGraphics getPixelateImage(PImage src) {
+	public PGraphics getPixelate(PImage src) {
 		super.setCurrentSH(PIXELATE);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
 		super.currentSH.set("pixelRes", 100.0f);
@@ -1089,7 +1088,7 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param pixelRes number of pixel per width
 	 * @return
 	 */
-	public PGraphics getPixelateImage(PImage src, float pixelRes) {
+	public PGraphics getPixelate(PImage src, float pixelRes) {
 		super.setCurrentSH(PIXELATE);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
 		super.currentSH.set("pixelRes", pixelRes);
@@ -1101,9 +1100,20 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param src source layer
 	 * @return
 	 */
-	public PGraphics getDitherBayer2x2Image(PImage src) {
+	public PGraphics getDitherBayer2x2(PImage src) {
+		return this.getDitherBayer2x2(src, 0.0f);
+	}
+	
+	/**
+	  * Get a greyscale dithering image based on 2x2 Bayer Matrix
+	 * @param src source layer
+	 * @param angle rotation angle of the pattern
+	 * @return
+	 */
+	public PGraphics getDitherBayer2x2(PImage src, float angle) {
 		super.setCurrentSH(DITHERBAYER2X2);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		super.currentSH.set("theta", angle);
 		return super.filter(src);
 	}
 	
@@ -1112,9 +1122,34 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param src source layer
 	 * @return
 	 */
-	public PGraphics getDitherBayer2x2RGBImage(PImage src) {
+	public PGraphics getDitherBayer2x2RGB(PImage src) {
+		return this.getDitherBayer2x2RGB(src, 0.0f);
+	}
+	
+	
+	/**
+	 * Get a rgb dithering image based on 2x2 Bayer Matrix
+	 * @param src source layer
+	 * @param angle rotation angle of the pattern
+	 * @return
+	 */
+	public PGraphics getDitherBayer2x2RGB(PImage src, float angle) {
 		super.setCurrentSH(DITHERBAYER2X2RGB);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		super.currentSH.set("theta", angle);
+		return super.filter(src);
+	}
+	
+	/**
+	 * Get a greyscale dithering image based on 3x3 Bayer Matrix
+	 * @param src source layer
+	 * @param angle rotation angle of the pattern
+	 * @return
+	 */
+	public PGraphics getDitherBayer3x3(PImage src, float angle) {
+		super.setCurrentSH(DITHERBAYER3X3);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		super.currentSH.set("theta", angle);
 		return super.filter(src);
 	}
 	
@@ -1123,9 +1158,20 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param src source layer
 	 * @return
 	 */
-	public PGraphics getDitherBayer3x3Image(PImage src) {
-		super.setCurrentSH(DITHERBAYER3X3);
+	public PGraphics getDitherBayer3x3(PImage src) {
+		return this.getDitherBayer3x3(src, 0.0f);
+	}
+	
+	/**
+	 * Get a rgb dithering image based on 3x3 Bayer Matrix
+	 * @param src source layer
+	 * @param angle rotation angle of the pattern
+	 * @return
+	 */
+	public PGraphics getDitherBayer3x3RGB(PImage src, float angle) {
+		super.setCurrentSH(DITHERBAYER3X3RGB);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		super.currentSH.set("theta", angle);
 		return super.filter(src);
 	}
 	
@@ -1134,20 +1180,42 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param src source layer
 	 * @return
 	 */
-	public PGraphics getDitherBayer3x3RGBImage(PImage src) {
-		super.setCurrentSH(DITHERBAYER3X3RGB);
+	public PGraphics getDitherBayer3x3RGB(PImage src) {
+		return this.getDitherBayer3x3RGB(src, 0.0f);
+	}
+	
+	/**
+	 * Get a greyscale dithering image based on 4x4 Bayer Matrix
+	 * @param src source layer
+	 * @param angle rotation angle of the pattern
+	 * @return
+	 */
+	public PGraphics getDitherBayer4x4(PImage src, float angle) {
+		super.setCurrentSH(DITHERBAYER4X4);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		super.currentSH.set("theta", angle);
 		return super.filter(src);
 	}
 	
 	/**
 	 * Get a greyscale dithering image based on 4x4 Bayer Matrix
 	 * @param src source layer
+	 * 
+	 */
+	public PGraphics getDitherBayer4x4(PImage src) {
+		return this.getDitherBayer4x4(src, 0.0f);
+	}
+	
+	/**
+	 * Get a rgb dithering image based on 4x4 Bayer Matrix
+	 * @param src source layer
+	 * @param angle rotation angle of the pattern
 	 * @return
 	 */
-	public PGraphics getDitherBayer4x4Image(PImage src) {
-		super.setCurrentSH(DITHERBAYER4X4);
+	public PGraphics getDitherBayer4x4RGB(PImage src, float angle) {
+		super.setCurrentSH(DITHERBAYER4X4RGB);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		super.currentSH.set("theta", angle);
 		return super.filter(src);
 	}
 	
@@ -1156,31 +1224,65 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param src source layer
 	 * @return
 	 */
-	public PGraphics getDitherBayer4x4RGBImage(PImage src) {
-		super.setCurrentSH(DITHERBAYER4X4RGB);
-		super.currentSH.set("resolution", (float)src.width, (float)src.height);
-		return super.filter(src);
+	public PGraphics getDitherBayer4x4RGB(PImage src) {
+		return this.getDitherBayer4x4RGB(src, 0.0f);
 	}
 	
 	/**
 	 * Get a greyscale dithering image based on 8x8 Bayer Matrix
 	 * @param src source layer
+	 * @param angle rotation angle of the pattern
 	 * @return
 	 */
-	public PGraphics getDitherBayer8x8Image(PImage src) {
+	public PGraphics getDitherBayer8x8(PImage src, float angle) {
 		super.setCurrentSH(DITHERBAYER8X8);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		super.currentSH.set("theta", angle);
 		return super.filter(src);
+	}
+
+	/**
+	 * Get a greyscale dithering image based on 8x8 Bayer Matrix
+	 * @param src source layer
+	 * @return
+	 */
+	public PGraphics getDitherBayer8x8(PImage src) {
+		return this.getDitherBayer8x8(src, 0.0f);
+		
 	}
 	
 	/**
 	 * Get a rgb dithering image based on 8x8 Bayer Matrix
 	 * @param src source layer
+	 * @param angle rotation angle of the pattern
 	 * @return
 	 */
-	public PGraphics getDitherBayer8x8RGBImage(PImage src) {
+	public PGraphics getDitherBayer8x8RGB(PImage src, float angle) {
 		super.setCurrentSH(DITHERBAYER8X8RGB);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		super.currentSH.set("theta", angle);
+		return super.filter(src);
+	}
+
+	/**
+	 * Get a rgb dithering image based on 8x8 Bayer Matrix
+	 * @param src source layer
+	 * @return
+	 */
+	public PGraphics getDitherBayer8x8RGB(PImage src) {
+		return this.getDitherBayer8x8RGB(src, 0.0f);
+	}
+	
+	/**
+	 * Get a greyscale dithering image based on 4x4 Cluster Dot Matrix
+	 * @param src source layer
+	 * @param angle rotation angle of the pattern
+	 * @return
+	 */
+	public PGraphics getDitherClusterDot4x4(PImage src, float angle) {
+		super.setCurrentSH(DITHERCLUSTERDOT4X4);
+		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		super.currentSH.set("theta", angle);
 		return super.filter(src);
 	}
 	
@@ -1189,9 +1291,20 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param src source layer
 	 * @return
 	 */
-	public PGraphics getDitherClusterDot4x4Image(PImage src) {
-		super.setCurrentSH(DITHERCLUSTERDOT4X4);
+	public PGraphics getDitherClusterDot4x4(PImage src) {
+		return this.getDitherClusterDot4x4(src, 0.0f);
+	}
+	
+	/**
+	 * Get a rgb dithering image based on 4x4 Cluster Dot Matrix
+	 * @param src source layer
+	 * @param angle rotation angle of the pattern
+	 * @return
+	 */
+	public PGraphics getDitherClusterDot4x4RGB(PImage src, float angle) {
+		super.setCurrentSH(DITHERCLUSTERDOT4X4RGB);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		super.currentSH.set("theta", angle);
 		return super.filter(src);
 	}
 	
@@ -1200,9 +1313,20 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param src source layer
 	 * @return
 	 */
-	public PGraphics getDitherClusterDot4x4RGBImage(PImage src) {
-		super.setCurrentSH(DITHERCLUSTERDOT4X4RGB);
+	public PGraphics getDitherClusterDot4x4RGB(PImage src) {
+		return this.getDitherClusterDot4x4RGB(src, 0.0f);
+	}
+	
+	/**
+	 * Get a greyscale dithering image based on 8x8 Cluster Dot Matrix
+	 * @param src source layer
+	 * @param angle rotation angle of the pattern
+	 * @return
+	 */
+	public PGraphics getDitherClusterDot8x8(PImage src, float angle) {
+		super.setCurrentSH(DITHERCLUSTERDOT8X8);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		super.currentSH.set("theta", angle);
 		return super.filter(src);
 	}
 	
@@ -1211,9 +1335,20 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param src source layer
 	 * @return
 	 */
-	public PGraphics getDitherClusterDot8x8Image(PImage src) {
-		super.setCurrentSH(DITHERCLUSTERDOT8X8);
+	public PGraphics getDitherClusterDot8x8(PImage src) {
+		return this.getDitherClusterDot8x8(src, 0.0f);
+	}
+	
+	/**
+	 * Get a rgb dithering image based on 8x8 Cluster Dot Matrix
+	 * @param src source layer
+	 * @param angle rotation angle of the pattern
+	 * @return
+	 */
+	public PGraphics getDitherClusterDot8x8RGB(PImage src, float angle) {
+		super.setCurrentSH(DITHERCLUSTERDOT8X8RGB);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		super.currentSH.set("theta", angle);
 		return super.filter(src);
 	}
 	
@@ -1222,9 +1357,20 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param src source layer
 	 * @return
 	 */
-	public PGraphics getDitherClusterDot8x8RGBImage(PImage src) {
-		super.setCurrentSH(DITHERCLUSTERDOT8X8RGB);
+	public PGraphics getDitherClusterDot8x8RGB(PImage src) {
+		return this.getDitherClusterDot8x8RGB(src, 0.0f);
+	}
+	
+	/**
+	 * Get a greyscale dithering image based on 5x3 Cluster Dot Matrix
+	 * @param src source layer
+	 * @param angle rotation angle of the pattern
+	 * @return
+	 */
+	public PGraphics getDitherClusterDot5x3(PImage src, float angle) {
+		super.setCurrentSH(DITHERCLUSTERDOT5X3);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		super.currentSH.set("theta", angle);
 		return super.filter(src);
 	}
 	
@@ -1233,9 +1379,20 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param src source layer
 	 * @return
 	 */
-	public PGraphics getDitherClusterDot5x3Image(PImage src) {
-		super.setCurrentSH(DITHERCLUSTERDOT5X3);
+	public PGraphics getDitherClusterDot5x3(PImage src) {
+		return this.getDitherClusterDot5x3(src, 0.0f);
+	}
+	
+	/**
+	 * Get a rgb dithering image based on 5x3 Cluster Dot Matrix
+	 * @param src source layer
+	 * @param angle rotation angle of the pattern
+	 * @return
+	 */
+	public PGraphics getDitherClusterDot5x3RGB(PImage src, float angle) {
+		super.setCurrentSH(DITHERCLUSTERDOT5X3RGB);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		super.currentSH.set("theta", angle);
 		return super.filter(src);
 	}
 	
@@ -1244,9 +1401,20 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param src source layer
 	 * @return
 	 */
-	public PGraphics getDitherClusterDot5x3RGBImage(PImage src) {
-		super.setCurrentSH(DITHERCLUSTERDOT5X3RGB);
+	public PGraphics getDitherClusterDot5x3RGB(PImage src) {
+		return this.getDitherClusterDot5x3RGB(src, 0.0f);
+	}
+	
+	/**
+	 * Get a greyscale dithering image based on 3x3 Random Matrix
+	 * @param src source layer
+	 * @param angle rotation angle of the pattern
+	 * @return
+	 */
+	public PGraphics getDitherRandom3x3(PImage src, float angle) {
+		super.setCurrentSH(DITHERRANDOM3X3);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		super.currentSH.set("theta", angle);
 		return super.filter(src);
 	}
 	
@@ -1255,9 +1423,20 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param src source layer
 	 * @return
 	 */
-	public PGraphics getDitherRandom3x3Image(PImage src) {
-		super.setCurrentSH(DITHERRANDOM3X3);
+	public PGraphics getDitherRandom3x3(PImage src) {
+		return this.getDitherRandom3x3(src, 0.0f);
+	}
+	
+	/**
+	 * Get a rgb dithering image based on 3x3 Random Matrix
+	 * @param src source layer
+	 * @param angle rotation angle of the pattern
+	 * @return
+	 */
+	public PGraphics getDitherRandom3x3RGB(PImage src, float angle) {
+		super.setCurrentSH(DITHERRANDOM3X3RGB);
 		super.currentSH.set("resolution", (float)src.width, (float)src.height);
+		super.currentSH.set("theta", angle);
 		return super.filter(src);
 	}
 	
@@ -1266,10 +1445,8 @@ public class Filter extends GPUImageBaseEffects{
 	 * @param src source layer
 	 * @return
 	 */
-	public PGraphics getDitherRandom3x3RGBImage(PImage src) {
-		super.setCurrentSH(DITHERRANDOM3X3RGB);
-		super.currentSH.set("resolution", (float)src.width, (float)src.height);
-		return super.filter(src);
+	public PGraphics getDitherRandom3x3RGB(PImage src) {
+		return this.getDitherRandom3x3RGB(src, 0.0f);
 	}
 	
 	/*

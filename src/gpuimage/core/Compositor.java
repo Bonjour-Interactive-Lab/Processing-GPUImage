@@ -56,7 +56,7 @@ public class Compositor extends GPUImageBaseEffects{
 	 * @param mask mask layer
 	 * @return
 	 */
-	public PGraphics getMaskImage(PImage src, PImage mask) {
+	public PGraphics getMask(PImage src, PImage mask) {
 		super.setCurrentSH(MASK);
 		this.checkUVSettings(src,  mask, "srci");
 		super.currentSH.set("mask", mask);
@@ -70,7 +70,7 @@ public class Compositor extends GPUImageBaseEffects{
 	 * @param mask mask layer
 	 * @return
 	 */
-	public PGraphics getMaskImage(PImage src, PImage base, PImage mask) {
+	public PGraphics getMask(PImage src, PImage base, PImage mask) {
 		super.setCurrentSH(MASK2);
 		this.checkUVSettings(src,  mask, "srci");
 		this.checkUVSettings(src,  base, "base2i");
@@ -88,7 +88,7 @@ public class Compositor extends GPUImageBaseEffects{
 	 * @param blue blue component of the key color between [0 - 255]
 	 * @return
 	 */
-	public PGraphics getChromaKeyImage(PImage src, PImage base, float red, float green, float blue) {
+	public PGraphics getChromaKey(PImage src, PImage base, float red, float green, float blue) {
 		super.setCurrentSH(CHROMAKEY2);
 		this.checkUVSettings(src, base, "srci");
 		super.currentSH.set("keyColor", red/255.0f, green/255.0f, blue/255.0f);
@@ -107,7 +107,7 @@ public class Compositor extends GPUImageBaseEffects{
 	 * @param threshold border threshold between [0.0, 1.0]
 	 * @return
 	 */
-	public PGraphics getChromaKeyImage(PImage src, PImage base, float red, float green, float blue, float threshold) {
+	public PGraphics getChromaKey(PImage src, PImage base, float red, float green, float blue, float threshold) {
 		super.setCurrentSH(CHROMAKEY2);
 		this.checkUVSettings(src, base, "srci");
 		super.currentSH.set("keyColor", red/255.0f, green/255.0f, blue/255.0f);
@@ -124,7 +124,7 @@ public class Compositor extends GPUImageBaseEffects{
 	 * @param blue blue component of the key color between [0 - 255]
 	 * @return
 	 */
-	public PGraphics getChromaKeyImage(PImage src, float red, float green, float blue) {
+	public PGraphics getChromaKey(PImage src, float red, float green, float blue) {
 		super.setCurrentSH(CHROMAKEY);
 		super.currentSH.set("keyColor", red/255.0f, green/255.0f, blue/255.0f);
 		super.currentSH.set("threshold", 0.5f);
@@ -140,7 +140,7 @@ public class Compositor extends GPUImageBaseEffects{
 	 * @param threshold border threshold between [0.0, 1.0]
 	 * @return
 	 */
-	public PGraphics getChromaKeyImage(PImage src, float red, float green, float blue, float threshold) {
+	public PGraphics getChromaKey(PImage src, float red, float green, float blue, float threshold) {
 		super.setCurrentSH(CHROMAKEY);
 		super.currentSH.set("keyColor", red/255.0f, green/255.0f, blue/255.0f);
 		super.currentSH.set("threshold", threshold);
@@ -161,8 +161,8 @@ public class Compositor extends GPUImageBaseEffects{
 	 * @param opacity opacity of the src blended layer on the base layer between 0/100
 	 * @return
 	 */
-	public PGraphics getBlendAddImage(PImage src, PImage base, float opacity) {
-		return getBlendImage(src, base, opacity, GPUImageInterface.ADD);
+	public PGraphics getBlendAdd(PImage src, PImage base, float opacity) {
+		return getBlend(src, base, opacity, GPUImageInterface.ADD);
 	}
 	
 	/**
@@ -172,8 +172,8 @@ public class Compositor extends GPUImageBaseEffects{
 	 * @param opacity opacity of the src blended layer on the base layer between 0/100
 	 * @return
 	 */
-	public PGraphics getBlendAverageImage(PImage src, PImage base, float opacity) {
-		return getBlendImage(src, base, opacity, GPUImageInterface.AVERAGE);
+	public PGraphics getBlendAverage(PImage src, PImage base, float opacity) {
+		return getBlend(src, base, opacity, GPUImageInterface.AVERAGE);
 	}
 	
 	/**
@@ -183,8 +183,8 @@ public class Compositor extends GPUImageBaseEffects{
 	 * @param opacity opacity of the src blended layer on the base layer between 0/100
 	 * @return
 	 */
-	public PGraphics getBlendColorImage(PImage src, PImage base, float opacity) {
-		return getBlendImage(src, base, opacity, GPUImageInterface.COLOR);
+	public PGraphics getBlendColor(PImage src, PImage base, float opacity) {
+		return getBlend(src, base, opacity, GPUImageInterface.COLOR);
 	}
 	
 	/**
@@ -194,8 +194,8 @@ public class Compositor extends GPUImageBaseEffects{
 	 * @param opacity opacity of the src blended layer on the base layer between 0/100
 	 * @return
 	 */
-	public PGraphics getBlendColorBurnImage(PImage src, PImage base, float opacity) {
-		return getBlendImage(src, base, opacity, GPUImageInterface.COLORBURN);
+	public PGraphics getBlendColorBurn(PImage src, PImage base, float opacity) {
+		return getBlend(src, base, opacity, GPUImageInterface.COLORBURN);
 	}
 	
 	/**
@@ -205,8 +205,8 @@ public class Compositor extends GPUImageBaseEffects{
 	 * @param opacity opacity of the src blended layer on the base layer between 0/100
 	 * @return
 	 */
-	public PGraphics getBlendColorDodgeImage(PImage src, PImage base, float opacity) {
-		return getBlendImage(src, base, opacity, GPUImageInterface.COLORDODGE);
+	public PGraphics getBlendColorDodge(PImage src, PImage base, float opacity) {
+		return getBlend(src, base, opacity, GPUImageInterface.COLORDODGE);
 	}
 	
 	/**
@@ -216,8 +216,8 @@ public class Compositor extends GPUImageBaseEffects{
 	 * @param opacity opacity of the src blended layer on the base layer between 0/100
 	 * @return
 	 */
-	public PGraphics getBlendDarkenImage(PImage src, PImage base, float opacity) {
-		return getBlendImage(src, base, opacity, GPUImageInterface.DARKEN);
+	public PGraphics getBlendDarken(PImage src, PImage base, float opacity) {
+		return getBlend(src, base, opacity, GPUImageInterface.DARKEN);
 	}
 	
 	/**
@@ -227,8 +227,8 @@ public class Compositor extends GPUImageBaseEffects{
 	 * @param opacity opacity of the src blended layer on the base layer between 0/100
 	 * @return
 	 */
-	public PGraphics getBlendDifferenceImage(PImage src, PImage base, float opacity) {
-		return getBlendImage(src, base, opacity, GPUImageInterface.DIFFERENCE);
+	public PGraphics getBlendDifference(PImage src, PImage base, float opacity) {
+		return getBlend(src, base, opacity, GPUImageInterface.DIFFERENCE);
 	}
 	
 	/**
@@ -238,8 +238,8 @@ public class Compositor extends GPUImageBaseEffects{
 	 * @param opacity opacity of the src blended layer on the base layer between 0/100
 	 * @return
 	 */
-	public PGraphics getBlendExclusionImage(PImage src, PImage base, float opacity) {
-		return getBlendImage(src, base, opacity, GPUImageInterface.EXCLUSION);
+	public PGraphics getBlendExclusion(PImage src, PImage base, float opacity) {
+		return getBlend(src, base, opacity, GPUImageInterface.EXCLUSION);
 	}
 	
 	/**
@@ -249,8 +249,8 @@ public class Compositor extends GPUImageBaseEffects{
 	 * @param opacity opacity of the src blended layer on the base layer between 0/100
 	 * @return
 	 */
-	public PGraphics getBlendGlowImage(PImage src, PImage base, float opacity) {
-		return getBlendImage(src, base, opacity, GPUImageInterface.GLOW);
+	public PGraphics getBlendGlow(PImage src, PImage base, float opacity) {
+		return getBlend(src, base, opacity, GPUImageInterface.GLOW);
 	}
 	
 	/**
@@ -260,8 +260,8 @@ public class Compositor extends GPUImageBaseEffects{
 	 * @param opacity opacity of the src blended layer on the base layer between 0/100
 	 * @return
 	 */
-	public PGraphics getBlendHardLightImage(PImage src, PImage base, float opacity) {
-		return getBlendImage(src, base, opacity, GPUImageInterface.HARDLIGHT);
+	public PGraphics getBlendHardLight(PImage src, PImage base, float opacity) {
+		return getBlend(src, base, opacity, GPUImageInterface.HARDLIGHT);
 	}
 	
 	/**
@@ -271,8 +271,8 @@ public class Compositor extends GPUImageBaseEffects{
 	 * @param opacity opacity of the src blended layer on the base layer between 0/100
 	 * @return
 	 */
-	public PGraphics getBlendHardMixImage(PImage src, PImage base, float opacity) {
-		return getBlendImage(src, base, opacity, GPUImageInterface.HARDMIX);
+	public PGraphics getBlendHardMix(PImage src, PImage base, float opacity) {
+		return getBlend(src, base, opacity, GPUImageInterface.HARDMIX);
 	}
 	
 	/**
@@ -282,8 +282,8 @@ public class Compositor extends GPUImageBaseEffects{
 	 * @param opacity opacity of the src blended layer on the base layer between 0/100
 	 * @return
 	 */
-	public PGraphics getBlendHueImage(PImage src, PImage base, float opacity) {
-		return getBlendImage(src, base, opacity, GPUImageInterface.HUE);
+	public PGraphics getBlendHue(PImage src, PImage base, float opacity) {
+		return getBlend(src, base, opacity, GPUImageInterface.HUE);
 	}
 	
 	/**
@@ -293,8 +293,8 @@ public class Compositor extends GPUImageBaseEffects{
 	 * @param opacity opacity of the src blended layer on the base layer between 0/100
 	 * @return
 	 */
-	public PGraphics getBlendLightenImage(PImage src, PImage base, float opacity) {
-		return getBlendImage(src, base, opacity, GPUImageInterface.LIGHTEN);
+	public PGraphics getBlendLighten(PImage src, PImage base, float opacity) {
+		return getBlend(src, base, opacity, GPUImageInterface.LIGHTEN);
 	}
 	
 	/**
@@ -304,8 +304,8 @@ public class Compositor extends GPUImageBaseEffects{
 	 * @param opacity opacity of the src blended layer on the base layer between 0/100
 	 * @return
 	 */
-	public PGraphics getBlendLinearBurnImage(PImage src, PImage base, float opacity) {
-		return getBlendImage(src, base, opacity, GPUImageInterface.LINEARBURN);
+	public PGraphics getBlendLinearBurn(PImage src, PImage base, float opacity) {
+		return getBlend(src, base, opacity, GPUImageInterface.LINEARBURN);
 	}
 	
 	/**
@@ -315,8 +315,8 @@ public class Compositor extends GPUImageBaseEffects{
 	 * @param opacity opacity of the src blended layer on the base layer between 0/100
 	 * @return
 	 */
-	public PGraphics getBlendLinearDodgeImage(PImage src, PImage base, float opacity) {
-		return getBlendImage(src, base, opacity, GPUImageInterface.LINEARDODGE);
+	public PGraphics getBlendLinearDodge(PImage src, PImage base, float opacity) {
+		return getBlend(src, base, opacity, GPUImageInterface.LINEARDODGE);
 	}
 	
 	/**
@@ -326,8 +326,8 @@ public class Compositor extends GPUImageBaseEffects{
 	 * @param opacity opacity of the src blended layer on the base layer between 0/100
 	 * @return
 	 */
-	public PGraphics getBlendLinearLightImage(PImage src, PImage base, float opacity) {
-		return getBlendImage(src, base, opacity, GPUImageInterface.LINEARLIGHT);
+	public PGraphics getBlendLinearLight(PImage src, PImage base, float opacity) {
+		return getBlend(src, base, opacity, GPUImageInterface.LINEARLIGHT);
 	}
 	
 	/**
@@ -337,8 +337,8 @@ public class Compositor extends GPUImageBaseEffects{
 	 * @param opacity opacity of the src blended layer on the base layer between 0/100
 	 * @return
 	 */
-	public PGraphics getBlendLuminosityImage(PImage src, PImage base, float opacity) {
-		return getBlendImage(src, base, opacity, GPUImageInterface.LUMINOSITY);
+	public PGraphics getBlendLuminosity(PImage src, PImage base, float opacity) {
+		return getBlend(src, base, opacity, GPUImageInterface.LUMINOSITY);
 	}
 	
 	/**
@@ -348,8 +348,8 @@ public class Compositor extends GPUImageBaseEffects{
 	 * @param opacity opacity of the src blended layer on the base layer between 0/100
 	 * @return
 	 */
-	public PGraphics getBlendMultiplyImage(PImage src, PImage base, float opacity) {
-		return getBlendImage(src, base, opacity, GPUImageInterface.MULTIPLY);
+	public PGraphics getBlendMultiply(PImage src, PImage base, float opacity) {
+		return getBlend(src, base, opacity, GPUImageInterface.MULTIPLY);
 	}
 	
 	/**
@@ -359,8 +359,8 @@ public class Compositor extends GPUImageBaseEffects{
 	 * @param opacity opacity of the src blended layer on the base layer between 0/100
 	 * @return
 	 */
-	public PGraphics getBlendNegationImage(PImage src, PImage base, float opacity) {
-		return getBlendImage(src, base, opacity, GPUImageInterface.NEGATION);
+	public PGraphics getBlendNegation(PImage src, PImage base, float opacity) {
+		return getBlend(src, base, opacity, GPUImageInterface.NEGATION);
 	}
 	
 
@@ -371,8 +371,8 @@ public class Compositor extends GPUImageBaseEffects{
 	 * @param opacity opacity of the src blended layer on the base layer between 0/100
 	 * @return
 	 */
-	public PGraphics getBlendOverlayImage(PImage src, PImage base, float opacity) {
-		return getBlendImage(src, base, opacity, GPUImageInterface.OVERLAY);
+	public PGraphics getBlendOverlay(PImage src, PImage base, float opacity) {
+		return getBlend(src, base, opacity, GPUImageInterface.OVERLAY);
 	}
 	
 	/**
@@ -382,8 +382,8 @@ public class Compositor extends GPUImageBaseEffects{
 	 * @param opacity opacity of the src blended layer on the base layer between 0/100
 	 * @return
 	 */
-	public PGraphics getBlendPhoenixImage(PImage src, PImage base, float opacity) {
-		return getBlendImage(src, base, opacity, GPUImageInterface.PHOENIX);
+	public PGraphics getBlendPhoenix(PImage src, PImage base, float opacity) {
+		return getBlend(src, base, opacity, GPUImageInterface.PHOENIX);
 	}
 	
 	/**
@@ -393,8 +393,8 @@ public class Compositor extends GPUImageBaseEffects{
 	 * @param opacity opacity of the src blended layer on the base layer between 0/100
 	 * @return
 	 */
-	public PGraphics getBlendPinLightImage(PImage src, PImage base, float opacity) {
-		return getBlendImage(src, base, opacity, GPUImageInterface.PINLIGHT);
+	public PGraphics getBlendPinLight(PImage src, PImage base, float opacity) {
+		return getBlend(src, base, opacity, GPUImageInterface.PINLIGHT);
 	}
 	
 	/**
@@ -404,8 +404,8 @@ public class Compositor extends GPUImageBaseEffects{
 	 * @param opacity opacity of the src blended layer on the base layer between 0/100
 	 * @return
 	 */
-	public PGraphics getBlendReflectImage(PImage src, PImage base, float opacity) {
-		return getBlendImage(src, base, opacity, GPUImageInterface.REFLECT);
+	public PGraphics getBlendReflect(PImage src, PImage base, float opacity) {
+		return getBlend(src, base, opacity, GPUImageInterface.REFLECT);
 	}
 	
 	/**
@@ -415,8 +415,8 @@ public class Compositor extends GPUImageBaseEffects{
 	 * @param opacity opacity of the src blended layer on the base layer between 0/100
 	 * @return
 	 */
-	public PGraphics getBlendSaturationImage(PImage src, PImage base, float opacity) {
-		return getBlendImage(src, base, opacity, GPUImageInterface.SATURATION);
+	public PGraphics getBlendSaturation(PImage src, PImage base, float opacity) {
+		return getBlend(src, base, opacity, GPUImageInterface.SATURATION);
 	}
 	
 	/**
@@ -426,8 +426,8 @@ public class Compositor extends GPUImageBaseEffects{
 	 * @param opacity opacity of the src blended layer on the base layer between 0/100
 	 * @return
 	 */
-	public PGraphics getBlendScreenImage(PImage src, PImage base, float opacity) {
-		return getBlendImage(src, base, opacity, GPUImageInterface.SCREEN);
+	public PGraphics getBlendScreen(PImage src, PImage base, float opacity) {
+		return getBlend(src, base, opacity, GPUImageInterface.SCREEN);
 	}
 	
 	/**
@@ -437,8 +437,8 @@ public class Compositor extends GPUImageBaseEffects{
 	 * @param opacity opacity of the src blended layer on the base layer between 0/100
 	 * @return
 	 */
-	public PGraphics getBlendSoftLightImage(PImage src, PImage base, float opacity) {
-		return getBlendImage(src, base, opacity, GPUImageInterface.SOFTLIGHT);
+	public PGraphics getBlendSoftLight(PImage src, PImage base, float opacity) {
+		return getBlend(src, base, opacity, GPUImageInterface.SOFTLIGHT);
 	}
 	
 	/**
@@ -448,8 +448,8 @@ public class Compositor extends GPUImageBaseEffects{
 	 * @param opacity opacity of the src blended layer on the base layer between 0/100
 	 * @return
 	 */
-	public PGraphics getBlendSubstractImage(PImage src, PImage base, float opacity) {
-		return getBlendImage(src, base, opacity, GPUImageInterface.SUBSTRACT);
+	public PGraphics getBlendSubstract(PImage src, PImage base, float opacity) {
+		return getBlend(src, base, opacity, GPUImageInterface.SUBSTRACT);
 	}
 	
 	/**
@@ -459,8 +459,8 @@ public class Compositor extends GPUImageBaseEffects{
 	 * @param opacity opacity of the src blended layer on the base layer between 0/100
 	 * @return
 	 */
-	public PGraphics getBlendVividLightImage(PImage src, PImage base, float opacity) {
-		return getBlendImage(src, base, opacity, GPUImageInterface.VIVIDLIGHT);
+	public PGraphics getBlendVividLight(PImage src, PImage base, float opacity) {
+		return getBlend(src, base, opacity, GPUImageInterface.VIVIDLIGHT);
 	}
 	
 	/**
@@ -471,7 +471,7 @@ public class Compositor extends GPUImageBaseEffects{
 	 * @param NAME Blending name
 	 * @return
 	 */
-	public PGraphics getBlendImage(PImage src, PImage base, float opacity, String NAME) {
+	public PGraphics getBlend(PImage src, PImage base, float opacity, String NAME) {
 		super.setCurrentSH(NAME);
 		this.checkUVSettings(src,  base, "srci");
 		super.currentSH.set("base", base);

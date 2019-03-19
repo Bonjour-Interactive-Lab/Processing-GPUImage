@@ -72,9 +72,15 @@ const int random3x3[54] = int[](1, 4, 7,
 
 uniform sampler2D texture;
 uniform vec2 resolution;
+uniform float theta;
 
 in vec4 vertTexCoord;
 out vec4 fragColor;
+
+mat2 rotate2D(float angle){
+	return mat2( cos(angle), -sin(angle),
+				 sin(angle),  cos(angle));
+}
 
 float random(vec2 tex){
 	//return fract(sin(x) * offset);
@@ -107,6 +113,12 @@ void main(){
 	vec2 uv = vertTexCoord.xy;
 	vec4 tex = texture(texture, uv);
 	float luma = getLuma(tex.rgb);
+
+	//rotate uv
+	uv -= vec2(0.5, 0.5);
+    uv = rotate2D(theta) * uv;
+    uv += vec2(0.5, 0.5);
+    
 	float value = dither(uv * resolution, luma);
 	float red = dither(uv * resolution, tex.r);
 	float green = dither(uv * resolution, tex.g);

@@ -10,8 +10,6 @@ import java.awt.*;
 PImage src;
 Filter gamma;
 
-//destination buffer
-PGraphics filteredImg1;
 String[] name = {"src", "filter: Gamma correction"};
 
 int nbFilter = 1;
@@ -40,10 +38,10 @@ void draw() {
   background(20);
   //float value = norm(mouseX, 0, width) * 2.0;
 
-  filteredImg1 = gamma.getGammaCorrectionImage(src, 2.2);
+  gamma.getGammaCorrection(src, 2.2);
 
   image(src, imgw * 0, imgh * 0, imgw, imgh);
-  image(filteredImg1, imgw * 1, imgh * 0, imgw, imgh);
+  image(gamma.getBuffer(), imgw * 1, imgh * 0, imgw, imgh);
 
   noStroke();
   textAlign(LEFT, CENTER);

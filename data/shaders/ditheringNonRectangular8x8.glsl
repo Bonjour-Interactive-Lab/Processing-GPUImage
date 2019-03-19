@@ -26,14 +26,14 @@ const int nonRectangular8x7[56] = int[](1, 6, 0, 5, 3, 4, 2, 7,
 
 uniform sampler2D texture;
 uniform vec2 resolution;
-uniform float mouse;
+uniform float theta;
 
 in vec4 vertTexCoord;
 out vec4 fragColor;
 
-mat2 rotate2d(float _angle){
-    return mat2(cos(_angle),-sin(_angle),
-                sin(_angle),cos(_angle));
+mat2 rotate2D(float angle){
+	return mat2( cos(angle), -sin(angle),
+				 sin(angle),  cos(angle));
 }
 
 float getLuma(vec3 color_){
@@ -56,9 +56,13 @@ void main(){
 	vec2 uv = vertTexCoord.xy;
 
 	vec4 tex = texture(texture, uv);
+
+	//rotate uv
+	uv -= vec2(0.5, 0.5);
+    uv = rotate2D(theta) * uv;
+    uv += vec2(0.5, 0.5);
+
 	float luma = getLuma(tex.rgb);
-
-
 	float value = dither(uv * resolution * 1.0, luma);
 
 	fragColor = vec4(vec3(value), 1.0);

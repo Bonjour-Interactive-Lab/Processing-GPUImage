@@ -15,8 +15,6 @@ PImage src;
 Filter filter1, filter2;
 Compositor comp;
 
-//destination buffer
-PGraphics filteredImg1, filteredImg2;
 String[] name = {"src", "filter: Hue Segmentation", "filter: Chroma key on Red hue"};
 
 int nbFilter = 2;
@@ -43,31 +41,30 @@ void draw() {
   background(20);
   float value = norm(mouseX, 0, width);// * 360;
   //1- use a bilateral filter for enhancing an bluring image in order to have sharp edge and smooth color
-  filteredImg1 = filter1.getBilateralImage(src);
+  filter1.getBilateral(src);
 
   //2 - re-use bilateral filter on x Loop
   int loop = 10;
   for (int i=0; i<loop; i++) {
-    filteredImg1 = filter1.getBilateralImage(filteredImg1);
+    filter1.getBilateral(filter1.getBuffer());
   }
 
-  filteredImg1 = filter1.getContrastSaturationBrightnessImage(filteredImg1, 120, 100, 100);
+  filter1.getContrastSaturationBrightness(filter1.getBuffer(), 120, 100, 100);
 
   //3- Use Hue segmentation
-  filteredImg1 = filter1.getHueSegmentationImage(filteredImg1);
+  filter1.getHueSegmentation(filter1.getBuffer());
 
   //4- chromakey
-  PGraphics tmp = createGraphics(filteredImg1.width, filteredImg1.height, P2D);
-  tmp = comp.getChromaKeyImage(filteredImg1, 255, 0, 0, 0.5);
-  tmp = filter2.getDesaturateImage(tmp, 100);
-  tmp = filter2.getThresholdImage(tmp, 138.78906);
+  comp.getChromaKey(filter1.getBuffer(), 255, 0, 0, 0.5);
+  filter2.getDesaturate(comp.getBuffer(), 100);
+  filter2.getThreshold(filter2.getBuffer(), 138.78906);
   //tmp = filter2.getInvertImage(tmp);
 
-  filteredImg2 = comp.getMaskImage(src, tmp);
+  comp.getMask(src, filter2.getBuffer());
 
   image(src, imgw * 0, imgh * 0, imgw, imgh);
-  image(filteredImg1, imgw * 1, imgh * 0, imgw, imgh);
-  image(filteredImg2, imgw * 2, imgh * 0, imgw, imgh);
+  image(filter1.getBuffer(), imgw * 1, imgh * 0, imgw, imgh);
+  image(comp.getBuffer(), imgw * 2, imgh * 0, imgw, imgh);
 
   noStroke();
   fill(20);

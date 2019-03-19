@@ -14,8 +14,6 @@ PGraphics mask;
 PImage src, base, maskimg;
 Compositor comp1, comp2;
 
-//destination buffer
-PGraphics filteredImg1, filteredImg2;
 String[] name = {"src", "base", "Mask on alpha", "Mask on base image"};
 
 float scale = 1.0;
@@ -58,14 +56,14 @@ void draw() {
 
   
   //PGraphics mess up with UV coordinates
-  filteredImg1 = comp1.getMaskImage(src, mask);
-  filteredImg2 = comp1.getMaskImage(src, base, mask);
+  comp1.getMask(src, mask);
+  comp2.getMask(src, base, mask);
   
 
   image(src, imgw * 0, imgh * 0, imgw, imgh);
   image(mask, imgw * 1, imgh * 0, imgw, imgh);
-  image(filteredImg1, imgw * 0, imgh * 1, imgw, imgh);
-  image(filteredImg2, imgw * 1, imgh * 1, imgw, imgh);
+  image(comp1.getBuffer(), imgw * 0, imgh * 1, imgw, imgh);
+  image(comp2.getBuffer(), imgw * 1, imgh * 1, imgw, imgh);
 
   noStroke();
   textAlign(LEFT, CENTER);

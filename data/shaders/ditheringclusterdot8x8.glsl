@@ -24,9 +24,15 @@ const int clusterDot8x8[64] = int[](24, 10, 12, 26, 35, 47, 49, 37,
 
 uniform sampler2D texture;
 uniform vec2 resolution;
+uniform float theta;
 
 in vec4 vertTexCoord;
 out vec4 fragColor;
+
+mat2 rotate2D(float angle){
+	return mat2( cos(angle), -sin(angle),
+				 sin(angle),  cos(angle));
+}
 
 float getLuma(vec3 color_){
 	return dot(color_.rgb, vec3(0.299, 0.587, 0.114));
@@ -47,6 +53,12 @@ float dither(vec2 screenpos, float lum){
 void main(){
 	vec2 uv = vertTexCoord.xy;
 	vec4 tex = texture(texture, uv);
+	
+	//rotate uv
+	uv -= vec2(0.5, 0.5);
+    uv = rotate2D(theta) * uv;
+    uv += vec2(0.5, 0.5);
+
 	float luma = getLuma(tex.rgb);
 	float value = dither(uv * resolution, luma);
 

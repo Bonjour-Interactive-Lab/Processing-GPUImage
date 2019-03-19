@@ -12,7 +12,6 @@ PImage src;
 Filter filter;
 
 //destination buffer
-PGraphics filteredImg1;
 String[] name = {"src", "filter: Desaturation"};
 
 int nbFilter = 1;
@@ -41,10 +40,10 @@ void draw() {
   background(20);
   float value = norm(mouseX, 0, width) * 100.0;
 
-  filteredImg1 = filter.getDesaturateImage(src, value);
+  filter.getDesaturate(src, value);
 
   image(src, imgw * 0, imgh * 0, imgw, imgh);
-  image(filteredImg1, imgw * 1, imgh * 0, imgw, imgh);
+  image(filter.getBuffer(), imgw * 1, imgh * 0, imgw, imgh);
 
   noStroke();
   textAlign(LEFT, CENTER);
