@@ -49,7 +49,7 @@ void draw() {
   //2- Desaturate the result image
   filter.getDesaturate(filter.getBuffer(), 100.0);
   //3- Compose it with the source image as overlay
-  comp.getBlendOverlayImage(filter.getBuffer(), src, 100.0);
+  comp.getBlendOverlay(filter.getBuffer(), src, 100.0);
 
 
   image(src, imgw * 0, imgh * 0, imgw, imgh);

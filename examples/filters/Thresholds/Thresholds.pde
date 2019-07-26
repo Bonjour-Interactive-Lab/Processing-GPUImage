@@ -41,8 +41,8 @@ void draw() {
   background(20);
   float value = norm(mouseX, 0, width) * 255.0;
 
-  filteredImg1 = threshold.getThresholdImage(src, value);
-  filteredImg2 = cThreshold.getColorThresholdImage(src, value, value - 50, value - 100);
+  filteredImg1 = threshold.getThreshold(src, value);
+  filteredImg2 = cThreshold.getColorThreshold(src, value, value - 50, value - 100);
 
   image(src, imgw * 0, imgh * 0, imgw, imgh);
   image(filteredImg1, imgw * 1, imgh * 0, imgw, imgh);

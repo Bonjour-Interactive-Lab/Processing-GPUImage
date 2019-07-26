@@ -43,8 +43,8 @@ void draw() {
   float value = 0.1 + norm(mouseX, 0, width);
 
 
-  filteredImg1 = grain.getGrainRGBImage(src, value, 1.0);
-  filteredImg2 = animatedGrain.getAnimatedGrainRGBImage(src, value);
+  filteredImg1 = grain.getGrainRGB(src, value, 1.0);
+  filteredImg2 = animatedGrain.getAnimatedGrainRGB(src, value);
 
   image(src, imgw * 0, imgh * 0, imgw, imgh);
   image(filteredImg1, imgw * 1, imgh * 0, imgw, imgh);

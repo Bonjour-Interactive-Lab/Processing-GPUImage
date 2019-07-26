@@ -36,7 +36,7 @@ void setup() {
 void draw() {
   background(20);
   
-  filteredImg = filter.getSignedDistanceFieldImage(src);
+  filteredImg = filter.getSignedDistanceField(src, 25);
 
   image(src, imgw * 0, imgh * 0, imgw, imgh);
   image(filteredImg, imgw * 1, imgh * 0, imgw, imgh);

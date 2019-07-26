@@ -35,9 +35,9 @@ void setup() {
 void draw() {
   background(20);
 
-  filteredImg = filter.getMedian5x5Image(src);
+  filteredImg = filter.getMedian5x5(src);
   for (int i=0; i<25; i++) {
-    filteredImg = filter.getMedian5x5Image(filteredImg);
+    filteredImg = filter.getMedian5x5(filteredImg);
   }
 
   image(src, imgw * 0, imgh * 0, imgw, imgh);

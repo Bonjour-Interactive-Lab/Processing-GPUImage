@@ -44,9 +44,9 @@ void draw() {
   background(20);
   float value = norm(mouseX, 0, width);
   
-  filteredImg1 = sobel.getSobelImage(src, 0.25, 0.25);
-  filteredImg2 = sobelEdge.getSobelEdgeImage(src, value, value);
-  filteredImg3 = cannyEdge.getCannyEdgeImage(src, 0.25, 0.25, 1.0 - value);
+  filteredImg1 = sobel.getSobel(src, 0.25, 0.25);
+  filteredImg2 = sobelEdge.getSobelEdge(src, value, value);
+  filteredImg3 = cannyEdge.getCannyEdge(src, 0.25, 0.25, 1.0 - value);
 
   image(src          , imgw * 0, imgh * 0, imgw, imgh);
   image(filteredImg1 , imgw * 1, imgh * 0, imgw, imgh);

@@ -50,7 +50,7 @@ void setup() {
 void draw() {
   background(20);
 
-  filteredImg1 = filter.getRamp1DImage(src, ramp);
+  filteredImg1 = filter.getRamp1D(src, ramp);
 
   image(src, imgw * 0, imgh * 0, imgw, imgh);
   image(filteredImg1, imgw * 1, imgh * 0, imgw, imgh);

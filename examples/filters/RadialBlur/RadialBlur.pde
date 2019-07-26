@@ -49,10 +49,10 @@ void draw() {
   float cy = src.height/2;
   float size = nx;
 
-  filteredImg1 = radial.getRadialBlurImage(src, cx, cy, size, 25);
-  filteredImg2 = low.getRadialBlurLowImage(src, cx, cy, size);
-  filteredImg3 = med.getRadialBlurMediumImage(src, cx, cy, size);
-  filteredImg4 = high.getRadialBlurHighImage(src, cx, cy, size);
+  filteredImg1 = radial.getRadialBlur(src, cx, cy, size, 25);
+  filteredImg2 = low.getRadialBlurLow(src, cx, cy, size);
+  filteredImg3 = med.getRadialBlurMedium(src, cx, cy, size);
+  filteredImg4 = high.getRadialBlurHigh(src, cx, cy, size);
 
   image(src, imgw * 0, imgh * 0, imgw, imgh);
   image(filteredImg1, imgw * 1, imgh * 0, imgw, imgh);
