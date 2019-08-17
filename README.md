@@ -38,21 +38,18 @@ Processing library for high-performance image computing and GPGPU computing (GLS
 ### Global/Recette
 - [ ] Add try catch and handle errors
 - [ ] Add custom throw error (view adidas source)
-- [x] Add precise documentation
-- [ ] Add avatar @gitlab
 - [ ] Find good licenced image for library usage/example
-- [ ] Codevember example (Add all codevember design ?)
 
-### Core 
+### Core
 - [x] Library info
 - [x] simple GPU info
 - [ ] custom GPU info (memory size...)
 
-### %"PingPong Buffer" 
+### %"PingPong Buffer"
 PingPong buffer is an utils class allowing you to create a ping pong buffer in order to make read-write texture pipeline by creating 2 buffers. For more information about the differents implementation test see issue #5
 
 - [x] Processing ping pong buffer using PGraphics
-Each buffer can be swapped so the second is always a previous version of the first one. 
+Each buffer can be swapped so the second is always a previous version of the first one.
 The main idea of this class is to keep the paradigm of an offscreen buffer made in processing using PGraphics through the PinPongBuffer object. User does not have to learn an new offscreen drawing implementation with various context and drawing methods. Drawing can be handle using
 ```java
 object.dst.beginDraw();
@@ -97,13 +94,13 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [x] Simple Denoise
 * * [x] set custom param binding to shader
 - [x] Median 3×3 (TBD : iteration avec PingPong Buffer)
-- [x] Median 5×5 (TBD : iteration avec PingPong Buffer) 
+- [x] Median 5×5 (TBD : iteration avec PingPong Buffer)
 - [x] Edge detection + Sobel + Canny
 - [x] High-Passing
 - [x] Hue segmentation
 - [x] Dilation
 - [x] Erosion
-- [x] Signed Distance Field
+- [ ] Signed Distance Field **To be corrected as true SDF**
 
 ##### Blur
 - [x] Gaussian
@@ -118,6 +115,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [x] Gamma
 * * [x] set custom param binding to shader
 - [x] LUT (1D)
+- [ ] LUT (2D)
 - [x] Ramp (1D)
 - [x] Color Threshold
 - [x] Threshold
@@ -136,7 +134,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [x] Glitches
 - [x] Datamoshing
 
-##### Other : 
+##### Other :
 - [ ] Optical Flow
 - [ ] FrameDifferencing
 - [ ] Pixel sorting
@@ -197,10 +195,11 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [x] Main float packing class
 - [x] RGBA1616 double packing → Allowing two data (1 per 2 channel 1616)
 - [x] ModIntPacking allowing to pack int value into 8bits + 8bits index
+- [ ] Bit shift packing to PImage (only usefull for CPU computation)
 - [ ] Performances
   - [x] Quid to use generic type in order to simplify class writing ? (Not quite efficience for now)
-  - [ ] Quid to thread encoding operation for performance ? 
-  - [x] Quid to bypass the PImage object in order to encode in a spediest way ? 
+  - [ ] Quid to thread encoding operation for performance ?
+  - [x] Quid to bypass the PImage object in order to encode in a spediest way ?
     - Using BufferedImage seems to speed up the performance [Reference](http://www.java-gaming.org/index.php?topic=23013.0)
     - Using specific method without switch/case. The test was too low
   - [x] Find a way to create a rectangle from area only. [See sehrope implementation en stackoverflow](https://stackoverflow.com/questions/16266931/input-an-integer-find-the-two-closest-integers-which-when-multiplied-equal-th)
@@ -239,8 +238,8 @@ This methods is a test methods only. We need to make a benchmark in order to def
     - [x] Contrast Saturation Brightness
     - [x] Invert
   - [x] Post fx
-    - [x] White grain 
-    - [x] RGB grain 
+    - [x] White grain
+    - [x] RGB grain
     - [x] Chroma warping
     - [x] Pixelate
     - [x] Ditherings
@@ -257,4 +256,3 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [x] Utils
   - [x] Generate 1D LUT
   - [X] Ping Pong Buffer
-
