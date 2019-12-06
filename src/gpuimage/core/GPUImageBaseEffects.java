@@ -130,6 +130,15 @@ abstract class GPUImageBaseEffects implements GPUImageInterface, PConstants{
 	}
 	
 	/**
+	 * Load pixels for the two Buffers
+	 * @return PGraphics buffer
+	 */
+	public void loadPixels() {
+		ppb.getSrcBuffer().loadPixels();
+		ppb.getDstBuffer().loadPixels();
+	}
+	
+	/**
 	 * Clear the buffers
 	 */
 	public void clear() {
