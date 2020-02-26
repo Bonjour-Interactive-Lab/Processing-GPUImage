@@ -139,6 +139,26 @@ abstract class GPUImageBaseEffects implements GPUImageInterface, PConstants{
 	}
 	
 	/**
+	 * Change the texture filtering mode as :
+	 * NEAREST
+	 * LINEAR
+	 * BILINEAR
+	 * TRILINEAR
+	 * @param FILTERING
+	 */
+	public void setFiltering(int FILTERING) {
+		this.ppb.setFiltering(FILTERING);
+	}
+	
+	/**
+	 * Enable/disable texture mipmap
+	 * @param state
+	 */
+	public void enableTextureMipmaps(boolean state) {
+		this.ppb.enableTextureMipmaps(state);
+	}
+	
+	/**
 	 * Clear the buffers
 	 */
 	public void clear() {
