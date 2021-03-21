@@ -82,7 +82,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
   ((PGraphicsOpenGL)buffer).textureSampling(3);
 ```
 
-### %"Filtering/Compositor/Procedural Texture"
+### Filtering/Compositor/Procedural Texture
 
 #### GPUImageBaseEffects
 
@@ -189,7 +189,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [ ] Isosurface
 - [ ] Reaction-Diffusion
 
-### %"Packing RGBA"
+### Packing RGBA
 - [x] Float to RGBA algorithm [precision test](https://gitlab.bonjour-lab.com/alexr4/GPUImage/blob/master/floatToRGBAEncoding.md)
 - [x] Abstract class with various encoding/decoding methods (RGBA16, 24, 32) from float and double
 - [x] Main float packing class
@@ -207,7 +207,7 @@ This methods is a test methods only. We need to make a benchmark in order to def
 - [x] Pack/unpack RGBA1616 shader model
 - [x] Pack/unpack RGBAMod shader model
 
-### %"Module Géométrique (VBO)"
+### Geometric (VBO)
 ### Wiki (TBD)
 ### Exemples
 - [ ] Composition
