@@ -31,7 +31,7 @@ Processing library for high-performance image computing and GPGPU computing (GLS
 	- **Compositor** : Composition between two images (mask, blending...)
 	- **ProceduralTexture** : Generation of procedural texture (noise, FBM, voronoi...)
 
-## %"Architecture et Design Pattern"
+## Architecture et Design Pattern
 ![Design Pattern](https://gitlab.bonjour-lab.com/alexr4/GPUImage/raw/master/DesignPattern.png)
 
 ## To do
